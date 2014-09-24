@@ -8,6 +8,8 @@ $(document).ready(function() {
         }
     }
 
+    enablei18n();
+
     $('body').on('click', '.watch-video', function(){
         $('.logo-container').removeClass('logo').addClass('video').html('<iframe width="801" height="455" id="youtube-frame" src="http://www.youtube.com/embed/_KVZmS_UO5I?enablejsapi=1&autoplay=1" frameborder="0" allowfullscreen></iframe>').fitVids();
         new YT.Player('youtube-frame', {
