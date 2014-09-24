@@ -1,0 +1,850 @@
+---
+redirect_from: "/get-started/"
+---
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+           __                            _     
+      ____/ /___  ____ ____  _________  (_)___ 
+     / __  / __ \/ __ `/ _ \/ ___/ __ \/ / __ \
+    / /_/ / /_/ / /_/ /  __/ /__/ /_/ / / / / /
+    \__,_/\____/\__, /\___/\___/\____/_/_/ /_/ 
+               /____/                          
+		
+    so markup. very website. wow.	   
+    -->
+	
+	<!-- Meta -->
+	<title>Dogecoin - Getting Started</title>
+	<meta charset="utf-8">
+	<meta content="Getting Started with Dogecoin is as easy as 1, 2, 3! It's simple, easy to set up, and free." name="description">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	
+	<!-- Scripts -->
+	<script type="text/javascript" src="../js/dogecoin_getstart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	
+	<!-- HTML5 Shiv -->
+	<!--[if lt IE 9]>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+	
+	<!-- Bootstrap -->
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+	<!-- CSS -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700%7COswald' rel='stylesheet' type='text/css'>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/dogecoin_getstart.css">
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	
+</head>
+
+<body>
+
+<div style="background-color: #f2ede0;">
+	<div class="text-center" style="padding-bottom: 5px; padding-top: 1px;">
+		<h1 class="dogefont"><a href="/"><img src="../imgs/avatar.png" width="70" height="70" alt="Dogecoin Icon"></a> GETTING STARTED</h1>
+		<h1 style="font-size: 4em;">Getting Started with Dogecoin</h1>
+		<h1>is as <strong>Easy</strong> as 1, 2, 3!</h1>
+		
+		<ul class="tabs">
+		<li><a id="desktop-button" href="#desktop-wallet" class="selected">Desktop Wallet</a></li>
+		<li><a id="phone-button" href="#phone-wallet">Phone Wallet</a></li>
+		<li><a id="online-button" href="#online-wallet">Online Wallet</a></li>
+		<li><a id="paper-button" href="#paper-wallet">Paper Wallet</a></li>
+		</ul>
+		
+		<h4>Choose a type of wallet to begin.</h4>
+	</div>
+</div>
+
+<!-- Desktop OS Selection Start -->
+<div id="select-desktop-os" class="os_slide text-center" style="background-color: #3ba4da;">
+	<div style="padding-bottom: 10px; padding-top: 10px;">
+		<ul class="tabs">
+		<li><a class="buttons" id="windows-desktop-os-button" href="#windows-desktop-os"><span class="fa fa-windows"></span> Windows</a></li>
+		<li><a class="buttons" id="apple-desktop-os-button" href="#apple-desktop-os"><span class="fa fa-apple"></span> OS X</a></li>
+		<li><a class="buttons" id="linux-desktop-os-button" href="#linux-desktop-os"><span class="fa fa-linux"></span> Linux</a></li>
+		</ul>
+		
+		<h4>Please choose your Computer's Operating System.</h4>
+	</div>
+</div>
+<!-- Desktop OS Selection End -->
+
+<!-- Mobile OS Selection Start -->
+<div id="select-mobile-os" class="os_slide text-center" style="background-color: #3ba4da;">
+	<div style="padding-bottom: 10px; padding-top: 10px;">
+		<ul class="tabs">
+		<li><a class="buttons" id="android-mobile-os-button" href="#android-mobile-os"><span class="fa fa-android"></span> Android</a></li>
+		<li><a class="buttons" id="apple-mobile-os-button" href="#apple-mobile-os"><span class="fa fa-apple"></span> iOS</a></li>
+		</ul>
+		
+		<h4>Please choose your Smartphone's Operating System.</h4>
+	</div>
+</div>
+<!-- Mobile OS Selection End -->
+
+<!-- Online OS Selection Start -->
+<div id="select-online-os" class="os_slide text-center" style="background-color: #3ba4da;">
+	<div style="padding-bottom: 10px; padding-top: 10px;">
+		<ul class="tabs">
+		<li><a class="buttons" id="dogeapi-online-os-button" href="#dogeapi-online-os"><span class="fa fa-rocket"></span> DogeAPI</a></li>
+		<li><a class="buttons" id="moolah-online-os-button" href="#moolah-online-os"><span class="fa fa-moon-o"></span> Moolah</a></li>
+		</ul>
+		
+		<h4>Please choose your Online Wallet.</h4>
+	</div>
+</div>
+<!-- Online OS Selection End -->
+
+<!-- Paper Wallet Selection Start -->
+<div id="select-paper-os" class="os_slide text-center" style="background-color: #3ba4da;">
+	<div style="padding-bottom: 10px; padding-top: 10px;">
+		<ul class="tabs">
+		<li><a class="buttons" id="walletgenerator-paper-os-button" href="#walletgenerator-paper-os"><span class="fa fa-rocket"></span> WalletGenerator</a></li>
+		</ul>
+		
+		<h4>Please choose your Paper Wallet.</h4>
+	</div>
+</div>
+<!-- Paper Wallet Selection End -->
+
+<!-- ### Tutorial Begins ### -->
+<div id="windows-desktop-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/downloading_dogewallet_windows.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>1. Download The Wallet.</strong></h2>
+					<p>Click the link below to download MultiDoge, a local Dogecoin wallet. <br/>If you are asked to accept the download, accept the download.</p>
+					<p>Once the file finishes downloading, click the (.exe) file.
+					<h4><a href="http://multidoge.org/?dl=win">Download MultiDoge for Windows</a></h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/install_dogewallet_windows.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Install" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Install The Wallet.</strong></h2>
+					<p>Go through the installation process. Once you get to the license agreement, accept it to continue with the installation.</p>
+					<p>Once you are finished with the installation, find the MultiDoge shortcut and open it.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_windows.jpg" class="img-responsive center-block" alt="Dogecoin Wallet" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Use Your Wallet!</strong></h2>
+					<p>On launch, your wallet will have a loading bar on the bottom-left. You will have to wait 1 - 5 minutes for the wallet to synchronize.</p>
+					<p>After it is synchronized with the network, you are now able to use your Dogecoin wallet!</p>
+					<p>You have just finished setting up your Dogecoin wallet!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; color: #333333;">
+		<div class="container">
+			<footer>
+				<div class="text-center">
+					<div class="row">
+						<h1><strong>Congratulations!</strong> Now let's put it to good use.</h1>
+								
+						<div style="padding-top: 15px;">
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#community-modal"><span class="fa fa-users fa-5x circle-center"></span></a>
+								<h3>Community.</h3>
+								<h5>Participate in the community.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#exchanges-modal"><span class="fa fa-exchange fa-5x circle-center"></span></a>
+								<h3>Get Dogecoin.</h3>
+								<h5>Find out how to get Dogecoin.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#stores-modal"><span class="fa fa-shopping-cart fa-5x circle-center"></span></a>
+								<h3>Stores.</h3>
+								<h5>Buy with Dogecoin.</h5>
+							</div>
+						</div>
+					</div>
+					<hr style="border-color: grey">
+					<h5>Photos, Windows Guide, and Website made by <a href="http://reddit.com/user/PowerLemons" target="_blank">/u/PowerLemons</a>.</h5>
+					<h5>© The Ðogecoin Project</h5>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="apple-desktop-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/downloading_dogewallet_osx.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Install" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>1. Download The Wallet.</strong></h2>
+					<p>Click the link below to download MultiDoge, a local Dogecoin wallet.</p>
+					<p>Once the download is finished, double click on the file in the "Downloads" drop down menu.</p>
+					<h4><a href="http://multidoge.org/?dl=osx">Download MultiDoge for OS X</a></h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/launch_dogewallet_osx.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Install The Wallet.</strong></h2>
+					<p>A new window should open when you click on the file. Click and drag the "MultiDoge" icon into the "Applications" folder.</p>
+					<p>This will move the wallet into your Applications menu.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_osx.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Use Your Wallet!</strong></h2>
+					<p>On launch, your wallet will have a loading bar on the bottom-left. You will have to wait 1 - 5 minutes for the wallet to synchronize.</p>
+					<p>After it is synchronized with the network, you are now able to use your Dogecoin wallet!</p>
+					<p>You have just finished setting up your Dogecoin wallet!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; color: #333333;">
+		<div class="container">
+			<footer>
+				<div class="text-center">
+					<div class="row">
+						<h1><strong>Congratulations!</strong> Now let's put it to good use.</h1>
+								
+						<div style="padding-top: 15px;">
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#community-modal"><span class="fa fa-users fa-5x circle-center"></span></a>
+								<h3>Community.</h3>
+								<h5>Participate in the community.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#exchanges-modal"><span class="fa fa-exchange fa-5x circle-center"></span></a>
+								<h3>Get Dogecoin.</h3>
+								<h5>Find out how to get Dogecoin.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#stores-modal"><span class="fa fa-shopping-cart fa-5x circle-center"></span></a>
+								<h3>Stores.</h3>
+								<h5>Buy with Dogecoin.</h5>
+							</div>
+						</div>
+					</div>
+					<hr style="border-color: grey">
+					<h5>Photos and OS X Guide made by <a href="http://www.reddit.com/user/FlippyDog101" target="_blank">/u/FlippyDog101</a>. Website made by <a href="http://reddit.com/user/PowerLemons" target="_blank">/u/PowerLemons</a>.</h5>
+					<h5>© The Ðogecoin Project</h5>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="linux-desktop-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/downloading_dogewallet_linux.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Install" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>1. Download The Wallet.</strong></h2>
+					<p>Click the link below to download MultiDoge, a local Dogecoin wallet. <br/>Save the file to download the file.</p>
+					<p>Find the (.jar) file, open the file with your chosen File Manager.</p>
+					<h4><a href="http://multidoge.org/?dl=lin">Download MultiDoge for Linux</a></h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/install_dogewallet_linux_01.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Set Permissions.</strong></h2>
+					<p>Right click on the (.jar) file, click "Properties".</p>
+					<p>Go to the "Permissions" tab, check the box next to "Execute" to allow executing of the file as a program. Close properties window.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/install_dogewallet_linux_02.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Launch as OpenJDK Java!</strong></h2>
+					<p>Right click the (.jar) file again, hover over "Open With", and then select OpenJDK Java 6 or 7 Runtime.</p>
+					<h5>Okay, we might've lied about 1, 2, 3 on Linux. But, we need to explain more compared to other Operating Systems. Sorry!</h5>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/install_dogewallet_linux_03.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>4. Install The Wallet.</strong></h2>
+					<p>Go through the installation process. Once you get to the license agreement, accept it to continue with the installation.</p>
+					<p>Once you are finished with the installation, find the MultiDoge shortcut and open it.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_linux.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>5. Use Your Wallet!</strong></h2>
+					<p>On launch, your wallet will have a loading bar on the bottom-left. You will have to wait 1 - 5 minutes for the wallet to synchronize.</p>
+					<p>After it is synchronized with the network, you are now able to use your Dogecoin wallet!</p>
+					<p>You have just finished setting up your Dogecoin wallet!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; color: #333333;">
+		<div class="container">
+			<footer>
+				<div class="text-center">
+					<div class="row">
+						<h1><strong>Congratulations!</strong> Now let's put it to good use.</h1>
+								
+						<div style="padding-top: 15px;">
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#community-modal"><span class="fa fa-users fa-5x circle-center"></span></a>
+								<h3>Community.</h3>
+								<h5>Participate in the community.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#exchanges-modal"><span class="fa fa-exchange fa-5x circle-center"></span></a>
+								<h3>Get Dogecoin.</h3>
+								<h5>Find out how to get Dogecoin.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#stores-modal"><span class="fa fa-shopping-cart fa-5x circle-center"></span></a>
+								<h3>Stores.</h3>
+								<h5>Buy with Dogecoin.</h5>
+							</div>
+						</div>
+					</div>
+					<hr style="border-color: grey">
+					<h5>Photos and Linux Guide made by <a href="http://www.reddit.com/user/BloodyMonday" target="_blank">/u/BloodyMonday</a>. Website made by <a href="http://reddit.com/user/PowerLemons" target="_blank">/u/PowerLemons</a>.</h5>
+					<h5>© The Ðogecoin Project</h5>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="android-mobile-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/install_dogewallet_android.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>1. Download The Wallet.</strong></h2>
+					<p>Go to the Play Store and search "Dogecoin Wallet" on the Play Store, or click the "Get it on Google Play" button.</p>
+					<p>Press the "Install" button. Press the "Accept" button on the App Permission Requests panel.</p>
+					<p>Wait for the application to download and install.</p>
+					<a href="https://play.google.com/store/apps/details?id=de.langerhans.wallet" target="_blank">
+						<img style="padding-top: 12px;" alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/launch_dogewallet_android.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Launch The Wallet.</strong></h2>
+					<p>On the same page, press the "Open" button. You will be directed to the Dogecoin Wallet.</p>
+					<p>You can also access the Dogecoin Wallet within the app drawer on your Android™ smartphone.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_android.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Use Your Wallet!</strong></h2>
+					<p>Now you have a full Dogecoin wallet in your hand!</p>
+					<p>On the top, you have your Address Book and Settings. <br/>Under it, you have your Dogecoin address on the left, Dogecoin address in the QR code on the right, and your Dogecoin balance.</p>
+					<p>On the bottom, you have your transaction history. On the very bottom, you can "Request Coins", "Send Coins", or scan a QR code with your camera.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; color: #333333;">
+		<div class="container">
+			<footer>
+				<div class="text-center">
+					<div class="row">
+						<h1><strong>Congratulations!</strong> Now let's put it to good use.</h1>
+								
+						<div style="padding-top: 15px;">
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#community-modal"><span class="fa fa-users fa-5x circle-center"></span></a>
+								<h3>Community.</h3>
+								<h5>Participate in the community.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#exchanges-modal"><span class="fa fa-exchange fa-5x circle-center"></span></a>
+								<h3>Get Dogecoin.</h3>
+								<h5>Find out how to get Dogecoin.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#stores-modal"><span class="fa fa-shopping-cart fa-5x circle-center"></span></a>
+								<h3>Stores.</h3>
+								<h5>Buy with Dogecoin.</h5>
+							</div>
+						</div>
+					</div>
+					<hr style="border-color: grey">
+					<h5>Photos made by <a href="http://www.reddit.com/u/rugerty100" target="_blank">/u/rugerty100</a>. Website and Guide made by <a href="http://reddit.com/user/PowerLemons" target="_blank">/u/PowerLemons</a>.</h5>
+					<h5>© The Ðogecoin Project</h5>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="apple-mobile-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/install_dogewallet_ios.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Install" />
+				</div>
+				<div class="col-md-8">
+					<div class="alert alert-danger"><i class="fa fa-warning"></i> <strong>Warning!</strong> MyDoge for iOS can only be used to view wallets. It <strong>cannot</strong> send Dogecoins!</div>
+					<h2><strong>1. Download The Wallet.</strong></h2>
+					<p>On your iPhone, launch the App Store and search for "MyDoge", or click on the badge below to be linked straight to "MyDoge". The app should be the first result.</p>
+					<p>Tap "Free", then "Install", and enter your iTunes password when prompted. The application will begin to download.</p>
+					<a href="https://itunes.apple.com/us/app/mydoge/id805178886" target="_blank">
+						<img alt="Get it on the App Store" src="https://devimages.apple.com.edgekey.net/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" />
+					</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/download_dogewallet_ios.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Wait for the Application to Download.</strong></h2>
+					<p>MyDoge will take anywhere from a few seconds to a few minutes to download, depending on your internet speed.</p>
+					<p>Once it is downloaded, tap the icon to launch the app.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_ios.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Use Your Wallet!</strong></h2>
+					<p>MyDoge can only view wallets, which means it <strong>cannot</strong> send Dogecoins. You must have an <strong>actual, existing</strong> wallet to use it.</p>
+					<p>To add a wallet, tap the + button, located in the top right-hand corner of your screen. To view more options, tap the icon in the top left-hand corner of your screen.</p>
+					<p>To refresh your wallets and see your most recent balance, tap the refresh icon on the bottom right-hand corner of your screen. Your total Dogecoin balance is on the bottom left-hand corner.</p>
+					<p>Once you have added a wallet, tap the name to view more information, including the wallet address as well as that wallet's balance.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; color: #333333;">
+		<div class="container">
+			<footer>
+				<div class="text-center">
+					<div class="row">
+						<h1><strong>Congratulations!</strong> Now let's put it to good use.</h1>
+								
+						<div style="padding-top: 15px;">
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#community-modal"><span class="fa fa-users fa-5x circle-center"></span></a>
+								<h3>Community.</h3>
+								<h5>Participate in the community.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#exchanges-modal"><span class="fa fa-exchange fa-5x circle-center"></span></a>
+								<h3>Get Dogecoin.</h3>
+								<h5>Find out how to get Dogecoin.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#stores-modal"><span class="fa fa-shopping-cart fa-5x circle-center"></span></a>
+								<h3>Stores.</h3>
+								<h5>Buy with Dogecoin.</h5>
+							</div>
+						</div>
+					</div>
+					<hr style="border-color: grey">
+					<h5>Photos and iOS Guide made by <a href="http://www.reddit.com/user/FlippyDog101" target="_blank">/u/FlippyDog101</a>. Website made by <a href="http://reddit.com/user/PowerLemons" target="_blank">/u/PowerLemons</a>.</h5>
+					<h5>© The Ðogecoin Project</h5>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="dogeapi-online-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_signup_01.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<div class="alert alert-info"><i class="fa fa-info-circle"></i> <strong>Note:</strong> For storing large amounts of Dogecoin, desktop wallets are highly recommended as a good security practice.</div>
+					<h2><strong>1. Sign Up on DogeAPI.</strong></h2>
+					<p>Click the link below to go to the registration page. <br/>Fill out the necessary details, then click the Register button.</p>
+					<h4><a href="https://www.dogeapi.com/register" target="_blank">Sign up for a DogeAPI account here.</a></h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_signup_02.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Verify Your Account.</strong></h2>
+					<p>After registering, you will be asked to confirm your account with a verification email.</p>
+					<p>Go to your email account and click the verification link in the email.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_signup_03.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Use Your Wallet!</strong></h2>
+					<p>Now you have an online Dogecoin wallet at DogeAPI! <br/>You can use the online wallet to send and receive Dogecoins.</p>
+					<p>On the top-left, you have the option to send Dogecoins. On the top-right are your receive addresses. On the bottom is your transaction history.</p>
+					<p>You have just finished setting up your Dogecoin wallet!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; color: #333333;">
+		<div class="container">
+			<footer>
+				<div class="text-center">
+					<div class="row">
+						<h1><strong>Congratulations!</strong> Now let's put it to good use.</h1>
+								
+						<div style="padding-top: 15px;">
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#community-modal"><span class="fa fa-users fa-5x circle-center"></span></a>
+								<h3>Community.</h3>
+								<h5>Participate in the community.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#exchanges-modal"><span class="fa fa-exchange fa-5x circle-center"></span></a>
+								<h3>Get Dogecoin.</h3>
+								<h5>Find out how to get Dogecoin.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#stores-modal"><span class="fa fa-shopping-cart fa-5x circle-center"></span></a>
+								<h3>Stores.</h3>
+								<h5>Buy with Dogecoin.</h5>
+							</div>
+						</div>
+					</div>
+					<hr style="border-color: grey">
+					<h5>Photos, DogeAPI Guide, and Website made by <a href="http://reddit.com/user/PowerLemons" target="_blank">/u/PowerLemons</a>.</h5>
+					<h5>© The Ðogecoin Project</h5>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="moolah-online-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_moolah_signup_01.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Download" />
+				</div>
+				<div class="col-md-8">
+					<div class="alert alert-info"><i class="fa fa-info-circle"></i> <strong>Note:</strong> For storing large amounts of Dogecoin, desktop wallets are highly recommended as a good security practice.</div>
+					<h2><strong>1. Sign Up on Moolah.</strong></h2>
+					<p>Click the link below to go to the registration page. <br/>Fill out the necessary details, then click the Register button.</p>
+					<h4><a href="https://moolah.io/register/" target="_blank">Sign up for a Moolah account here.</a></h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_moolah_signup_02.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Create a Dogecoin Account.</strong></h2>
+					<p>On your account summary, create a Dogecoin account.</p>
+					<p>A Dogecoin account on Moolah works similarly to a chequing or savings account in your bank.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_moolah_signup_03.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Set up your Dogecoin Account.</strong></h2>
+					<p>Fill out the form to set up your Dogecoin account.</p>
+					<p>Specify your alias, account type, set whether it's receive only or not, and if you want any sort of security on your Dogecoin account.</p>
+					<h5>We might've lied about 1, 2, 3 process on Moolah, but at least you're only one step away. Sorry!</h5>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/dogewallet_moolah_signup_04.jpg" class="img-responsive center-block" alt="Dogecoin Wallet Launch" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>4. Use Your Wallet!</strong></h2>
+					<p>Now you have an online Dogecoin wallet at Moolah! <br/>You can use the online wallet to send and receive Dogecoins.</p>
+					<p>On the top, you have your receive address and balance. Below, you have the option to send Dogecoins. On the bottom is your transaction history.</p>
+					<p>You have just finished setting up your Dogecoin wallet!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; color: #333333;">
+		<div class="container">
+			<footer>
+				<div class="text-center">
+					<div class="row">
+						<h1><strong>Congratulations!</strong> Now let's put it to good use.</h1>
+								
+						<div style="padding-top: 15px;">
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#community-modal"><span class="fa fa-users fa-5x circle-center"></span></a>
+								<h3>Community.</h3>
+								<h5>Participate in the community.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#exchanges-modal"><span class="fa fa-exchange fa-5x circle-center"></span></a>
+								<h3>Get Dogecoin.</h3>
+								<h5>Find out how to get Dogecoin.</h5>
+							</div>
+							<div class="col-md-4">
+								<a class="btn btn-default btn-circle btn-xl" data-toggle="modal" data-target="#stores-modal"><span class="fa fa-shopping-cart fa-5x circle-center"></span></a>
+								<h3>Stores.</h3>
+								<h5>Buy with Dogecoin.</h5>
+							</div>
+						</div>
+					</div>
+					<hr style="border-color: grey">
+					<h5>Photos, Moolah Guide, and Website made by <a href="http://reddit.com/user/PowerLemons" target="_blank">/u/PowerLemons</a>.</h5>
+					<h5>© The Ðogecoin Project</h5>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div id="walletgenerator-paper-os" class="tutorial tutorial_slide">
+	<div class="container">
+		<div class="row">
+			<div style="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/print_walletgenerator_01.jpg" class="img-responsive center-block" alt="Dogecoin Paper Wallet" />
+				</div>
+				<div class="col-md-8">
+					<div class="alert alert-info"><i class="fa fa-info-circle"></i> <strong>Note:</strong> For long term storage of Dogecoin, paper wallets are highly recommended as a good security practice.</div>
+					<h2><strong>1. Go to walletgenerator.net.</strong></h2>
+					<p>Click the link below to go to walletgenerator.net.</p>
+					<p>Read the security checklist</p>
+					<p>For extra security, download the website as explained on the security checklist and run it on your computer.</p>
+					<h4><a href="http://walletgenerator.net/?currency=Dogecoin" target="_blank">Go to walletgenerator.net.</a></h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div style="padding-top: 30px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/print_walletgenerator_02.jpg" class="img-responsive center-block" alt="Dogecoin Paper Wallet" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>2. Generate randomness.</strong></h2>
+					<p>Move your mouse on the website until the counter goes to 0.</p>
+					<p>Your mouse movements are used to generate randomness so you can have a very secure paper wallet.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/print_walletgenerator_03.jpg" class="img-responsive center-block" alt="Dogecoin Paper Wallet" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>3. Generate a paper wallet.</strong></h2>
+					<p>Click on the "Paper wallet" tab.</p>
+					<p>You can generate as much paper wallet as you want by clicking on "Generate".</p>
+					<p>You can encrypt your paper wallet using BIP38 by specifying a passphrase.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="padding-top: 50px;">
+				<div class="col-md-4">
+					<img style="padding-bottom: 30px;" src="../imgs/tut/print_walletgenerator_04.jpg" class="img-responsive center-block" alt="Dogecoin Paper Wallet" />
+				</div>
+				<div class="col-md-8">
+					<h2><strong>4. Print and fold your wallet!</strong></h2>
+					<p>Print your paper wallet using the "Print" button.</p>
+					<p>Fold it in half lengthwise, and then in three widthwise.</p>
+					<p>You can insert one side inside the other to lock the wallet.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modals -->
+
+<div class="modal fade" id="community-modal" tabindex="-1" role="dialog" aria-labelledby="community-modal-lable" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title dogefont" id="community-modal-lable">COMMUNITY:</h4>
+				<h5>Get involved with Dogecoin! <br/><br/>Participate in our Reddit community, chat on our IRC (Internet Chat) channel, or have fun on our forums.</h5>
+				<ul>
+					<li><a href="http://www.reddit.com/r/dogecoin" target="_blank">Reddit Community</a> - The Main Hotspot of the Dogecoin Community.</li>
+					<li><a href="http://foundation.dogecoin.com/" target="_blank">Dogecoin Foundation</a> - Non-Profit Organization which uses Dogecoin for goodwill and charitable endeavors.</li>
+					<li><a href="http://webchat.freenode.net/?nick=Shibe..&amp;channels=%23dogecoin&amp;prompt=1" target="_blank">#dogecoin IRC</a> - Dogecoin-based Internet Chat.</li>
+					<li><a href="http://discuss.dogecoin.com/" target="_blank">Discuss Dogecoin</a> - Dogecoin Forums.</li>
+				</ul>
+				<h5>We are friendly, and we will be happy to answer any Dogecoin-related questions. <br/>Try us, we promise we won't bite!</h5>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="exchanges-modal" tabindex="-1" role="dialog" aria-labelledby="exchanges-modal-lable" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title dogefont" id="exchanges-modal-lable">GET DOGECOIN:</h4>
+				<h5>There are numerous amounts of ways to get Dogecoin. You can buy them, trade for them, get tipped, "mine" them, and more. They are surprisingly endless! <br/><br/>You can get tipped Dogecoin by participating in <a href="http://www.reddit.com/r/dogecoin">our community</a>. If that's not your style, the easiest way to have your first Dogecoin is to get them from a faucet. <br/><br/>A Faucet is a website which gives you a small amount of Dogecoin for free to introduce you to the currency! All you need is your Dogecoin address. <br/><br/>Here are a couple Dogecoin faucets:</h5>
+				<ul>
+					<li><a href="http://www.dogefaucet.com/" target="_blank">Dogefaucet.com</a> - Enter your address to get free Dogecoin.</li>
+					<li><a href="http://indogewetrust.com/" target="_blank">InDogeWeTrust.com</a> - Same as Dogefaucet.</li>
+					<li><a href="http://dogec0in.com/" target="_blank">Dogec0in.com</a> - Chat with the community to get free Dogecoin.</li>
+				</ul>
+				<h5>You can also buy them or exchange for them with regular money. This is an easy way to get Dogecoin. <br/><br/>Here are some trusted Dogecoin exchanges:</h5>
+				<ul>
+					<li><a href="https://www.weselldoges.com/" target="_blank">WeSellDoges</a> (PayPal)</li>
+					<li><a href="https://www.vaultofsatoshi.com/" target="_blank">Vault of Satoshi</a> (USD &amp; CAD)</li>
+					<li><a href="https://anxpro.com/" target="_blank">ANXPRO</a> (USD, EUR, GBP, AUD, CAD, HKD, SGD, NZD)</li>
+					<li><a href="https://www.kraken.com/" target="_blank">Kraken</a> (USD, EUR)</li>
+					<li><a href="http://www.localdogecoin.com/" target="_blank">LocalDogecoin</a> (A website to purchase Dogecoin locally.)</li>
+				</ul>
+				<h5>You can also get Dogecoin by "mining" it. Mining is when you use your computer to process Dogecoin transactions by other people, and in return you get Dogecoin. <br/><br/>Mining is intended for advanced users only, as it requires a lot of technical knowledge to do. If you are interested, <a href="http://dogecointutorial.com/mining.html" target="_blank">read more here</a>.</h5>
+				<h5 class="note"><strong>Note:</strong> These online exchanges are not owned or maintained by Dogecoin or the Dogecoin Foundation. While we are satisfied they are trustworthy, reliable services - please use at your own risk.</h5>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="stores-modal" tabindex="-1" role="dialog" aria-labelledby="stores-modal-lable" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title dogefont" id="stores-modal-lable">STORES:</h4>
+				<h5>You can shop for goods online with Dogecoin. <br/><br/>Dogecoin is safe during checkout, because you don't put down any sensitive bank information! Just send your Dogecoin to the address specified by the merchant, and then you'll have your item processed and ready for delivery in an instant! <br/><br/>Here are some businesses that accept Dogecoin:</h5>
+				<ul>
+					<li><a href="http://www.bitcoinshop.us/" target="_blank">BitcoinShop.us</a></li>
+					<li><a href="https://dogeoutlet.com/" target="_blank">DogeOutlet</a></li>
+				</ul>
+				<h5>If that isn't enough, you can look at the Dogecoin Business Directories below.</h5>
+				<h5><a href="http://dogedir.com/" target="_blank">Dogedir</a> - Dogecoin Business Directory.<br><a href="http://dogecoin.link/" target="_blank">Dogecoin.link</a> - User-generated Dogecoin Directory.</h5>
+				<h5 class="note"><strong>Note:</strong> These online shops and business directories are not owned or maintained by Dogecoin or the Dogecoin Foundation. While we are satisfied they are trustworthy, reliable services - please use at your own risk.</h5>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ### Tutorial Ends ### -->
+
+<!-- AddThis Smart Layers -->
+<script src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-529f00d46dc73a67" type="text/javascript"></script>
+<script type="text/javascript">
+addthis.layers({
+      'theme' : 'transparent',
+      'share' : {
+        'position' : 'left',
+        'numPreferredServices' : 5
+      }
+      
+    }
+                  );
+</script>
+
+
+</body>
+</html>
