@@ -2,7 +2,7 @@ function enablei18n() {
      'use strict';
      var i18n = $.i18n();
      var localeFromURL = getUrlParameter('lng');
-     if(localeFromURL && i18n.locale !== 'en') { 
+     if(localeFromURL) { 
         i18n.locale = localeFromURL;
         console.log("localFromURL was successful.  Lang set as:" + i18n.locale);
      }
