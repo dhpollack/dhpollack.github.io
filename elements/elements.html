@@ -1,0 +1,159 @@
+<html><head>
+
+
+
+
+
+
+
+
+
+
+
+<script src="../bower_components/promise-polyfill/Promise.js"></script>
+
+
+
+
+
+
+
+
+
+
+</head><body><div hidden=""><dom-module id="paper-ripple">
+  <style>
+    :host {
+      display: block;
+      position: absolute;
+      border-radius: inherit;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      /* This resolves a rendering issue in Chrome 40 where the
+         ripple is not properly clipped by its parent (which may have
+         rounded corners. See: http://jsbin.com/temexa/4 */
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    :host([noink]) {
+      pointer-events: none;
+    }
+
+    #background,
+    #waves,
+    .wave-container,
+    .wave {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #background,
+    .wave {
+      opacity: 0;
+    }
+
+    #waves,
+    .wave {
+      overflow: hidden;
+    }
+
+    .wave-container,
+    .wave {
+      border-radius: 50%;
+    }
+
+    :host(.circle) #background,
+    :host(.circle) #waves {
+      border-radius: 50%;
+    }
+
+    :host(.circle) .wave-container {
+      overflow: hidden;
+    }
+
+  </style>
+  <template>
+    <div id="background"></div>
+    <div id="waves"></div>
+  </template>
+</dom-module>
+
+
+<dom-module id="letter-card">
+    <style>
+    :host {
+      display: inline-block;
+      position: relative;
+      float: left;
+    }
+    :host:before{
+  	  content: "";
+  	  display: inline-block;
+    	padding-top: 100%; 	/* initial ratio of 1:1*/
+    }
+    .card-content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    </style>
+    <template>
+      <div class="card-body layout horizontal center">
+        <div class="card-content">
+          <paper-ripple recenters=""></paper-ripple>
+          <span class="content-span"><content></content></span>
+        </div>
+        <audio style="display: none;">
+          
+          <source src="{{aacAudio}}">
+          <source src="{{opusAudio}}">
+        </audio>
+      </div>
+    </template>
+</dom-module>
+
+<dom-module id="letter-service">
+  <style>
+  core-ajax {
+    display: none;
+  }
+  </style>
+  <template>
+    <core-ajax id="ajax" auto="" verbose="" url="/api/ar/letters.json" handleas="json" on-response="lettersLoaded">
+    </core-ajax>
+  </template>
+</dom-module>
+  <dom-module id="letter-list">
+  <style>
+    :host {
+      display: inline-block;
+      position: relative;
+    }
+  </style>
+  <template>
+    <letter-service id="service" lobj="{{lobj}}"></letter-service>
+        <template id="repeater" is="x-repeat" items="[[lobj.alphabet]]">
+          <letter-card uid="[[item.uid]]" audio="[[item.audio]]" on-tap="fireTapFunction" letter="[[item.letter]]" currlang="[[item.currlang]]" alang="[[item.letter]]" hidden="{{item.hidden}}">
+            <p>[[item.letter]]</p>
+          </letter-card>
+        </template>
+      
+  </template>
+  <template>
+    <letter-service id="service" currlang="{{currlang}}"></letter-service>
+      <h1>{{currlang}}</h1>
+  </template>
+</dom-module>
+</div><script charset="utf-8" src="elements.js"></script></body></html>
