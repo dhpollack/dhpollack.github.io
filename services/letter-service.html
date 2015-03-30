@@ -28,8 +28,12 @@
       // Make a copy of the loaded data
       //console.log(ajaxData);
       var ajaxData = this.$.ajax.lastResponse.slice()[0];
-      ajaxData.alphabet.forEach(function(entry) {
+      shuffle(ajaxData.alphabet);
+      ajaxData.alphabet.forEach(function(entry, i) {
         entry["currlang"] = ajaxData.lang[0].code;
+        if(i <= 11) {
+          entry["hidden"] = false;
+        }
       });
       this._setLobj(ajaxData);
       //console.log("# letters: " + this.letters.length);
@@ -64,4 +68,22 @@
     }
     
   });
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex ;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
   </script>

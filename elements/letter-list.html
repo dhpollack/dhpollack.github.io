@@ -19,7 +19,7 @@
             letter="[[item.letter]]"
             currlang="[[item.currlang]]"
             alang="[[item.letter]]"
-            hidden="{{item.hidden}}">
+            hidden="[[item.hidden]]">
             <p>[[item.letter]]</p>
           </letter-card>
         </template>
@@ -40,8 +40,11 @@
       clicked: {
         type: Number,
         notify: true
+      },
+      hideCard: {
+        type: Boolean,
+        computed: 'hideLetCard(limit)'
       }
-
     },
     bind: {
     },
@@ -54,6 +57,12 @@
     fireTapFunction: function(e) {
       console.log("fire tap function!");
       this.fire("letter-tapped");
+    },
+    hideLetCard: function(ev) {
+      var hide = Math.random() >= 0.5;
+      console.log(ev);
+      console.log("Hide Card: " + hide);
+      return hide;
     }
   });
 </script>

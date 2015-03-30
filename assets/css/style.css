@@ -64,3 +64,17 @@
       width: 100vw;
     }
   }
+  @media screen and (orientation: portrait) {
+    letter-card {
+      height: 20vh;
+    }
+    .content-span {
+      font-size: 12vh;
+    }
+    
+  }
+  @media screen and (orientation: landscape) {
+    letter-card {
+      width: 25vw;
+    }
+  }

@@ -1,33 +1,35 @@
 [
-  {
-    "lang": [{
-      "code": "ar"
-    }],
-    "alphabet": [
       {
         "uid": 1,
-        "hidden": true,
+        "hidden": false,
         "letter": "ا",
-        "en": "alif"
+        "en": "alif",
+        "audio": "/assets/audio/ar/alif.opus"
       },
       {
         "uid": 2,
-        "hidden": true,
+        "hidden": false,
         "letter": "ب",
-        "en": "baa"      },
+        "en": "baa",
+        "audio": "/assets/audio/ar/baa.m4a"
+      },
       {
         "uid": 3,
-        "hidden": true,
+        "hidden": false,
         "letter": "ج",
-        "en": "jeem"      },
+        "en": "jeem",
+        "audio": "/assets/audio/ar/jeem.m4a"
+      },
       {
         "uid": 4,
-        "hidden": true,
+        "hidden": false,
         "letter": "د",
-        "en": "daal"      },
+        "en": "daal",
+        "audio": "/assets/audio/ar/daal.opus"
+      },
       {
         "uid": 5,
-        "hidden": true,
+        "hidden": false,
         "letter": "ه",
         "en": "haa"
       },
@@ -41,14 +43,14 @@
     
       {
         "uid": 7,
-        "hidden": true,
+        "hidden": false,
         "letter": "ز",
         "en": "zhay"
       },
     
       {
         "uid": 8,
-        "hidden": true,
+        "hidden": false,
         "letter": "ح",
         "en": "hhaa"
       },
@@ -83,7 +85,7 @@
     
       {
         "uid": 13,
-        "hidden": true,
+        "hidden": false,
         "letter": "م",
         "en": "meem"
       },
@@ -132,7 +134,7 @@
     
       {
         "uid": 20,
-        "hidden": true,
+        "hidden": false,
         "letter": "ر",
         "en": "raa"
       },
@@ -184,6 +186,4 @@
         "letter": "غ",
         "en": "ghain"
       }    
-    ]
-  }
 ]
