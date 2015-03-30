@@ -32,13 +32,14 @@
         <audio style="display: none;">
           <script type="text/javascript">
           </script>
-          <source src="{{aacAudio}}">
           <source src="{{opusAudio}}">
+          <source src="{{aacAudio}}">
         </audio>
       </div>
     </template>
 </dom-module>
 <script>
+(function() {
   Polymer({
     is: 'letter-card',
     properties: {
@@ -54,6 +55,11 @@
         type: String,
         reflectToAttribute: true
       },
+      canOpus: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
       aacAudio: {
         type: String,
         computed: 'computeAacAudio(letter, currlang)'
@@ -67,21 +73,26 @@
       'click': 'handleClick'
     },
     handleClick: function(e) {
+      if(e.path[1].querySelector(".content-span").innerText == "___") {
+        console.log("firing change-language");
+        this.fire("change-language");
+      }
       var audio = this.querySelector("audio");
       audio.play();
     },
-    ready: function(e) {
+    ready: function() {
     },
     computeAacAudio: function(letter, mylang) {
       return "/assets/audio/"+ mylang +"/" + letter + ".m4a";
     },
     computeOpusAudio: function(letter, mylang) {
-      var audioTag = document.createElement("audio");
-      if(!!(audioTag.canPlayType && audioTag.canPlayType('audio/ogg;codecs="opus"').replace(/no/, ''))) {
+      console.log("letter-card canOpus: " + this.canOpus);
+      if(this.canOpus) {
         return "/assets/audio/"+ mylang +"/" + letter + ".opus";
       } else {
         return '';
       }
     }
   });
+})();
 </script>
