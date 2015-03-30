@@ -30,10 +30,8 @@
           <span class="content-span"><content></content></span>
         </div>
         <audio style="display: none;">
-          <script type="text/javascript">
-          </script>
-          <source src="{{opusAudio}}">
           <source src="{{aacAudio}}">
+          <source src="{{opusAudio}}">
         </audio>
       </div>
     </template>
@@ -75,6 +73,8 @@
     handleClick: function(e) {
       if(e.path[1].querySelector(".content-span").innerText == "___") {
         console.log("firing change-language");
+        // gonna use later
+        //var testword = 'مرحبا';
         this.fire("change-language");
       }
       var audio = this.querySelector("audio");
