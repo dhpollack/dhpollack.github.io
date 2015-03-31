@@ -1,0 +1,79 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../services/word-service.html">
+
+<dom-module id="word-board">
+  <style>
+    :host {
+      display: inline-block;
+      position: relative;
+    }
+  </style>
+  <template>
+    <div class="word-board"><span>{{myWord}}</span></div>
+    <word-service id="service" currlang="{{langCode}}" warray="{{warray}}"></letter-service>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: "word-board",
+    properties: {
+      langCode: {
+        type: String,
+        notify: true,
+        value: "es"
+      },
+      canOpus: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      reset: {
+        type: Boolean,
+        value: false,
+        observer: 'resetWord'
+      },
+      myWord: {
+        type: String,
+        value: "",
+        notify: true,
+        computed: 'wordFilter(warray)'
+      },
+      wordArray: {
+        type: Array,
+        value: function() { return []; }
+      }
+    },
+    listeners: {
+      'new-letters': 'onNewLetters'
+    },
+    created: function() {
+    },
+    ready: function() {
+    },
+    onNewLetters: function(event) {
+      console.log("new-letters was fired and heard by letters-list: " + this.langCode);
+      //this.currlang = event.detail.jsonLang;
+      //console.log("now the new language is: " + this.currlang);
+    },
+    changeLanguage: function(event) {
+      //console.log("Event: " + event.type + "\nFrom: " + event.srcElement.localName);
+      //this.currlang = (this.currlang == "ar") ? "en" : "ar";
+    },
+    wordFilter: function(items) {
+      if(items.length === 0) return "";
+      this.wordArray = items;
+      var word = items[Math.round(Math.random()*100)][0];
+      this.fire("random-word-selected", { value: word, langCode: this.langCode });
+      return word;
+    },
+    resetWord: function() {
+      if(this.reset) {
+        console.log("resetWord()");
+        this.reset = false;
+        this.wordFilter(this.wordArray);
+      }
+    }
+  });
+})();
+</script>

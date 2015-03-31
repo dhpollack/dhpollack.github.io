@@ -1,14 +1,32 @@
-<!doctype html><html><head><title>Polymer Arabic Game</title><meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"><script src="../bower_components/webcomponents/webcomponents.js"></script><link rel="import" href="/bower_components/polymer/polymer.html"><link rel="import" href="../bower_components/layout/layout.html"><link rel="import" href="elements/elements.html"><link rel="stylesheet" href="/assets/css/style.css" type="text/css"></head><body fullbleed=""><template is="x-autobind"><div class="header"><span id="game-name">Logo</span><score-board></score-board></div><div class="container layout vertical center"><letter-list limit="12" lang-code="ar"></letter-list></div><div class="footer"><letter-card class="space-bar" letter=""><jumbotron-text></jumbotron-text></letter-card></div></template><script>
-  var jumbotronBox = document.querySelector("jumbotron-text");
+<!doctype html><html><head><title>Polymer Arabic Game</title><meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"><script src="../bower_components/webcomponents/webcomponents.js"></script><link rel="import" href="/bower_components/polymer/polymer.html"><link rel="import" href="../bower_components/layout/layout.html"><link rel="import" href="elements/elements.html"><link rel="stylesheet" href="/assets/css/style.css" type="text/css"></head><body fullbleed=""><template is="x-autobind"><div class="header"><word-board lang-code="ar"></word-board><score-board></score-board></div><div class="container layout vertical center"><letter-list limit="12" lang-code="ar"></letter-list></div><div class="footer"><letter-card class="space-bar" letter=""><jumbotron-text></jumbotron-text></letter-card></div></template><script>
+  /* Catchers */
+  var headerBox = document.querySelector('.header')
   var containerBox = document.querySelector('.container');
   var footerBox = document.querySelector('.footer');
+  /* Batters */
+  var jumbotronBox = document.querySelector("jumbotron-text");
   var scoreBox = document.querySelector('score-board');
-  footerBox.addEventListener('click-from-card', function(event) {
-    jumbotronBox.setAttribute("last-bucket", " ");
+  var letterListBox = document.querySelector('letter-list');
+  var wordBoardBox = document.querySelector('word-board');
+  
+  headerBox.addEventListener('random-word-selected', function(event) {
+    letterListBox.setAttribute("filter-word", event.detail.value);
+    scoreBox.setAttribute("check-word", event.detail.value);
+    jumbotronBox.setAttribute("ziel-wort", event.detail.value);
   });
+  
+  headerBox.addEventListener('correct-answer', function(event) {
+    console.log("Congrats!");
+    wordBoardBox.setAttribute('reset', true);
+  });
+
   containerBox.addEventListener('click-from-card', function(event) {
     jumbotronBox.setAttribute("last-bucket", "");
     jumbotronBox.setAttribute("last-bucket", event.detail.letter);
+  });
+
+  footerBox.addEventListener('click-from-card', function(event) {
+    jumbotronBox.setAttribute("last-bucket", " ");
   });
   footerBox.addEventListener("check-jumbotron-word", function(event) {
     scoreBox.setAttribute("last-bucket", "");
