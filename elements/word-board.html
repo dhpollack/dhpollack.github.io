@@ -10,7 +10,7 @@
   </style>
   <template>
     <div class="word-board"><span>{{myWord}}</span></div>
-    <word-service id="service" currlang="{{langCode}}" warray="{{warray}}"></letter-service>
+    <word-service id="service" currlang="{{langCode}}" warray="{{warray}}"></word-service>
   </template>
 </dom-module>
 <script>
@@ -28,24 +28,22 @@
         value: false,
         reflectToAttribute: true
       },
-      reset: {
-        type: Boolean,
-        value: false,
-        observer: 'resetWord'
-      },
       myWord: {
         type: String,
         value: "",
-        notify: true,
-        computed: 'wordFilter(warray)'
+        notify: true
       },
       wordArray: {
         type: Array,
         value: function() { return []; }
+      },
+      reset: {
+        type: Boolean,
+        value: true
       }
     },
     listeners: {
-      'new-letters': 'onNewLetters'
+      'new-words': 'setWords'
     },
     created: function() {
     },
@@ -62,17 +60,32 @@
     },
     wordFilter: function(items) {
       if(items.length === 0) return "";
-      this.wordArray = items;
-      var word = items[Math.round(Math.random()*100)][0];
-      this.fire("random-word-selected", { value: word, langCode: this.langCode });
-      return word;
+      this.resetWord2();
     },
     resetWord: function() {
-      if(this.reset) {
-        console.log("resetWord()");
+      if(this.reset  && this.wordArray.length > 0) {
+        console.log("resetWord(): " + this.wordArray.length);
+        var word = this.wordArray[Math.round(Math.random() * this.wordArray.length)][0];
+        this.fire("random-word-selected", { value: word, langCode: this.langCode });
         this.reset = false;
-        this.wordFilter(this.wordArray);
+        this.myWord = word; 
       }
+    },
+    resetWord2: function() {
+      console.log("resetWord2(): " + this.wordArray.length);
+      var word = this.wordArray[Math.round(Math.random() * this.wordArray.length)][0];
+      this.fire("random-word-selected", { value: word, langCode: this.langCode });
+      this.myWord = word; 
+    },
+    setWords: function() {
+      console.log("setting words");
+      var items = this.$.service.warray;
+      this.wordArray = items;
+      this.wordFilter(items);
+      return items
+    },
+    myTest: function() {
+      console.log("running myTest...");
     }
   });
 })();
