@@ -62,27 +62,17 @@
       if(items.length === 0) return "";
       this.resetWord2();
     },
-    resetWord: function() {
-      if(this.reset  && this.wordArray.length > 0) {
-        console.log("resetWord(): " + this.wordArray.length);
-        var word = this.wordArray[Math.round(Math.random() * this.wordArray.length)][0];
-        this.fire("random-word-selected", { value: word, langCode: this.langCode });
-        this.reset = false;
-        this.myWord = word; 
-      }
-    },
     resetWord2: function() {
-      console.log("resetWord2(): " + this.wordArray.length);
-      var word = this.wordArray[Math.round(Math.random() * this.wordArray.length)][0];
-      this.fire("random-word-selected", { value: word, langCode: this.langCode });
-      this.myWord = word; 
+      var word = this.wordArray[Math.round(Math.random() * this.wordArray.length)];
+      this.fire("random-word-selected", { value: word[0], valueOhneAccent: word[1], langCode: this.langCode });
+      this.myWord = word[0]; 
     },
     setWords: function() {
       console.log("setting words");
       var items = this.$.service.warray;
       this.wordArray = items;
       this.wordFilter(items);
-      return items
+      return items;
     },
     myTest: function() {
       console.log("running myTest...");
