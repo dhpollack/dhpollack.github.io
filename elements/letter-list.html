@@ -60,7 +60,7 @@
         notify: true,
         value: function() { return []; }
       },
-      saveSet: {
+      saveWord: {
         type: Boolean,
         value: false
       }
@@ -92,14 +92,15 @@
     },
     onNewLetters: function() {
       this.letterList = this.filterResults(this.$.lservice.lobj, this.filterWord[1], this.langCode);
-      this.async(
-        function(){
+      if(this.setWord) {
+        this.async(function() {
           this.shuffleLetters(this.filterWord[1]);
-        }
-      );
+        });
+      }
     },
     onNewWord2: function(word) {
       console.log("caught new word2: " + word[0] + "| ohneAccent: " + word[1]);
+      this.setWord = true;
       this.filterWord = word;
       if(this.letterList.length > 0) this.shuffleLetters(word[1]);
     },
