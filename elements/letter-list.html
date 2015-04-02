@@ -53,7 +53,7 @@
       filterWord: {
         type: Array,
         notify: true,
-        value: function() { return ['مرحبا','مرحبا'];}
+        value: function() { return []; }
       },
       letterList: {
         type: Array,
@@ -93,6 +93,7 @@
     onNewLetters: function() {
       this.letterList = this.filterResults(this.$.lservice.lobj, this.filterWord[1], this.langCode);
       if(this.setWord) {
+        if(this.filterWord.length === 0) this.fire("resend-word");
         this.async(function() {
           this.shuffleLetters(this.filterWord[1]);
         });

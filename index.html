@@ -24,12 +24,17 @@
   containerBox.addEventListener('click-from-card', function(event) {
     jumbotronBox.calcScore2(event.detail.letter);
   });
+  
+  containerBox.addEventListener('resend-word', function(event) {
+    console.log("filter word not found");
+    letterListBox.onNewWord2([wordBoardBox.wordArray[wordBoardBox.ranWordIndex][0],wordBoardBox.wordArray[wordBoardBox.ranWordIndex][1]]); 
+  });
 
   footerBox.addEventListener('click-from-card', function(event) {
     jumbotronBox.calcScore2(" ");
   });
   footerBox.addEventListener("check-jumbotron-word", function(event) {
     scoreBox.calcScore2(event.detail.word);
-  })
+  });
 
  </script></body></html>
