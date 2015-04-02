@@ -97,6 +97,8 @@
           if(this.filterWord.length === 0) this.fire("resend-word");
           this.shuffleLetters(this.filterWord[1]);
         });
+      } else {
+        if(this.filterWord.length === 0) this.fire("resend-word");
       }
     },
     onNewWord2: function(word) {
