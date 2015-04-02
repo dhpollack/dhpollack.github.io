@@ -93,8 +93,8 @@
     onNewLetters: function() {
       this.letterList = this.filterResults(this.$.lservice.lobj, this.filterWord[1], this.langCode);
       if(this.setWord) {
-        if(this.filterWord.length === 0) this.fire("resend-word");
         this.async(function() {
+          if(this.filterWord.length === 0) this.fire("resend-word");
           this.shuffleLetters(this.filterWord[1]);
         });
       }
