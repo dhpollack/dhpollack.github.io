@@ -111,6 +111,7 @@
       var letterCards = document.querySelectorAll('letter-card.letter-matrix');
       var letterParent = letterCards[0].parentNode;
       var numTiles = this.limit;
+      var specialChars = ["ء", "ى"];
       numTiles = numTiles - word.split("").filter(function(value, index, self){ return self.indexOf(value) === index;}).length;
       for(var i = 0; i < letterCards.length; i++) {
         letterParent.appendChild(letterParent.children[Math.random() * i | 0]);
@@ -118,7 +119,7 @@
           //do nothing for spacebar
         } else if(word.indexOf(letterCards[i].letter) > -1) {
           letterCards[i].hidden = false;
-        } else if(letterCards[i].letter === "ى") {
+        } else if(specialChars.indexOf(letterCards[i].letter) > -1) {
           letterCards[i].hidden = true;
         } else if(numTiles > 0) {
           letterCards[i].hidden = false;
