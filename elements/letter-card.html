@@ -74,12 +74,10 @@
       'click': 'handleClick'
     },
     handleClick: function(e) {
-      var audio = this.querySelector("audio");
-      audio.play();
-      //console.log("firing click-from-card...");
-      //this.fire("click-from-card", {letter: this.letter});
       var jumbotronBox = document.querySelector("jumbotron-text");
       jumbotronBox.calcScore2(this.letter);
+      var audio = this.querySelector("audio");
+      audio.play();
     },
     ready: function() {
     },
