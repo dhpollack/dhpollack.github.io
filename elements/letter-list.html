@@ -92,22 +92,27 @@
     },
     onNewLetters: function() {
       this.letterList = this.filterResults(this.$.lservice.lobj, this.filterWord[1], this.langCode);
-      if(this.setWord) {
         this.async(function() {
-          if(this.filterWord.length === 0) this.fire("resend-word");
-          this.shuffleLetters(this.filterWord[1]);
+          if(this.setWord) {
+              if(this.filterWord.length === 0) this.fire("resend-word");
+              this.shuffleLetters(this.filterWord[1]);
+          } else {
+            if(this.filterWord.length === 0) this.fire("resend-word");
+          }
         });
-      } else {
-        if(this.filterWord.length === 0) this.fire("resend-word");
-      }
     },
     onNewWord2: function(word) {
       console.log("caught new word2: " + word[0] + "| ohneAccent: " + word[1]);
       this.setWord = true;
       this.filterWord = word;
-      if(this.letterList.length > 0) this.shuffleLetters(word[1]);
+      if(this.letterList.length > 0) {
+        this.shuffleLetters(word[1]);
+      } else {
+        console.log("this.letterList is not yet set :-/");
+      }
     },
     shuffleLetters: function(word) {
+      console.log("shuffling letters...");
       var letterParent = Polymer.dom(this.$.lmc);
       var letterCards = letterParent.children;
       var numTiles = this.limit;
