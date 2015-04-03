@@ -191,13 +191,15 @@
         "uid": 29,
         "hidden": true,
         "letter": "ى",
-        "en": "yaay"
+        "en": "yaay",
+        "regular": false
       },
       {
         "uid": 30,
-        "hidden": "true",
+        "hidden": true,
         "letter": "ء",
-        "en": "hamza"
+        "en": "hamza",
+        "regular": false
       }
     ]
   }

@@ -45,7 +45,9 @@
     },
     calcScore2: function(nextLetter) {
       if(nextLetter === " ") {
-        this.fire("check-jumbotron-word", { word: this.usertext });
+        //this.fire("check-jumbotron-word", { word: this.usertext });
+        var scoreBox = document.querySelector('score-board');
+        scoreBox.calcScore2(this.usertext);
         this.scoreArray = [];
         this.usertext = "_____";
       } else if(nextLetter !== "") {
