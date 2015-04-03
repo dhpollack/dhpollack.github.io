@@ -11,7 +11,7 @@
   </style>
   <template>
     <letter-service id="lservice" currlang="{{langCode}}" lobj="{{lobj}}"></letter-service>
-    <div class="letter-matrix-container">
+    <div id="lmc">
       <template id="repeater" is="x-repeat" items="{{letterList}}">
         <letter-card
           class="letter-matrix"
@@ -108,8 +108,8 @@
       if(this.letterList.length > 0) this.shuffleLetters(word[1]);
     },
     shuffleLetters: function(word) {
-      var letterCards = document.querySelectorAll('letter-card.letter-matrix');
-      var letterParent = letterCards[0].parentNode;
+      var letterParent = Polymer.dom(this.$.lmc);
+      var letterCards = letterParent.children;
       var numTiles = this.limit;
       var specialChars = ["ء", "ى"];
       numTiles = numTiles - word.split("").filter(function(value, index, self){ return self.indexOf(value) === index;}).length;
