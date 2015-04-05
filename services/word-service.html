@@ -1,8 +1,21 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../../bower_components/core-ajax/core-ajax.html"><dom-module id="word-service"><style>
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<!-- Additional Component Load -->
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<dom-module id="word-service">
+  <style>
   core-ajax {
     display: none;
   }
-  </style><template><core-ajax id="wajax" url="{{jsonUrl}}" handleas="json" on-response="wordsLoaded"></core-ajax></template></dom-module><script>
+  </style>
+  <template>
+    <core-ajax id="wajax" 
+      url={{jsonUrl}} 
+      handleas="json" 
+      on-response="wordsLoaded">
+    </core-ajax>
+  </template>
+</dom-module>
+<script>
 (function() {
   Polymer({
     is: 'word-service',
