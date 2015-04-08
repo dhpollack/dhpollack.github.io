@@ -40,6 +40,7 @@
               <select onchange="setLang(this.value)">
                 <option value="ar">Arabic</option>
                 <option value="en">English</option>
+                <option value="en-US-south">English (US South)</option>
               </select>
             </div>
             <br />
@@ -58,15 +59,18 @@
     </div>
   </core-header-panel>
   <script>
+  var wordBoard = document.querySelector('word-board');
+  var letterList = document.querySelector('letter-list');
+  var jumbotron = document.querySelector('jumbotron-text');
   function toggleCoreCollapse() {
     document.querySelector('#collapse1').toggle();
   }
   function setLang(lang) {
     console.log("toggling language: " + lang);
-    var wordBoard = document.querySelector('word-board');
-    var letterList = document.querySelector('letter-list');
+    
     wordBoard.setAttribute("lang-code", lang);
     letterList.setAttribute("lang-code", lang);
+    jumbotron.resetBox();
   }
   function setNerdModus() {
     // Stub for those that want to learn good.
