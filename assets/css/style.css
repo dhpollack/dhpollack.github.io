@@ -135,7 +135,14 @@
     .content-span {
       font-size: 12vh;
     }
-    
+    core-icon {
+      height: 5vh;
+      width: 5vh;
+      color: white;
+    }
+    word-board {
+      line-height: 8vh;
+    }
   }
   @media screen and (orientation: landscape) {
     letter-card {
