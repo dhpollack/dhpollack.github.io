@@ -34,8 +34,7 @@
         value: function() { return []; }
       },
       ranWordIndex: {
-        type: Number,
-        value: 0
+        type: Number
       }
     },
     listeners: {
@@ -57,13 +56,16 @@
       this.$.wservice.currlang = this.langCode;
     },
     wordFilter: function() {
-      var randomIndex = 0;
+      var randomIndex = Math.floor(Math.random() * this.wordArray.length);
       if(this.wordArray.length !== 0) {
-        while(this.ranWordIndex === randomIndex) {
-          randomIndex = Math.floor(Math.random() * this.wordArray.length);
+        if(this.ranWordIndex !== undefined) {
+          for(var i=0;this.ranWordIndex === randomIndex;i++) {
+            randomIndex = Math.floor(Math.random() * this.wordArray.length);
+            if(i > 20) break;
+          }
         }
         this.ranWordIndex = randomIndex;
-        //console.log("wordArray.length: " + this.wordArray.length + "\nthis.ranWordIndex: " + this.ranWordIndex);
+        console.log("wordArray.length: " + this.wordArray.length + "\nthis.ranWordIndex: " + this.ranWordIndex);
         var word = this.wordArray[this.ranWordIndex];
         //this.fire("random-word-selected", { value: word[0], valueOhneAccent: word[1], langCode: this.langCode });
         this.myWord = word[0];
