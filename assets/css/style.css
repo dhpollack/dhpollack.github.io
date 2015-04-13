@@ -141,7 +141,8 @@
       color: white;
     }
     word-board {
-      line-height: 8vh;
+      line-height: 9.3vh;
+      margin-top: 1px;
     }
   }
   @media screen and (orientation: landscape) {
