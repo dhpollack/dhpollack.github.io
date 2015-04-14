@@ -12,7 +12,7 @@
     color: white;
     height: 10vh;
     font-size: 5vh;
-    padding: 0 1vw;
+    padding: 0 2px;
   }
   word-board {
     font-size: 7vh;
@@ -57,7 +57,7 @@
     font-size: 0;
     vertical-align: bottom;
     bottom: 0;
-    padding: 0 1vw;
+    padding: 0 2px;
     overflow: hidden;
   }
   letter-list {
@@ -136,8 +136,8 @@
       font-size: 12vh;
     }
     core-icon {
-      height: 5vh;
-      width: 5vh;
+      height: 7vw;
+      width: 7vw;
       color: white;
     }
     word-board {

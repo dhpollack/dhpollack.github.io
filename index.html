@@ -7,8 +7,11 @@
 
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <!-- mobile app stuff -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="mobileapp-manifest.json">
+  <link rel="icon" href="launcher-icon.png">
   <!-- App CSS -->
   <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
   <!-- Polymer Imports -->
@@ -92,7 +95,7 @@
       Lastly, in Arabic, some letters have accents (also called diacritics).  For the purposes of this game, you do not need to enter these.  But be careful because dots are not the same as these more elaborate marks.  Think of it as the difference between "l" and "t" (one has a cross the other doesn't) vs "e" and "é" (just an accent mark, at least in English it's just an accent ;-)).
     </div>
   </core-overlay>
-  <script>
+  <script type="text/javascript">
   var wordBoard = document.querySelector('word-board');
   var letterList = document.querySelector('letter-list');
   var jumbotron = document.querySelector('jumbotron-text');
@@ -135,5 +138,20 @@
   }
 
  </script>
+  <script type="text/javascript">
+  	  window._pt_lt = new Date().getTime();
+  	  window._pt_sp_2 = [];
+  	  _pt_sp_2.push('setAccount,1db66b9e');
+  	  var _protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  	  (function() {
+  		var atag = document.createElement('script'); atag.type = 'text/javascript'; atag.async = true;
+  		atag.src = _protocol + 'js.ptengine.com/pta.js';
+  		var stag = document.createElement('script'); stag.type = 'text/javascript'; stag.async = true;
+  		stag.src = _protocol + 'js.ptengine.com/pts.js';
+  		var s = document.getElementsByTagName('script')[0]; 
+  		s.parentNode.insertBefore(atag, s);s.parentNode.insertBefore(stag, s);
+  	  })();
+  </script>
+	        
 </body>
 </html>
