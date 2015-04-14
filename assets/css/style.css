@@ -4,6 +4,20 @@
     background-color: #E5E5E5;
     font-family: 'RobotoDraft', sans-serif;
   }
+  #splash-screen {
+    position: fixed;
+    z-index: 999;
+    height: 20em;
+    width: 20em;
+    border-style: solid;
+    border-width: 4px;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
   core-header-panel {
     height: 100vh;
   }
@@ -16,6 +30,8 @@
   }
   word-board {
     font-size: 7vh;
+    line-height: 9.3vh;
+    margin-top: 1px;
   }
   .word-board {
     border-bottom-style: solid;
@@ -125,6 +141,9 @@
 		box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 		overflow: auto;
   }
+  .right-to-left {
+    transform: rotateY(180deg);
+  }
   .container {
     width: 100vw;
   }
@@ -140,10 +159,7 @@
       width: 7vw;
       color: white;
     }
-    word-board {
-      line-height: 9.3vh;
-      margin-top: 1px;
-    }
+
   }
   @media screen and (orientation: landscape) {
     letter-card {
