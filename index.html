@@ -27,6 +27,8 @@
   <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
   <!-- Custom Elements Vulcanized -->
   <link rel="import" href="elements/elements.html">
+  <!-- Fix for Viewport Units -->
+  <script src="../bower_components/viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
 </head>
 
 <body fullbleed unresolved>
@@ -149,7 +151,7 @@
     // but this stub is in case I want to move it here.
     document.body.removeAttribute("unresolved");
   }
-
+  window.viewportUnitsBuggyfill.init();
  </script>
 
 </body>
