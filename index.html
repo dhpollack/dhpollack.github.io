@@ -66,7 +66,7 @@
       </div>
       <div class="footer horizontal justified layout center">
         <div class="footer-button horizontal start-justified layout flex">
-          <paper-icon-button id="menu-toggle" icon="more-vert" onclick="toggleCoreCollapse()"></paper-icon-button>
+          <paper-icon-button id="menu-toggle" icon="trending-neutral" onclick="toggleCoreCollapse()"></paper-icon-button>
         </div>
         <jumbotron-text class="horizontal center-justified layout flex-2"></jumbotron-text>
         <div id="nerdmodus-div" class="horizontal end-justified layout flex">
@@ -77,9 +77,11 @@
     </div>
   </core-header-panel>
   <core-overlay id="help-overlay" class="dialog" backdrop>
+    <section>
+    <div id="close-help-overlay"><paper-icon-button id="close-help-overlay-icon" icon="cancel" onclick="showHelp()"></core-icon></div>
     <center><h1>This Is Not A Vocabulary Game</h1></center>
     <h3>The Goal</h3>
-    <p>Spell the word at the top of the page.</p>
+    <p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p>
     <h3>The Rules</h3>
     <ol>
       <li>Look at the word at the top of the page.</li>
@@ -89,7 +91,7 @@
     <h3>Scoring and Tips</h3>
     <ol>
       <li>100 points for each correct answer and -30 points for each wrong answer.</li>
-      <li>If you need help, click the underlined "A" in the bottom right corner.</li>
+      <li>If you need help, click the <paper-icon-button icon="text-format"></paper-icon-button> button in the bottom right corner.</li>
       <li>When you spell the word correctly, you will automatically hear the word.</li>
       <li>However, you still must click the word at the bottom to check it.</li>
       <li>There is no delete button, so be careful!</li>
@@ -104,6 +106,7 @@
       <li>Arabic is like the Flappy Bird of languages... Good Luck!</li>
     </ol>
     </div>
+    </section>
   </core-overlay>
   <script type="text/javascript">
   var wordBoard = document.querySelector('word-board');
@@ -112,9 +115,16 @@
   var overlay = document.getElementById('help-overlay');
   var recordDiv = document.getElementById('record-elem');
   var scoreBoard2 = document.getElementById('score-board-player-2');
+  var collapseMenu = document.getElementById('collapse1');
+  var menuToggleButton = document.getElementById('menu-toggle');
   
   function toggleCoreCollapse() {
-    document.querySelector('#collapse1').toggle();
+    collapseMenu.toggle();
+    if(collapseMenu.opened) {
+      menuToggleButton.style.transform = "rotateY(180deg)";
+    } else {
+      menuToggleButton.style.transform = "rotateY(0deg)";
+    }
   }
   function setLang(lang) {
     console.log("toggling language: " + lang);

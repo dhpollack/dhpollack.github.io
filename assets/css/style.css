@@ -106,6 +106,18 @@
   }
   .card-body {
   }
+  #menu-toggle {
+    transition: 0.3s ease-in-out;
+  }
+  #close-help-overlay {
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  #help-overlay core-icon {
+    color: black;
+  }
   core-collapse {
     background: rgba(200,170,160, 1.0);
   }
