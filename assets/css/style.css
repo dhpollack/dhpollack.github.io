@@ -20,6 +20,8 @@
   }
   core-header-panel {
     height: 100vh;
+    content: 'viewport-units-buggyfill; height: 100vh;';
+
   }
   .core-header {
     background: #16B38B;
@@ -27,11 +29,15 @@
     height: 10vh;
     font-size: 5vh;
     padding: 0 2px;
+    content: 'viewport-units-buggyfill; height: 10vh; font-size: 5vh;';
+
   }
   word-board {
     font-size: 7vh;
     line-height: 9.3vh;
     margin-top: 1px;
+    content: 'viewport-units-buggyfill; font-size: 7vh; line-height: 9.3vh;';
+
   }
   .word-board {
     border-bottom-style: solid;
@@ -68,6 +74,7 @@
     font-size: 8vh;
     text-align: center;
     font-weight: 300;
+    content: 'viewport-units-buggyfill; font-size: 8vh;';
   }
   .footer  {
     background: #16B38B;
@@ -78,6 +85,8 @@
     bottom: 0;
     padding: 0 2px;
     overflow: hidden;
+    content: 'viewport-units-buggyfill; height: 10vh;';
+
   }
   letter-list {
     width: 100vw;
@@ -91,6 +100,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+    content: 'viewport-units-buggyfill; width: 100vw;';
   }
   letter-card {
     display: inline-block;
@@ -99,6 +109,8 @@
     font-weight: 300;
     text-align: center;
     background: rgba(238,197,145,0.7);
+    content: 'viewport-units-buggyfill; width: 33.33vw; height: 26.66vh;';
+
   }
   .space-bar {
     width: inherit;
@@ -106,6 +118,7 @@
     font-weight: 300;
     text-align: center;
     background: #03a9f4;
+    content: 'viewport-units-buggyfill; height: 10vh;';
   }
   .card-body {
   }
@@ -115,6 +128,7 @@
   .mini-menu {
     width: 360px;
     padding: 1vh 1vw;
+    content: 'viewport-units-buggyfill; padding: 1vh 1vw;';
   }
   core-icon {
     height: 7vh;
@@ -125,6 +139,7 @@
   .content-span {
     font-size: 13vh;
     margin: 0 0 0 0;
+    content: 'viewport-units-buggyfill; font-size: 13vh;';
   }
   paper-ripple {
     color: #18C924; /* greenish */
@@ -150,6 +165,7 @@
   }
   .container {
     width: 100vw;
+    content: 'viewport-units-buggyfill; width: 100vw;';
   }
   #menu-toggle {
     transition: 0.3s ease-in-out;
@@ -166,9 +182,11 @@
   @media screen and (orientation: portrait) {
     letter-card {
       height: 20vh;
+      content: 'viewport-units-buggyfill; height: 20vh;';
     }
     .content-span {
       font-size: 12vh;
+      content: 'viewport-units-buggyfill; font-size: 12vh;';
     }
     core-icon {
       height: 7vw;
@@ -181,5 +199,6 @@
   @media screen and (orientation: landscape) {
     letter-card {
       width: 25vw;
+      content: 'viewport-units-buggyfill; width: 25vw;';
     }
   }

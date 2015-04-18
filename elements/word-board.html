@@ -85,10 +85,13 @@
       }
     },
     getCheckWord: function() {
-      var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
-      var word = this.wordArray[this.ranWordIndex];
-      return word[findex];
-      
+      if(this.wordArray.length !== 0) {
+        var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
+        var word = this.wordArray[this.ranWordIndex];
+        return word[findex];
+      } else {
+        return;
+      }
     },
     setWords: function() {
       var items = this.$.wservice.warray;

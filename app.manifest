@@ -129,19 +129,19 @@ assets/audio/en-US-south/words/squirrel.m4a
 assets/audio/en-US-south/words/trash.m4a
 assets/audio/en-US-south/words/village.m4a
 assets/audio/en-US-south/words/zipper.m4a
-mobileapp-manifest.json
+tinavg-webapp.json
 api/ar/letters.json
 api/ar/words-stpacc.json
 api/ar/words.json
-api/de/letters.json
-api/de/words-stpacc.json
-api/de/words.json
 api/en/letters.json
 api/en/words-stpacc.json
 api/en/words.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words.json
+api/de/letters.json
+api/de/words-stpacc.json
+api/de/words.json
 api/tr/letters.json
 api/tr/words-stpacc.json
 api/tr/words.json
@@ -156,4 +156,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: 768f6c5376627417c2c51c6f6ad2c36e03c7dea1ffe7a3f6d3ca28d5b4c63093
+# hash: 548dfbad1f7f1a7e1303d29b85adeb675082c88c2d2948de86b1f2ae49e7c9dd
