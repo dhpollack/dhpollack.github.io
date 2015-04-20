@@ -3,36 +3,6 @@ CACHE MANIFEST
 
 CACHE:
 index.html
-assets/audio/de/a.m4a
-assets/audio/de/b.m4a
-assets/audio/de/c.m4a
-assets/audio/de/d.m4a
-assets/audio/de/e.m4a
-assets/audio/de/f.m4a
-assets/audio/de/g.m4a
-assets/audio/de/h.m4a
-assets/audio/de/i.m4a
-assets/audio/de/j.m4a
-assets/audio/de/k.m4a
-assets/audio/de/l.m4a
-assets/audio/de/m.m4a
-assets/audio/de/n.m4a
-assets/audio/de/o.m4a
-assets/audio/de/p.m4a
-assets/audio/de/q.m4a
-assets/audio/de/r.m4a
-assets/audio/de/s.m4a
-assets/audio/de/t.m4a
-assets/audio/de/u.m4a
-assets/audio/de/v.m4a
-assets/audio/de/w.m4a
-assets/audio/de/x.m4a
-assets/audio/de/y.m4a
-assets/audio/de/z.m4a
-assets/audio/de/%C3%9F.m4a
-assets/audio/de/%C3%A4.m4a
-assets/audio/de/%C3%B6.m4a
-assets/audio/de/%C3%BC.m4a
 assets/audio/ar/%D8%A1.m4a
 assets/audio/ar/%D8%A7.m4a
 assets/audio/ar/%D8%A8.m4a
@@ -63,6 +33,36 @@ assets/audio/ar/%D9%87.m4a
 assets/audio/ar/%D9%88.m4a
 assets/audio/ar/%D9%89.m4a
 assets/audio/ar/%D9%8A.m4a
+assets/audio/de/a.m4a
+assets/audio/de/b.m4a
+assets/audio/de/c.m4a
+assets/audio/de/d.m4a
+assets/audio/de/e.m4a
+assets/audio/de/f.m4a
+assets/audio/de/g.m4a
+assets/audio/de/h.m4a
+assets/audio/de/i.m4a
+assets/audio/de/j.m4a
+assets/audio/de/k.m4a
+assets/audio/de/l.m4a
+assets/audio/de/m.m4a
+assets/audio/de/n.m4a
+assets/audio/de/o.m4a
+assets/audio/de/p.m4a
+assets/audio/de/q.m4a
+assets/audio/de/r.m4a
+assets/audio/de/s.m4a
+assets/audio/de/t.m4a
+assets/audio/de/u.m4a
+assets/audio/de/v.m4a
+assets/audio/de/w.m4a
+assets/audio/de/x.m4a
+assets/audio/de/y.m4a
+assets/audio/de/z.m4a
+assets/audio/de/%C3%9F.m4a
+assets/audio/de/%C3%A4.m4a
+assets/audio/de/%C3%B6.m4a
+assets/audio/de/%C3%BC.m4a
 assets/audio/en/a.m4a
 assets/audio/en/b.m4a
 assets/audio/en/c.m4a
@@ -284,15 +284,15 @@ api/ar/words.json
 api/de/letters.json
 api/de/words-stpacc.json
 api/de/words.json
-api/en/letters.json
-api/en/words-stpacc.json
-api/en/words.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words.json
 api/tr/letters.json
 api/tr/words-stpacc.json
 api/tr/words.json
+api/en/letters.json
+api/en/words-stpacc.json
+api/en/words.json
 
 
 NETWORK:
@@ -304,4 +304,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: 4f92b5b59c1ec2acb9363b0596cd898c23642e5f410595bafbce15c74abeccb6
+# hash: 7d7f24fb6ff2412768a016b23d295378beb3f1500eabfee143ee21646815a24b
