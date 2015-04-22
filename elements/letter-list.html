@@ -12,7 +12,7 @@
   <template>
     <letter-service id="lservice" currlang="{{langCode}}" lobj="{{lobj}}"></letter-service>
     <div id="lmc" class="horizontal layout flex wrap" style="width: 100vw">
-      <template id="repeater" is="x-repeat" items="{{letterList}}">
+      <template id="repeater" is="x-repeat" filter="addIndex" items="{{letterList}}">
         <letter-card
           class="letter-matrix"
           uid="[[item.uid]]"
@@ -20,7 +20,8 @@
           letter="[[item.letter]]"
           currlang="[[item.currlang]]"
           regular="[[item.regular]]"
-          hidden="[[item.hidden]]">
+          hidden="[[item.hidden]]"
+          tabindex="[[item.index]]">
           <p>[[item.letter]]</p>
         </letter-card>
       </template>
@@ -71,6 +72,10 @@
       pageRevealed: {
         type: Boolean,
         value: false
+      },
+      itemIndex: {
+        type: Number,
+        value: 1
       }
     },
     listeners: {
@@ -83,13 +88,20 @@
     },
     attached: function() {
     },
-    ready: function() {
+    addIndex: function(item) {
+      item.index = this.itemIndex;
+      this.itemIndex++;
+      return item;
+    },
+    init: function() {
       this.wordBoardBox = document.querySelector('word-board');
+      this.webapp = document.querySelector('tinavg-webapp');
     },
     changeLanguage: function(event) {
       this.$.lservice.currlang = this.langCode;
     },
     runLetters: function() {
+      if(!this.wordBoardWord) this.init();
       if(this.setWord) {
         this.onNewWord();
       }
@@ -124,6 +136,7 @@
       this.shuffleLetters(this.wordBoardBox.getCheckWord().toLowerCase());
     },
     onNewWord: function() {
+      this.itemIndex = 1;
       var word = this.wordBoardBox.getCheckWord();
       if(word !== undefined && word.length !== 0) {
         console.log("fired filter-word-changed: " + word + " | ohneAccent: " + this.stripDiacritics);
@@ -139,6 +152,7 @@
       if(!this.pageRevealed) {
         if(document.body.hasAttribute("unresolved")) this.pageRevealed = true;
         document.body.removeAttribute("unresolved");
+        this.webapp.init();
         /* gonna move this to index.html
         window.viewportUnitsBuggyfill.init({
           refreshDebounceWait: 50,
@@ -168,6 +182,9 @@
         }
       });
       this.letterList = shuffle(dummyArray);
+      this.webapp.letterLimit = this.letterList.length;
+      this.webapp.jumbotronIndex = this.letterList.length + 1;
+      
     }
   });
   function shuffle(array) {
