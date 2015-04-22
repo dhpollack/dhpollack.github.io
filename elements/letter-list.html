@@ -151,12 +151,10 @@
         document.body.removeAttribute("unresolved");
         this.init();
         this.webapp.init();
-        /* gonna move this to index.html
         window.viewportUnitsBuggyfill.init({
           refreshDebounceWait: 50,
           hacks: window.viewportUnitsBuggyfillHacks
         });
-        */
       }
       // this is a hack because polymer doesn't update if an array's properties have changed only if the array itself
       // has been manipulated.

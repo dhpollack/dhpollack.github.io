@@ -199,7 +199,13 @@
     // but this stub is in case I want to move it here.
     document.body.removeAttribute("unresolved");
   }
-  
+  function refreshBuggyFill() {
+    window.viewportUnitsBuggyfill.init({force: true});
+    window.viewportUnitsBuggyfill.refresh();
+    window.viewportUnitsBuggyfill.findProperties();
+    console.log(window.viewportUnitsBuggyfill.getCss());
+  }
+
   Mousetrap.bind('shift+enter', function() { 
     jumbotron.click(); 
   });
