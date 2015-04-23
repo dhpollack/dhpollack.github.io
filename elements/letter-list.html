@@ -151,7 +151,7 @@
     },
     shuffleLetters: function(word, tileLimit) {
       if(!this.pageRevealed) {
-        if(document.body.hasAttribute("unresolved")) this.pageRevealed = true;
+        this.pageRevealed = true;
         document.body.removeAttribute("unresolved");
         this.init();
         this.webapp.init();
