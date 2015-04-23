@@ -1,0 +1,6 @@
+[
+["gnarly", {"grammar": { "partofs": "adjective" }}],
+["village",  {"grammar": {"partofs": "noun"}}],
+["I'm awesome",  {"grammar": {"type": "phrase" , "segments": [{ "partofs": "contraction", "number": "singular" }, {"partofs": "adjective"}]}}],
+["raze",  {"grammar": {"partofs": "verb"}}]
+]
