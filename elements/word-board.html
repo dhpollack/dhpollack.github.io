@@ -74,7 +74,6 @@
     wordFilter: function() {
       if(!this.letterListBox) this.init();
       var randomIndex = Math.floor(Math.random() * this.wordArray.length);
-      var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
       this.phraseIndex++;
       if(this.wordArray.length !== 0) {
         if(this.phraseArray[this.phraseIndex] === undefined) {
@@ -105,7 +104,7 @@
         this.letterListBox.runLetters();
 
         
-        if(this.myWordSpan.classList.contains('invisible-text')) this.audioBox.play();
+        if(this.myWordSpan.classList.contains('invisible-text') || this.jumbotronBox.usertext === "(^_^)") this.audioBox.play();
       }
     },
     getCheckWord: function() {
