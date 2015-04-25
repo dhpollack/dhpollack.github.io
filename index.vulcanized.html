@@ -7646,11 +7646,6 @@ Fired when the user cancels the `core-overlay`.
 
 <!-- Custom Elements Vulcanized -->
 
-<!-- Additional Component Load -->
-
-
-
-
 
 <!-- Additional Component Load -->
 
@@ -8291,14 +8286,6 @@ if (!window.Promise) {
 
 
 
-
-
-<!-- Additional Component Load -->
-
-
-
-
-
 <!-- Additional Component Load -->
 
 
@@ -8307,6 +8294,20 @@ if (!window.Promise) {
 
 <script src="assets/js/p5.min.js"></script>
 <script src="assets/js/p5.sound.js"></script>
+
+
+
+<!-- Additional Component Load -->
+
+
+
+
+
+<!-- Additional Component Load -->
+
+
+
+
 
 
 <!-- keyboard shortcuts -->
@@ -9825,6 +9826,10 @@ if (!window.Promise) {
       })()
     };
 
+    /**
+     * @param {HTMLElement} element
+     * @constructor
+     */
     function ElementMetrics(element) {
       this.element = element;
       this.width = this.boundingRect.width;
@@ -9848,6 +9853,10 @@ if (!window.Promise) {
       }
     };
 
+    /**
+     * @param {HTMLElement} element
+     * @constructor
+     */
     function Ripple(element) {
       this.element = element;
       this.color = window.getComputedStyle(element).color;
@@ -10171,7 +10180,7 @@ if (!window.Promise) {
       },
 
       simulatedRipple: function() {
-        this.mousedownAction();
+        this.mousedownAction(null);
 
         // Please see polymer/polymer#1305
         this.async(function() {
@@ -10254,596 +10263,6 @@ if (!window.Promise) {
 </script>
 
 
-<dom-module id="letter-card">
-    <style>
-    :host {
-      display: inline-block;
-      position: relative;
-    }
-    </style>
-    <template>
-      <div class="card-body layout horizontal center-justified">
-        <span class="content-span"><content></content></span>
-        <paper-ripple recenters=""></paper-ripple>
-      </div>
-      <audio style="display: none;" src="{{aacAudio}}"></audio>
-    </template>
-</dom-module>
-<script>
-(function() {
-  Polymer({
-    is: 'letter-card',
-    properties: {
-      letter: {
-        type: String,
-        reflectToAttribute: true
-      },
-      currlang: {
-        type: String,
-        reflectToAttribute: true
-      },
-      uid: {
-        type: String,
-        reflectToAttribute: true
-      },
-      canOpus: {
-        type: Boolean,
-        value: false
-      },
-      regular: {
-        type: Boolean,
-        value: true
-      },
-      aacAudio: {
-        type: String
-      },
-      hidden: {
-        type: Boolean,
-        notify: true
-      },
-      tabindex: {
-        type: Number,
-        reflectToAttribute: true,
-        value: null
-      }
-    },
-    listeners: {
-      // gesture listeners left in as reminders.
-      // Not functioning as of 07.04.2015
-      // See https://github.com/Polymer/polymer/blob/0.8-preview/PRIMER.md#gesture-support
-      //'holdpulse': 'handlePulse',
-      //'release': 'handleRelease',
-      'tap': 'handleClick'
-    },
-    ready: function() {
-      this.paperRippleElem = Polymer.dom(this.root).querySelector("paper-ripple");
-      this.audio = Polymer.dom(this.root).querySelector("audio");
-    },
-    handleClick: function(e) {
-      if(this.jumbotronBox === undefined) this.jumbotronBox = document.querySelector("jumbotron-text");
-      this.jumbotronBox.lastBucket = this.letter;
-      if(!this.audio.paused) {
-        this.audio.pause();
-        this.audio.currentTime = this.audio.currentTime / 3;
-      }
-      this.audio.play();
-    },
-    handlePulse: function(e) {
-      console.log("Hold Pulse");
-      console.log(e);
-    },
-    handleRelease: function(e) {
-      console.log("Release");
-      console.log(e);
-    },
-    computeAacAudio: function(letter, mylang) {
-      if(letter === " " || mylang === undefined) return "";
-      return "/assets/audio/"+ mylang +"/" + letter + ".m4a";
-    },
-    firePaperRipple: function(playAudio) {
-      if(this.paperRippleElem) {
-        this.paperRippleElem.mousedownAction();
-        this.paperRippleElem.mouseupAction();
-        if(playAudio) this.audio.play();
-      }
-    }
-  });
-})();
-</script>
-<dom-module id="letter-service">
-  <style>
-  core-ajax {
-    display: none;
-  }
-  </style>
-  <template>
-    <core-ajax id="ajax" url="{{jsonUrl}}" handleas="json" on-request="lettersRequest" on-response="lettersLoaded">
-    </core-ajax>
-  </template>
-</dom-module>
-<script>
-(function() {
-  Polymer({
-    is: 'letter-service',
-
-    properties: {
-      currlang: {
-        type: String,
-        notify: true
-      },
-      lobj: {
-        type: Object,
-        notify: true,
-        value: function () { return {}; }
-      },
-      jsonUrl: {
-        type: String,
-        value: ""
-      }
-    },
-    listeners: {
-      'currlang-changed': 'changeJsonUrl'
-    },
-    attached: function() {
-      this.jsonUrl = this.createJsonUrl(this.currlang);
-      this.$.ajax.auto = true;
-    },
-    changeJsonUrl: function(ev) {
-      this.jsonUrl = this.createJsonUrl(this.currlang);
-    },
-    createJsonUrl: function(langCode) {
-      if(langCode == undefined) {
-        return "/api/ar/letters.json";
-      } else {
-        return "/api/"+langCode+"/letters.json";
-      }
-    },
-    lettersRequest: function() {
-      if(!this.letterListBox) {
-        this.letterListBox = document.querySelector("letter-list");
-      }
-      this.letterListBox.setLetters = false;
-    },
-    lettersLoaded: function() {
-      var jsonSuccess = (this.$.ajax.lastResponse != null) ? true : false;
-      console.log("loading letters from url: " + this.jsonUrl + " \nSuccess: " + jsonSuccess);
-      // Make a copy of the loaded data
-      if(jsonSuccess) {
-        var ajaxData = this.$.ajax.lastResponse.slice()[0];
-        this.lobj = ajaxData;
-        this.fire('new-letters', { jsonLang:  ajaxData.lang.code });
-        this.letterListBox.setLetters = true;
-      }
-    }
-  });
-})();
-</script><dom-module id="letter-list">
-  <style>
-    :host {
-      display: inline-block;
-      position: relative;
-    }
-  </style>
-  <template>
-    <letter-service id="lservice" currlang="{{langCode}}" lobj="{{lobj}}"></letter-service>
-    <div id="lmc" class="horizontal layout flex wrap" style="width: 100vw">
-      <template id="repeater" is="x-repeat" filter="addIndex" items="{{letterList}}">
-        <letter-card class="letter-matrix" uid="[[item.uid]]" aac-audio="[[item.audio]]" letter="[[item.letter]]" currlang="[[item.currlang]]" regular="[[item.regular]]" hidden="[[item.hidden]]" tabindex="[[item.index]]">
-          <p>[[item.letter]]</p>
-        </letter-card>
-      </template>
-    </div>
-  </template>
-</dom-module>
-<script>
-(function() {
-  Polymer({
-    is: "letter-list",
-    properties: {
-      limit: {
-        type: Number,
-        value: 12
-      },
-      clicked: {
-        type: Number,
-        notify: true
-      },
-      langCode: {
-        type: String,
-        notify: true
-      },
-      letterList: {
-        type: Array,
-        notify: true,
-        value: function() { return []; }
-      },
-      allLettersList: {
-        type: Array,
-        notify: true,
-        value: function() { return []; }
-      },
-      setWord: {
-        type: Boolean,
-        value: false,
-        notify: true
-      },
-      setLetters: {
-        type: Boolean,
-        value: false,
-        notify: true
-      },
-      stripDiacritics: {
-        type: Boolean,
-        value: true
-      },
-      pageRevealed: {
-        type: Boolean,
-        value: false
-      },
-      itemIndex: {
-        type: Number,
-        value: 1
-      }
-    },
-    listeners: {
-      'new-letters': 'onNewLetters',
-      'lang-code-changed': 'changeLanguage',
-      'set-letters-changed': 'runLetters',
-      'set-word-changed': 'runLetters'
-    },
-    created: function() {
-    },
-    attached: function() {
-    },
-    addIndex: function(item) {
-      item.index = this.itemIndex;
-      this.itemIndex++;
-      return item;
-    },
-    init: function() {
-      this.wordBoardBox = document.querySelector('word-board');
-      this.webapp = document.querySelector('tinavg-webapp');
-    },
-    changeLanguage: function(event) {
-      this.$.lservice.currlang = this.langCode;
-    },
-    runLetters: function() {
-      if(!this.wordBoardWord) this.init();
-      if(this.setWord && this.setLetters) {
-        this.runNewLetters();
-        this.setWord = false;
-      } else if(this.setWord) {
-        this.onNewWord();
-      }
-    },
-    filterResults: function(items) {
-      if(Object.keys(items).length === 0) {
-        console.log("hmm, you've got an empty dataset");
-      } else {
-        var lang = items.lang.code;
-        this.langCode = lang;
-        this.stripDiacritics = items.lang.stripDiacritics;
-        items.alphabet.forEach(function(entry, i, array) {
-          entry.currlang = lang;
-          array[i].currlang = lang;
-          array[i].audio = computeAacAudio(entry);
-          array[i].hidden = false;
-        });
-      }
-      return items.alphabet;
-    },
-    onNewLetters: function() {
-      this.allLettersList = this.filterResults(this.$.lservice.lobj);
-      this.setLetters = true;
-    },
-    runNewLetters: function(){
-      if(this.wordBoardBox.getCheckWord() !== undefined) {
-        console.log("switching up letters: " + this.wordBoardBox.getCheckWord());
-        this.shuffleLetters(this.wordBoardBox.getCheckWord().toLowerCase(), this.limit);
-      } else {
-        console.log("check word still not set");
-      }
-    },
-    onNewWord: function() {
-      var word = this.wordBoardBox.getCheckWord();
-      if(word !== undefined && word.length !== 0) {
-        console.log("fired filter-word-changed: " + word + " | ohneAccent: " + this.stripDiacritics);
-        this.setWord = true;
-        if(this.allLettersList.length > 0 && this.setLetters) {
-          this.shuffleLetters(word.toLowerCase(), this.limit);
-        } else {
-          console.log("this.letterList is not yet set :-/");
-        }
-      }
-    },
-    shuffleLetters: function(word, tileLimit) {
-      if(!this.pageRevealed) {
-        this.pageRevealed = true;
-        document.body.removeAttribute("unresolved");
-        this.init();
-        this.webapp.init();
-        /*
-        window.viewportUnitsBuggyfill.init({
-          refreshDebounceWait: 50,
-          hacks: window.viewportUnitsBuggyfillHacks
-        });
-        */
-      }
-      // this is a hack because polymer doesn't update if an array's properties have changed only if the array itself
-      // has been manipulated.
-      // see http://stackoverflow.com/questions/23706775/polymer-changes-not-always-flowing-through-a-filter
-      this.itemIndex = 1;
-      var dummyArray = [];
-      var numTiles = tileLimit;
-      numTiles = numTiles - word.split("").filter(function(value, index, self){ return self.indexOf(value) === index;}).length;
-      shuffle(this.allLettersList);
-      this.allLettersList.forEach(function(value, index) {
-        if(value.letter === "!!!" || value.letter === undefined) {
-          //do nothing
-        } else if(word.indexOf(value.letter) > -1) {
-          value.hidden = false;
-          dummyArray.push(value);
-        } else if(numTiles > 0 && value.regular !== false) {
-          value.hidden = false;
-          dummyArray.push(value);
-          numTiles--;
-        } else {
-          value.hidden = true;
-        }
-      });
-      if(dummyArray.length < tileLimit) {
-        console.log("Not enough tiles");
-        console.log(this.dummyArray);
-      }
-      this.letterList = shuffle(dummyArray);
-      //this.webapp.letterLimit = tileLimit;
-      //this.webapp.jumbotronIndex = tileLimit + 1;
-      
-    }
-  });
-  function shuffle(array) {
-    if(array instanceof Array) {
-      var currentIndex = array.length, temporaryValue, randomIndex ;
-    
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-    
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-    
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-      return array;
-    } else {
-      console.log("You're trying to shuffle something that is not an array.");
-      return array;
-    }
-  }
-  function computeAacAudio(item) {
-    if(item.letter === "!!!" || item.currlang === undefined) return "";
-    return "/assets/audio/"+ item.currlang +"/" + item.letter + ".m4a";
-  }
-
-})();
-</script>
-<dom-module id="score-board">
-  <style>
-  </style>
-  <template>
-    <div class="score-box">
-      <div id="score-sign" class="horizontal layout center"><core-icon id="star-points" icon="stars"></core-icon>&nbsp;<span id="score-box-score">{{score}}</span></div>
-    </div>
-  </template>
-</dom-module>
-<script>
-(function() {
-  Polymer({
-    is: "score-board",
-    properties: {
-      score: {
-        type: Number,
-        value: 0
-      },
-      streak: {
-        type: Number,
-        value: 0
-      },
-      lastBucket: {
-        type: String,
-        notify: true
-      },
-      player: {
-        type: Number,
-        value: 1
-      },
-      correctPts: {
-        type: Number,
-        value: 100
-      },
-      incorrectPts: {
-        type: Number,
-        value: 30
-      },
-      selfRecMult: {
-        type: Number,
-        value: 2.5
-      },
-      learnmodus: {
-        type: Boolean,
-        value: false
-      }
-    },
-    listeners: {
-      'last-bucket-changed': 'updateScoreBoard'
-    },
-    created: function() {
-    },
-    init: function() {
-      this.starIcon = Polymer.dom(this.root).querySelector("core-icon");
-      this.clueShow = document.getElementById('clue-show');
-      this.wordBoardBox = document.querySelector('word-board');
-    },
-    updateStreak: function(correct) {
-      if(correct) {
-        if(this.streak >= 0) {
-          this.streak++;
-        } else {
-          this.streak = 1;
-        }
-      } else {
-        if(this.streak <= 0) {
-          this.streak--;
-        } else {
-          this.streak = -1;
-        }
-      }
-      if(this.streak <= -3) this.helpPlayer();
-    },
-    updateScoreBoard: function() {
-      if(!this.wordBoardBox) this.init();
-      if(["","_____"].indexOf(this.lastBucket) === -1) {
-        console.log("Does " + this.lastBucket.toLowerCase() + " = " + this.wordBoardBox.getCheckWord().toLowerCase());
-        if(this.learnmodus && this.lastBucket === "(^_^)") {
-          this.resetStar();
-          this.wordBoardBox.wordFilter();
-          if(this.clueShow.classList.contains("glow-yellow")) this.clueShow.classList.remove("glow-yellow");
-        } else {
-          if(this.lastBucket.toLowerCase() === this.wordBoardBox.getCheckWord().toLowerCase()) {
-            if(this.starIcon.style.color === "green") {
-              this.score += this.correctPts * this.selfRecMult;
-            } else {
-              this.score += this.correctPts;
-            }
-            this.updateStreak(true);
-            this.resetStar();
-            this.wordBoardBox.wordFilter();
-            if(this.clueShow.classList.contains("glow-yellow")) this.clueShow.classList.remove("glow-yellow");
-          } else {
-            this.updateStreak(false);
-            if(!this.learnmodus) this.score -= this.incorrectPts;
-          }
-        }
-      }
-    },
-    resetStar: function() {
-      if(this.starIcon.style.color !== "white") {
-        this.starIcon.style.color = "white";
-      }
-    },
-    helpPlayer: function() {
-      this.clueShow.classList.add("glow-yellow");
-    }
-  });
-})();
-</script>
-<dom-module id="jumbotron-text">
-  <style>
-  </style>
-  <template>
-    <div id="jumbotron-div" class="jumbotron">
-      <span id="jumbotron-text">{{usertext}}</span>
-    </div>
-  </template>
-</dom-module>
-<script>
-(function() {
-  var checkTimeout;
-  Polymer({
-    is: "jumbotron-text",
-    properties: {
-      scoreArray: {
-        type: Array,
-        value: function() { return []; }
-      },
-      usertext: {
-        type: String,
-        value: "_____"
-      },
-      lastBucket: {
-        type: String,
-        notify: true
-      },
-      zielWort: {
-        type: String,
-        value: "_____"
-      },
-      tabindex: {
-        type: Number,
-        reflectToAttribute: true
-      },
-      learnmodus: {
-        type: Boolean,
-        value: false
-      }
-    },
-    listeners: {
-      'tap': 'handleClick',
-      'last-bucket-changed': 'updateJumbotron'
-    },
-    created: function() {
-    },
-    init: function() {
-      //console.log("scoreArray: " + scoreCount + "\nscore: " + score + "\nlastBucket: " + lastBucket);
-      this.scoreBox = document.getElementById('score-board-player-1');
-      this.wordBoard = document.querySelector('word-board');
-      this.jtext = document.querySelector('jumbotron-text');
-      this.first = true;
-    },
-    handleClick: function() {
-      this.lastBucket = "!!!";
-    },
-    updateJumbotron: function() {
-      if(!this.wordBoard) this.init();
-      if(this.wordBoard.myWord.charAt(0) === this.wordBoard.myWord.charAt(0).toUpperCase()) {
-        this.jtext.classList.add('capitalize');
-      } else if(this.jtext.classList.contains('capitalize')) {
-        this.jtext.classList.remove('capitalize');
-      }
-      if(this.learnmodus && this.lastBucket === "!!!") {
-        this.scoreBox.lastBucket = this.usertext;
-        this.resetBox();
-      } else {
-        if(this.lastBucket == "!!!" || this.lastBucket.length > 2) {
-          console.log("checking word...");
-          this.jtext.classList.remove("glow-yellow");
-          this.scoreBox.lastBucket = this.usertext;
-          this.resetBox();
-        } else if(this.lastBucket !== "") {
-          if(this.scoreArray.length >= this.zielWort.length + 2) this.scoreArray.shift();
-          window.clearTimeout(checkTimeout);
-          this.scoreArray.push(this.lastBucket);
-          this.usertext = this.scoreArray.join("");
-          if(this.usertext.toLowerCase() === this.wordBoard.getCheckWord().toLowerCase()) {
-              checkTimeout = setTimeout(function() {
-                if(this.first) {
-                  this.wordBoard.tapWord(false);
-                } else {
-                  this.wordBoard.playAudio();
-                }
-                this.first=false;
-                this.jtext.classList.add("glow-yellow");
-              }.bind(this), 700);
-          } else {
-            this.jtext.classList.remove("glow-yellow");
-          }
-          this.lastBucket = "";
-        }
-      }
-    },
-    resetBox: function() {
-        this.scoreArray = [];
-        this.usertext = (this.learnmodus) ? "(^_^)" : "_____";
-        this.lastBucket = "";
-        this.scoreBox.lastBucket = "";
-        this.jtext.classList.remove("glow-yellow");
-    }
-  });
-})();
-</script>
 <dom-module id="word-service">
   <style>
   core-ajax {
@@ -10986,6 +10405,7 @@ if (!window.Promise) {
     wordFilter: function() {
       if(!this.letterListBox) this.init();
       var randomIndex = Math.floor(Math.random() * this.wordArray.length);
+      var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
       this.phraseIndex++;
       if(this.wordArray.length !== 0) {
         if(this.phraseArray[this.phraseIndex] === undefined) {
@@ -10999,8 +10419,7 @@ if (!window.Promise) {
           console.log("wordArray.length: " + this.wordArray.length + "\nthis.ranWordIndex: " + this.ranWordIndex);
           
           //word = this.wordArray[this.ranWordIndex];
-          var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
-          this.phraseArray = this.wordArray[this.ranWordIndex][findex].split(" ");
+          //this.phraseArray = this.wordArray[this.ranWordIndex][findex].split(" ");
           this.phraseIndex = 0;
         }
         if(this.wordArray[this.ranWordIndex][2] !== (undefined || null) && typeof this.wordArray[this.ranWordIndex][2] === 'object') {
@@ -11011,13 +10430,11 @@ if (!window.Promise) {
             this.setGrammarStyles(this.wordArray[this.ranWordIndex][2].grammar.segments[this.phraseIndex]);
           }
         }
-        this.myWord = this.phraseArray[this.phraseIndex];
-        
-        this.wordAudio = this.produceWordAudioUrl(this.phraseArray[this.phraseIndex].toLowerCase(), this.langCode);
+        this.setDisplayWord();
+
         this.letterListBox.setWord = true;
         this.letterListBox.runLetters();
 
-        this.jumbotronBox.zielWort = this.phraseArray[this.phraseIndex];
         
         if(this.myWordSpan.classList.contains('invisible-text')) this.audioBox.play();
       }
@@ -11031,6 +10448,13 @@ if (!window.Promise) {
         console.log("words not set yet");
         return;
       }
+    },
+    setDisplayWord: function() {
+      var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
+      this.phraseArray = this.wordArray[this.ranWordIndex][findex].split(" ");
+      this.myWord = this.phraseArray[this.phraseIndex];
+      this.wordAudio = this.produceWordAudioUrl(this.phraseArray[this.phraseIndex].toLowerCase(), this.langCode);
+      this.jumbotronBox.zielWort = this.phraseArray[this.phraseIndex];
     },
     setWords: function() {
       if(!this.wordBoardWord) this.init();
@@ -11125,6 +10549,220 @@ if (!window.Promise) {
   });
 })();
 </script>
+<dom-module id="score-board">
+  <style>
+  </style>
+  <template>
+    <div class="score-box">
+      <div id="score-sign" class="horizontal layout center"><core-icon id="star-points" icon="stars"></core-icon>&nbsp;<span id="score-box-score">{{score}}</span></div>
+    </div>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: "score-board",
+    properties: {
+      score: {
+        type: Number,
+        value: 0
+      },
+      streak: {
+        type: Number,
+        value: 0
+      },
+      lastBucket: {
+        type: String,
+        notify: true
+      },
+      player: {
+        type: Number,
+        value: 1
+      },
+      correctPts: {
+        type: Number,
+        value: 100
+      },
+      incorrectPts: {
+        type: Number,
+        value: 30
+      },
+      selfRecMult: {
+        type: Number,
+        value: 2.5
+      },
+      learnmodus: {
+        type: Boolean,
+        value: false
+      }
+    },
+    listeners: {
+      'last-bucket-changed': 'updateScoreBoard'
+    },
+    created: function() {
+    },
+    init: function() {
+      this.starIcon = Polymer.dom(this.root).querySelector("core-icon");
+      this.clueShow = document.getElementById('clueshow');
+      this.wordBoardBox = document.querySelector('word-board');
+    },
+    updateStreak: function(correct) {
+      if(correct) {
+        if(this.streak >= 0) {
+          this.streak++;
+        } else {
+          this.streak = 1;
+        }
+      } else {
+        if(this.streak <= 0) {
+          this.streak--;
+        } else {
+          this.streak = -1;
+        }
+      }
+      if(this.streak <= -3) this.helpPlayer();
+    },
+    updateScoreBoard: function() {
+      if(!this.wordBoardBox) this.init();
+      if(["","_____"].indexOf(this.lastBucket) === -1) {
+        console.log("Does " + this.lastBucket.toLowerCase() + " = " + this.wordBoardBox.getCheckWord().toLowerCase());
+        if(this.learnmodus && this.lastBucket === "(^_^)") {
+          this.resetStar();
+          this.wordBoardBox.wordFilter();
+          if(document.getElementById('clueshow').classList.contains("glow-yellow")) document.getElementById('clueshow').classList.remove("glow-yellow");
+        } else {
+          if(this.lastBucket.toLowerCase() === this.wordBoardBox.getCheckWord().toLowerCase()) {
+            if(this.starIcon.style.color === "green") {
+              this.score += this.correctPts * this.selfRecMult;
+            } else {
+              this.score += this.correctPts;
+            }
+            this.updateStreak(true);
+            this.resetStar();
+            this.wordBoardBox.wordFilter();
+            if(document.getElementById('clueshow').classList.contains("glow-yellow")) document.getElementById('clueshow').classList.remove("glow-yellow");
+          } else {
+            this.updateStreak(false);
+            if(!this.learnmodus) this.score -= this.incorrectPts;
+          }
+        }
+      }
+    },
+    resetStar: function() {
+      if(this.starIcon.style.color !== "white") {
+        this.starIcon.style.color = "white";
+      }
+    },
+    helpPlayer: function() {
+      this.clueShow.classList.add("glow-yellow");
+    }
+  });
+})();
+</script>
+<dom-module id="jumbotron-text">
+  <style>
+  </style>
+  <template>
+    <div id="jumbotron-div" class="jumbotron">
+      <span id="jtext">{{usertext}}</span>
+    </div>
+  </template>
+</dom-module>
+<script>
+(function() {
+  var checkTimeout;
+  Polymer({
+    is: "jumbotron-text",
+    properties: {
+      scoreArray: {
+        type: Array,
+        value: function() { return []; }
+      },
+      usertext: {
+        type: String,
+        value: "_____"
+      },
+      lastBucket: {
+        type: String,
+        notify: true
+      },
+      zielWort: {
+        type: String,
+        value: "_____"
+      },
+      tabindex: {
+        type: Number,
+        reflectToAttribute: true
+      },
+      learnmodus: {
+        type: Boolean,
+        value: false
+      }
+    },
+    listeners: {
+      'tap': 'handleClick',
+      'last-bucket-changed': 'updateJumbotron'
+    },
+    created: function() {
+    },
+    init: function() {
+      //console.log("scoreArray: " + scoreCount + "\nscore: " + score + "\nlastBucket: " + lastBucket);
+      this.scoreBox = document.getElementById('score-board-player-1');
+      this.wordBoard = document.querySelector('word-board');
+      //this.jtext = document.querySelector('jumbotron-text');
+      this.first = true;
+    },
+    handleClick: function() {
+      this.lastBucket = "!!!";
+    },
+    updateJumbotron: function() {
+      if(!this.wordBoard) this.init();
+      if(this.wordBoard.myWord.charAt(0) === this.wordBoard.myWord.charAt(0).toUpperCase()) {
+        this.$.jtext.classList.add('capitalize');
+      } else if(this.$.jtext.classList.contains('capitalize')) {
+        this.$.jtext.classList.remove('capitalize');
+      }
+      if(this.learnmodus && this.lastBucket === "!!!") {
+        this.scoreBox.lastBucket = this.usertext;
+        this.resetBox();
+      } else {
+        if(this.lastBucket == "!!!" || this.lastBucket.length > 2) {
+          console.log("checking word...");
+          this.$.jtext.classList.remove("glow-yellow");
+          this.scoreBox.lastBucket = this.usertext;
+          this.resetBox();
+        } else if(this.lastBucket !== "") {
+          if(this.scoreArray.length >= this.zielWort.length + 2) this.scoreArray.shift();
+          window.clearTimeout(checkTimeout);
+          this.scoreArray.push(this.lastBucket);
+          this.usertext = this.scoreArray.join("");
+          if(this.usertext.toLowerCase() === this.wordBoard.getCheckWord().toLowerCase()) {
+              checkTimeout = setTimeout(function() {
+                if(this.first) {
+                  this.wordBoard.tapWord(false);
+                } else {
+                  this.wordBoard.playAudio();
+                }
+                this.first=false;
+                this.$.jtext.classList.add("glow-yellow");
+              }.bind(this), 700);
+          } else {
+            this.$.jtext.classList.remove("glow-yellow");
+          }
+          this.lastBucket = "";
+        }
+      }
+    },
+    resetBox: function() {
+        this.scoreArray = [];
+        this.usertext = (this.learnmodus) ? "(^_^)" : "_____";
+        this.lastBucket = "";
+        this.scoreBox.lastBucket = "";
+        this.$.jtext.classList.remove("glow-yellow");
+    }
+  });
+})();
+</script>
 <core-iconset-svg name="av" size="24">
 <svg><defs>
 <g id="album"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path></g>
@@ -11190,7 +10828,7 @@ if (!window.Promise) {
       <div id="record-elem">
         <audio id="recAudio" src="" hidden=""></audio>
         <core-icon id="recorderInit" icon="av:mic" on-tap="makeRecording"></core-icon>
-        <core-icon id="recorderPlay" icon="av:play-circle-fill" on-tap="playRecording"><paper-ripple recenters=""></paper-ripple></core-icon>
+        <core-icon id="recorderPlay" class="spin-flip-transition" icon="av:play-circle-fill" on-tap="playRecording"></core-icon>
       </div>
     </template>
 </dom-module>
@@ -11216,6 +10854,12 @@ if (!window.Promise) {
       } else {
         //this.scoreBoard.style.color = "green";
       }
+      if(this.$.recorderPlay.style.transform === "rotateY(360deg)") {
+        this.$.recorderPlay.style.transform = "rotateY(0deg)";
+      } else {
+        this.$.recorderPlay.style.transform = "rotateY(360deg)";
+      }
+
     }
   });
   
@@ -11293,6 +10937,372 @@ if (!window.Promise) {
     }
   }
 })();
+</script>
+<dom-module id="letter-card">
+    <style>
+    :host {
+      display: inline-block;
+      position: relative;
+    }
+    </style>
+    <template>
+      <div class="card-body layout horizontal center-justified">
+        <span class="content-span"><content></content></span>
+        <paper-ripple id="letterpr" recenters=""></paper-ripple>
+      </div>
+      <audio id="letteraudio" style="display: none;" src="{{aacAudio}}"></audio>
+    </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: 'letter-card',
+    properties: {
+      letter: {
+        type: String,
+        reflectToAttribute: true
+      },
+      currlang: {
+        type: String,
+        reflectToAttribute: true
+      },
+      uid: {
+        type: String,
+        reflectToAttribute: true
+      },
+      canOpus: {
+        type: Boolean,
+        value: false
+      },
+      regular: {
+        type: Boolean,
+        value: true
+      },
+      aacAudio: {
+        type: String
+      },
+      hidden: {
+        type: Boolean,
+        notify: true
+      },
+      tabindex: {
+        type: Number,
+        reflectToAttribute: true,
+        value: null
+      }
+    },
+    listeners: {
+      // gesture listeners left in as reminders.
+      // Not functioning as of 07.04.2015
+      // See https://github.com/Polymer/polymer/blob/0.8-preview/PRIMER.md#gesture-support
+      //'holdpulse': 'handlePulse',
+      //'release': 'handleRelease',
+      'tap': 'handleClick'
+    },
+    ready: function() {
+    },
+    handleClick: function(e) {
+      this.fire("letter-card-tapped", {letter: this.letter});
+      if(!this.$.letteraudio.paused) {
+        this.$.letteraudio.pause();
+        this.$.letteraudio.currentTime = this.$.letteraudio.currentTime / 3;
+      }
+      this.$.letteraudio.play();
+    },
+    handlePulse: function(e) {
+      console.log("Hold Pulse");
+      console.log(e);
+    },
+    handleRelease: function(e) {
+      console.log("Release");
+      console.log(e);
+    },
+    computeAacAudio: function(letter, mylang) {
+      if(letter === " " || mylang === undefined) return "";
+      return "/assets/audio/"+ mylang +"/" + letter + ".m4a";
+    },
+    firePaperRipple: function(playAudio) {
+      this.$.letterpr.mousedownAction();
+      this.$.letterpr.mouseupAction();
+      if(playAudio) this.$.letteraudio.play();
+    }
+  });
+})();
+</script>
+<dom-module id="letter-service">
+  <style>
+  core-ajax {
+    display: none;
+  }
+  </style>
+  <template>
+    <core-ajax id="ajax" url="{{jsonUrl}}" handleas="json" on-request="lettersRequest" on-response="lettersLoaded">
+    </core-ajax>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: 'letter-service',
+
+    properties: {
+      currlang: {
+        type: String,
+        notify: true
+      },
+      lobj: {
+        type: Object,
+        notify: true,
+        value: function () { return {}; }
+      },
+      jsonUrl: {
+        type: String,
+        value: ""
+      }
+    },
+    listeners: {
+      'currlang-changed': 'changeJsonUrl'
+    },
+    attached: function() {
+      this.jsonUrl = this.createJsonUrl(this.currlang);
+      this.$.ajax.auto = true;
+    },
+    changeJsonUrl: function(ev) {
+      this.jsonUrl = this.createJsonUrl(this.currlang);
+    },
+    createJsonUrl: function(langCode) {
+      if(langCode == undefined) {
+        return "/api/ar/letters.json";
+      } else {
+        return "/api/"+langCode+"/letters.json";
+      }
+    },
+    lettersRequest: function() {
+      if(!this.letterListBox) {
+        this.letterListBox = document.querySelector("letter-list");
+      }
+      this.letterListBox.setLetters = false;
+    },
+    lettersLoaded: function() {
+      var jsonSuccess = (this.$.ajax.lastResponse != null) ? true : false;
+      console.log("loading letters from url: " + this.jsonUrl + " \nSuccess: " + jsonSuccess);
+      // Make a copy of the loaded data
+      if(jsonSuccess) {
+        var ajaxData = this.$.ajax.lastResponse.slice()[0];
+        this.lobj = ajaxData;
+        this.fire('new-letters', { jsonLang:  ajaxData.lang.code });
+        this.letterListBox.setLetters = true;
+      }
+    }
+  });
+})();
+</script><dom-module id="letter-list">
+  <style>
+    :host {
+      display: inline-block;
+      position: relative;
+    }
+  </style>
+  <template>
+    <letter-service id="lservice" currlang="{{langCode}}" lobj="{{lobj}}"></letter-service>
+    <div id="lmc" class="horizontal layout flex wrap" style="width: 100vw">
+      <template id="repeater" is="x-repeat" filter="addIndex" items="{{letterList}}">
+        <letter-card class="letter-matrix" uid="[[item.uid]]" aac-audio="[[item.audio]]" letter="[[item.letter]]" currlang="[[item.currlang]]" regular="[[item.regular]]" hidden="[[item.hidden]]" tabindex="[[item.index]]">
+          <p>[[item.letter]]</p>
+        </letter-card>
+      </template>
+    </div>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: "letter-list",
+    properties: {
+      limit: {
+        type: Number,
+        value: 12
+      },
+      langCode: {
+        type: String,
+        notify: true
+      },
+      letterList: {
+        type: Array,
+        notify: true,
+        value: function() { return []; }
+      },
+      allLettersList: {
+        type: Array,
+        notify: true,
+        value: function() { return []; }
+      },
+      setWord: {
+        type: Boolean,
+        value: false,
+        notify: true
+      },
+      setLetters: {
+        type: Boolean,
+        value: false,
+        notify: true
+      },
+      stripDiacritics: {
+        type: Boolean,
+        value: true
+      },
+      pageRevealed: {
+        type: Boolean,
+        value: false
+      },
+      itemIndex: {
+        type: Number,
+        value: 1
+      }
+    },
+    listeners: {
+      'new-letters': 'onNewLetters',
+      'lang-code-changed': 'changeLanguage',
+      'set-letters-changed': 'runLetters',
+      'set-word-changed': 'runLetters'
+    },
+    created: function() {
+    },
+    attached: function() {
+    },
+    addIndex: function(item) {
+      item.index = this.itemIndex;
+      this.itemIndex++;
+      return item;
+    },
+    init: function() {
+      this.wordBoardBox = document.querySelector('word-board');
+    },
+    changeLanguage: function(event) {
+      this.$.lservice.currlang = this.langCode;
+    },
+    runLetters: function() {
+      if(!this.wordBoardWord) this.init();
+      if(this.setWord && this.setLetters) {
+        this.runNewLetters();
+        this.setWord = false;
+      } else if(this.setWord) {
+        this.onNewWord();
+      }
+    },
+    filterResults: function(items) {
+      if(Object.keys(items).length === 0) {
+        console.log("hmm, you've got an empty dataset");
+      } else {
+        var lang = items.lang.code;
+        this.langCode = lang;
+        this.stripDiacritics = items.lang.stripDiacritics;
+        this.fire("stripdia-set",{stripdia: this.stripDiacritics });
+        items.alphabet.forEach(function(entry, i, array) {
+          entry.currlang = lang;
+          array[i].currlang = lang;
+          array[i].audio = computeAacAudio(entry);
+          array[i].hidden = false;
+        });
+      }
+      return items.alphabet;
+    },
+    onNewLetters: function() {
+      this.allLettersList = this.filterResults(this.$.lservice.lobj);
+      this.setLetters = true;
+    },
+    runNewLetters: function(){
+      if(this.wordBoardBox.getCheckWord() !== undefined) {
+        console.log("switching up letters: " + this.wordBoardBox.getCheckWord());
+        this.shuffleLetters(this.wordBoardBox.getCheckWord().toLowerCase(), this.limit);
+      } else {
+        console.log("check word still not set");
+      }
+    },
+    onNewWord: function() {
+      var word = this.wordBoardBox.getCheckWord();
+      if(word !== undefined && word.length !== 0) {
+        console.log("fired filter-word-changed: " + word + " | ohneAccent: " + this.stripDiacritics);
+        this.setWord = true;
+        if(this.allLettersList.length > 0 && this.setLetters) {
+          this.shuffleLetters(word.toLowerCase(), this.limit);
+        } else {
+          console.log("this.letterList is not yet set :-/");
+        }
+      }
+    },
+    shuffleLetters: function(word, tileLimit) {
+      if(!this.pageRevealed) {
+        if(document.body.hasAttribute("unresolved")) this.pageRevealed = true;
+        document.body.removeAttribute("unresolved");
+        this.init();
+        /*
+        window.viewportUnitsBuggyfill.init({
+          refreshDebounceWait: 50,
+          hacks: window.viewportUnitsBuggyfillHacks
+        });
+        */
+      }
+      // this is a hack because polymer doesn't update if an array's properties have changed only if the array itself
+      // has been manipulated.
+      // see http://stackoverflow.com/questions/23706775/polymer-changes-not-always-flowing-through-a-filter
+      this.itemIndex = 1;
+      var dummyArray = [];
+      var numTiles = tileLimit;
+      numTiles = numTiles - word.split("").filter(function(value, index, self){ return self.indexOf(value) === index;}).length;
+      shuffle(this.allLettersList);
+      this.allLettersList.forEach(function(value, index) {
+        if(value.letter === "!!!" || value.letter === undefined) {
+          //do nothing
+        } else if(word.indexOf(value.letter) > -1) {
+          value.hidden = false;
+          dummyArray.push(value);
+        } else if(numTiles > 0 && value.regular !== false) {
+          value.hidden = false;
+          dummyArray.push(value);
+          numTiles--;
+        } else {
+          value.hidden = true;
+        }
+      });
+      if(dummyArray.length < tileLimit) {
+        console.log("Not enough tiles");
+        console.log(this.dummyArray);
+      }
+      this.letterList = shuffle(dummyArray);
+      //this.webapp.letterLimit = tileLimit;
+      //this.webapp.jumbotronIndex = tileLimit + 1;
+      
+    }
+  });
+  function shuffle(array) {
+    if(array instanceof Array) {
+      var currentIndex = array.length, temporaryValue, randomIndex ;
+    
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+    
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+    
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    } else {
+      console.log("You're trying to shuffle something that is not an array.");
+      return array;
+    }
+  }
+  function computeAacAudio(item) {
+    if(item.letter === "!!!" || item.currlang === undefined) return "";
+    return "/assets/audio/"+ item.currlang +"/" + item.letter + ".m4a";
+  }
+
+})();
 </script><dom-module id="tinavg-webapp">
     <style>
     </style>
@@ -11300,19 +11310,19 @@ if (!window.Promise) {
       <core-header-panel id="header-panel">
         <core-toolbar class="core-header horizontal justified layout start">
           <score-board id="score-board-player-1" player="1" class="horizontal start-justified layout flex" learnmodus="{{learnmodus}}"></score-board>
-          <word-board class="horizontal center-justified layout flex-2" lang-code="{{currLang}}"></word-board>
+          <word-board id="wboard" class="horizontal center-justified layout flex-2" lang-code="{{currLang}}"></word-board>
           <div class="top-right-item horizontal end-justified layout flex">
             <score-board id="score-board-player-2" player="2" hidden=""></score-board>
-            <word-recorder></word-recorder>
+            <word-recorder id="wrecorder"></word-recorder>
           </div>
         </core-toolbar>
         <div class="content">
           <div class="horizontal layout">
-            <core-collapse id="collapse1" horizontal="">
+            <core-collapse id="collapse" horizontal="">
               <div class="mini-menu">
                 <div>
                   Language: 
-                  <select onchange="setLang(this.value)">
+                  <select on-change="setLang">
                     <option value="de">German</option>
                     <option value="en">English</option>
                     <option value="en-US-south">English (US South)</option>
@@ -11322,30 +11332,30 @@ if (!window.Promise) {
                     -->
                   </select>
                 </div>
-                <div><br>Earmodus: <button id="select-earmodus" onclick="toggleEarModus(myWord)">toggle</button></div>
-                <div><br>Learnmodus: <button id="select-learnmodus" onclick="toggleLearnModus()">toggle</button></div>
-                <div><br>Recordmodus: <button id="select-recordmodus" onclick="toggleEl(recordDiv)">toggle</button></div>
-                <div><br>BuggyFill: <button id="select-buggyfill" onclick="refreshBuggyFill()">toggle</button></div>
-                <div hidden=""><br>Nerdmodus: <button id="select-nerdmodus" onclick="toggleNerdModus()">toggle</button></div>
+                <div><br>Earmodus: <button id="select-earmodus" on-tap="toggleEarModus">toggle</button></div>
+                <div><br>Learnmodus: <button id="select-learnmodus" on-tap="toggleLearnModus">toggle</button></div>
+                <div><br>Recordmodus: <button id="select-recordmodus" on-tap="toggleRecordModus">toggle</button></div>
+                <div><br>BuggyFill: <button id="select-buggyfill" on-tap="refreshBuggyFill">toggle</button></div>
+                <div hidden=""><br>Nerdmodus: <button id="select-nerdmodus" on-tap="toggleNerdModus">toggle</button></div>
               </div>
             </core-collapse>
             <letter-list id="letter-grid" limit="{{letterLimit}}" lang-code="{{currLang}}"></letter-list>
           </div>
           <div class="footer horizontal justified layout center">
             <div class="footer-button horizontal start-justified layout flex">
-              <core-icon id="menu-toggle" icon="trending-neutral" onclick="toggleCoreCollapse()"><paper-ripple recenters=""></paper-ripple></core-icon>
+              <core-icon id="menutoggle" class="spin-flip-transition" icon="trending-neutral" on-tap="toggleCoreCollapse"></core-icon>
             </div>
-            <jumbotron-text tabindex="{{jumbotronIndex}}" class="horizontal center-justified layout flex-2" learnmodus="{{learnmodus}}"></jumbotron-text>
+            <jumbotron-text id="jt" tabindex="{{jumbotronIndex}}" class="horizontal center-justified layout flex-2" learnmodus="{{learnmodus}}"></jumbotron-text>
             <div id="nerdmodus-div" class="horizontal end-justified layout flex">
-              <div id="clue-show-div"><core-icon id="clue-show" icon="text-format" onclick="showClue()"><paper-ripple recenters=""></paper-ripple></core-icon></div>
-              <core-icon id="help-show" icon="help" onclick="showHelp()"><paper-ripple recenters=""></paper-ripple></core-icon>
+              <div id="clue-show-div"><core-icon id="clueshow" class="spin-flip-transition" icon="text-format" on-tap="showClue"></core-icon></div>
+              <core-icon id="help-show" icon="help" on-tap="showHelp"></core-icon>
             </div>
           </div>
         </div>
       </core-header-panel>
-      <core-overlay id="help-overlay" class="dialog" backdrop="">
+      <core-overlay id="helpoverlay" class="dialog" backdrop="">
         <section>
-        <div id="close-help-overlay"><core-icon id="close-help-overlay-icon" icon="cancel" onclick="showHelp()"></core-icon></div>
+        <div id="close-help-overlay"><core-icon id="close-help-overlay-icon" icon="cancel" on-tap="showHelp"></core-icon></div>
         <center><h1>This Is Not A Vocabulary Game</h1></center>
         The current language is <span>{{currLang}}</span>
         <h3>The Goal</h3>
@@ -11401,138 +11411,104 @@ if (!window.Promise) {
       }
     },
     listeners: {
+      'letter-card-tapped': 'letterTapped',
+      'stripdia-set': 'setWBoardDisplay'
     },
-    init: function() {
-      init();
+    ready: function() {
+      Mousetrap.bind('shift+enter', function() { 
+        this.$.jt.click(); 
+      }.bind(this));
+      Mousetrap.bind('enter', function() {
+        document.activeElement.click();
+        if(typeof document.activeElement.firePaperRipple === 'function') document.activeElement.firePaperRipple(false);
+      });
+      Mousetrap.bind('a', function() {
+        console.log(window.innerHeight > window.innerWidth);
+      });
+      Mousetrap.bind('p', function() {
+        this.$.wboard.tapWord(false);
+        console.log(window.innerHeight > window.innerWidth);
+      }.bind(this));
+      Mousetrap.bind('left', function() {
+        var prevIndex = (document.activeElement.tabIndex === -1) ? this.letterLimit : (document.activeElement.tabIndex - 1 > 0) ? document.activeElement.tabIndex - 1 : this.letterLimit;
+        document.querySelector('[tabindex="'+ (prevIndex) + '"]').focus();
+      }.bind(this));
+      Mousetrap.bind('right', function() {
+        var nextIndex = (document.activeElement.tabIndex === -1 || document.activeElement.tabIndex + 1 > this.letterLimit) ? 1 : document.activeElement.tabIndex + 1;
+        document.querySelector('[tabindex="'+ (nextIndex) + '"]').focus();
+      }.bind(this));
+      Mousetrap.bind('up', function() {
+        var moveFocus = (window.innerHeight > window.innerWidth) ? 3 : 4;
+        var prevIndex = (document.activeElement.tabIndex === -1) ? this.jumbotronIndex : (document.activeElement.tabIndex - moveFocus > 0) ? document.activeElement.tabIndex - moveFocus : (moveFocus === 4) ? document.activeElement.tabIndex + moveFocus * 2 : document.activeElement.tabIndex + moveFocus * 3;
+        document.querySelector('[tabindex="'+ (prevIndex) + '"]').focus();
+      }.bind(this));
+      Mousetrap.bind('down', function() {
+        var moveFocus = (window.innerHeight > window.innerWidth) ? 3 : 4;
+        var newFocus = (document.activeElement.tabIndex + moveFocus < this.jumbotronIndex) ? document.activeElement.tabIndex + moveFocus : this.jumbotronIndex;
+        var downIndex = (document.activeElement.tabIndex === -1) ? 1 : newFocus;
+        document.querySelector('[tabindex="'+ (downIndex) + '"]').focus();
+      }.bind(this));
+      Mousetrap.bind('backspace', function(e) {
+        // stub to play a wawa sound
+        if (e.preventDefault) {
+          e.preventDefault();
+        } else {
+          // internet explorer
+          e.returnValue = false;
+        }
+        console.log("backspace...");
+      });      
+    },
+    letterTapped: function(e) {
+      this.$.jt.lastBucket = e.detail.letter;
+    },
+    showHelp: function(e) {
+      this.$.helpoverlay.toggle();
+    },
+    showClue: function(e) {
+      this.$.wboard.revealWord();
+      if(this.$.clueshow.classList.contains("glow-yellow")) this.$.clueshow.classList.remove("glow-yellow");
+      if(this.$.clueshow.style.transform === "rotateX(360deg)") {
+        this.$.clueshow.style.transform = "rotateX(0deg)";
+      } else {
+        this.$.clueshow.style.transform = "rotateX(360deg)";
+      }
+    },
+    toggleCoreCollapse: function(e) {
+      this.$.collapse.toggle();
+      if(this.$.collapse.opened) {
+        this.$.menutoggle.style.transform = "rotateY(180deg)";
+      } else {
+        this.$.menutoggle.style.transform = "rotateY(0deg)";
+      }
+    },
+    toggleEarModus: function() {
+      this.$.wboard.hideWord();
+    },
+    toggleLearnModus: function() {
+      this.learnmodus = !this.learnmodus;
+      this.$.jt.resetBox();
+    },
+    toggleRecordModus: function() {
+      this.$.wrecorder.hidden = !this.$.wrecorder.hidden;
+    },
+    refreshBuggyFill: function() {
+      window.viewportUnitsBuggyfill.init({force: true});
+      window.viewportUnitsBuggyfill.refresh();
+      window.viewportUnitsBuggyfill.findProperties();
+      console.log(window.viewportUnitsBuggyfill.getCss());
+    },
+    setLang: function(ev) {
+      console.log("toggling language: " + ev.target.value + " | chars: " + this.letterLimit);
+      this.currLang = ev.target.value;
+      this.$.jt.resetBox();
+    },
+    setWBoardDisplay: function(ev) {
+      console.log("changing diacritics");
+      this.$.wboard.setDisplayWord();
     }
   });
-  
-  var wordBoard, myWord, letterList, jumbotron, overlay, recordDiv, scoreBoard2, collapseMenu, menuToggleButton, clueShow, webapp;
-  
-  
-  function init() {
-    webapp = document.querySelector('tinavg-webapp');
-    wordBoard = document.querySelector('word-board');
-    letterList = document.querySelector('letter-list');
-    jumbotron = document.querySelector('jumbotron-text');
-    overlay = document.getElementById('help-overlay');
-    recordDiv = document.getElementById('record-elem');
-    scoreBoard2 = document.getElementById('score-board-player-2');
-    collapseMenu = document.getElementById('collapse1');
-    menuToggleButton = document.getElementById('menu-toggle');
-    clueShow = document.getElementById('clue-show');
-  }
-  
-  function toggleCoreCollapse() {
-    collapseMenu.toggle();
-    if(collapseMenu.opened) {
-      menuToggleButton.style.transform = "rotateY(180deg)";
-    } else {
-      menuToggleButton.style.transform = "rotateY(0deg)";
-    }
-  }
-  function setLang(lang) {
-    console.log("toggling language: " + lang + " | chars: " + webapp.letterLimit);
-    webapp.currLang = lang;
-    jumbotron.resetBox();
-  }
-  function showHelp() {
-    overlay.toggle();
-  }
-  function toggleEl(el) {
-    if(el.getAttribute("hidden")) {
-      el.removeAttribute("hidden");
-    } else {
-      el.setAttribute("hidden", true);
-    }
-  }
-  function toggleRecordDiv() {
-    if(recordDiv.getAttribute("hidden")) {
-      recordDiv.removeAttribute("hidden");
-    } else {
-      recordDiv.setAttribute("hidden", true);
-    }
-  }
-  function toggleScoreBoard2() {
-    // not implemented yet
-    if(scoreBoard2.getAttribute("hidden")) {
-      scoreBoard2.removeAttribute("hidden");
-    } else {
-      scoreBoard2.setAttribute("hidden", true);
-    }
-  }
-  function toggleLearnModus() {
-    webapp.learnmodus = !webapp.learnmodus;
-    jumbotron.resetBox();
-  }
-  function showClue() {
-    wordBoard.revealWord();
-    if(clueShow.classList.contains("glow-yellow")) clueShow.classList.remove("glow-yellow");
-  }
-  function toggleNerdModus() {
-    // Stub for those that want to learn good.
-  }
-  function toggleEarModus() {
-    wordBoard.hideWord();
-  }
-  function removeUnresolved() {
-    // not used, rather done directly in letter-list.html
-    // but this stub is in case I want to move it here.
-    document.body.removeAttribute("unresolved");
-  }
-  function refreshBuggyFill() {
-    window.viewportUnitsBuggyfill.init({force: true});
-    window.viewportUnitsBuggyfill.refresh();
-    window.viewportUnitsBuggyfill.findProperties();
-    console.log(window.viewportUnitsBuggyfill.getCss());
-  }
 
-  Mousetrap.bind('shift+enter', function() { 
-    jumbotron.click(); 
-  });
-  Mousetrap.bind('enter', function() {
-    document.activeElement.click();
-    if(typeof document.activeElement.firePaperRipple === 'function') document.activeElement.firePaperRipple(false);
-  });
-  Mousetrap.bind('a', function() {
-    console.log(window.innerHeight > window.innerWidth);
-  });
-  Mousetrap.bind('p', function() {
-    wordBoard.tapWord(false);
-    console.log(window.innerHeight > window.innerWidth);
-  });
-  Mousetrap.bind('left', function() {
-    var prevIndex = (document.activeElement.tabIndex === -1) ? webapp.letterLimit : (document.activeElement.tabIndex - 1 > 0) ? document.activeElement.tabIndex - 1 : webapp.letterLimit;
-    document.querySelector('[tabindex="'+ (prevIndex) + '"]').focus();
-  });
-  Mousetrap.bind('right', function() {
-    var nextIndex = (document.activeElement.tabIndex === -1 || document.activeElement.tabIndex + 1 > webapp.letterLimit) ? 1 : document.activeElement.tabIndex + 1;
-    document.querySelector('[tabindex="'+ (nextIndex) + '"]').focus();
-  });
-  Mousetrap.bind('up', function() {
-    var moveFocus = (window.innerHeight > window.innerWidth) ? 3 : 4;
-    var prevIndex = (document.activeElement.tabIndex === -1) ? webapp.jumbotronIndex : (document.activeElement.tabIndex - moveFocus > 0) ? document.activeElement.tabIndex - moveFocus : (moveFocus === 4) ? document.activeElement.tabIndex + moveFocus * 2 : document.activeElement.tabIndex + moveFocus * 3;
-    document.querySelector('[tabindex="'+ (prevIndex) + '"]').focus();
-  });
-  Mousetrap.bind('down', function() {
-    var moveFocus = (window.innerHeight > window.innerWidth) ? 3 : 4;
-    var newFocus = (document.activeElement.tabIndex + moveFocus < webapp.jumbotronIndex) ? document.activeElement.tabIndex + moveFocus : webapp.jumbotronIndex;
-    var downIndex = (document.activeElement.tabIndex === -1) ? 1 : newFocus;
-    document.querySelector('[tabindex="'+ (downIndex) + '"]').focus();
-  });
-  Mousetrap.bind('backspace', function(e) {
-    // stub to play a wawa sound
-    if (e.preventDefault) {
-      e.preventDefault();
-    } else {
-      // internet explorer
-      e.returnValue = false;
-    }
-    console.log("backspace...");
-  });
-  document.body.addEventListener("polymer-ready", function() {
-    document.body.removeAttribute("unresolved");
-  });
 
 </script></div>
   <!-- arabic alphabet

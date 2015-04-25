@@ -1,5 +1,5 @@
 /*!
- * viewport-units-buggyfill v0.5.2
+ * viewport-units-buggyfill v0.5.3
  * @web: https://github.com/rodneyrehm/viewport-units-buggyfill/
  * @author: Rodney Rehm - http://rodneyrehm.de/en/
  */
@@ -365,8 +365,8 @@
     };
 
     forEach.call(document.styleSheets, function(sheet) {
-      if (!sheet.href || origin(sheet.href) === origin(location.href)) {
-        // skip <style> and <link> from same origin
+      if (!sheet.href || origin(sheet.href) === origin(location.href) || sheet.ownerNode.getAttribute('data-viewport-units-buggyfill') === 'ignore') {
+        // skip <style> and <link> from same origin or explicitly declared to ignore
         return;
       }
 
@@ -414,7 +414,7 @@
   }
 
   return {
-    version: '0.5.2',
+    version: '0.5.3',
     findProperties: findProperties,
     getCss: getReplacedViewportUnits,
     init: initialize,
