@@ -20,6 +20,7 @@
         <score-board id="score-board-player-1" player="1" class="horizontal start-justified layout flex" learnmodus="{{learnmodus}}" recordmodus="{{recordmodus}}"></score-board>
         <word-board id="wboard" class="horizontal center-justified layout flex-2" lang-code="{{currLang}}"></word-board>
         <div class="top-right-item horizontal end-justified layout flex">
+          <iron-icon id="switchModusIcon" class="spin-flip-transition" icon="autorenew" on-tap="switchModus"></iron-icon>
           <score-board id="score-board-player-2" player="2" hidden></score-board>
         </div>
       </div>
@@ -208,7 +209,7 @@
       this.recordmodus = !this.recordmodus;
       this.$.wrecorder.hidden = !this.$.wrecorder.hidden;
       this.$.lettergrid.hidden = !this.$.lettergrid.hidden;
-      this.learnmodus = true;
+      this.learnmodus = this.recordmodus;
       this.$.jt.resetBox();
     },
     refreshBuggyFill: function() {
@@ -225,6 +226,18 @@
     setWBoardDisplay: function(ev) {
       console.log("changing diacritics");
       this.$.wboard.setDisplayWord();
+    },
+    switchModus: function() {
+      var deg = 0;
+      var languageList = ['de', 'en', 'en-US-south', 'ar'];
+      var nextLang = (languageList.indexOf(this.currLang) === -1 || languageList.indexOf(this.currLang) + 1 >= languageList.length) ? 0 : languageList.indexOf(this.currLang) + 1;
+      this.currLang = languageList[nextLang];
+      if(nextLang === 0 || !this.$.switchModusIcon.style.transform) {
+        deg = 180; 
+      } else {
+        deg = parseInt(this.$.switchModusIcon.style.transform.match(/\d+/)[0]) + 180;
+      }
+      this.$.switchModusIcon.style.transform = "rotateZ("+ deg + "deg)";
     }
   });
 
