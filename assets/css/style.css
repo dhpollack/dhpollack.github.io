@@ -147,6 +147,9 @@
     height: 7vh;
     width: 7vh;
     color: white;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
     content: 'viewport-units-buggyfill; width: 7vh; height: 7vh;';
   }
   .content-span {

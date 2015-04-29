@@ -12329,12 +12329,12 @@ if (!window.Promise) {
             <p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p>
             <h3>The Rules: Normal / Earmodus / Learnmodus / Talkmodus</h3>
             <ol>
-              <li>Look at the word at the bottom of the page.</li>
+              <li>Look at the word at the top of the page.</li>
               <li>Spell the word by tapping the letters in the grid.</li>
-              <li>Check your answer by tapping the word at the top of the page.</li>
+              <li>Check your answer by tapping the word just below the target word.</li>
               <li>100 points for a correct answer and -30 for an incorrect answer.</li>
-              <li>Earmodus: The word is hidden and only spoke.  The underline indicates grammar.</li>
-              <li>Learnmodus: You can skip words and do not lose 30 pts for incorrect answers.</li>
+              <li>Earmodus: The word is hidden and only spoken.  The underline gives hints about the word's grammar.</li>
+              <li>Learnmodus: Skip words and do not lose 30 pts for incorrect answers.</li>
               <li>Talkmodus: Record your voice and play it.  Then click the emoticon for the next word and 250 pts.</li>
             </ol>
             <h3>The Buttons</h3>
@@ -12343,7 +12343,7 @@ if (!window.Promise) {
               <li><iron-icon id="help-overlay-a" icon="text-format"></iron-icon>: Goes through the letter sequence, then says the word aloud</li>
               <li><iron-icon id="help-overlay-help-show" icon="help"></iron-icon>: Shows this help menu.</li>
               <li><iron-icon id="help-overlay-switchModusIcon" icon="autorenew"></iron-icon>: Switches the language.  Does NOT check word.</li>
-              <li><iron-icon icon="av:mic"></iron-icon>: Record voice in record modus.  Also stops recording.</li>
+              <li><iron-icon icon="av:mic"></iron-icon>: Record voice in Talkmodus.  Also stops recording.</li>
               <li><iron-icon icon="av:play-circle-fill"></iron-icon>: Play voice recording.  Also stops recording.</li>
               <li>Word At Bottom: You can click this to repeat the word outloud</li>
             </ol>
@@ -12527,11 +12527,13 @@ if (!window.Promise) {
       console.log("changing diacritics");
       this.$.wboard.setDisplayWord();
     },
-    switchModus: function() {
+    switchModus: function(ev) {
+      console.log(ev);
       var deg = 0;
       var languageList = ['de', 'en', 'en-US-south', 'ar'];
       var nextLang = (languageList.indexOf(this.currLang) === -1 || languageList.indexOf(this.currLang) + 1 >= languageList.length) ? 0 : languageList.indexOf(this.currLang) + 1;
       this.currLang = languageList[nextLang];
+      this.$.jt.resetBox();
       if(nextLang === 0 || !this.$.switchModusIcon.style.transform) {
         deg = 180; 
       } else {
