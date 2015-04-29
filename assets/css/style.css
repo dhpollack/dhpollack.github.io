@@ -213,9 +213,9 @@
     text-transform: capitalize;
   }
   .glow-text {
-    -webkit-animation: glowtext 1.5s infinite alternate;
-    -moz-animation: glowtext 1.5s infinite alternate;
-    animation: glowtext 1.5s infinite alternate;
+    -webkit-animation: glowtext 1.5s 10 alternate;
+    -moz-animation: glowtext 1.5s 10 alternate;
+    animation: glowtext 1.5s 10 alternate;
     /*
     -webkit-animation: fliptext 2s ease-in-out 2;
     -moz-animation: fliptext 2s ease-in-out 2;
@@ -342,9 +342,9 @@
     }
   }
   .glow-yellow {
-    -webkit-animation: glowyellow 1.5s ease-in-out infinite alternate;
-    -moz-animation: glowyellow 1.5s ease-in-out infinite alternate;
-    animation: glowyellow 1.5s ease-in-out infinite alternate;
+    -webkit-animation: glowyellow 1.5s ease-in-out 10 alternate;
+    -moz-animation: glowyellow 1.5s ease-in-out 10 alternate;
+    animation: glowyellow 1.5s ease-in-out 10 alternate;
     /*
     this would be a less CPU intensive operation
     -webkit-animation: fliptext 2s ease-in-out 2;

@@ -61,10 +61,10 @@
               <li><iron-icon id="help-overlay-menutoggle" icon="trending-neutral"></iron-icon>: Reveals the options menu</li>
               <li><iron-icon id="help-overlay-a" icon="text-format"></iron-icon>: Goes through the letter sequence, then says the word aloud</li>
               <li><iron-icon id="help-overlay-help-show" icon="help"></iron-icon>: Shows this help menu.</li>
-              <li><iron-icon id="help-overlay-switchModusIcon" icon="autorenew"></iron-icon>: Switches the language.  Does NOT check word.</li>
+              <li><iron-icon id="help-overlay-switchModusIcon" icon="country-flags:de"></iron-icon>: Switches the language.  Does NOT check word.</li>
               <li><iron-icon icon="av:mic"></iron-icon>: Record voice in Talkmodus.  Also stops recording.</li>
               <li><iron-icon icon="av:play-circle-fill"></iron-icon>: Play voice recording.  Also stops recording.</li>
-              <li>Word At Bottom: You can click this to repeat the word outloud</li>
+              <li>Target Word: You can click this to have the word spoken outloud.</li>
             </ol>
             <div id="help-lang-specific"></div>
           </div>
@@ -144,12 +144,11 @@
         document.activeElement.click();
         if(typeof document.activeElement.firePaperRipple === 'function') document.activeElement.firePaperRipple(false);
       });
-      Mousetrap.bind('a', function() {
-        console.log(window.innerHeight > window.innerWidth);
-      });
-      Mousetrap.bind('p', function() {
+      Mousetrap.bind('shift+p', function() {
         this.$.wboard.tapWord(false);
-        console.log(window.innerHeight > window.innerWidth);
+      }.bind(this));
+      Mousetrap.bind('shift+l', function() {
+        this.$.switchModusIcon.click();
       }.bind(this));
       Mousetrap.bind('left', function() {
         var lastTab = this.lastTabIndex;
@@ -251,7 +250,6 @@
       this.$.wboard.setDisplayWord();
     },
     switchModus: function(ev) {
-      console.log(ev);
       var deg = 0;
       var languageList = ['de', 'en', 'en-US-south', 'ar'];
       var nextLang = (languageList.indexOf(this.currLang) === -1 || languageList.indexOf(this.currLang) + 1 >= languageList.length) ? 0 : languageList.indexOf(this.currLang) + 1;

@@ -7145,6 +7145,16 @@ Note, all features of `x-style` are available when defining styles as part of Po
   <!-- Fix for Viewport Units -->
   <script src="../bower_components/viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
   <script src="../bower_components/viewport-units-buggyfill/viewport-units-buggyfill.hacks.js"></script>
+  <script type="text/javascript">
+    window.viewportUnitsBuggyfill.init({
+      // milliseconds to delay between updates of viewport-units
+      // caused by orientationchange, pageshow, resize events
+      refreshDebounceWait: 250,
+    
+      // provide hacks plugin to make the contentHack property work correctly.
+      hacks: window.viewportUnitsBuggyfillHacks
+    });
+  </script>
   <!-- tinavg-webapp -->
   
 <!-- Additional Component Load -->
@@ -9620,16 +9630,6 @@ if (!window.Promise) {
 <script src="assets/js/mousetrap.min.js"></script>
 
 
-  <script type="text/javascript">
-    window.viewportUnitsBuggyfill.init({
-      // milliseconds to delay between updates of viewport-units
-      // caused by orientationchange, pageshow, resize events
-      refreshDebounceWait: 250,
-    
-      // provide hacks plugin to make the contentHack property work correctly.
-      hacks: window.viewportUnitsBuggyfillHacks
-    });
-  </script>
   
 </head>
 
@@ -12267,8 +12267,9 @@ if (!window.Promise) {
     },
     shuffleLetters: function(word, tileLimit) {
       if(!this.pageRevealed) {
-        if(document.body.hasAttribute("unresolved")) this.pageRevealed = true;
-        document.body.removeAttribute("unresolved");
+        if(document.querySelector('[unresolved]')) this.pageRevealed = true;
+        document.getElementById('friendly-message').setAttribute('hidden', true);
+        document.querySelector('[unresolved]').removeAttribute("unresolved");
         this.init();
         /*
         window.viewportUnitsBuggyfill.init({
@@ -12393,10 +12394,10 @@ if (!window.Promise) {
               <li><iron-icon id="help-overlay-menutoggle" icon="trending-neutral"></iron-icon>: Reveals the options menu</li>
               <li><iron-icon id="help-overlay-a" icon="text-format"></iron-icon>: Goes through the letter sequence, then says the word aloud</li>
               <li><iron-icon id="help-overlay-help-show" icon="help"></iron-icon>: Shows this help menu.</li>
-              <li><iron-icon id="help-overlay-switchModusIcon" icon="autorenew"></iron-icon>: Switches the language.  Does NOT check word.</li>
+              <li><iron-icon id="help-overlay-switchModusIcon" icon="country-flags:de"></iron-icon>: Switches the language.  Does NOT check word.</li>
               <li><iron-icon icon="av:mic"></iron-icon>: Record voice in Talkmodus.  Also stops recording.</li>
               <li><iron-icon icon="av:play-circle-fill"></iron-icon>: Play voice recording.  Also stops recording.</li>
-              <li>Word At Bottom: You can click this to repeat the word outloud</li>
+              <li>Target Word: You can click this to have the word spoken outloud.</li>
             </ol>
             <div id="help-lang-specific"></div>
           </div>
@@ -12476,12 +12477,11 @@ if (!window.Promise) {
         document.activeElement.click();
         if(typeof document.activeElement.firePaperRipple === 'function') document.activeElement.firePaperRipple(false);
       });
-      Mousetrap.bind('a', function() {
-        console.log(window.innerHeight > window.innerWidth);
-      });
-      Mousetrap.bind('p', function() {
+      Mousetrap.bind('shift+p', function() {
         this.$.wboard.tapWord(false);
-        console.log(window.innerHeight > window.innerWidth);
+      }.bind(this));
+      Mousetrap.bind('shift+l', function() {
+        this.$.switchModusIcon.click();
       }.bind(this));
       Mousetrap.bind('left', function() {
         var lastTab = this.lastTabIndex;
@@ -12583,7 +12583,6 @@ if (!window.Promise) {
       this.$.wboard.setDisplayWord();
     },
     switchModus: function(ev) {
-      console.log(ev);
       var deg = 0;
       var languageList = ['de', 'en', 'en-US-south', 'ar'];
       var nextLang = (languageList.indexOf(this.currLang) === -1 || languageList.indexOf(this.currLang) + 1 >= languageList.length) ? 0 : languageList.indexOf(this.currLang) + 1;
@@ -12606,8 +12605,19 @@ if (!window.Promise) {
   <!-- arabic alphabet
   غ	ظ	ض	ذ	خ	ث	ت	ش	ر	ق	ص	ف	ع	س	ن	م	ل	ك	ي	ط	ح	ز	و	ه	د	ج	ب	ا
   -->
+  <div id="friendly-message" hidden="">If you see this message something is taking too long, please try reloading your browser. <a href="javascript:void(0)" onclick="hideFriendlyMessage();">Click here to hide this message</a></div>
   <tinavg-webapp></tinavg-webapp>
-
+  <script type="text/javascript">
+    function hideFriendlyMessage() {
+      document.getElementById('friendly-message').setAttribute('hidden', true);
+    }
+    setTimeout(function() {
+      if(document.querySelector('[unresolved]')) {
+        document.getElementById('friendly-message').removeAttribute('hidden');
+        document.querySelector('[unresolved]').removeAttribute("unresolved");
+      }
+    }, 25000);
+  </script>
 
 
 </body></html>
