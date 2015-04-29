@@ -6,6 +6,7 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="country-flags.html">
 <!-- Custom Elements Vulcanized -->
 <link rel="import" href="elements.html">
 <!-- keyboard shortcuts -->
@@ -29,7 +30,7 @@
         <div class="core-header horizontal justified layout center">
           <div class="top-right-item horizontal start-justified layout flex">
             <iron-icon id="help-show" icon="help" on-tap="showHelp"></iron-icon>
-            <iron-icon id="switchModusIcon" class="spin-flip-transition" icon="autorenew" on-tap="switchModus"></iron-icon>
+            <iron-icon id="switchModusIcon" class="spin-flip-transition" icon="{{flagIcon}}" on-tap="switchModus"></iron-icon>
           </div>
           <jumbotron-text id="jt" tabindex="{{jumbotronIndex}}" class="horizontal center-justified layout flex-2" learnmodus="{{learnmodus}}"></jumbotron-text>
           <div id="nerdmodus-div" class="horizontal end-justified layout flex">
@@ -124,6 +125,10 @@
       langHelp: {
         type: String,
         value: ""
+      },
+      flagIcon: {
+        type: String,
+        computed: 'flagIconString(currLang)'
       }
     },
     listeners: {
@@ -253,11 +258,14 @@
       this.currLang = languageList[nextLang];
       this.$.jt.resetBox();
       if(nextLang === 0 || !this.$.switchModusIcon.style.transform) {
-        deg = 180; 
+        deg = 360; 
       } else {
-        deg = parseInt(this.$.switchModusIcon.style.transform.match(/\d+/)[0]) + 180;
+        deg = parseInt(this.$.switchModusIcon.style.transform.match(/\d+/)[0]) + 360;
       }
-      this.$.switchModusIcon.style.transform = "rotateZ("+ deg + "deg)";
+      this.$.switchModusIcon.style.transform = "rotateY("+ deg + "deg)";
+    },
+    flagIconString: function(lang) {
+      return "country-flags:" + lang;
     }
   });
 

@@ -85,6 +85,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       size: {
         type: Number,
         value: 24
+      },
+      sizex: {
+        type: Number
+      },
+      sizey: {
+        type: Number
       }
 
     },
@@ -179,13 +185,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * matching `id`.
      */
     _cloneIcon: function(id) {
-      return this._prepareSvgClone(this._icons[id], this.size);
+      if(!this.sizex) this.sizex = this.size;
+      if(!this.sizey) this.sizey = this.size || this.sizex;
+      return this._prepareSvgClone(this._icons[id], this.sizex, this.sizey);
     },
 
-    _prepareSvgClone: function(sourceSvg, size) {
+    _prepareSvgClone: function(sourceSvg, sizex, sizey) {
       if (sourceSvg) {
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', ['0', '0', size, size].join(' '));
+        svg.setAttribute('viewBox', ['0', '0', sizex, sizey].join(' '));
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         // TODO(dfreedm): `pointer-events: none` works around https://crbug.com/370136
         // TODO(sjmiles): inline style may not be ideal, but avoids requiring a shadow-root

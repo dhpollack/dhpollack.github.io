@@ -8856,6 +8856,12 @@ and instead put a div inside and style that.
       size: {
         type: Number,
         value: 24
+      },
+      sizex: {
+        type: Number
+      },
+      sizey: {
+        type: Number
       }
 
     },
@@ -8950,13 +8956,15 @@ and instead put a div inside and style that.
      * matching `id`.
      */
     _cloneIcon: function(id) {
-      return this._prepareSvgClone(this._icons[id], this.size);
+      if(!this.sizex) this.sizex = this.size;
+      if(!this.sizey) this.sizey = this.size || this.sizex;
+      return this._prepareSvgClone(this._icons[id], this.sizex, this.sizey);
     },
 
-    _prepareSvgClone: function(sourceSvg, size) {
+    _prepareSvgClone: function(sourceSvg, sizex, sizey) {
       if (sourceSvg) {
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', ['0', '0', size, size].join(' '));
+        svg.setAttribute('viewBox', ['0', '0', sizex, sizey].join(' '));
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         // TODO(dfreedm): `pointer-events: none` works around https://crbug.com/370136
         // TODO(sjmiles): inline style may not be ideal, but avoids requiring a shadow-root
@@ -8968,6 +8976,9 @@ and instead put a div inside and style that.
 
   });
 </script>
+
+
+
 
 
 <!-- Custom Elements Vulcanized -->
@@ -10673,6 +10684,42 @@ if (!window.Promise) {
 </defs></svg>
 </iron-iconset-svg>
 
+<iron-iconset-svg name="country-flags" sizex="1235" sizey="650">
+<svg><defs>
+      <g id="de">
+      	<desc>Flag of Germany</desc>
+      	<rect id="black_stripe" width="1235" height="650" y="0" x="0" fill="#000"></rect>
+      	<rect id="red_stripe" width="1235" height="433.3333" y="216.6666" x="0" fill="#D00"></rect>
+      	<rect id="gold_stripe" width="1235" height="216.6666" y="433.3333" x="0" fill="#FFCE00"></rect>
+      </g>
+      <g id="en-US-south">
+        <desc>Flag of Alambama</desc>
+        <rect width="1235" height="650" fill="#fff"></rect>
+        <path d="M0,0 1235,650M0,650 1235,0" stroke="#b10021" stroke-width="100"></path>
+      </g>
+      <g id="en">
+        <desc>Flag of the USA</desc>
+        <defs>
+        <polygon id="pt" points="-0.1624598481164531,0 0,-0.5 0.1624598481164531,0" transform="scale(0.0616)" fill="#FFF"></polygon>
+        <g id="star"><use xlink:href="#pt" transform="rotate(-144)"></use><use xlink:href="#pt" transform="rotate(-72)"></use><use xlink:href="#pt"></use><use xlink:href="#pt" transform="rotate(72)"></use><use xlink:href="#pt" transform="rotate(144)"></use></g>
+        <g id="s5"><use xlink:href="#star" x="-0.252"></use><use xlink:href="#star" x="-0.126"></use><use xlink:href="#star"></use><use xlink:href="#star" x="0.126"></use><use xlink:href="#star" x="0.252"></use></g>
+        <g id="s6"><use xlink:href="#s5" x="-0.063"></use><use xlink:href="#star" x="0.315"></use></g>
+        <g id="x4"><use xlink:href="#s6"></use><use xlink:href="#s5" y="0.054"></use><use xlink:href="#s6" y="0.108"></use><use xlink:href="#s5" y="0.162"></use></g>
+        <g id="u"><use xlink:href="#x4" y="-0.216"></use><use xlink:href="#x4"></use><use xlink:href="#s6" y="0.216"></use></g>
+        <rect id="stripe" width="1235" height="50" fill="#B22234"></rect>
+        </defs>
+        <rect width="1235" height="650" fill="#FFF"></rect><use xlink:href="#stripe"></use><use xlink:href="#stripe" y="100"></use><use xlink:href="#stripe" y="200"></use><use xlink:href="#stripe" y="300"></use><use xlink:href="#stripe" y="400"></use><use xlink:href="#stripe" y="500"></use><use xlink:href="#stripe" y="600"></use><rect width="494" height="350" fill="#3C3B6E"></rect><use xlink:href="#u" transform="translate(247,175) scale(650)"></use>
+      </g>
+      <g id="ar">
+        <desc>Flag of the UAE</desc>
+        <rect width="247" height="650" y="0" x="0" fill="#f00"></rect>
+        <rect width="988" height="216.6666" y="0" x="247" fill="#00732f"></rect>
+        <rect width="988" height="216.6666" y="216.6666" x="247" fill="#fff"></rect>
+        <rect width="988" height="216.6666" y="433.3333" x="247" fill="#000"></rect>
+      </g>
+</defs></svg>
+</iron-iconset-svg>
+
 <dom-module id="word-service">
   <style>
   iron-ajax {
@@ -12315,7 +12362,7 @@ if (!window.Promise) {
         <div class="core-header horizontal justified layout center">
           <div class="top-right-item horizontal start-justified layout flex">
             <iron-icon id="help-show" icon="help" on-tap="showHelp"></iron-icon>
-            <iron-icon id="switchModusIcon" class="spin-flip-transition" icon="autorenew" on-tap="switchModus"></iron-icon>
+            <iron-icon id="switchModusIcon" class="spin-flip-transition" icon="{{flagIcon}}" on-tap="switchModus"></iron-icon>
           </div>
           <jumbotron-text id="jt" tabindex="{{jumbotronIndex}}" class="horizontal center-justified layout flex-2" learnmodus="{{learnmodus}}"></jumbotron-text>
           <div id="nerdmodus-div" class="horizontal end-justified layout flex">
@@ -12410,6 +12457,10 @@ if (!window.Promise) {
       langHelp: {
         type: String,
         value: ""
+      },
+      flagIcon: {
+        type: String,
+        computed: 'flagIconString(currLang)'
       }
     },
     listeners: {
@@ -12539,11 +12590,14 @@ if (!window.Promise) {
       this.currLang = languageList[nextLang];
       this.$.jt.resetBox();
       if(nextLang === 0 || !this.$.switchModusIcon.style.transform) {
-        deg = 180; 
+        deg = 360; 
       } else {
-        deg = parseInt(this.$.switchModusIcon.style.transform.match(/\d+/)[0]) + 180;
+        deg = parseInt(this.$.switchModusIcon.style.transform.match(/\d+/)[0]) + 360;
       }
-      this.$.switchModusIcon.style.transform = "rotateZ("+ deg + "deg)";
+      this.$.switchModusIcon.style.transform = "rotateY("+ deg + "deg)";
+    },
+    flagIconString: function(lang) {
+      return "country-flags:" + lang;
     }
   });
 
