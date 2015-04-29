@@ -78,6 +78,7 @@
     width: 25vmax;
   }
   score-board {
+    font-size: 6vh;
   }
   jumbotron-text {
     font-size: 7vh;
@@ -390,6 +391,9 @@
       width: 7vw;
       color: white;
       content: 'viewport-units-buggyfill; width: 7vw; height: 7vw;';
+    }
+    score-board {
+      font-size: 6vw;
     }
     word-recorder iron-icon {
       height: 33.33vmax;
