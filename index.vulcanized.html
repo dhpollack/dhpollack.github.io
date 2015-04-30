@@ -11192,6 +11192,7 @@ if (!window.Promise) {
       this.lastBucket = "!!!";
     },
     updateJumbotron: function() {
+      if(!document.getElementById('click_jtext').hasAttribute('hidden')) document.getElementById('click_jtext').setAttribute('hidden', true);
       if(!this.wordBoard) this.init();
       if(this.wordBoard.myWord.charAt(0) === this.wordBoard.myWord.charAt(0).toUpperCase()) {
         this.$.jtext.classList.add('capitalize');
@@ -11216,6 +11217,7 @@ if (!window.Promise) {
               checkTimeout = setTimeout(function() {
                 if(this.first) {
                   this.wordBoard.tapWord(false);
+                  document.getElementById('click_jtext').removeAttribute('hidden');
                 } else {
                   this.wordBoard.playAudio();
                 }
@@ -12365,7 +12367,10 @@ if (!window.Promise) {
             <iron-icon id="help-show" icon="help" on-tap="showHelp"></iron-icon>
             <iron-icon id="switchModusIcon" class="spin-flip-transition flag-svg" icon="{{flagIcon}}" on-tap="switchModus"></iron-icon>
           </div>
-          <jumbotron-text id="jt" tabindex="{{jumbotronIndex}}" class="horizontal center-justified layout flex-2" learnmodus="{{learnmodus}}"></jumbotron-text>
+          <div class="horizontal center-justified layout flex-2">
+            <jumbotron-text id="jt" tabindex="{{jumbotronIndex}}" learnmodus="{{learnmodus}}"></jumbotron-text>
+            <div id="click_jtext" class="arrow_box" hidden="">Click</div>
+          </div>
           <div id="nerdmodus-div" class="horizontal end-justified layout flex">
             <score-board id="score-board-player-2" player="2" hidden=""></score-board>
             <div id="clue-show-div"><iron-icon id="clueshow" class="spin-flip-transition" icon="text-format" on-tap="showClue"></iron-icon></div>
