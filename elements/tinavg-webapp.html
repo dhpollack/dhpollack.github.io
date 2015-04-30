@@ -189,7 +189,10 @@
           e.returnValue = false;
         }
         console.log("backspace...");
-      });      
+      });
+      document.getElementById('friendly_message').setAttribute('hidden', true);
+      document.querySelector('[unresolved]').removeAttribute("unresolved");
+
     },
     setLangHelp: function(e) {
       var langHtml  = e.detail.langHtml;

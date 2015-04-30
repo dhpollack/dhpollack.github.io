@@ -12261,15 +12261,9 @@ if (!window.Promise) {
     shuffleLetters: function(word, tileLimit) {
       if(!this.pageRevealed) {
         if(document.querySelector('[unresolved]')) this.pageRevealed = true;
-        document.getElementById('friendly-message').setAttribute('hidden', true);
-        document.querySelector('[unresolved]').removeAttribute("unresolved");
+        //document.getElementById('friendly-message').setAttribute('hidden', true);
+        //document.querySelector('[unresolved]').removeAttribute("unresolved");
         this.init();
-        /*
-        window.viewportUnitsBuggyfill.init({
-          refreshDebounceWait: 50,
-          hacks: window.viewportUnitsBuggyfillHacks
-        });
-        */
       }
       // this is a hack because polymer doesn't update if an array's properties have changed only if the array itself
       // has been manipulated.
@@ -12515,7 +12509,10 @@ if (!window.Promise) {
           e.returnValue = false;
         }
         console.log("backspace...");
-      });      
+      });
+      document.getElementById('friendly_message').setAttribute('hidden', true);
+      document.querySelector('[unresolved]').removeAttribute("unresolved");
+
     },
     setLangHelp: function(e) {
       var langHtml  = e.detail.langHtml;
@@ -12601,15 +12598,15 @@ if (!window.Promise) {
   <!-- arabic alphabet
   غ	ظ	ض	ذ	خ	ث	ت	ش	ر	ق	ص	ف	ع	س	ن	م	ل	ك	ي	ط	ح	ز	و	ه	د	ج	ب	ا
   -->
-  <div id="friendly-message" hidden="">If you see this message something is taking too long, please try reloading your browser. <a href="javascript:void(0)" onclick="hideFriendlyMessage();">Click here to hide this message</a></div>
+  <div id="friendly_message" hidden="">If you see this message something is taking too long, please try reloading your browser. <a href="javascript:void(0)" onclick="hideFriendlyMessage();">Click here to hide this message</a></div>
   <tinavg-webapp></tinavg-webapp>
   <script type="text/javascript">
     function hideFriendlyMessage() {
-      document.getElementById('friendly-message').setAttribute('hidden', true);
+      document.getElementById('friendly_message').setAttribute('hidden', true);
     }
     setTimeout(function() {
       if(document.querySelector('[unresolved]')) {
-        document.getElementById('friendly-message').removeAttribute('hidden');
+        document.getElementById('friendly_message').removeAttribute('hidden');
         document.querySelector('[unresolved]').removeAttribute("unresolved");
       }
     }, 25000);

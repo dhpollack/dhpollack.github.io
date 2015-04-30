@@ -2,7 +2,6 @@ CACHE MANIFEST
 
 
 CACHE:
-index.html
 assets/audio/ar/%D8%A1.m4a
 assets/audio/ar/%D8%A7.m4a
 assets/audio/ar/%D8%A8.m4a
@@ -507,22 +506,22 @@ assets/audio/test/words/trash.m4a
 assets/audio/test/words/village.m4a
 assets/audio/test/words/zipper.m4a
 tinavg-webapp.json
-api/ar/letters.json
-api/ar/words-stpacc.json
-api/ar/words.json
 api/de/letters.json
 api/de/words-stpacc.json
 api/de/words.json
+api/ar/letters.json
+api/ar/words-stpacc.json
+api/ar/words.json
 api/en/letters.json
 api/en/words-stpacc.json
 api/en/words.json
-api/test/letters.json
-api/test/words-stpacc.json
-api/test/words.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words-to-add.json
 api/en-US-south/words.json
+api/test/letters.json
+api/test/words-stpacc.json
+api/test/words.json
 api/tr/letters.json
 api/tr/words-stpacc.json
 api/tr/words.json
@@ -537,4 +536,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: eda0506e31f2b92de554d180a51a2922314b60bdf463abc476ab27ec1dcb07f2
+# hash: 860c3e4dc28af820cb0040a225cf1673b9df7ef64ce2e52ba0ec91c7113bc8f1
