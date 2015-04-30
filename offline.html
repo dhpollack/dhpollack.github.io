@@ -21,16 +21,6 @@
   <!-- Fix for Viewport Units -->
   <script src="../bower_components/viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
   <script src="../bower_components/viewport-units-buggyfill/viewport-units-buggyfill.hacks.js"></script>
-  <script type="text/javascript">
-    window.viewportUnitsBuggyfill.init({
-      // milliseconds to delay between updates of viewport-units
-      // caused by orientationchange, pageshow, resize events
-      refreshDebounceWait: 250,
-    
-      // provide hacks plugin to make the contentHack property work correctly.
-      hacks: window.viewportUnitsBuggyfillHacks
-    });
-  </script>
   <!-- tinavg-webapp -->
   <link rel="import" href="elements/tinavg-webapp.html">
   
@@ -52,6 +42,14 @@
         document.querySelector('[unresolved]').removeAttribute("unresolved");
       }
     }, 25000);
+    window.viewportUnitsBuggyfill.init({
+      // milliseconds to delay between updates of viewport-units
+      // caused by orientationchange, pageshow, resize events
+      refreshDebounceWait: 250,
+    
+      // provide hacks plugin to make the contentHack property work correctly.
+      hacks: window.viewportUnitsBuggyfillHacks
+    });
   </script>
 </body>
 </html>

@@ -7145,16 +7145,6 @@ Note, all features of `x-style` are available when defining styles as part of Po
   <!-- Fix for Viewport Units -->
   <script src="../bower_components/viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
   <script src="../bower_components/viewport-units-buggyfill/viewport-units-buggyfill.hacks.js"></script>
-  <script type="text/javascript">
-    window.viewportUnitsBuggyfill.init({
-      // milliseconds to delay between updates of viewport-units
-      // caused by orientationchange, pageshow, resize events
-      refreshDebounceWait: 250,
-    
-      // provide hacks plugin to make the contentHack property work correctly.
-      hacks: window.viewportUnitsBuggyfillHacks
-    });
-  </script>
   <!-- tinavg-webapp -->
   
 <!-- Additional Component Load -->
@@ -11192,7 +11182,7 @@ if (!window.Promise) {
       this.lastBucket = "!!!";
     },
     updateJumbotron: function() {
-      if(!document.getElementById('click_jtext').hasAttribute('hidden')) document.getElementById('click_jtext').setAttribute('hidden', true);
+      if(document.getElementById('click_jtext') && !document.getElementById('click_jtext').hasAttribute('hidden')) document.getElementById('click_jtext').remove();
       if(!this.wordBoard) this.init();
       if(this.wordBoard.myWord.charAt(0) === this.wordBoard.myWord.charAt(0).toUpperCase()) {
         this.$.jtext.classList.add('capitalize');
@@ -11217,6 +11207,7 @@ if (!window.Promise) {
               checkTimeout = setTimeout(function() {
                 if(this.first) {
                   this.wordBoard.tapWord(false);
+                  document.getElementById('click_jtext').classList.add('arrow_box');
                   document.getElementById('click_jtext').removeAttribute('hidden');
                 } else {
                   this.wordBoard.playAudio();
@@ -12369,7 +12360,7 @@ if (!window.Promise) {
           </div>
           <div class="horizontal center-justified layout flex-2">
             <jumbotron-text id="jt" tabindex="{{jumbotronIndex}}" learnmodus="{{learnmodus}}"></jumbotron-text>
-            <div id="click_jtext" class="arrow_box" hidden="">Click</div>
+            <div id="click_jtext" hidden="">Click</div>
           </div>
           <div id="nerdmodus-div" class="horizontal end-justified layout flex">
             <score-board id="score-board-player-2" player="2" hidden=""></score-board>
@@ -12622,6 +12613,14 @@ if (!window.Promise) {
         document.querySelector('[unresolved]').removeAttribute("unresolved");
       }
     }, 25000);
+    window.viewportUnitsBuggyfill.init({
+      // milliseconds to delay between updates of viewport-units
+      // caused by orientationchange, pageshow, resize events
+      refreshDebounceWait: 250,
+    
+      // provide hacks plugin to make the contentHack property work correctly.
+      hacks: window.viewportUnitsBuggyfillHacks
+    });
   </script>
 
 
