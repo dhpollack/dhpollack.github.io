@@ -3,11 +3,15 @@
 <!-- Layout/Polymer Elements -->
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
-<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="country-flags.html">
+<link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
 <!-- Custom Elements Vulcanized -->
+<link rel="import" href="country-flags.html">
 <link rel="import" href="elements.html">
 <!-- keyboard shortcuts -->
 <script src="../assets/js/mousetrap.min.js"></script>
@@ -77,6 +81,14 @@
             <div class="mini-menu">
               <div>
                 Language: 
+                <!-- waiting for paper-dropdown
+                <paper-menu on-iron-select="setLang2" valueattr="lang" selected="{{currLang}}">
+                  <paper-item lang="de" label="German"><iron-icon icon="country-flags:de"></iron-icon> German</paper-item>
+                  <paper-item lang="en" label="English"><iron-icon icon="country-flags:en"></iron-icon> English</paper-item>
+                  <paper-item lang="en-US-south" label="English (US South)"><iron-icon icon="country-flags:en-US-south"></iron-icon> English (US South)</paper-item>
+                  <paper-item lang="ar" label="Arabic"><iron-icon icon="country-flags:ar"></iron-icon> Arabic</paper-item>
+                </paper-menu>
+                -->
                 <select on-change="setLang">
                   <option value="de">German</option>
                   <option value="en">English</option>
@@ -87,10 +99,10 @@
                   -->
                 </select>
               </div>
-              <div><br />Earmodus: <button id="select-earmodus" on-tap="toggleEarModus">toggle</button></div>
-              <div><br />Learnmodus: <button id="select-learnmodus" on-tap="toggleLearnModus">toggle</button></div>
-              <div><br />Talkmodus: <button id="select-recordmodus" on-tap="toggleRecordModus">toggle</button></div>
-              <div><br />BuggyFill: <button id="select-buggyfill" on-tap="refreshBuggyFill">toggle</button></div>
+              <div><br />Earmodus: <paper-toggle-button id="select_earmodus" on-tap="toggleEarModus"></paper-toggle-button></div>
+              <div><br />Learnmodus: <paper-toggle-button id="select-learnmodus" on-tap="toggleLearnModus"></paper-toggle-button></div>
+              <div><br />Talkmodus: <paper-toggle-button id="select-recordmodus" on-tap="toggleRecordModus"></paper-toggle-button></div>
+              <div><br />BuggyFill: <paper-toggle-button id="select-buggyfill" on-tap="refreshBuggyFill"></paper-toggle-button></div>
               <div hidden><br />Nerdmodus: <button id="select-nerdmodus" on-tap="toggleNerdModus">toggle</button></div>
             </div>
           </iron-collapse>
@@ -249,6 +261,12 @@
     setLang: function(ev) {
       console.log("toggling language: " + ev.target.value + " | chars: " + this.letterLimit);
       this.currLang = ev.target.value;
+      this.$.jt.resetBox();
+    },
+    setLang2: function(ev) {
+      console.log(ev);
+      console.log("toggling language: " + ev.target.value + " | chars: " + this.letterLimit);
+      this.currLang = ev.detail.item.lang;
       this.$.jt.resetBox();
     },
     setWBoardDisplay: function(ev) {
