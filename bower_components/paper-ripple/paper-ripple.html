@@ -16,11 +16,11 @@ Example:
 
     <paper-ripple></paper-ripple>
 
-`paper-ripple` listens to "down" and "up" events so it would display ripple
+`paper-ripple` listens to "mousedown" and "mouseup" events so it would display ripple
 effect when touches on it.  You can also defeat the default behavior and
 manually route the down and up actions to the ripple element.  Note that it is
-important if you call downAction() you will have to make sure to call upAction()
-so that `paper-ripple` would end the animation loop.
+important if you call downAction() you will have to make sure to call
+upAction() so that `paper-ripple` would end the animation loop.
 
 Example:
 
@@ -84,7 +84,7 @@ animation finishes to perform some action.
       /* This resolves a rendering issue in Chrome 40 where the
          ripple is not properly clipped by its parent (which may have
          rounded corners. See: http://jsbin.com/temexa/4 */
-      -webkit-transform: translate3d(0, 0, 0);
+      -webkit-transform: translate(0, 0);
       transform: translate3d(0, 0, 0);
     }
 
@@ -366,23 +366,24 @@ animation finishes to perform some action.
         dx = this.xNow - (this.containerMetrics.width / 2);
         dy = this.yNow - (this.containerMetrics.height / 2);
 
-        Polymer.Base.translate3d(dx + 'px', dy + 'px', 0, this.waveContainer);
 
         // 2d transform for safari because of border-radius and overflow:hidden clipping bug.
         // https://bugs.webkit.org/show_bug.cgi?id=98538
+        this.waveContainer.style.webkitTransform = 'translate(' + dx + 'px, ' + dy + 'px)';
+        this.waveContainer.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0)';
         this.wave.style.webkitTransform = 'scale(' + scale + ',' + scale + ')';
         this.wave.style.transform = 'scale3d(' + scale + ',' + scale + ',1)';
       },
 
-      mousedownAction: function(event) {
+      downAction: function(event) {
         this.resetInteractionState();
         this.mouseDownStart = Utility.now();
 
         this.xStart = event ?
-          event.x - this.containerMetrics.boundingRect.left :
+          event.detail.x - this.containerMetrics.boundingRect.left :
           this.containerMetrics.width / 2;
         this.yStart = event ?
-          event.y - this.containerMetrics.boundingRect.top :
+          event.detail.y - this.containerMetrics.boundingRect.top :
           this.containerMetrics.height / 2;
 
         if (this.recenters) {
@@ -407,7 +408,7 @@ animation finishes to perform some action.
         this.waveContainer.style.height = this.containerMetrics.size + 'px';
       },
 
-      mouseupAction: function(event) {
+      upAction: function(event) {
         if (!this.isMouseDown) {
           return;
         }
@@ -486,20 +487,6 @@ animation finishes to perform some action.
           value: function() {
             return this.animate.bind(this);
           }
-        },
-
-        _boundMousedownAction: {
-          type: Function,
-          value: function() {
-            return this.mousedownAction.bind(this);
-          }
-        },
-
-        _boundMouseupAction: {
-          type: Function,
-          value: function() {
-            return this.mouseupAction.bind(this);
-          }
         }
       },
 
@@ -508,22 +495,9 @@ animation finishes to perform some action.
       },
 
       attached: function() {
-        this.target.addEventListener('mousedown', this._boundMousedownAction);
-        this.target.addEventListener('mouseup', this._boundMouseupAction);
+        this._listen(this.target, 'up', this.upAction.bind(this));
+        this._listen(this.target, 'down', this.downAction.bind(this));
       },
-
-      detached: function() {
-        this.target.removeEventListener('mousedown', this._boundMousedownAction);
-        this.target.removeEventListener('mouseup', this._boundMouseupAction);
-      },
-
-      /* TODO(cdata): Replace the above attached / detached listeners when
-         PolymerGestures equivalent lands in 0.8.
-      listeners: {
-        mousedown: 'mousedownAction',
-        mouseup: 'mouseupAction'
-      },
-      */
 
       get shouldKeepAnimating () {
         for (var index = 0; index < this.ripples.length; ++index) {
@@ -536,27 +510,27 @@ animation finishes to perform some action.
       },
 
       simulatedRipple: function() {
-        this.mousedownAction(null);
+        this.downAction(null);
 
         // Please see polymer/polymer#1305
         this.async(function() {
-          this.mouseupAction();
+          this.upAction();
         }, 1);
       },
 
-      mousedownAction: function(event) {
+      downAction: function(event) {
         var ripple = this.addRipple();
 
-        ripple.mousedownAction(event);
+        ripple.downAction(event);
 
         if (!this._animating) {
           this.animate();
         }
       },
 
-      mouseupAction: function(event) {
+      upAction: function(event) {
         this.ripples.forEach(function(ripple) {
-          ripple.mouseupAction(event);
+          ripple.upAction(event);
         });
 
         this.animate();
@@ -617,4 +591,3 @@ animation finishes to perform some action.
     });
   })();
 </script>
-
