@@ -3,7 +3,7 @@
     "lang": {
       "code": "ko",
       "stripDiacritics": false,
-      "langHelpInfo": "<h3><u>Korean</u></h3>"
+      "langHelpInfo": "<h3><u>Korean</u></h3><ol><li>If the double letters are available, use these instead of using the single letter twice.</li></ol>"
     },
     "alphabet": [
       {

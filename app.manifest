@@ -516,13 +516,13 @@ api/de/words.json
 api/en/letters.json
 api/en/words-stpacc.json
 api/en/words.json
-api/ko/letters.json
-api/ko/words-stpacc.json
-api/ko/words.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words-to-add.json
 api/en-US-south/words.json
+api/ko/letters.json
+api/ko/words-stpacc.json
+api/ko/words.json
 api/ru/letters.json
 api/ru/words-stpacc.json
 api/ru/words.json
@@ -543,4 +543,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: fe24abcfe48e0a8ae6ef1dfd61a246d6f36fced830af7815e4daa45e4f11f750
+# hash: c6591ee5caa0bfe3cb0fdd90ed29b71d06a46db4ccb16d3e6d47e10403289338
