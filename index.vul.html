@@ -10906,6 +10906,10 @@ Styling toggle-button:
 
 
 
+
+
+
+
 <!-- Custom Elements Vulcanized -->
 
 
@@ -13398,6 +13402,133 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </script>
 
+<dom-module id="paper-toast">
+  <style>
+    :host {
+      display: inline-block;
+      background: #323232;
+      color: #f1f1f1;
+      min-height: 48px;
+      min-width: 288px;
+      padding: 16px 24px 12px;
+      position: fixed;
+      box-sizing: border-box;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      border-radius: 2px;
+      bottom: 12px;
+      left: 12px;
+      font-size: 14px;
+      cursor: default;
+      transition-duration: 300ms;
+    }
+
+    :host(.capsule) {
+      border-radius: 24px;
+    }
+
+    :host(.fit-bottom) {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      min-width: 0;
+      border-radius: 0;
+    }
+    :host(.paper-toast-closed) {
+      visibility: hidden;
+      transition: visibility 300ms, transform 300ms;
+      transform: translateY(100px);
+    }
+    :host(.paper-toast-openend){
+      transition: visibility, transform, 300ms;
+      transform: translateY(-100px);
+    }
+  </style>
+  <template>
+    <span>{{text}}</span>
+    <content></content>
+  </template>
+</dom-module>
+<script>
+(function() {
+
+  var PaperToast = Polymer({
+    is: 'paper-toast',
+
+    properties: {
+      opened: {
+        observer: 'openChanged',
+        type: Boolean,
+        notify: true,
+        value: false
+      },
+
+      /**
+       * The duration in milliseconds to show the toast.
+       */
+      duration: {
+        type: Number,
+        value: 3000
+      },
+
+      /**
+       * The text to display in the toast.
+       */
+      text: {
+        type: String,
+        value: ""
+      }
+    },
+
+    /**
+     * Hide the toast
+     * @return {[type]} [description]
+     */
+    hide: function() {
+      this.opened = false;
+    },
+
+    _toggleClasses: function(visible) {
+      this.toggleClass('paper-toast-closed', !visible);
+      this.toggleClass('paper-toast-open', visible);
+    },
+
+    openChanged: function() {
+      if (this.opened) {
+        this.show();
+      } else {
+        if (PaperToast.currentToast === this) {
+          PaperToast.currentToast = null;
+        }
+        this._toggleClasses(false);
+      }
+    },
+
+    /**
+     * Toggle the opened state of the toast.
+     * @method toggle
+     */
+    toggle: function() {
+      this.opened = !this.opened;
+    },
+
+    /**
+     * Show the toast.
+     * @method show
+     */
+    show: function() {
+      this.opened = true;
+      if (PaperToast.currentToast && PaperToast.currentToast !== this) {
+        PaperToast.currentToast.hide();
+      }
+      PaperToast.currentToast = this;
+      this._toggleClasses(true);
+      this.debounce('dismissToast', this.hide, this.duration);
+    }
+
+  });
+})();
+</script>
+
 <iron-iconset-svg name="country-flags" sizex="1235" sizey="650" size="1235">
 <svg><defs>
       <g id="de">
@@ -13643,7 +13774,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
     getCheckWord: function() {
       if(this.wordArray.length !== 0) {
-        var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
+        var findex = (this.letterListBox.stripDiacritics) ? "ohne" : "word";
         var word = this.wordArray[this.ranWordIndex][findex].split(" ");
         return word[this.phraseIndex];
       } else {
@@ -13651,8 +13782,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return;
       }
     },
+    getWordObj: function() {
+      return this.wordArray[this.ranWordIndex];
+    },
     setDisplayWord: function() {
-      var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
+      var findex = (this.letterListBox.stripDiacritics) ? "ohne" : "word";
       this.phraseArray = this.wordArray[this.ranWordIndex][findex].split(" ");
       this.myWord = this.phraseArray[this.phraseIndex];
       this.wordAudio = this.produceWordAudioUrl(this.phraseArray[this.phraseIndex].toLowerCase(), this.langCode);
@@ -13667,7 +13801,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
     revealWord: function() {
       var pauseLength = 1500;
-      var findex = (this.letterListBox.stripDiacritics) ? 1 : 0;
+      var findex = (this.letterListBox.stripDiacritics) ? "ohne" : "word";
       var word;
       
       if(this.langCode === "ko") {
@@ -14682,6 +14816,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     runNewLetters: function(){
       if(this.wordBoardBox.getCheckWord() !== undefined) {
         console.log("switching up letters: " + this.wordBoardBox.getCheckWord());
+        this.fire('ready-set-go', true);
         this.shuffleLetters(this.wordBoardBox.getCheckWord().toLowerCase(), this.limit);
       } else {
         console.log("check word still not set");
@@ -14893,22 +15028,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <option value="ar">Arabic</option>
                   <option value="ko">Korean</option>
                   <option value="ru">Russian</option>
+                  <option value="he">Hebrew</option>
                   <!--
                   <option value="tr">Turkish</option>
                   -->
                 </select>
               </div>
               <div><br>Earmodus: <paper-toggle-button id="select_earmodus" on-tap="toggleEarModus"></paper-toggle-button></div>
-              <div><br>Learnmodus: <paper-toggle-button id="select-learnmodus" on-tap="toggleLearnModus"></paper-toggle-button></div>
-              <div><br>Talkmodus: <paper-toggle-button id="select-recordmodus" on-tap="toggleRecordModus"></paper-toggle-button></div>
-              <div><br>BuggyFill: <paper-toggle-button id="select-buggyfill" on-tap="refreshBuggyFill"></paper-toggle-button></div>
-              <div hidden=""><br>Nerdmodus: <button id="select-nerdmodus" on-tap="toggleNerdModus">toggle</button></div>
+              <div><br>Learnmodus: <paper-toggle-button id="select_learnmodus" on-tap="toggleLearnModus" checked$="{{learnmodus}}"></paper-toggle-button></div>
+              <div><br>Meiseldmodus: <paper-toggle-button id="select_nerdmodus" on-tap="toggleNerdModus" checked$="{{nerdmodus}}"></paper-toggle-button></div>
+              <div>
+                Meiselsprache: 
+                <select id="meiselspracheliste" on-change="setNerdSprache" disabled="">
+                  <option value="de">German</option>
+                  <option value="en">English</option>
+                  <option value="ar">Arabic</option>
+                  <option value="ko">Korean</option>
+                  <option value="ru">Russian</option>
+                  <option value="he">Hebrew</option>
+                  <option value="tr">Turkish</option>
+                </select>
+              </div>
+              <div><br>Talkmodus: <paper-toggle-button id="select_recordmodus" on-tap="toggleRecordModus" checked$="{{recordmodus}}"></paper-toggle-button></div>
+              <div hidden=""><br>BuggyFill: <paper-toggle-button id="select_buggyfill" on-tap="refreshBuggyFill"></paper-toggle-button></div>
             </div>
           </iron-collapse>
           <div id="maincontentarea"><word-recorder id="wrecorder" hidden=""></word-recorder><letter-list id="lettergrid" limit="{{letterLimit}}" lang-code="{{currLang}}"></letter-list></div>
         </div>
       </div>
     </paper-header-panel>
+    <paper-toast id="übersetzung" text="{{currLang}}"></paper-toast>
   </template>
 </dom-module>
 <script>
@@ -14936,6 +15085,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         type: Boolean,
         value: false
       },
+      nerdmodus: {
+        type: Boolean,
+        value: false
+      },
+      nerdSprache: {
+        type: String,
+        value: 'de'
+      },
       langHelp: {
         type: String,
         value: ""
@@ -14946,13 +15103,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       languageList: {
         type: Array,
-        value: function() { return ['de', 'en', 'en-US-south', 'ar',"ko", "ru"]; }
+        value: function() { return ['de', 'en', 'en-US-south', 'ar','ko', 'ru', 'he']; }
       }
     },
     listeners: {
       'letter-card-tapped': 'letterTapped',
       'stripdia-set': 'setWBoardDisplay',
-      'lang-help': 'setLangHelp'
+      'lang-help': 'setLangHelp',
+      'ready-set-go': 'showÜbersetzung'
     },
     ready: function() {
       Mousetrap.bind('shift+enter', function() { 
@@ -15111,6 +15269,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
     flagIconString: function(lang) {
       return "country-flags:" + lang;
+    },
+    toggleNerdModus: function() {
+      this.nerdmodus = !this.nerdmodus;
+      this.$.meiselspracheliste.disabled = !this.nerdmodus;
+      this.showÜbersetzung();
+    },
+    showÜbersetzung: function() {
+      if(this.nerdmodus && this.$.wboard.getWordObj().übersetzung !== undefined && this.$.wboard.getWordObj().übersetzung[this.nerdSprache]) {
+        this.$.übersetzung.text = this.$.wboard.getWordObj().übersetzung[this.nerdSprache];
+      } else if(this.$.wboard.getWordObj().uebersetzungen[this.nerdSprache] !== undefined) {
+        this.$.übersetzung.text = this.$.wboard.getWordObj().uebersetzungen[this.nerdSprache];
+      } else {
+        this.$.übersetzung.text = "Es tut mir Leid.  Keine Übersetzung :-(";
+      }
+      if(this.nerdmodus) this.$.übersetzung.show();
+    },
+    setNerdSprache: function(ev) {
+      this.nerdSprache = ev.target.value;
+      this.showÜbersetzung();
     }
   });
 

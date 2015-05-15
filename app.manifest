@@ -520,6 +520,9 @@ api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words-to-add.json
 api/en-US-south/words.json
+api/he/letters.json
+api/he/words-stpacc.json
+api/he/words.json
 api/ko/letters.json
 api/ko/words-stpacc.json
 api/ko/words.json
@@ -543,4 +546,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: c6591ee5caa0bfe3cb0fdd90ed29b71d06a46db4ccb16d3e6d47e10403289338
+# hash: 546ab96866d265b7d8561f2d64cd65ca902c6ff8c15f37d722299740625d3c11
