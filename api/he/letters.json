@@ -160,6 +160,18 @@
         "hidden": true,
         "letter": "ץ",
         "regular": false
+      },
+      {
+        "uid": 28,
+        "hidden": true,
+        "letter": " ",
+        "regular": false
+      },
+      {
+        "uid": 29,
+        "hidden": true,
+        "letter": "'",
+        "regular": false
       }
     ]
   }
