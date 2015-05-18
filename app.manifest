@@ -648,12 +648,12 @@ api/en-US-south/words.json
 api/he/letters.json
 api/he/words-stpacc.json
 api/he/words.json
-api/ko/letters.json
-api/ko/words-stpacc.json
-api/ko/words.json
 api/ru/letters.json
 api/ru/words-stpacc.json
 api/ru/words.json
+api/ko/letters.json
+api/ko/words-stpacc.json
+api/ko/words.json
 api/test/letters.json
 api/test/words-stpacc.json
 api/test/words.json
@@ -671,4 +671,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: 0ca3dbe0a5465cabcfdf071d7a2c3b6219baf865b7da770840e2786e1bc4a990
+# hash: 6a3c07558db225d24f5031dd052e3adfedb2f2d28911e4de48041cffb0d29dd7
