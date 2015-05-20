@@ -185,8 +185,6 @@
     bottom:0;
 		box-sizing: border-box;
 		-moz-box-sizing: border-box;
-		-webkit-user-select: none;
-		-moz-user-select: none;
 		overflow: hidden;
 		background: white;
 		padding: 10px;
@@ -197,9 +195,18 @@
 		z-index: 100;
   }
   #overlaycontainer {
-    background-color: rgba(255,255,255,0.7);
-    width: 100%;
-    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: opacity 0.2s;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: initial;
+    transition-delay: initial;
+    z-index: 99;
   }
   .right-to-left {
     transform: rotateY(180deg);

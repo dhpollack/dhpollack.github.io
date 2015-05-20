@@ -101,13 +101,13 @@
           //this.phraseArray = this.wordArray[this.ranWordIndex][findex].split(" ");
           this.phraseIndex = 0;
         }
-        if(this.wordArray[this.ranWordIndex][2] !== (undefined || null) && typeof this.wordArray[this.ranWordIndex][2] === 'object') {
+        if(this.wordArray[this.ranWordIndex].grammar !== (undefined || null) && typeof this.wordArray[this.ranWordIndex].grammar === 'object') {
           this.wordBoardWord.className = "";
           this.myWordSpan.className = "";
-          if(this.wordArray[this.ranWordIndex][2].grammar.segments === undefined) {
-            this.setGrammarStyles(this.wordArray[this.ranWordIndex][2].grammar);
+          if(this.wordArray[this.ranWordIndex].grammar.segments === undefined) {
+            this.setGrammarStyles(this.wordArray[this.ranWordIndex].grammar);
           } else {
-            this.setGrammarStyles(this.wordArray[this.ranWordIndex][2].grammar.segments[this.phraseIndex]);
+            this.setGrammarStyles(this.wordArray[this.ranWordIndex].grammar.segments[this.phraseIndex]);
           }
         } else {
           this.wordBoardWord.className = "";
@@ -124,7 +124,7 @@
       }
     },
     getCheckWord: function() {
-      if(this.wordArray.length !== 0) {
+      if(this.wordArray.length !== 0 && this.wordArray[this.ranWordIndex] !== undefined) {
         var findex = (this.letterListBox.stripDiacritics) ? "ohne" : "word";
         var word = this.wordArray[this.ranWordIndex][findex].split(" ");
         return word[this.phraseIndex];

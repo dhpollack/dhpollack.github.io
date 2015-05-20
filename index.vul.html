@@ -254,7 +254,41 @@ animation finishes to perform some action.
     The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
     Code distributed by Google as part of the polymer project is also
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!-- Custom Elements Vulcanized --><!--arctan(-3/2)--><!--
+--><!--
+Element access to localStorage.  The "name" property
+is the key to the data ("value" property) stored in localStorage.
+
+`iron-localstorage` automatically saves the value to localStorage when
+value is changed.  Note that if value is an object auto-save will be
+triggered only when value is a different instance.
+
+    <iron-localstorage name="my-app-storage" value="{{value}}"></iron-localstorage>
+
+@group Iron Elements
+@element iron-localstorage
+@blurb Element access to localStorage.
+--><!-- Custom Elements --><!--arctan(-3/2)--><!--
+Fired after the `iron-overlay` closes.
+@event iron-overlay-closed
+@param {Object} detail
+@param {Object} detail.canceled True if the overlay was canceled
+--><!--
+Fired after the `iron-overlay` opens.
+@event iron-overlay-opened
+--><!--
+`iron-overlay-behavior` displays an element on top of other content. It starts out hidden and is
+displayed by calling `open()` or setting the `opened` property to `true`. It may be closed by
+calling `close()` or `cancel()`, or by setting the `opened` property to `true`.
+
+The difference between `close()` and `cancel()` is user intent. `close()` generally implies that
+the user acknowledged the content of the overlay. By default, it will cancel whenever the user taps
+outside it or presses the escape key. This behavior can be turned off via the `no-cancel-on-esc-key`
+and the `no-cancel-on-outside-click` properties.
+--><!--
+`iron-overlay-backdrop` is a backdrop used by `iron-overlay-behavior`. It should be a singleton.
+--><!--
+Fits an element in another element using `max-height` and `max-width`, and optionally centers it.
+--><!--
 
 Material Design: <a href="http://www.google.com/design/spec/components/buttons.html">Buttons</a>
 
@@ -10206,7 +10240,7 @@ Polymer.Debounce = (function() {
 </script>
 
 <style is="custom-style">
-  * {
+  :root {
     --paper-toggle-button-unchecked-bar-color: #000000;
     --paper-toggle-button-unchecked-button-color: #f1f1f1;
     --paper-toggle-button-unchecked-ink-color: #bbb;
@@ -11850,6 +11884,7 @@ Polymer.Debounce = (function() {
 
 
 
+
 <script src="../bower_components/promise-polyfill/Promise.js"></script>
 <script>
 if (!window.Promise) {
@@ -12521,8 +12556,671 @@ if (!window.Promise) {
 
 
 
-<script src="assets/js/mousetrap.min.js"></script>
+<script>
 
+  Polymer.IronFitBehavior = {
+
+    properties: {
+
+      /**
+       * The element that will receive a `max-height`/`width`. By default it is the same as `this`,
+       * but it can be set to a child element. This is useful, for example, for implementing a
+       * scrolling region inside the element.
+       */
+      sizingTarget: {
+        type: Object,
+        value: function() {
+          return this;
+        }
+      },
+
+      /**
+       * The element to fit `this` into.
+       */
+      fitInto: {
+        type: Object,
+        value: window
+      },
+
+      /**
+       * Set to true to auto-fit on attach.
+       */
+      autoFit: {
+        type: Boolean,
+        value: false
+      },
+
+      _fitInfo: {
+        type: Object
+      }
+
+    },
+
+    get _fitWidth() {
+      var fitWidth;
+      if (this.fitInto === window) {
+        fitWidth = this.fitInto.innerWidth;
+      } else {
+        fitWidth = this.fitInto.getBoundingClientRect().width;
+      }
+      return fitWidth;
+    },
+
+    get _fitHeight() {
+      var fitHeight;
+      if (this.fitInto === window) {
+        fitHeight = this.fitInto.innerHeight;
+      } else {
+        fitHeight = this.fitInto.getBoundingClientRect().height;
+      }
+      return fitHeight;
+    },
+
+    attached: function() {
+      if (this.autoFit) {
+        if (window.getComputedStyle(this).display === 'none') {
+          setTimeout(function() {
+            this.fit();
+          }.bind(this));
+        } else {
+          this.fit();
+        }
+      }
+    },
+
+    fit: function() {
+      this._discoverInfo();
+      this.constrain();
+      this.center();
+    },
+
+    /**
+     * Memoize information needed to position and size the target element.
+     */
+    _discoverInfo: function() {
+      if (this._fitInfo) {
+        return;
+      }
+      var target = window.getComputedStyle(this);
+      var sizer = window.getComputedStyle(this.sizingTarget);
+      this._fitInfo = {
+        positionedBy: {
+          vertically: target.top !== 'auto' ? 'top' : (target.bottom !== 'auto' ?
+            'bottom' : null),
+          horizontally: target.left !== 'auto' ? 'left' : (target.right !== 'auto' ?
+            'right' : null),
+          css: target.position
+        },
+        sizedBy: {
+          height: sizer.maxHeight !== 'none',
+          width: sizer.maxWidth !== 'none'
+        },
+        margin: {
+          top: parseInt(target.marginTop, 10) || 0,
+          right: parseInt(target.marginRight, 10) || 0,
+          bottom: parseInt(target.marginBottom, 10) || 0,
+          left: parseInt(target.marginLeft, 10) || 0
+        }
+      };
+    },
+
+    /**
+     * Resets the target element's position and size constraints, and clear
+     * the memoized data.
+     */
+    resetFit: function() {
+      if (!this._fitInfo || !this._fitInfo.sizedBy.height) {
+        this.sizingTarget.style.maxHeight = '';
+        this.style.top = '';
+      }
+      if (!this._fitInfo || !this._fitInfo.sizedBy.width) {
+        this.sizingTarget.style.maxWidth = '';
+        this.style.left = '';
+      }
+      if (this._fitInfo) {
+        this.style.position = this._fitInfo.positionedBy.css;
+      }
+      this._fitInfo = null;
+    },
+
+    refit: function() {
+      this.resetFit();
+      this.fit();
+    },
+
+    constrain: function() {
+      var info = this._fitInfo;
+      // position at (0px, 0px) if not already positioned, so we can measure the natural size.
+      if (!this._fitInfo.positionedBy.vertically) {
+        this.style.top = '0px';
+      }
+      if (!this._fitInfo.positionedBy.horizontally) {
+        this.style.left = '0px';
+      }
+      // need border-box for margin/padding
+      this.sizingTarget.style.boxSizing = 'border-box';
+      // constrain the width and height if not already set
+      var rect = this.getBoundingClientRect();
+      if (!info.sizedBy.height) {
+        this._sizeDimension(rect, info.positionedBy.vertically, 'top', 'bottom', 'Height');
+      }
+      if (!info.sizedBy.width) {
+        this._sizeDimension(rect, info.positionedBy.horizontally, 'left', 'right', 'Width');
+      }
+    },
+
+    _sizeDimension: function(rect, positionedBy, start, end, extent) {
+      var info = this._fitInfo;
+      var max = extent === 'Width' ? this._fitWidth : this._fitHeight;
+      var flip = (positionedBy === end);
+      var offset = flip ? max - rect[end] : rect[start];
+      var margin = info.margin[flip ? start : end];
+      var offsetExtent = 'offset' + extent;
+      var sizingOffset = this[offsetExtent] - this.sizingTarget[offsetExtent];
+      this.sizingTarget.style['max' + extent] = (max - margin - offset - sizingOffset) + 'px';
+    },
+
+    /**
+     * Centers horizontally and vertically if not already positioned.
+     */
+    center: function() {
+      if (!this._fitInfo.positionedBy.vertically || !this._fitInfo.positionedBy.horizontally) {
+        // need position:fixed to center
+        this.style.position = 'fixed';
+      }
+      if (!this._fitInfo.positionedBy.vertically) {
+        var top = (this._fitHeight - this.offsetHeight) / 2;
+        top -= this._fitInfo.margin.top;
+        this.style.top = top + 'px';
+      }
+      if (!this._fitInfo.positionedBy.horizontally) {
+        var left = (this._fitWidth - this.offsetWidth) / 2;
+        left -= this._fitInfo.margin.left;
+        this.style.left = left + 'px';
+      }
+    }
+
+  };
+
+</script>
+
+
+<script>
+
+  Polymer.IronOverlayManager = (function() {
+
+    var overlays = [];
+    var DEFAULT_Z = 10;
+    var backdrops = [];
+
+    // track overlays for z-index and focus managemant
+    function addOverlay(overlay) {
+      var z0 = currentOverlayZ();
+      overlays.push(overlay);
+      var z1 = currentOverlayZ();
+      if (z1 <= z0) {
+        applyOverlayZ(overlay, z0);
+      }
+    }
+
+    function removeOverlay(overlay) {
+      var i = overlays.indexOf(overlay);
+      if (i >= 0) {
+        overlays.splice(i, 1);
+        setZ(overlay, '');
+      }
+    }
+
+    function applyOverlayZ(overlay, aboveZ) {
+      setZ(overlay, aboveZ + 2);
+    }
+
+    function setZ(element, z) {
+      element.style.zIndex = z;
+    }
+
+    function currentOverlay() {
+      return overlays[overlays.length-1];
+    }
+
+    function currentOverlayZ() {
+      var z;
+      var current = currentOverlay();
+      if (current) {
+        var z1 = window.getComputedStyle(current).zIndex;
+        if (!isNaN(z1)) {
+          z = Number(z1);
+        }
+      }
+      return z || DEFAULT_Z;
+    }
+
+    function focusOverlay() {
+      var current = currentOverlay();
+      // We have to be careful to focus the next overlay _after_ any current
+      // transitions are complete (due to the state being toggled prior to the
+      // transition). Otherwise, we risk infinite recursion when a transitioning
+      // (closed) overlay becomes the current overlay.
+      //
+      // NOTE: We make the assumption that any overlay that completes a transition
+      // will call into focusOverlay to kick the process back off. Currently:
+      // transitionend -> applyFocus -> focusOverlay.
+      if (current && !current.transitioning) {
+        current.applyFocus();
+      }
+    }
+
+    function trackBackdrop(element) {
+      // backdrops contains the overlays with a backdrop that are currently
+      // visible
+      if (element.opened) {
+        backdrops.push(element);
+      } else {
+        var index = backdrops.indexOf(element);
+        if (index >= 0) {
+          backdrops.splice(index, 1);
+        }
+      }
+    }
+
+    function getBackdrops() {
+      return backdrops;
+    }
+
+    return {
+      addOverlay: addOverlay,
+      removeOverlay: removeOverlay,
+      currentOverlay: currentOverlay,
+      currentOverlayZ: currentOverlayZ,
+      focusOverlay: focusOverlay,
+      trackBackdrop: trackBackdrop,
+      getBackdrops: getBackdrops
+    };
+
+  })();
+
+</script>
+
+
+
+
+
+
+<script>
+
+  /** @polymerBehavior */
+  Polymer.IronOverlayBehavior = [Polymer.IronFitBehavior, {
+
+    properties: {
+
+      /**
+       * Set opened to true to show an overlay and to false to hide it.
+       * A `iron-overlay` may be made initially opened by setting its
+       * `opened` attribute.
+       */
+      opened: {
+        observer: '_openedChanged',
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * True if the overlay was cancelled.
+       */
+      canceled: {
+        observer: '_canceledChanged',
+        readOnly: true,
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * If true, the overlay has a backdrop darkening the rest of the screen.
+       * The backdrop element is attached to the document body and may be styled
+       * with the class `iron-overlay-backdrop`. When opened the `iron-opened`
+       * class is applied.
+       */
+      withBackdrop: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Set to true to disable auto-focusing the overlay or child nodes with
+       * the `autofocus` attribute` when the overlay is opened.
+       */
+      noAutoFocus: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Set to true to disable canceling the overlay with the ESC key.
+       */
+      noCancelOnEscKey: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Set to true to disable canceling the overlay by clicking outside it.
+       */
+      noCancelOnOutsideClick: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Returns the reason this dialog was last closed.
+       */
+      closingReason: {
+        // was a getter before, but needs to be a property so other
+        // behaviors can override this.
+        type: Object
+      },
+
+      _manager: {
+        type: Object,
+        value: Polymer.IronOverlayManager
+      },
+
+      _boundOnCaptureClick: {
+        type: Function,
+        value: function() {
+          return this._onCaptureClick.bind(this);
+        }
+      },
+
+      _boundOnCaptureKeydown: {
+        type: Function,
+        value: function() {
+          return this._onCaptureKeydown.bind(this);
+        }
+      },
+
+      _boundOnResize: {
+        type: Function,
+        value: function() {
+          return this._onResize.bind(this);
+        }
+      }
+
+    },
+
+    listeners: {
+      'click': '_onClick'
+    },
+
+    get backdropElement() {
+      return this._backdrop;
+    },
+
+    get _focusNode() {
+      return Polymer.dom(this).querySelector('[autofocus]') || this;
+    },
+
+    registered: function() {
+      this._backdrop = document.createElement('iron-overlay-backdrop');
+    },
+
+    ready: function() {
+      this._ensureSetup();
+      if (this._callOpenedWhenReady) {
+        this._openedChanged();
+      }
+    },
+
+    detached: function() {
+      this.opened = false;
+      this._completeBackdrop();
+      this._manager.removeOverlay(this);
+    },
+
+    /**
+     * Toggle the opened state of the overlay.
+     */
+    toggle: function() {
+      this.opened = !this.opened;
+    },
+
+    /**
+     * Open the overlay.
+     */
+    open: function() {
+      this.opened = true;
+      this.closingReason = {canceled: false};
+    },
+
+    /**
+     * Close the overlay.
+     */
+    close: function() {
+      this.opened = false;
+      this._setCanceled(false);
+    },
+
+    /**
+     * Cancels the overlay.
+     */
+    cancel: function() {
+      this.opened = false,
+      this._setCanceled(true);
+    },
+
+    _ensureSetup: function() {
+      if (this._overlaySetup) {
+        return;
+      }
+      this._overlaySetup = true;
+      this.style.outline = 'none';
+      this.style.display = 'none';
+    },
+
+    _openedChanged: function() {
+      // wait to call after ready only if we're initially open
+      if (!this._overlaySetup) {
+        this._callOpenedWhenReady = this.opened;
+        return;
+      }
+      if (this._openChangedAsync) {
+        this.cancelAsync(this._openChangedAsync);
+      }
+
+      this._transitioning = true;
+
+      this._toggleListeners();
+
+      if (this.opened) {
+        this._prepareRenderOpened();
+      }
+
+      // async here to allow overlay layer to become visible.
+      this._openChangedAsync = this.async(function() {
+        // overlay becomes visible here
+        this.style.display = '';
+        // force layout to ensure transitions will go
+        this.offsetWidth;
+        if (this.opened) {
+          this._renderOpened();
+        } else {
+          this._renderClosed();
+        }
+        this._openChangedAsync = null;
+      });
+
+    },
+
+    _canceledChanged: function() {
+      this.closingReason = this.closingReason || {};
+      this.closingReason.canceled = this.canceled;
+    },
+
+    _toggleListener: function(enable, node, event, boundListener, capture) {
+      if (enable) {
+        node.addEventListener(event, boundListener, capture);
+      } else {
+        node.removeEventListener(event, boundListener, capture);
+      }
+    },
+
+    _toggleListeners: function() {
+      if (this._toggleListenersAsync) {
+        this.cancelAsync(this._toggleListenersAsync);
+      }
+      // async so we don't auto-close immediately via a click.
+      this._toggleListenersAsync = this.async(function() {
+        this._toggleListener(this.opened, document, 'click', this._boundOnCaptureClick, true);
+        this._toggleListener(this.opened, document, 'keydown', this._boundOnCaptureKeydown, true);
+        this._toggleListenersAsync = null;
+      });
+      this._toggleListener(this.opened, window, 'resize', this._boundOnResize, false);
+    },
+
+    // tasks which must occur before opening; e.g. making the element visible
+    _prepareRenderOpened: function() {
+      this._manager.addOverlay(this);
+
+      if (this.withBackdrop) {
+        this.backdropElement.prepare();
+        this._manager.trackBackdrop(this);
+      }
+
+      this._preparePositioning();
+      this.fit();
+      this._finishPositioning();
+    },
+
+    // tasks which cause the overlay to actually open; typically play an
+    // animation
+    _renderOpened: function() {
+      // this.notifyResize();
+      if (this.withBackdrop) {
+        this.backdropElement.open();
+      }
+      // FIXME implement transitions
+      // var transition = this.getTransition();
+      // if (transition) {
+      //   transition.go(this, {opened: this.opened});
+      // } else {
+        // this.transitionend();
+      // }
+      this._finishRenderOpened();
+    },
+
+    _renderClosed: function() {
+      if (this.withBackdrop) {
+        this.backdropElement.close();
+      }
+      this._finishRenderClosed();
+    },
+
+    _onTransitionend: function(event) {
+      // make sure this is our transition event.
+      if (event && event.target !== this) {
+        return;
+      }
+      this._transitioning = false;
+      if (this.opened) {
+        this._finishRenderOpened();
+      } else {
+        this._finishRenderClosed();
+      }
+    },
+
+    _finishRenderOpened: function() {
+      // focus the child node with [autofocus]
+      if (!this.noAutoFocus) {
+        this._focusNode.focus();
+      }
+
+      this.fire('iron-overlay-opened');
+    },
+
+    _finishRenderClosed: function() {
+      // hide the overlay and remove the backdrop
+      this.resetFit();
+      this.style.display = 'none';
+      this._completeBackdrop();
+      this._manager.removeOverlay(this);
+
+      this._focusNode.blur();
+      // focus the next overlay, if there is one
+      this._manager.focusOverlay();
+
+      this.fire('iron-overlay-closed', this.closingReason);
+    },
+
+    _completeBackdrop: function() {
+      if (this.withBackdrop) {
+        this._manager.trackBackdrop(this);
+        this.backdropElement.complete();
+      }
+    },
+
+    _preparePositioning: function() {
+      this.style.transition = this.style.webkitTransition = 'none';
+      this.style.transform = this.style.webkitTransform = 'none';
+      this.style.display = '';
+    },
+
+    _finishPositioning: function(target) {
+      this.style.display = 'none';
+      this.style.transform = this.style.webkitTransform = '';
+      // force layout to avoid application of transform
+      this.offsetWidth;
+      this.style.transition = this.style.webkitTransition = '';
+    },
+
+    applyFocus: function() {
+      if (this.opened) {
+        if (!this.noAutoFocus) {
+          this._focusNode.focus();
+        }
+      } else {
+        this._focusNode.blur();
+        this._manager.focusOverlay();
+      }
+    },
+
+    // We use the traditional approach of capturing events on document
+    // to to determine if the overlay needs to close. However, due to
+    // ShadowDOM event retargeting, the event target is not useful. Instead
+    // of using it, we attempt to close asynchronously and prevent the close
+    // if a tap event is immediately heard on the target.
+    // TODO(sorvell): This approach will not work with modal. For
+    // this we need a scrim.
+    _onCaptureClick: function(event) {
+      if (!this.noCancelOnOutsideClick && (this._manager.currentOverlay() == this)) {
+        this._cancelJob = this.async(function() {
+          this.cancel();
+        }, 10);
+      }
+    },
+
+    _onClick: function(event) {
+      if (this._cancelJob) {
+        this.cancelAsync(this._cancelJob);
+        this._cancelJob = null;
+      }
+    },
+
+    _onCaptureKeydown: function(event) {
+      var ESC = 27;
+      if (!this.noCancelOnEscKey && (event.keyCode === ESC)) {
+        this.cancel();
+        event.stopPropagation();
+      }
+    },
+
+    _onResize: function() {
+      this.refit();
+    }
+
+  }];
+
+</script>
+
+<script src="assets/js/mousetrap.min.js"></script>
 </head>
 
 <body fullbleed="" unresolved=""><div hidden="" by-vulcanize=""><dom-module id="iron-icon" assetpath="../bower_components/iron-icon/">
@@ -14448,7 +15146,6 @@ if (!window.Promise) {
 </script>
 <dom-module id="paper-toggle-button" assetpath="../bower_components/paper-toggle-button/">
 
-
   <link rel="import" type="css" href="../bower_components/paper-toggle-button/paper-toggle-button.css">
 
   <template>
@@ -14800,6 +15497,160 @@ if (!window.Promise) {
   });
 })();
 </script>
+<dom-module id="iron-localstorage" assetpath="../bower_components/iron-localstorage/"></dom-module>
+<script>
+
+  Polymer({
+    is: 'iron-localstorage',
+    /**
+     * Fired when a value is loaded from localStorage.
+     *
+     * @event iron-localstorage-load
+     * @param {Object} detail
+     * @param {Boolean} detail.externalChange true if change occured in different window
+     */
+
+    properties: {
+      /**
+       * The key to the data stored in localStorage.
+       */
+      name: {
+        type: String,
+        value: ''
+      },
+      /**
+       * The data associated with this storage.
+       */
+      value: {
+        type: Object,
+        notify: true
+      },
+
+      /**
+       * Value is stored and retrieved without JSON parse if true
+       */
+      useRaw: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Auto save is disabled if true. Default to false.
+       */
+      autoSaveDisabled: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * Last error encountered while saving/loading items. Null otherwise
+       */
+      errorMessage: {
+        type: String,
+        notify: true
+      },
+      /*
+       * True if value was loaded
+       */
+      _loaded: {
+        type: Boolean,
+        value: false
+      }
+    },
+
+    observers: [
+      'reload(name,useRaw)',
+      '_trySaveValue(value, _loaded, autoSaveDisabled)'
+    ],
+
+    ready: function() {
+      this._boundHandleStorage = this._handleStorage.bind(this);
+      if (this.name !== '')
+        this._load();
+    },
+
+    attached: function() {
+      window.addEventListener('storage', this._boundHandleStorage);
+    },
+
+    detached: function() {
+      window.removeEventListener('storage', this._boundHandleStorage);
+    },
+
+    /** @private */
+    _handleStorage: function(ev) {
+      if (ev.key == this.name) {
+        this._load(true);
+      }
+    },
+
+    _trySaveValue: function(value, _loaded, autoSaveDisabled) {
+      if (_loaded && !autoSaveDisabled) {
+        this.save();
+      }
+    },
+
+    /**
+     * Loads the value again. Use if you modify
+     * localstorage using DOM calls, and want to
+     * keep this element in sync.
+     */
+    reload: function() {
+      this._load();
+    },
+
+    /**
+     * loads value from local storage
+     * @param {Boolean} internal parameter, true if loading changes from a different window
+     */
+    _load: function(externalChange) {
+      var v = localStorage.getItem(this.name);
+      if (this.useRaw) {
+        this.value = v;
+      } else {
+        // localStorage has a flaw that makes it difficult to determine
+        // if a key actually exists or not (getItem returns null if the
+        // key doesn't exist, which is not distinguishable from a stored
+        // null value)
+        // however, if not `useRaw`, an (unparsed) null value unambiguously
+        // signals that there is no value in storage (a stored null value would
+        // be escaped, i.e. "null")
+        // in this case we save any non-null current (default) value
+        if (v === null) {
+          if (this.value != null) {
+            this.save();
+          }
+        } else {
+          try {
+            v = JSON.parse(v);
+          } catch(x) {
+            this.errorMessage = "Could not parse local storage value";
+            console.error("could not parse local storage value", v);
+          }
+          this.value = v;
+        }
+      }
+      this._loaded = true;
+      this.fire('iron-localstorage-load', { externalChange: externalChange});
+    },
+
+    /**
+     * Saves the value to localStorage. Call to save if autoSaveDisabled is set
+     */
+    save: function() {
+      var v = this.useRaw ? this.value : JSON.stringify(this.value);
+      try {
+        localStorage.setItem(this.name, v);
+      }
+      catch(ex) {
+        // Happens in Safari incognito mode,
+        this.errorMessage = ex.message;
+        console.error("localStorage could not be saved. Safari incoginito mode?", ex);
+      }
+    }
+
+  });
+
+</script>
 <iron-iconset-svg name="country-flags" sizex="1235" sizey="650" size="1235">
 <svg><defs>
       <g id="de">
@@ -15019,13 +15870,13 @@ if (!window.Promise) {
           //this.phraseArray = this.wordArray[this.ranWordIndex][findex].split(" ");
           this.phraseIndex = 0;
         }
-        if(this.wordArray[this.ranWordIndex][2] !== (undefined || null) && typeof this.wordArray[this.ranWordIndex][2] === 'object') {
+        if(this.wordArray[this.ranWordIndex].grammar !== (undefined || null) && typeof this.wordArray[this.ranWordIndex].grammar === 'object') {
           this.wordBoardWord.className = "";
           this.myWordSpan.className = "";
-          if(this.wordArray[this.ranWordIndex][2].grammar.segments === undefined) {
-            this.setGrammarStyles(this.wordArray[this.ranWordIndex][2].grammar);
+          if(this.wordArray[this.ranWordIndex].grammar.segments === undefined) {
+            this.setGrammarStyles(this.wordArray[this.ranWordIndex].grammar);
           } else {
-            this.setGrammarStyles(this.wordArray[this.ranWordIndex][2].grammar.segments[this.phraseIndex]);
+            this.setGrammarStyles(this.wordArray[this.ranWordIndex].grammar.segments[this.phraseIndex]);
           }
         } else {
           this.wordBoardWord.className = "";
@@ -15042,7 +15893,7 @@ if (!window.Promise) {
       }
     },
     getCheckWord: function() {
-      if(this.wordArray.length !== 0) {
+      if(this.wordArray.length !== 0 && this.wordArray[this.ranWordIndex] !== undefined) {
         var findex = (this.letterListBox.stripDiacritics) ? "ohne" : "word";
         var word = this.wordArray[this.ranWordIndex][findex].split(" ");
         return word[this.phraseIndex];
@@ -16030,8 +16881,9 @@ if (!window.Promise) {
       }
     },
     onNewWord: function() {
-      var word = this.wordBoardBox.getCheckWord().toLowerCase();
+      var word = this.wordBoardBox.getCheckWord();
       if(word !== undefined && word.length !== 0) {
+        word = word.toLowerCase();
         console.log("fired filter-word-changed: " + word + " | ohneAccent: " + this.stripDiacritics);
         this.setWord = true;
         if(this.allLettersList.length > 0 && this.setLetters) {
@@ -16149,7 +17001,6 @@ if (!window.Promise) {
       this.isReady = true;
     },
     switchLanguage: function() {
-      console.log("switchLang Fired!");
       if(!this.isReady) return;
       var deg = 0;
       this.$.flag_icon.style.background = "url(/assets/images/" + this.mylang + ".png) center center no-repeat";
@@ -16163,10 +17014,160 @@ if (!window.Promise) {
     }
   });
 })();
-</script><dom-module id="tinavg-webapp" assetpath="elements/">
+</script><dom-module id="iron-overlay-backdrop" assetpath="../bower_components/iron-overlay-behavior/">
+
   <style>
+
+    :host {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--iron-overlay-backdrop-background-color, #000);
+      opacity: 0;
+      transition: opacity 0.2s;
+
+      @apply(--iron-overlay-backdrop);
+    }
+
+    :host([opened]) {
+      opacity: 0.6;
+
+      @apply(--iron-overlay-backdrop-opened);
+    }
+
+  </style>
+
+  <template>
+    <content></content>
+  </template>
+
+</dom-module>
+
+<script>
+
+(function() {
+
+  Polymer({
+
+    is: 'iron-overlay-backdrop',
+
+    properties: {
+
+      /**
+       * Returns true if the backdrop is opened.
+       */
+      opened: {
+        readOnly: true,
+        reflectToAttribute: true,
+        type: Boolean,
+        value: false
+      },
+
+      _manager: {
+        type: Object,
+        value: Polymer.IronOverlayManager
+      }
+
+    },
+
+    /**
+     * Appends the backdrop to document body and sets its z-index to be below the latest overlay.
+     */
+    prepare: function() {
+      if (!this.parentNode) {
+        Polymer.dom(document.body).appendChild(this);
+        this.style.zIndex = this._manager.currentOverlayZ() - 1;
+      }
+    },
+
+    /**
+     * Shows the backdrop if needed.
+     */
+    open: function() {
+      // only need to make the backdrop visible if this is called by the first overlay with a backdrop
+      if (this._manager.getBackdrops().length < 2) {
+        this._setOpened(true);
+      }
+    },
+
+    /**
+     * Hides the backdrop if needed.
+     */
+    close: function() {
+      // only need to make the backdrop invisible if this is called by the last overlay with a backdrop
+      if (this._manager.getBackdrops().length < 2) {
+        this._setOpened(false);
+      }
+    },
+
+    /**
+     * Removes the backdrop from document body if needed.
+     */
+    complete: function() {
+      // only remove the backdrop if there are no more overlays with backdrops
+      if (this._manager.getBackdrops().length === 0 && this.parentNode) {
+        Polymer.dom(this.parentNode).removeChild(this);
+      }
+    }
+
+  });
+
+})();
+
+</script>
+<dom-module id="simple-overlay" assetpath="elements/">
+
+  <style>
+
+    :host {
+      background: white;
+      color: black;
+      padding: 24px;
+      box-shadow: rgba(0, 0, 0, 0.24) -2.3408942051048403px 5.524510324047423px 12.090680100755666px 0px, rgba(0, 0, 0, 0.12) 0px 0px 12px 0px;
+    }
+
+  </style>
+
+  <template>
+    <content></content>
+  </template>
+
+</dom-module>
+
+<script>
+
+(function() {
+
+  Polymer({
+
+    is: 'simple-overlay',
+
+    behaviors: [
+      Polymer.IronOverlayBehavior
+    ]
+
+  });
+
+})();
+
+</script>
+<dom-module id="tinavg-webapp" assetpath="elements/">
+  <style is="custom-style">
+    /*
+    paper-toggle-button {
+      --paper-toggle-button-unchecked-bar-color: #FF4081;
+      --paper-toggle-button-unchecked-button-color: #9c27b0;
+      --paper-toggle-button-unchecked-ink-color: #009688;
+      --paper-toggle-button-checked-bar-color: #5677fc;
+      --paper-toggle-button-checked-button-color: #ff4081;
+      --paper-toggle-button-checked-ink-color: #ff4081;
+    }
+    */
   </style>
   <template>
+    <iron-localstorage name="tinavg-lastlang" value="{{currLang}}"></iron-localstorage>
     <paper-drawer-panel id="pdp" responsive-width="25000px" right-drawer="">
       <div id="collapse" class="mini-menu" drawer="">
         <div>
@@ -16228,35 +17229,37 @@ if (!window.Promise) {
         <div id="maincontentarea" class="content">
           <word-recorder id="wrecorder" hidden=""></word-recorder>
           <letter-list id="lettergrid" limit="{{letterLimit}}" lang-code="{{currLang}}"></letter-list>
-          <section id="overlaycontainer">
-            <div id="helpoverlay" class="help-box">
-              <div id="close-help-overlay"><iron-icon id="close-help-overlay-icon" class="tinavg-med-icon" icon="cancel" on-tap="showHelp"></iron-icon></div>
-              <center><h2>This Is Not A Vocabulary Game</h2></center>
-              <h3>The Goal</h3>
-              <p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p>
-              <h3>The Rules: Normal / Earmodus / Learnmodus / Talkmodus</h3>
-              <ol>
-                <li>Look at the word at the top of the page.</li>
-                <li>Spell the word by tapping the letters in the grid.</li>
-                <li>Check your answer by tapping the word just below the target word.</li>
-                <li>100 points for a correct answer and -30 for an incorrect answer.</li>
-                <li>Earmodus: The word is hidden and only spoken.  The underline gives hints about the word's grammar.</li>
-                <li>Learnmodus: Skip words and do not lose 30 pts for incorrect answers.</li>
-                <li>Talkmodus: Record your voice and play it.  Then click the emoticon for the next word and 250 pts.</li>
-              </ol>
-              <h3>The Buttons</h3>
-              <ol>
-                <li><iron-icon id="help-overlay-menutoggle" icon="menu" class="tinavg-med-icon"></iron-icon>: Reveals the options menu</li>
-                <li><iron-icon id="help-overlay-a" icon="text-format" class="tinavg-med-icon"></iron-icon>: Goes through the letter sequence, then says the word aloud</li>
-                <li><iron-icon id="help-overlay-help-show" icon="help" class="tinavg-med-icon"></iron-icon>: Shows this help menu.</li>
-                <li><iron-icon id="help-overlay-switchModusIcon" icon="country-flags:de" class="tinavg-med-icon"></iron-icon>: Switches the language.  Does NOT check word.</li>
-                <li><iron-icon icon="av:mic" class="tinavg-med-icon"></iron-icon>: Record voice in Talkmodus.  Also stops recording.</li>
-                <li><iron-icon icon="av:play-circle-fill" class="tinavg-med-icon"></iron-icon>: Play voice recording.  Also stops recording.</li>
-                <li>Target Word: You can click this to have the word spoken outloud.</li>
-              </ol>
-              <div id="help-lang-specific"></div>
+          <simple-overlay id="so" opened="true">
+            <div id="overlaycontainer">
+              <div id="helpoverlay" class="help-box">
+                <div id="close-help-overlay"><iron-icon id="close-help-overlay-icon" class="tinavg-med-icon" icon="cancel" on-tap="showHelp"></iron-icon></div>
+                <center><h2>This Is Not A Vocabulary Game</h2></center>
+                <h3>The Goal</h3>
+                <p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p>
+                <h3>The Rules: Normal / Earmodus / Learnmodus / Talkmodus</h3>
+                <ol>
+                  <li>Look at the word at the top of the page.</li>
+                  <li>Spell the word by tapping the letters in the grid.</li>
+                  <li>Check your answer by tapping the word just below the target word.</li>
+                  <li>100 points for a correct answer and -30 for an incorrect answer.</li>
+                  <li>Earmodus: The word is hidden and only spoken.  The underline gives hints about the word's grammar.</li>
+                  <li>Learnmodus: Skip words and do not lose 30 pts for incorrect answers.</li>
+                  <li>Talkmodus: Record your voice and play it.  Then click the emoticon for the next word and 250 pts.</li>
+                </ol>
+                <h3>The Buttons</h3>
+                <ol>
+                  <li><iron-icon id="help-overlay-menutoggle" icon="menu" class="tinavg-med-icon"></iron-icon>: Reveals the options menu</li>
+                  <li><iron-icon id="help-overlay-a" icon="text-format" class="tinavg-med-icon"></iron-icon>: Goes through the letter sequence, then says the word aloud</li>
+                  <li><iron-icon id="help-overlay-help-show" icon="help" class="tinavg-med-icon"></iron-icon>: Shows this help menu.</li>
+                  <li><iron-icon id="help-overlay-switchModusIcon" icon="country-flags:de" class="tinavg-med-icon"></iron-icon>: Switches the language.  Does NOT check word.</li>
+                  <li><iron-icon icon="av:mic" class="tinavg-med-icon"></iron-icon>: Record voice in Talkmodus.  Also stops recording.</li>
+                  <li><iron-icon icon="av:play-circle-fill" class="tinavg-med-icon"></iron-icon>: Play voice recording.  Also stops recording.</li>
+                  <li>Target Word: You can click this to have the word spoken outloud.</li>
+                </ol>
+                <div id="help-lang-specific"></div>
+              </div>
             </div>
-          </section>
+          </simple-overlay>
         </div>
         <paper-toast id="übersetzung" text="{{currLang}}"></paper-toast>
       </paper-header-panel>
@@ -16270,7 +17273,6 @@ if (!window.Promise) {
     properties: {
       currLang: {
         type: String,
-        value: "de",
         notify: true
       },
       letterLimit: {
@@ -16367,27 +17369,24 @@ if (!window.Promise) {
         }
         console.log("backspace...");
       });
+      
+      // remove unresolve and show app
       document.getElementById('friendly_message').setAttribute('hidden', true);
       document.querySelector('[unresolved]').removeAttribute("unresolved");
+      
       //preload flags
       for(var i = 0; i < this.languageList.length; i++) {
         new Image().src = "/assets/images/" + this.languageList[i] + ".png";
       }
-      /*
-      var fixIcons = document.querySelectorAll(".iron-icon-0");
-      for(var i = 0; i < fixIcons.length; i++) {
-        fixIcons[i].classList.remove("iron-icon-0");
-        if(fixIcons[i].classList.contains("tinavg-med-icon")) {
-          fixIcons[i].style.height = "7vh";
-          fixIcons[i].style.width = "7vh";
-        }
-        if(fixIcons[i].classList.contains("recorder-icon")) {
-          fixIcons[i].style.height = "25vw";
-          fixIcons[i].style.width = "25vw";
-        }
-        //fixIcons[i].classList.add("iron-icon-0");
+      
+      // test localStorage
+      window.localStorage["tinavg-lastvisit"] = new Date();
+
+      if(this.languageList.indexOf(JSON.parse(localStorage.getItem("tinavg-lastlang"))) === -1) {
+        this.currLang = "de";
+      } else {
+        this.currLang = JSON.parse(localStorage.getItem("tinavg-lastlang"));
       }
-      */
 
     },
     setLangHelp: function(e) {
@@ -16403,7 +17402,7 @@ if (!window.Promise) {
       this.$.jt.lastBucket = e.detail.letter;
     },
     showHelp: function(e) {
-      this.$.helpoverlay.hidden = !this.$.helpoverlay.hidden;
+      this.$.so.opened = !this.$.so.opened;
     },
     showClue: function(e) {
       this.$.wboard.revealWord();
