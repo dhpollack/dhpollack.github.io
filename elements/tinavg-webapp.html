@@ -11,7 +11,6 @@
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
 <!-- Custom Elements -->
-<link rel="import" href="country-flags.html">
 <link rel="import" href="elements.html">
 <!-- keyboard shortcuts -->
 <script src="../assets/js/mousetrap.min.js"></script>
@@ -30,6 +29,10 @@
   </style>
   <template>
     <iron-localstorage name="tinavg-lastlang" value="{{currLang}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-earmodus" value="{{earmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-learnmodus" value="{{learnmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-recordmodus" value="{{recordmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-nerdmodus" value="{{nerdmodus}}"></iron-localstorage>
     <paper-drawer-panel id="pdp" responsive-width="25000px" right-drawer>
       <div id="collapse" class="mini-menu" drawer>
         <div>
@@ -47,7 +50,7 @@
             -->
           </select>
         </div>
-        <br /><div>Earmodus: <paper-toggle-button id="select_earmodus" on-tap="toggleEarModus"></paper-toggle-button></div>
+        <br /><div>Earmodus: <paper-toggle-button id="select_earmodus" on-tap="toggleEarModus" checked$="{{earmodus}}"></paper-toggle-button></div>
         <br /><div>Learnmodus: <paper-toggle-button id="select_learnmodus" on-tap="toggleLearnModus" checked$="{{learnmodus}}"></paper-toggle-button></div>
         <br /><div>Meiseldmodus: <paper-toggle-button id="select_nerdmodus" on-tap="toggleNerdModus" checked$="{{nerdmodus}}"></paper-toggle-button></div>
         <br /><div>
@@ -71,7 +74,7 @@
             <div class="footer-button horizontal start-justified layout flex">
               <score-board id="score-board-player-1" player="1" learnmodus="{{learnmodus}}" recordmodus="{{recordmodus}}"></score-board>
             </div>
-            <word-board id="wboard" class="horizontal center-justified layout flex-2" lang-code="{{currLang}}"></word-board>
+            <word-board id="wboard" class="horizontal center-justified layout flex-2" lang-code="{{currLang}}" earmodus="{{earmodus}}"></word-board>
             <div class="horizontal end-justified layout flex">
               <iron-icon id="menutoggle" class="spin-flip-transition tinavg-med-icon" icon="menu" paper-drawer-toggle></iron-icon>
             </div>
@@ -86,17 +89,17 @@
             </div>
             <div id="nerdmodus-div" class="horizontal end-justified layout flex">
               <score-board id="score-board-player-2" player="2" hidden></score-board>
-              <div id="clue-show-div"><iron-icon id="clueshow" class="spin-flip-transition tinavg-med-icon" icon="text-format" on-tap="showClue"></iron-icon></div>
+              <div id="clue-show-div" class="tinavg-med-icon"><iron-icon id="clueshow" class="spin-flip-transition tinavg-med-icon" icon="text-format" on-tap="showClue"></iron-icon></div>
             </div>
           </div>
         </div>
         <div id="maincontentarea" class="content">
-          <word-recorder id="wrecorder" hidden></word-recorder>
-          <letter-list id="lettergrid" limit="{{letterLimit}}" lang-code="{{currLang}}"></letter-list>
+          <word-recorder id="wrecorder" hidden$="{{!recordmodus}}"></word-recorder>
+          <letter-list id="lettergrid" limit="{{letterLimit}}" lang-code="{{currLang}}" hidden$="{{recordmodus}}"></letter-list>
           <simple-overlay id="so" opened="true">
             <div id="overlaycontainer">
               <div id="helpoverlay" class="help-box">
-                <div id="close-help-overlay"><iron-icon id="close-help-overlay-icon" class="tinavg-med-icon" icon="cancel" on-tap="showHelp"></iron-icon></div>
+                <div id="close-help-overlay" class="tinavg-med-icon"><iron-icon id="close-help-overlay-icon" class="tinavg-med-icon" icon="cancel" on-tap="showHelp"></iron-icon></div>
                 <center><h2>This Is Not A Vocabulary Game</h2></center>
                 <h3>The Goal</h3>
                 <p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p>
@@ -112,12 +115,12 @@
                 </ol>
                 <h3>The Buttons</h3>
                 <ol>
-                  <li><iron-icon id="help-overlay-menutoggle" icon="menu" class="tinavg-med-icon"></iron-icon>: Reveals the options menu</li>
-                  <li><iron-icon id="help-overlay-a" icon="text-format" class="tinavg-med-icon"></iron-icon>: Goes through the letter sequence, then says the word aloud</li>
-                  <li><iron-icon id="help-overlay-help-show" icon="help" class="tinavg-med-icon"></iron-icon>: Shows this help menu.</li>
-                  <li><iron-icon id="help-overlay-switchModusIcon" icon="country-flags:de" class="tinavg-med-icon"></iron-icon>: Switches the language.  Does NOT check word.</li>
-                  <li><iron-icon icon="av:mic" class="tinavg-med-icon"></iron-icon>: Record voice in Talkmodus.  Also stops recording.</li>
-                  <li><iron-icon icon="av:play-circle-fill" class="tinavg-med-icon"></iron-icon>: Play voice recording.  Also stops recording.</li>
+                  <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-menutoggle" icon="menu" class="tinavg-med-icon"></iron-icon></div>: Reveals the options menu</li>
+                  <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-a" icon="text-format" class="tinavg-med-icon"></iron-icon></div>: Goes through the letter sequence, then says the word aloud</li>
+                  <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-help-show" icon="help" class="tinavg-med-icon"></iron-icon></div>: Shows this help menu.</li>
+                  <li><div class="tinavg-med-icon"><lang-flag id="help-overlay-switch-modus" mylang="[[currLang]]" langs="[[languageList]]" class="same-line"></lang-flag></div>: Switches the language.  Does NOT check word.</li>
+                  <li><div class="tinavg-med-icon"><iron-icon icon="av:mic" class="tinavg-med-icon"></iron-icon></div>: Record voice in Talkmodus.  Also stops recording.</li>
+                  <li><div class="tinavg-med-icon"><iron-icon icon="av:play-circle-fill" class="tinavg-med-icon"></iron-icon></div>: Play voice recording.  Also stops recording.</li>
                   <li>Target Word: You can click this to have the word spoken outloud.</li>
                 </ol>
                 <div id="help-lang-specific"></div>
@@ -153,16 +156,16 @@
         value: 13
       },
       learnmodus: {
-        type: Boolean,
-        value: false
+        type: Boolean
       },
       recordmodus: {
-        type: Boolean,
-        value: false
+        type: Boolean
       },
       nerdmodus: {
-        type: Boolean,
-        value: false
+        type: Boolean
+      },
+      earmodus: {
+        type: Boolean
       },
       nerdSprache: {
         type: String,
@@ -187,7 +190,41 @@
       'lang-help': 'setLangHelp',
       'ready-set-go': 'showÜbersetzung'
     },
+    created: function() {
+
+      if(localStorage.getItem("tinavg-earmodus") === undefined) {
+        this.earmodus = JSON.parse(localStorage.getItem("tinavg-earmodus"));
+      }
+
+      if(localStorage.getItem("tinavg-learnmodus") === undefined) {
+        this.learnmodus = JSON.parse(localStorage.getItem("tinavg-learnmodus"));
+      }
+
+      if(localStorage.getItem("tinavg-recordmodus") === undefined) {
+        this.recordmodus = JSON.parse(localStorage.getItem("tinavg-recordmodus"));
+      }
+
+      if(JSON.parse(localStorage.getItem("tinavg-nerdmodus")) === undefined) {
+        this.nerdmodus = JSON.parse(localStorage.getItem("tinavg-nerdmodus"));
+      }
+
+    },
     ready: function() {
+
+      // localStorage functions and setting defaults
+      window.localStorage["tinavg-lastvisit"] = new Date();
+      if(this.languageList.indexOf(JSON.parse(localStorage.getItem("tinavg-lastlang"))) === -1) {
+        this.currLang = "de";
+      } else {
+        this.currLang = JSON.parse(localStorage.getItem("tinavg-lastlang"));
+      }
+      if(this.earmodus === undefined) this.earmodus = false;
+      if(this.learnmodus === undefined) this.learnmodus = false;
+      if(this.recordmodus === undefined) this.recordmodus = false;
+      if(this.nerdmodus === undefined) this.nerdmodus = false;
+      this.$.jt.forceLearnmodus(this.learnmodus);
+
+      // Keyboard Shortcut Bindings
       Mousetrap.bind('shift+enter', function() { 
         this.$.jt.click(); 
       }.bind(this));
@@ -239,7 +276,7 @@
         console.log("backspace...");
       });
       
-      // remove unresolve and show app
+      // remove unresolve and reveal app
       document.getElementById('friendly_message').setAttribute('hidden', true);
       document.querySelector('[unresolved]').removeAttribute("unresolved");
       
@@ -248,15 +285,6 @@
         new Image().src = "/assets/images/" + this.languageList[i] + ".png";
       }
       
-      // test localStorage
-      window.localStorage["tinavg-lastvisit"] = new Date();
-
-      if(this.languageList.indexOf(JSON.parse(localStorage.getItem("tinavg-lastlang"))) === -1) {
-        this.currLang = "de";
-      } else {
-        this.currLang = JSON.parse(localStorage.getItem("tinavg-lastlang"));
-      }
-
     },
     setLangHelp: function(e) {
       var langHtml  = e.detail.langHtml;
@@ -283,7 +311,7 @@
       }
     },
     toggleEarModus: function() {
-      this.$.wboard.hideWord();
+      this.earmodus = !this.earmodus;
     },
     toggleLearnModus: function() {
       this.learnmodus = !this.learnmodus;
@@ -291,8 +319,6 @@
     },
     toggleRecordModus: function() {
       this.recordmodus = !this.recordmodus;
-      this.$.wrecorder.hidden = !this.$.wrecorder.hidden;
-      this.$.lettergrid.hidden = !this.$.lettergrid.hidden;
       this.learnmodus = this.recordmodus;
       this.$.select_learnmodus.toggleAttribute('disabled');
       this.$.jt.resetBox();
@@ -331,6 +357,7 @@
         console.log(nextLangInd);
         this.currLang = this.languageList[nextLangInd];
       }
+      this.$.jt.resetBox();
     },
     flagIconString: function(lang) {
       return "country-flags:" + lang;
