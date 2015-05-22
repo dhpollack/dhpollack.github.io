@@ -18003,6 +18003,7 @@ if (!window.Promise) {
     <iron-localstorage name="tinavg-learnmodus" value="{{learnmodus}}"></iron-localstorage>
     <iron-localstorage name="tinavg-recordmodus" value="{{recordmodus}}"></iron-localstorage>
     <iron-localstorage name="tinavg-nerdmodus" value="{{nerdmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-nerdsprache" value="{{nerdSprache}}"></iron-localstorage>
     <paper-drawer-panel id="pdp" responsive-width="25000px" right-drawer="">
       <div id="collapse" class="mini-menu" drawer="">
         <div>
@@ -18020,10 +18021,10 @@ if (!window.Promise) {
         </div>
         <br><div>Earmodus: <paper-toggle-button id="select_earmodus" on-tap="toggleEarModus" checked$="{{earmodus}}"></paper-toggle-button></div>
         <br><div>Learnmodus: <paper-toggle-button id="select_learnmodus" on-tap="toggleLearnModus" checked$="{{learnmodus}}"></paper-toggle-button></div>
-        <br><div>Meiseldmodus: <paper-toggle-button id="select_nerdmodus" on-tap="toggleNerdModus" checked$="{{nerdmodus}}"></paper-toggle-button></div>
+        <br><div>Meiselmodus: <paper-toggle-button id="select_nerdmodus" on-tap="toggleNerdModus" checked$="{{nerdmodus}}"></paper-toggle-button></div>
         <br><div>
           Meiselsprache: 
-          <select id="meiselspracheliste" on-change="setNerdSprache" disabled="">
+          <select id="meiselspracheliste" on-change="setNerdSprache" disabled$="{{!nerdmodus}}">
             <option value="de">German</option>
             <option value="en">English</option>
             <option value="ar">Arabic</option>
@@ -18131,8 +18132,7 @@ if (!window.Promise) {
         type: Boolean
       },
       nerdSprache: {
-        type: String,
-        value: 'de'
+        type: String
       },
       langHelp: {
         type: String,
@@ -18171,6 +18171,9 @@ if (!window.Promise) {
         this.nerdmodus = JSON.parse(localStorage.getItem("tinavg-nerdmodus"));
       }
 
+      if(JSON.parse(localStorage.getItem("tinavg-nerdsprache")) === undefined) {
+        this.nerdmodus = JSON.parse(localStorage.getItem("tinavg-nerdsprache"));
+      }
     },
     ready: function() {
 
@@ -18185,6 +18188,7 @@ if (!window.Promise) {
       if(this.learnmodus === undefined) this.learnmodus = false;
       if(this.recordmodus === undefined) this.recordmodus = false;
       if(this.nerdmodus === undefined) this.nerdmodus = false;
+      if(this.nerdSprache === undefined) this.nerdSprache = "de";
       this.$.jt.forceLearnmodus(this.learnmodus);
 
       // Keyboard Shortcut Bindings
@@ -18327,19 +18331,20 @@ if (!window.Promise) {
     },
     toggleNerdModus: function() {
       this.nerdmodus = !this.nerdmodus;
-      this.$.meiselspracheliste.disabled = !this.nerdmodus;
       this.showÜbersetzung();
     },
     showÜbersetzung: function() {
       // stub to add phrase info
-      if(this.nerdmodus && this.$.wboard.getWordObj().übersetzung !== undefined && this.$.wboard.getWordObj().übersetzung[this.nerdSprache]) {
-        this.$.übersetzung.text = this.$.wboard.getWordObj().übersetzung[this.nerdSprache];
-      } else if(this.$.wboard.getWordObj().uebersetzungen[this.nerdSprache] !== undefined) {
-        this.$.übersetzung.text = this.$.wboard.getWordObj().uebersetzungen[this.nerdSprache];
-      } else {
-        this.$.übersetzung.text = "Es tut mir Leid.  Keine Übersetzung :-(";
+      if(this.nerdmodus) {
+        if(this.$.wboard.getWordObj().übersetzung !== undefined && this.$.wboard.getWordObj().übersetzung[this.nerdSprache]) {
+          this.$.übersetzung.text = this.$.wboard.getWordObj().übersetzung[this.nerdSprache];
+        } else if(this.$.wboard.getWordObj().uebersetzungen[this.nerdSprache] !== undefined) {
+          this.$.übersetzung.text = this.$.wboard.getWordObj().uebersetzungen[this.nerdSprache];
+        } else {
+          this.$.übersetzung.text = "Es tut mir Leid.  Keine Übersetzung :-(";
+        }
+        this.$.übersetzung.show();
       }
-      if(this.nerdmodus) this.$.übersetzung.show();
     },
     setNerdSprache: function(ev) {
       this.nerdSprache = ev.target.value;
