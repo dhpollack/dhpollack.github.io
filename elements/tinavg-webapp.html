@@ -132,12 +132,6 @@
         <paper-toast id="übersetzung" text="{{currLang}}"></paper-toast>
       </paper-header-panel>
     </paper-drawer-panel>
-      <!--
-      <div class="content">
-        <div class="horizontal layout">
-        </div>
-      </div>
-      -->
   </template>
 </dom-module>
 <script>
@@ -358,7 +352,6 @@
         this.currLang = newLang;
       } else {
         var nextLangInd = (this.languageList.indexOf(this.currLang) === -1 || this.languageList.indexOf(this.currLang) + 1 >= this.languageList.length) ? 0 : this.languageList.indexOf(this.currLang) + 1;
-        console.log(nextLangInd);
         this.currLang = this.languageList[nextLangInd];
       }
       this.$.jt.resetBox();
