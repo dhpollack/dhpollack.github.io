@@ -322,6 +322,10 @@ context. You should place this element as a child of `<body>` whenever possible.
         this._focusNode.focus();
       }
 
+      if(this.withBackdrop) {
+        this.parentNode.insertBefore(this._backdrop, this);
+      }
+
       this.fire('iron-overlay-opened');
 
       this._squelchNextResize = true;

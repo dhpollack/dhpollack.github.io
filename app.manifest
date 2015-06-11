@@ -635,12 +635,12 @@ tinavg-webapp.json
 api/ar/letters.json
 api/ar/words-stpacc.json
 api/ar/words.json
-api/de/letters.json
-api/de/words-stpacc.json
-api/de/words.json
 api/en/letters.json
 api/en/words-stpacc.json
 api/en/words.json
+api/de/letters.json
+api/de/words-stpacc.json
+api/de/words.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words-to-add.json
@@ -671,4 +671,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: db1b3e9869779d4270d1b55f32f9db771efd711a5f6ed89cc4f81c1cc7276135
+# hash: ced2b1d1c29cb79a0bd85e42baf67d272c5c74ce7ca62db0151659db2a4a0548
