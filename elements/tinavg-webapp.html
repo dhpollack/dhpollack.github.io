@@ -10,6 +10,8 @@
 <link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-auth.html">
 <!-- Custom Elements -->
 <link rel="import" href="elements.html">
 <!-- keyboard shortcuts -->
@@ -75,7 +77,13 @@
             <option value="tr">Turkish</option>
           </select>
         </div>
-        <div><br />Talkmodus: <paper-toggle-button id="select_recordmodus" on-tap="toggleRecordModus" checked$="{{recordmodus}}"></paper-toggle-button></div>
+        <br /><div>Talkmodus: <paper-toggle-button id="select_recordmodus" on-tap="toggleRecordModus" checked$="{{recordmodus}}"></paper-toggle-button></div>
+        <br /><div>
+          <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://intense-heat-8981.firebaseio.com" provider="twitter" on-error="errorHandler" ></firebase-auth>
+          <img src="../assets/images/sign-in-with-twitter-gray.png" alt="sign in with Twitter" on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">
+          <button on-tap="logout" hidden$="{{!computeLoginHidden(statusKnown, user)}}">Logout</button>
+        </div>
+
         <div hidden><br />BuggyFill: <paper-toggle-button id="select_buggyfill" on-tap="refreshBuggyFill"></paper-toggle-button></div>
       </div>
       <paper-header-panel id="header-panel" main>
@@ -140,6 +148,7 @@
                   </ol>
                   <div id="llin" hidden><small>You last logged in on: <span>{{lastvisit}}</span></small></div>
                   <div id="help-lang-specific"></div>
+                  <div><a href="/privacy.html">privacy policy</a></div>
                 </div>
                 <div id="credits">
                   <p>First, I know that I won't be able to thank everyone that made this game possible, but I wanted to give credit to a few people that have inspired me to develop this game and to those that have lent their voice to the game.</p>
@@ -170,7 +179,8 @@
                       <ul>
                         <li>Suzan hails from Israel and contributed her voice after a chance meeting while she was on vacation in Berlin.  I was super excited about that because I was going to Israel the very next week, so I could actually put this project to use.  She also showed me a around a bit in Jerusalem and will hopefully remain a dear friend in the future.</li>
                       </ul>
-                  <p>Lastly, I would like to thank my friend, Luisa Meisel, for whom the "Meiselmodus" is named after (originally conceived as "Nerdmodus").  She was the first of many that suggested that I add definitions to the game.  I resisted for a long time, even going so far as to name the game "this is not a vocabulary game" but in the end, I conceded.  Many of my friends, including her, have endured the trials and tribulations of beta testing tinavg.com so I thought it was only appropriate to throw them a bone and add the option of seeing definitions to the words in the game.</p>
+                  <p>Additionally, I would like to thank my friend, Luisa Meisel, for whom the "Meiselmodus" is named after (originally conceived as "Nerdmodus").  She was the first of many that suggested that I add definitions to the game.  I resisted for a long time, even going so far as to name the game "this is not a vocabulary game" but in the end, I conceded.</p>
+                  <p>Finally, I would like to thank my father, Bob Pollack.  The list would be endless if I had to thank him for everything, but he has endured the trials and tribulations of beta testing tinavg.com on the iPad/iPhone.  He along with all of my friends comments and questions have made this site what it is today.</p>
                 </div>
                 <div id="contact">
                   <h3>Email Me!</h3>
@@ -237,14 +247,22 @@
       languageList: {
         type: Array,
         value: function() { return ['de', 'en', 'en-US-south', 'ar','ko', 'ru', 'he']; }
+      },
+      user: {
+        type: Object,
+        notify: true
       }
     },
     listeners: {
       'letter-card-tapped': 'letterTapped',
       'stripdia-set': 'setWBoardDisplay',
       'lang-help': 'setLangHelp',
-      'ready-set-go': 'showÜbersetzung'
+      'ready-set-go': 'lettersSet',
+      'checking-word': 'fbLetterSeq'
     },
+    observers: [
+      '_addUsersToFirebase(user.*)'
+    ],
     created: function() {
 
       if(localStorage.getItem("tinavg-earmodus") === undefined) {
@@ -264,7 +282,7 @@
       }
 
       if(JSON.parse(localStorage.getItem("tinavg-nerdsprache")) === undefined) {
-        this.nerdmodus = JSON.parse(localStorage.getItem("tinavg-nerdsprache"));
+        this.nerdSprache = JSON.parse(localStorage.getItem("tinavg-nerdsprache"));
       }
     },
     ready: function() {
@@ -284,8 +302,33 @@
       this.$.jt.forceLearnmodus(this.learnmodus);
       
       // selected tab
-      
       if(!this.selected) this.selected = 0;
+      
+      // firebase
+      var fbRef = new Firebase('https://intense-heat-8981.firebaseio.com');
+      var lastlogin = window.localStorage["tinavg-lastvisit"];
+      this.letterSeq = [];
+      fbRef.onAuth(function(authData) {
+        if (authData) {
+          // save the user's profile into Firebase so we can list users,
+          // use them in Security and Firebase Rules, and show profiles
+          fbRef.child("users").child(authData.uid).update({
+            provider: authData.provider,
+            name: _getFirebaseName(authData),
+            lastlogin: lastlogin,
+            options: this.getOptions()
+          });
+          fbRef.child("users").child(authData.uid).child("logins").push({
+            timestamp: lastlogin
+          });
+        } else {
+          fbRef.child("users").child("anonymous").child("logins").push({
+            timestamp: lastlogin
+          });
+        }
+      }.bind(this));
+      
+      this.firebaseRef = fbRef;
 
       // Keyboard Shortcut Bindings
       Mousetrap.bind('shift+enter', function() { 
@@ -360,6 +403,20 @@
     },
     letterTapped: function(e) {
       this.$.jt.lastBucket = e.detail.letter;
+      this.fbLetterSeq(e);
+    },
+    fbLetterSeq: function(e) {
+      if(this.letterSeq.length === 0 && e.detail.letter === '!!!') {
+        // do nothing
+      } else {
+        this.letterSeq.push(e.detail.letter);
+      }
+      var authData = this.firebaseRef.getAuth();
+      if(authData) {
+        this.firebaseWordRef.child('letters').set(this.letterSeq);
+      } else {
+        // not logged in
+      }
     },
     showHelp: function(e) {
       this.$.so.toggle();
@@ -409,7 +466,6 @@
       this.$.jt.resetBox();
     },
     setWBoardDisplay: function(ev) {
-      console.log("changing diacritics");
       this.$.wboard.setDisplayWord();
     },
     switchModus: function(newLang) {
@@ -441,10 +497,66 @@
         this.$.übersetzung.show();
       }
     },
+    lettersSet: function() {
+      this.showÜbersetzung();
+      this.letterSeq = [];
+      var authData = this.firebaseRef.getAuth();
+      if(authData) {
+        var word = this.$.wboard.getWordObj();
+        delete word.uebersetzungen;
+        this.firebaseWordRef = this.firebaseRef.child("users").child(authData.uid).child('words').push(word);
+      } else {
+        // not logged in
+      }
+      
+    },
     setNerdSprache: function(ev) {
       this.nerdSprache = ev.target.value;
       this.showÜbersetzung();
+    },
+    login: function() {
+      var params;
+      try {
+        params = JSON.parse(this.params);
+      } catch (e) {
+        params = null;
+      }
+      if (this.provider == 'password') {
+        params = params || {};
+        params.email = this.email;
+        params.password = this.password;
+      }
+      this.$.firebaseLogin.login(params);
+    },
+    logout: function() {
+      this.$.firebaseLogin.logout();
+    },
+    _addUsersToFirebase: function(e) {
+      //console.log(this.user);
+    },
+    computeLoginHidden: function(statusKnown, user) {
+      return !statusKnown || !!user;
+    },
+    getOptions: function() {
+      var options = {};
+      options.language = this.currLang;
+      options.learnmodus = this.learnmodus;
+      options.recordmodus = this.recordmodus;
+      options.nerdmodus = this.nerdmodus;
+      options.nerdsprache = this.nerdSprache;
+      options.earmodus = this.earmodus;
+      return options;
     }
   });
+function _getFirebaseName(authData) {
+  switch(authData.provider) {
+     case 'password':
+       return authData.password.email.replace(/@.*/, '');
+     case 'twitter':
+       return authData.twitter.displayName;
+     case 'facebook':
+       return authData.facebook.displayName;
+  }
+}
 
 </script>
