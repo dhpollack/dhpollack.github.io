@@ -180,7 +180,7 @@
                         <li>Suzan hails from Israel and contributed her voice after a chance meeting while she was on vacation in Berlin.  I was super excited about that because I was going to Israel the very next week, so I could actually put this project to use.  She also showed me a around a bit in Jerusalem and will hopefully remain a dear friend in the future.</li>
                       </ul>
                   <p>Additionally, I would like to thank my friend, Luisa Meisel, for whom the "Meiselmodus" is named after (originally conceived as "Nerdmodus").  She was the first of many that suggested that I add definitions to the game.  I resisted for a long time, even going so far as to name the game "this is not a vocabulary game" but in the end, I conceded.</p>
-                  <p>Finally, I would like to thank my father, Bob Pollack.  The list would be endless if I had to thank him for everything, but he has endured the trials and tribulations of beta testing tinavg.com on the iPad/iPhone.  He along with all of my friends comments and questions have made this site what it is today.</p>
+                  <p>Finally, I would like to thank my father, Bob Pollack.  The list would be endless if I had to thank him for everything, but he has endured the trials and tribulations of beta testing tinavg.com on the iPad/iPhone.  His along with all of my friends' comments, suggestions, criticisms, and wild looks of bewilderment have made this game what it is today.</p>
                 </div>
                 <div id="contact">
                   <h3>Email Me!</h3>
@@ -316,14 +316,17 @@
             provider: authData.provider,
             name: _getFirebaseName(authData),
             lastlogin: lastlogin,
+            stimestamp: Firebase.ServerValue.TIMESTAMP,
             options: this.getOptions()
           });
           fbRef.child("users").child(authData.uid).child("logins").push({
-            timestamp: lastlogin
+            lastlogin: lastlogin,
+            stimestamp: Firebase.ServerValue.TIMESTAMP
           });
         } else {
           fbRef.child("users").child("anonymous").child("logins").push({
-            timestamp: lastlogin
+            lastlogin: lastlogin,
+            stimestamp: Firebase.ServerValue.TIMESTAMP
           });
         }
       }.bind(this));
@@ -502,9 +505,10 @@
       this.letterSeq = [];
       var authData = this.firebaseRef.getAuth();
       if(authData) {
-        var word = this.$.wboard.getWordObj();
-        delete word.uebersetzungen;
+        var wordObj = this.$.wboard.getWordObj();
+        var word = { "word": wordObj.word, "ohne": wordObj.ohne } ;
         this.firebaseWordRef = this.firebaseRef.child("users").child(authData.uid).child('words').push(word);
+        this.firebaseWordRef.child('timestamp').set(Firebase.ServerValue.TIMESTAMP);
       } else {
         // not logged in
       }
