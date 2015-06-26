@@ -635,15 +635,12 @@ tinavg-webapp.json
 api/ar/letters.json
 api/ar/words-stpacc.json
 api/ar/words.json
-api/de/letters.json
-api/de/words-stpacc.json
-api/de/words.json
 api/emoji/letters.json
 api/emoji/words-stpacc.json
 api/emoji/words.json
-api/en/letters.json
-api/en/words-stpacc.json
-api/en/words.json
+api/de/letters.json
+api/de/words-stpacc.json
+api/de/words.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words-to-add.json
@@ -651,15 +648,18 @@ api/en-US-south/words.json
 api/he/letters.json
 api/he/words-stpacc.json
 api/he/words.json
-api/ko/letters.json
-api/ko/words-stpacc.json
-api/ko/words.json
 api/ru/letters.json
 api/ru/words-stpacc.json
 api/ru/words.json
 api/test/letters.json
 api/test/words-stpacc.json
 api/test/words.json
+api/en/letters.json
+api/en/words-stpacc.json
+api/en/words.json
+api/ko/letters.json
+api/ko/words-stpacc.json
+api/ko/words.json
 api/tr/letters.json
 api/tr/words-stpacc.json
 api/tr/words.json
@@ -674,4 +674,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: 727718684e672b85bf576a1f2e147cb0b81010e43300a931f9570098d89cb842
+# hash: a15fc397c78a8d1be122fbdae750c0ead952f19807ef6c89254532459a1208c2
