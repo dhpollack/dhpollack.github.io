@@ -235,9 +235,7 @@
     init: function () {
       var options = window[OPTIONS_VARIABLE];
       if (options) this.setOptions(options);
-      
-      document.getElementById("so").noCancelOnOutsideClick = true;
-      
+
       this.setContainer();
 
       // Calls render when theme is loaded.
@@ -315,7 +313,6 @@
       evt.returnValue = false;
       this.setDismissedCookie();
       this.container.removeChild(this.element);
-      document.getElementById("so").noCancelOnOutsideClick = false;
     },
 
     setDismissedCookie: function () {

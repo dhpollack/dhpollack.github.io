@@ -71,6 +71,7 @@
           this.scoreBox.lastBucket = this.usertext;
           this.resetBox();
         } else if(this.lastBucket !== "") {
+          var cw = this.wordBoard.getCheckWord().toLowerCase();
           if(!this.$.jtext.hasAttribute("raised")) this.$.jtext.setAttribute("raised", true);
           if(this.wordBoard.gameLang === "ko") {
             if(this.scoreArray.length >= window.Hangul.disassemble(this.zielWort).join('').length + 2) this.scoreArray.shift();
@@ -81,9 +82,17 @@
           this.scoreArray.push(this.lastBucket);
           if(this.wordBoard.gameLang === "ko") {
             this.usertext = window.Hangul.assemble(this.scoreArray.join(""));
+            cw = window.Hangul.disassemble(cw);
           } else {
             this.usertext = this.scoreArray.join("");
+            cw = cw.split("");
           }
+          if(JSON.stringify(cw.slice(0, this.scoreArray.length)) === JSON.stringify(this.scoreArray)) {
+            this.fire("word-percent-correct", { progress: (this.scoreArray.length / cw.length) * 100, secondary: 0 });
+          } else {
+            this.fire("word-percent-correct", { progress: 0,  secondary: 100});
+          }
+          
           if(this.usertext.toLowerCase() === this.wordBoard.getCheckWord().toLowerCase()) {
               checkTimeout = setTimeout(function() {
                 if(this.first) {
@@ -112,6 +121,7 @@
         this.scoreBox.lastBucket = "";
         this.$.jtext.removeAttribute("raised");
         this.$.jtext.classList.remove("to-foreground");
+        this.fire("word-percent-correct", { progress: 0,  secondary: 0});
     }
   });
 })();

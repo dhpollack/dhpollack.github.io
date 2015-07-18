@@ -1,5 +1,5 @@
 /*!
- * viewport-units-buggyfill v0.5.3
+ * viewport-units-buggyfill v0.5.4
  * @web: https://github.com/rodneyrehm/viewport-units-buggyfill/
  * @author: Rodney Rehm - http://rodneyrehm.de/en/
  */
@@ -30,8 +30,8 @@
   var dimensions;
   var declarations;
   var styleNode;
-  var isBuggyIE = false;
-  var isOldIE = false;
+  var isBuggyIE = /MSIE [0-9]\./i.test(userAgent);
+  var isOldIE = /MSIE [0-8]\./i.test(userAgent);
   var isOperaMini = userAgent.indexOf('Opera Mini') > -1;
 
   var isMobileSafari = /(iPhone|iPod|iPad).+AppleWebKit/i.test(userAgent) && (function() {
@@ -65,23 +65,6 @@
     // 4.4 has issues with viewport units within calc()
     return versionNumber <= 4.4;
   })();
-
-  // Do not remove the following comment!
-  // It is a conditional comment used to
-  // identify old Internet Explorer versions
-
-  /*@cc_on
-
-  @if (9 <= @_jscript_version && @_jscript_version <= 10)
-    isBuggyIE = true;
-  @end
-  
-  @if (@_jscript_version < 9) {
-    isOldIE = true;
-  }
-  @end
-  
-  @*/
 
   // added check for IE11, since it *still* doesn't understand vmax!!!
   if (!isBuggyIE) {
@@ -414,7 +397,7 @@
   }
 
   return {
-    version: '0.5.3',
+    version: '0.5.4',
     findProperties: findProperties,
     getCss: getReplacedViewportUnits,
     init: initialize,
