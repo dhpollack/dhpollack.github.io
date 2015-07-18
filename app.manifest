@@ -11,15 +11,15 @@ api/de/letters.json
 api/de/words-stpacc.json
 api/emoji/letters.json
 api/emoji/words-stpacc.json
-api/en/letters.json
-api/en/words-stpacc.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words-to-add.json
-api/he/letters.json
-api/he/words-stpacc.json
+api/en/letters.json
+api/en/words-stpacc.json
 api/ko/letters.json
 api/ko/words-stpacc.json
+api/he/letters.json
+api/he/words-stpacc.json
 api/ru/letters.json
 api/ru/words-stpacc.json
 api/test/letters.json
@@ -49,4 +49,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: d3fe100f32dab1a0da5691e5e4403f187b02b14461df7dc6dbd804f96866f1c0
+# hash: aa3553ba6d1a5078d55dc30ca9984bb9fa754a1aa52617a45b12ec5c3bebb987
