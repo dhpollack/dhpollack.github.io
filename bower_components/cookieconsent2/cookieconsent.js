@@ -102,7 +102,6 @@
       exdate.setDate(exdate.getDate() + expirydays);
       localStorage[name] = value;
       localStorage[name + "-expiry"] = exdate.toUTCString();
-      //document.cookie = name + '=' + value + '; expires=' + exdate.toUTCString() + '; path=/'
     },
 
     addEventListener: function (el, event, eventListener) {
