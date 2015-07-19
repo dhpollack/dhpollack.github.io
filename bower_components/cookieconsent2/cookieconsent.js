@@ -20,7 +20,12 @@
   var THEME_BUCKET_PATH = '//s3.amazonaws.com/cc.silktide.com/';
 
   // No point going further if they've already dismissed.
-  if (document.cookie.indexOf(DISMISSED_COOKIE) > -1) {
+  //if (document.cookie.indexOf(DISMISSED_COOKIE) > -1) {
+  //  return;
+  //}
+
+  // No point going further if they've already dismissed.
+  if (localStorage[DISMISSED_COOKIE] !== undefined) {
     return;
   }
 
@@ -95,7 +100,9 @@
       var exdate = new Date();
       expirydays = expirydays || 365;
       exdate.setDate(exdate.getDate() + expirydays);
-      document.cookie = name + '=' + value + '; expires=' + exdate.toUTCString() + '; path=/'
+      localStorage[name] = value;
+      localStorage[name + "-expiry"] = exdate.toUTCString();
+      //document.cookie = name + '=' + value + '; expires=' + exdate.toUTCString() + '; path=/'
     },
 
     addEventListener: function (el, event, eventListener) {
@@ -312,7 +319,13 @@
       evt.preventDefault && evt.preventDefault();
       evt.returnValue = false;
       this.setDismissedCookie();
+      this.dismissedCallback();
       this.container.removeChild(this.element);
+    },
+    dismissedCallback: function() {
+      var ev = new CustomEvent("cookieconsent-dismissed", { detail: { dismissed: true }});
+      var webapp = document.getElementById("tinavg_app");
+      webapp.dispatchEvent(ev);
     },
 
     setDismissedCookie: function () {

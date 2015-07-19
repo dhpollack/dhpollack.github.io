@@ -7,23 +7,23 @@ manifest.json
 tinavg-webapp.json
 api/ar/letters.json
 api/ar/words-stpacc.json
-api/de/letters.json
-api/de/words-stpacc.json
 api/emoji/letters.json
 api/emoji/words-stpacc.json
-api/en/letters.json
-api/en/words-stpacc.json
+api/de/letters.json
+api/de/words-stpacc.json
 api/en-US-south/letters.json
 api/en-US-south/words-stpacc.json
 api/en-US-south/words-to-add.json
+api/en/letters.json
+api/en/words-stpacc.json
 api/he/letters.json
 api/he/words-stpacc.json
 api/ko/letters.json
 api/ko/words-stpacc.json
-api/ru/letters.json
-api/ru/words-stpacc.json
 api/test/letters.json
 api/test/words-stpacc.json
+api/ru/letters.json
+api/ru/words-stpacc.json
 api/tr/letters.json
 api/tr/words-stpacc.json
 launcher-icon.png
@@ -49,4 +49,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: d3fe100f32dab1a0da5691e5e4403f187b02b14461df7dc6dbd804f96866f1c0
+# hash: 06b5589e94807ae0e1e23847c49ffa17e5ba7a724ee8050711f5ba720691f474
