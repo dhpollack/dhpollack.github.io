@@ -1,226 +1,224 @@
-[
-  {
-    "lang": {
-      "code": "ko",
-      "stripDiacritics": false,
-      "langHelpInfo": "<h3><u>Korean</u></h3><ol><li>If the double letters are available, use these instead of using the single letter twice.</li></ol>"
+{
+  "lang": {
+    "code": "ko",
+    "stripDiacritics": false,
+    "langHelpInfo": "<h3><u>Korean</u></h3><ol><li>If the double letters are available, use these instead of using the single letter twice.</li></ol>"
+  },
+  "alphabet": [
+    {
+      "uid": 1,
+      "hidden": true,
+      "letter": "ㄱ"
     },
-    "alphabet": [
-      {
-        "uid": 1,
-        "hidden": true,
-        "letter": "ㄱ"
-      },
-      {
-        "uid": 2,
-        "hidden": true,
-        "letter": "ㄴ"
-      },
-      {
-        "uid": 3,
-        "hidden": true,
-        "letter": "ㄷ"
-      },
-      {
-        "uid": 4,
-        "hidden": true,
-        "letter": "ㄹ"
-      },
-      {
-        "uid": 5,
-        "hidden": true,
-        "letter": "ㅁ"
-      },
-    
-      {
-        "uid": 6,
-        "hidden": true,
-        "letter": "ㅂ"
-      },
-    
-      {
-        "uid": 7,
-        "hidden": true,
-        "letter": "ㅅ"
-      },
-    
-      {
-        "uid": 8,
-        "hidden": true,
-        "letter": "ㅇ"
-      },
-    
-      {
-        "uid": 9,
-        "hidden": true,
-        "letter": "ㅈ"
-      },
-    
-      {
-        "uid": 10,
-        "hidden": true,
-        "letter": "ㅊ"
-      },
-    
-      {
-        "uid": 11,
-        "hidden": true,
-        "letter": "ㅋ"
-      },
-    
-      {
-        "uid": 12,
-        "hidden": true,
-        "letter": "ㅌ"
-      },
-    
-      {
-        "uid": 13,
-        "hidden": true,
-        "letter": "ㅍ"
-      },
-    
-      {
-        "uid": 14,
-        "hidden": true,
-        "letter": "ㅎ"
-      },
-    
-      {
-        "uid": 15,
-        "hidden": true,
-        "letter": "ㄲ"
-      },
-    
-      {
-        "uid": 16,
-        "hidden": true,
-        "letter": "ㄸ"
-      },
-    
-      {
-        "uid": 17,
-        "hidden": true,
-        "letter": "ㅃ"
-      },
-    
-      {
-        "uid": 18,
-        "hidden": true,
-        "letter": "ㅆ"
-      },
-    
-      {
-        "uid": 19,
-        "hidden": true,
-        "letter": "ㅉ"
-      },
-    
-      {
-        "uid": 20,
-        "hidden": true,
-        "letter": "ㅏ"
-      },
-      {
-        "uid": 21,
-        "hidden": true,
-        "letter": "ㅑ"
-      },
-      {
-        "uid": 22,
-        "hidden": true,
-        "letter": "ㅓ"
-      },
-      {
-        "uid": 23,
-        "hidden": true,
-        "letter": "ㅕ"
-      },
-      {
-        "uid": 24,
-        "hidden": true,
-        "letter": "ㅗ"
-      },
-      {
-        "uid": 25,
-        "hidden": true,
-        "letter": "ㅛ"
-      },
-      {
-        "uid": 26,
-        "hidden": true,
-        "letter": "ㅜ"
-      },
-      {
-        "uid": 27,
-        "hidden": true,
-        "letter": "ㅠ"
-      },
-      {
-        "uid": 28,
-        "hidden": true,
-        "letter": "ㅡ"
-      },
-      {
-        "uid": 29,
-        "hidden": true,
-        "letter": "ㅣ"
-      },
-      {
-        "uid": 30,
-        "hidden": true,
-        "letter": "ㅐ"
-      },
-      {
-        "uid": 31,
-        "hidden": true,
-        "letter": "ㅒ"
-      },
-      {
-        "uid": 32,
-        "hidden": true,
-        "letter": "ㅔ"
-      },
-      {
-        "uid": 33,
-        "hidden": true,
-        "letter": "ㅖ"
-      },
-      {
-        "uid": 34,
-        "hidden": true,
-        "letter": "ㅚ"
-      },
-      {
-        "uid": 35,
-        "hidden": true,
-        "letter": "ㅟ"
-      },
-      {
-        "uid": 36,
-        "hidden": true,
-        "letter": "ㅢ"
-      },
-      {
-        "uid": 37,
-        "hidden": true,
-        "letter": "ㅘ"
-      },
-      {
-        "uid": 38,
-        "hidden": true,
-        "letter": "ㅝ"
-      },
-      {
-        "uid": 39,
-        "hidden": true,
-        "letter": "ㅝ"
-      },
-      {
-        "uid": 40,
-        "hidden": true,
-        "letter": "ㅞ"
-      }
-    ]
-  }
-]
+    {
+      "uid": 2,
+      "hidden": true,
+      "letter": "ㄴ"
+    },
+    {
+      "uid": 3,
+      "hidden": true,
+      "letter": "ㄷ"
+    },
+    {
+      "uid": 4,
+      "hidden": true,
+      "letter": "ㄹ"
+    },
+    {
+      "uid": 5,
+      "hidden": true,
+      "letter": "ㅁ"
+    },
+  
+    {
+      "uid": 6,
+      "hidden": true,
+      "letter": "ㅂ"
+    },
+  
+    {
+      "uid": 7,
+      "hidden": true,
+      "letter": "ㅅ"
+    },
+  
+    {
+      "uid": 8,
+      "hidden": true,
+      "letter": "ㅇ"
+    },
+  
+    {
+      "uid": 9,
+      "hidden": true,
+      "letter": "ㅈ"
+    },
+  
+    {
+      "uid": 10,
+      "hidden": true,
+      "letter": "ㅊ"
+    },
+  
+    {
+      "uid": 11,
+      "hidden": true,
+      "letter": "ㅋ"
+    },
+  
+    {
+      "uid": 12,
+      "hidden": true,
+      "letter": "ㅌ"
+    },
+  
+    {
+      "uid": 13,
+      "hidden": true,
+      "letter": "ㅍ"
+    },
+  
+    {
+      "uid": 14,
+      "hidden": true,
+      "letter": "ㅎ"
+    },
+  
+    {
+      "uid": 15,
+      "hidden": true,
+      "letter": "ㄲ"
+    },
+  
+    {
+      "uid": 16,
+      "hidden": true,
+      "letter": "ㄸ"
+    },
+  
+    {
+      "uid": 17,
+      "hidden": true,
+      "letter": "ㅃ"
+    },
+  
+    {
+      "uid": 18,
+      "hidden": true,
+      "letter": "ㅆ"
+    },
+  
+    {
+      "uid": 19,
+      "hidden": true,
+      "letter": "ㅉ"
+    },
+  
+    {
+      "uid": 20,
+      "hidden": true,
+      "letter": "ㅏ"
+    },
+    {
+      "uid": 21,
+      "hidden": true,
+      "letter": "ㅑ"
+    },
+    {
+      "uid": 22,
+      "hidden": true,
+      "letter": "ㅓ"
+    },
+    {
+      "uid": 23,
+      "hidden": true,
+      "letter": "ㅕ"
+    },
+    {
+      "uid": 24,
+      "hidden": true,
+      "letter": "ㅗ"
+    },
+    {
+      "uid": 25,
+      "hidden": true,
+      "letter": "ㅛ"
+    },
+    {
+      "uid": 26,
+      "hidden": true,
+      "letter": "ㅜ"
+    },
+    {
+      "uid": 27,
+      "hidden": true,
+      "letter": "ㅠ"
+    },
+    {
+      "uid": 28,
+      "hidden": true,
+      "letter": "ㅡ"
+    },
+    {
+      "uid": 29,
+      "hidden": true,
+      "letter": "ㅣ"
+    },
+    {
+      "uid": 30,
+      "hidden": true,
+      "letter": "ㅐ"
+    },
+    {
+      "uid": 31,
+      "hidden": true,
+      "letter": "ㅒ"
+    },
+    {
+      "uid": 32,
+      "hidden": true,
+      "letter": "ㅔ"
+    },
+    {
+      "uid": 33,
+      "hidden": true,
+      "letter": "ㅖ"
+    },
+    {
+      "uid": 34,
+      "hidden": true,
+      "letter": "ㅚ"
+    },
+    {
+      "uid": 35,
+      "hidden": true,
+      "letter": "ㅟ"
+    },
+    {
+      "uid": 36,
+      "hidden": true,
+      "letter": "ㅢ"
+    },
+    {
+      "uid": 37,
+      "hidden": true,
+      "letter": "ㅘ"
+    },
+    {
+      "uid": 38,
+      "hidden": true,
+      "letter": "ㅝ"
+    },
+    {
+      "uid": 39,
+      "hidden": true,
+      "letter": "ㅝ"
+    },
+    {
+      "uid": 40,
+      "hidden": true,
+      "letter": "ㅞ"
+    }
+  ]
+}

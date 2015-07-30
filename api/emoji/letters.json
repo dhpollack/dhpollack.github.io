@@ -1,195 +1,193 @@
-[
-  {
-    "lang": {
-      "code": "emoji",
-      "stripDiacritics": true,
-      "langHelpInfo": "<h3><u>Emoji</u></h3><ol><li>This is a proof of concept that the game can be played with non-alphabets as a pure pattern recognition game.</li><li>Here is a sampling of emoji: <p>😢😊😛😄😁💪😔😘😉😆😅😨👍🙈😵😒😜😝😎😏🙍🛀🌈☔🍍🍜🍌🍟🍣🍦🍔☕🍵🍹🍷🍻🍺🍸🐼🐮🐵🐒🐨🐐🐰🐱📝📠🎂🎈🎆🎊🎉📛💸💰💳🚬💉💣👔⌚👙👏👊😻😹💩😰😍</p><span>😻🎊😍☺😊😀😈😅😬😇🔝🔙🔛🔜🔚🔯💯🈴🈺🉑🈶💥🔥💡↕⬆↗➡↘⬇↙⬅↖↔⤴🌟🌠↩❗🔀🔄🔓</span></li></ol>"
+{
+  "lang": {
+    "code": "emoji",
+    "stripDiacritics": true,
+    "langHelpInfo": "<h3><u>Emoji</u></h3><ol><li>This is a proof of concept that the game can be played with non-alphabets as a pure pattern recognition game.</li><li>Here is a sampling of emoji: <p>😢😊😛😄😁💪😔😘😉😆😅😨👍🙈😵😒😜😝😎😏🙍🛀🌈☔🍍🍜🍌🍟🍣🍦🍔☕🍵🍹🍷🍻🍺🍸🐼🐮🐵🐒🐨🐐🐰🐱📝📠🎂🎈🎆🎊🎉📛💸💰💳🚬💉💣👔⌚👙👏👊😻😹💩😰😍</p><span>😻🎊😍☺😊😀😈😅😬😇🔝🔙🔛🔜🔚🔯💯🈴🈺🉑🈶💥🔥💡↕⬆↗➡↘⬇↙⬅↖↔⤴🌟🌠↩❗🔀🔄🔓</span></li></ol>"
+  },
+  "alphabet": [
+    {
+      "uid": 1,
+      "hidden": true,
+      "letter": "😢",
+      "en": "a"
     },
-    "alphabet": [
-      {
-        "uid": 1,
-        "hidden": true,
-        "letter": "😢",
-        "en": "a"
-      },
-      {
-        "uid": 2,
-        "hidden": true,
-        "letter": "😊",
-        "en": "b"
-      },
-      {
-        "uid": 3,
-        "hidden": true,
-        "letter": "😛",
-        "en": "c"
-      },
-      {
-        "uid": 4,
-        "hidden": true,
-        "letter": "😄",
-        "en": "d"
-      },
-      {
-        "uid": 5,
-        "hidden": true,
-        "letter": "😁",
-        "en": "e"
-      },
-      {
-        "uid": 6,
-        "hidden": true,
-        "letter": "😔",
-        "en": "f"
-      },
-      {
-        "uid": 7,
-        "hidden": true,
-        "letter": "😘",
-        "en": "g"
-      },
-      {
-        "uid": 8,
-        "hidden": true,
-        "letter": "😉",
-        "en": "h"
-      },
-      {
-        "uid": 9,
-        "hidden": true,
-        "letter": "😆",
-        "en": "i"
-      },
-      {
-        "uid": 10,
-        "hidden": true,
-        "letter": "😒",
-        "en": "j"
-      },
-      {
-        "uid": 11,
-        "hidden": true,
-        "letter": "😜",
-        "en": "k"
-      },
-      {
-        "uid": 12,
-        "hidden": true,
-        "letter": "😝",
-        "en": "l"
-      },
-      {
-        "uid": 13,
-        "hidden": true,
-        "letter": "😎",
-        "en": "m"
-      },
-      {
-        "uid": 14,
-        "hidden": true,
-        "letter": "😏",
-        "en": "n"
-      },
-      {
-        "uid": 15,
-        "hidden": true,
-        "letter": "😈",
-        "en": "o"
-      },
-      {
-        "uid": 16,
-        "hidden": true,
-        "letter": "😇",
-        "en": "p"
-      },
-      {
-        "uid": 17,
-        "hidden": true,
-        "letter": "⬆",
-        "en": "q"
-      },
-      {
-        "uid": 18,
-        "hidden": true,
-        "letter": "➡",
-        "en": "r"
-      },
-      {
-        "uid": 19,
-        "hidden": true,
-        "letter": "⬇",
-        "en": "s"
-      },
-      {
-        "uid": 20,
-        "hidden": true,
-        "letter": "⬅",
-        "en": "t"
-      },
-      {
-        "uid": 21,
-        "hidden": true,
-        "letter": "↔",
-        "en": "u"
-      },
-      {
-        "uid": 22,
-        "hidden": true,
-        "letter": "❗",
-        "en": "v"
-      },
-      {
-        "uid": 23,
-        "hidden": true,
-        "letter": "☔",
-        "en": "w"
-      },
-      {
-        "uid": 24,
-        "hidden": true,
-        "letter": "☕",
-        "en": "x"
-      },
-      {
-        "uid": 25,
-        "hidden": true,
-        "letter": "🍹",
-        "en": "cocktail"
-      },
-      {
-        "uid": 26,
-        "hidden": true,
-        "letter": "🍷",
-        "en": "drinks"
-      },
-      {
-        "uid": 27,
-        "hidden": true,
-        "letter": "💩",
-        "en": "poop",
-        "regular": true
-      },
-      {
-        "uid": 27,
-        "hidden": true,
-        "letter": "💩",
-        "en": "poop",
-        "regular": true
-      },
-      {
-        "uid": 27,
-        "hidden": true,
-        "letter": "💩",
-        "en": "poop",
-        "regular": true
-      },
-      {
-        "uid": 27,
-        "hidden": true,
-        "letter": "💩",
-        "en": "poop",
-        "regular": true
-      }
-    ]
-  }
-]
+    {
+      "uid": 2,
+      "hidden": true,
+      "letter": "😊",
+      "en": "b"
+    },
+    {
+      "uid": 3,
+      "hidden": true,
+      "letter": "😛",
+      "en": "c"
+    },
+    {
+      "uid": 4,
+      "hidden": true,
+      "letter": "😄",
+      "en": "d"
+    },
+    {
+      "uid": 5,
+      "hidden": true,
+      "letter": "😁",
+      "en": "e"
+    },
+    {
+      "uid": 6,
+      "hidden": true,
+      "letter": "😔",
+      "en": "f"
+    },
+    {
+      "uid": 7,
+      "hidden": true,
+      "letter": "😘",
+      "en": "g"
+    },
+    {
+      "uid": 8,
+      "hidden": true,
+      "letter": "😉",
+      "en": "h"
+    },
+    {
+      "uid": 9,
+      "hidden": true,
+      "letter": "😆",
+      "en": "i"
+    },
+    {
+      "uid": 10,
+      "hidden": true,
+      "letter": "😒",
+      "en": "j"
+    },
+    {
+      "uid": 11,
+      "hidden": true,
+      "letter": "😜",
+      "en": "k"
+    },
+    {
+      "uid": 12,
+      "hidden": true,
+      "letter": "😝",
+      "en": "l"
+    },
+    {
+      "uid": 13,
+      "hidden": true,
+      "letter": "😎",
+      "en": "m"
+    },
+    {
+      "uid": 14,
+      "hidden": true,
+      "letter": "😏",
+      "en": "n"
+    },
+    {
+      "uid": 15,
+      "hidden": true,
+      "letter": "😈",
+      "en": "o"
+    },
+    {
+      "uid": 16,
+      "hidden": true,
+      "letter": "😇",
+      "en": "p"
+    },
+    {
+      "uid": 17,
+      "hidden": true,
+      "letter": "⬆",
+      "en": "q"
+    },
+    {
+      "uid": 18,
+      "hidden": true,
+      "letter": "➡",
+      "en": "r"
+    },
+    {
+      "uid": 19,
+      "hidden": true,
+      "letter": "⬇",
+      "en": "s"
+    },
+    {
+      "uid": 20,
+      "hidden": true,
+      "letter": "⬅",
+      "en": "t"
+    },
+    {
+      "uid": 21,
+      "hidden": true,
+      "letter": "↔",
+      "en": "u"
+    },
+    {
+      "uid": 22,
+      "hidden": true,
+      "letter": "❗",
+      "en": "v"
+    },
+    {
+      "uid": 23,
+      "hidden": true,
+      "letter": "☔",
+      "en": "w"
+    },
+    {
+      "uid": 24,
+      "hidden": true,
+      "letter": "☕",
+      "en": "x"
+    },
+    {
+      "uid": 25,
+      "hidden": true,
+      "letter": "🍹",
+      "en": "cocktail"
+    },
+    {
+      "uid": 26,
+      "hidden": true,
+      "letter": "🍷",
+      "en": "drinks"
+    },
+    {
+      "uid": 27,
+      "hidden": true,
+      "letter": "💩",
+      "en": "poop",
+      "regular": true
+    },
+    {
+      "uid": 27,
+      "hidden": true,
+      "letter": "💩",
+      "en": "poop",
+      "regular": true
+    },
+    {
+      "uid": 27,
+      "hidden": true,
+      "letter": "💩",
+      "en": "poop",
+      "regular": true
+    },
+    {
+      "uid": 27,
+      "hidden": true,
+      "letter": "💩",
+      "en": "poop",
+      "regular": true
+    }
+  ]
+}

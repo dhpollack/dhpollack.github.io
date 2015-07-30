@@ -38,11 +38,13 @@
       'game-lang-changed': 'changeJsonUrl'
     },
     attached: function() {
-      this.jsonUrl = this.createJsonUrl(this.gameLang);
+      var gl = this.gameLang;
+      if(gl) this.jsonUrl = this.createJsonUrl(gl);
     },
-    changeJsonUrl: function(ev) {
-      this.jsonUrl = this.createJsonUrl(this.gameLang);
-      if(this.letterListBox && this.letterListBox.allLettersList[this.gameLang]) {
+    changeJsonUrl: function() {
+      var gl = this.gameLang;
+      this.jsonUrl = this.createJsonUrl(gl);
+      if(this.letterListBox && this.letterListBox.allLettersList[gl]) {
         this.letterListBox.setLetters = false;
         this.async(function() { this.spoofLoad(); }, 150);
       } else {
@@ -67,7 +69,7 @@
       //console.log("loading letters from url: " + this.jsonUrl + " \nSuccess: " + jsonSuccess);
       // Make a copy of the loaded data
       if(jsonSuccess) {
-        var ajaxData = this.$.ajax.lastResponse.slice()[0];
+        var ajaxData = this.$.ajax.lastResponse;
         this.lobj = ajaxData;
         this.fire('new-letters');
         this.letterListBox.setLetters = true;

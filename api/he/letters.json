@@ -1,178 +1,176 @@
-[
-  {
-    "lang": {
-      "code": "he",
-      "stripDiacritics": false,
-      "langHelpInfo": "<h3><u>Hebrew</u></h3>"
+{
+  "lang": {
+    "code": "he",
+    "stripDiacritics": false,
+    "langHelpInfo": "<h3><u>Hebrew</u></h3>"
+  },
+  "alphabet": [
+    {
+      "uid": 1,
+      "hidden": true,
+      "letter": "א"
     },
-    "alphabet": [
-      {
-        "uid": 1,
-        "hidden": true,
-        "letter": "א"
-      },
-      {
-        "uid": 2,
-        "hidden": true,
-        "letter": "ב"
-      },
-      {
-        "uid": 3,
-        "hidden": true,
-        "letter": "ג"
-      },
-      {
-        "uid": 4,
-        "hidden": true,
-        "letter": "ד"
-      },
-      {
-        "uid": 5,
-        "hidden": true,
-        "letter": "ה"
-      },
-    
-      {
-        "uid": 6,
-        "hidden": true,
-        "letter": "ו"
-      },
-    
-      {
-        "uid": 7,
-        "hidden": true,
-        "letter": "ז"
-      },
-    
-      {
-        "uid": 8,
-        "hidden": true,
-        "letter": "ח"
-      },
-    
-      {
-        "uid": 9,
-        "hidden": true,
-        "letter": "ט"
-      },
-    
-      {
-        "uid": 10,
-        "hidden": true,
-        "letter": "י"
-      },
-    
-      {
-        "uid": 11,
-        "hidden": true,
-        "letter": "כ"
-      },
-    
-      {
-        "uid": 12,
-        "hidden": true,
-        "letter": "ל"
-      },
-    
-      {
-        "uid": 13,
-        "hidden": true,
-        "letter": "מ"
-      },
-    
-      {
-        "uid": 14,
-        "hidden": true,
-        "letter": "נ"
-      },
-    
-      {
-        "uid": 15,
-        "hidden": true,
-        "letter": "ס"
-      },
-    
-      {
-        "uid": 16,
-        "hidden": true,
-        "letter": "ע"
-      },
-    
-      {
-        "uid": 17,
-        "hidden": true,
-        "letter": "פ"
-      },
-    
-      {
-        "uid": 18,
-        "hidden": true,
-        "letter": "צ"
-      },
-    
-      {
-        "uid": 19,
-        "hidden": true,
-        "letter": "ק"
-      },
-    
-      {
-        "uid": 20,
-        "hidden": true,
-        "letter": "ר"
-      },
-      {
-        "uid": 21,
-        "hidden": true,
-        "letter": "ש"
-      },
-      {
-        "uid": 22,
-        "hidden": true,
-        "letter": "ת"
-      },
-      {
-        "uid": 23,
-        "hidden": true,
-        "letter": "ך",
-        "regular": false
-      },
-      {
-        "uid": 24,
-        "hidden": true,
-        "letter": "ם",
-        "regular": false
-      },
-      {
-        "uid": 25,
-        "hidden": true,
-        "letter": "ן",
-        "regular": false
-      },
-      {
-        "uid": 26,
-        "hidden": true,
-        "letter": "ף",
-        "regular": false
-      },
-      {
-        "uid": 27,
-        "hidden": true,
-        "letter": "ץ",
-        "regular": false
-      },
-      {
-        "uid": 28,
-        "hidden": true,
-        "letter": " ",
-        "regular": false
-      },
-      {
-        "uid": 29,
-        "hidden": true,
-        "letter": "'",
-        "regular": false
-      }
-    ]
-  }
-]
+    {
+      "uid": 2,
+      "hidden": true,
+      "letter": "ב"
+    },
+    {
+      "uid": 3,
+      "hidden": true,
+      "letter": "ג"
+    },
+    {
+      "uid": 4,
+      "hidden": true,
+      "letter": "ד"
+    },
+    {
+      "uid": 5,
+      "hidden": true,
+      "letter": "ה"
+    },
+  
+    {
+      "uid": 6,
+      "hidden": true,
+      "letter": "ו"
+    },
+  
+    {
+      "uid": 7,
+      "hidden": true,
+      "letter": "ז"
+    },
+  
+    {
+      "uid": 8,
+      "hidden": true,
+      "letter": "ח"
+    },
+  
+    {
+      "uid": 9,
+      "hidden": true,
+      "letter": "ט"
+    },
+  
+    {
+      "uid": 10,
+      "hidden": true,
+      "letter": "י"
+    },
+  
+    {
+      "uid": 11,
+      "hidden": true,
+      "letter": "כ"
+    },
+  
+    {
+      "uid": 12,
+      "hidden": true,
+      "letter": "ל"
+    },
+  
+    {
+      "uid": 13,
+      "hidden": true,
+      "letter": "מ"
+    },
+  
+    {
+      "uid": 14,
+      "hidden": true,
+      "letter": "נ"
+    },
+  
+    {
+      "uid": 15,
+      "hidden": true,
+      "letter": "ס"
+    },
+  
+    {
+      "uid": 16,
+      "hidden": true,
+      "letter": "ע"
+    },
+  
+    {
+      "uid": 17,
+      "hidden": true,
+      "letter": "פ"
+    },
+  
+    {
+      "uid": 18,
+      "hidden": true,
+      "letter": "צ"
+    },
+  
+    {
+      "uid": 19,
+      "hidden": true,
+      "letter": "ק"
+    },
+  
+    {
+      "uid": 20,
+      "hidden": true,
+      "letter": "ר"
+    },
+    {
+      "uid": 21,
+      "hidden": true,
+      "letter": "ש"
+    },
+    {
+      "uid": 22,
+      "hidden": true,
+      "letter": "ת"
+    },
+    {
+      "uid": 23,
+      "hidden": true,
+      "letter": "ך",
+      "regular": false
+    },
+    {
+      "uid": 24,
+      "hidden": true,
+      "letter": "ם",
+      "regular": false
+    },
+    {
+      "uid": 25,
+      "hidden": true,
+      "letter": "ן",
+      "regular": false
+    },
+    {
+      "uid": 26,
+      "hidden": true,
+      "letter": "ף",
+      "regular": false
+    },
+    {
+      "uid": 27,
+      "hidden": true,
+      "letter": "ץ",
+      "regular": false
+    },
+    {
+      "uid": 28,
+      "hidden": true,
+      "letter": " ",
+      "regular": false
+    },
+    {
+      "uid": 29,
+      "hidden": true,
+      "letter": "'",
+      "regular": false
+    }
+  ]
+}

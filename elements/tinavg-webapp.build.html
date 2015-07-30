@@ -1,4 +1,4 @@
-<!DOCTYPE html><html manifest="app.manifest"><head><meta charset="UTF-8"><!--
+<html><head><meta charset="UTF-8"><!--
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE
@@ -22,9 +22,24 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><title>tinavg: Alphabets for Everyone</title><meta name="description" content="This Is Not A Vocabulary Game, TINAVG, utilizes different languages to create a fun, fast-paced pattern matching game that is suitable for all ages. English, German, and Hebrew are currently fully implemented with Arabic, Korean, and Russian also available in some form or another."><meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="tinavg"><link rel="apple-touch-icon" href="laucher-icon.png"><meta name="mobile-web-app-capable" content="yes"><link rel="manifest" href="tinavg-webapp.json"><link rel="icon" href="launcher-icon.png"><style>html,body {height: 100%;margin: 0;background-color: #E5E5E5;font-family: 'RobotoDraft', sans-serif;}a {color: black;text-decoration: none;}form {max-width: 450px;}paper-header-panel {height: 100vh;content: 'viewport-units-buggyfill; height: 100vh;';}.core-header {background: #16B38B;color: white;height: 10vh;font-size: 5vh;padding: 0 2px;content: 'viewport-units-buggyfill; height: 10vh; font-size: 5vh;';}word-board {font-size: 7vh;line-height: 9.3vh;margin-top: 1px;content: 'viewport-units-buggyfill; font-size: 7vh; line-height: 9.3vh;';}.word-board {border-bottom-style: solid;border-bottom-color: white;}.word-board-male {border-bottom-color: #03a9f4;}.word-board-female {border-bottom-color: #FF80CE;}.word-board-neuter {border-bottom-style: solid;border-bottom-color: #8A8A8A;}.word-board-singular {border-bottom-style: solid;}.word-board-plural {border-bottom-style: dotted;}.word-board-verb {border-bottom-style: solid;border-bottom-color: #CC2200;}.word-board-adj-adv {border-bottom-style: solid;border-bottom-color: #52FF66;}#record-elem {width: 100vw;height: 79.98vh;content: 'viewport-units-buggyfill; width: 100vw; height: 79.98vh;';background: #f3d6b0;}.recorder-icon {color: #222;height: 25vmax;width: 25vmax;}score-board {font-size: 6vh;}jumbotron-text {font-size: 7vh;text-align: center;font-weight: 300;content: 'viewport-units-buggyfill; font-size: 8vh;';}.footer{background: #16B38B;color: white;height: 10vh;font-size: 0;vertical-align: bottom;bottom: 0;padding: 0 2px;overflow: hidden;content: 'viewport-units-buggyfill; height: 10vh;';}letter-list {width: 100vw;background-color: white;font-size: 0;padding: 0;margin: 0;line-height: 0px;vertical-align: top;overflow: hidden;-webkit-user-select: none;-moz-user-select: none;user-select: none;content: 'viewport-units-buggyfill; width: 100vw;';}letter-card {display: inline-block;width: 33.33vw;height: 26.66vh;font-weight: 300;text-align: center;background: #f3d6b0;content: 'viewport-units-buggyfill; width: 33.33vw; height: 26.66vh;';}letter-card:focus {z-index: 4;}.space-bar {width: inherit;height: 10vh;font-weight: 300;text-align: center;background: #03a9f4;content: 'viewport-units-buggyfill; height: 10vh;';}.card-body {}iron-collapse {background: rgba(200,170,160, 1.0);}iron-selector.paper-drawer-panel > #drawer.paper-drawer-panel {background: rgba(200,170,160, 1.0);}#drawer.paper-drawer-panel {width: 360px;padding: 1vh 1vh;content: 'viewport-units-buggyfill; padding: 1vh 1vw;';}.mini-menu {background: rgba(200,170,160, 1.0);}.tinavg-med-icon {font-size: 14px;height: 7vmin;width: 7vmin;color: white;display: inline-block;-webkit-user-select: none;-moz-user-select: none;user-select: none;content: 'viewport-units-buggyfill; width: 7vh; height: 7vh;';}.content-span {font-size: 13vh;margin: 0 0 0 0;content: 'viewport-units-buggyfill; font-size: 13vh;';}.flag-div {background: url("/assets/images/de.png") center center no-repeat;background-size: contain;}paper-ripple {color: #18C924; /* greenish */}paper-button {text-transform: none;}.content.paper-button {padding: 2px;}.overlay-toolbar {background-color: #16B38B;margin: 0px;padding: 0px;width: 100%;display: inline-block;color: #fff;}paper-dialog {overflow: hidden;width: 100%;}.overlay-pages {padding: 10px;overflow-y: scroll;height: 58vh;}.overlay-pages iron-icon {color: black;}.right-to-left {transform: rotateY(180deg);}.container {width: 100vw;content: 'viewport-units-buggyfill; width: 100vw;';}.spin-flip-transition {transition: 0.3s ease-in-out;}#jumbotron-text {border:solid 0px;}.to-foreground {z-index: 7;}.capitalize {text-transform: capitalize;}.same-line {display: inline-block;}.glow-text {-webkit-animation: glowtext 1.5s 10 alternate;-moz-animation: glowtext 1.5s 10 alternate;animation: glowtext 1.5s 10 alternate;/*-webkit-animation: fliptext 2s ease-in-out 2;-moz-animation: fliptext 2s ease-in-out 2;animation: fliptext 2s ease-in-out 2;*/}paper-progress {width: 100vw;position:absolute;bottom:0;z-index: 5;}@-webkit-keyframes glowtext {from {color: white;border:solid 0px rgba(224,230,57,0.0);}to {padding: 5px;border:solid 2px rgba(224,230,57,0.7);}}@-moz-keyframes glowtext {from {color: white;border:solid 0px rgba(224,230,57,0.0);}to {padding: 5px;border:solid 2px rgba(224,230,57,0.7);}}@keyframes glowtext {from {color: white;border:solid 0px rgba(224,230,57,0.0);}to {padding: 5px;border:solid 2px rgba(224,230,57,0.7);}}.flip-text {-webkit-animation: fliptext 0.25s ease-in-out 2;-moz-animation: fliptext 0.25s ease-in-out 2;animation: fliptext 0.25s ease-in-out 2;}@-webkit-keyframes fliptext {0% {/* transform: rotateY(360deg); */-moz-transform: scale(1, 1);-webkit-transform: scale(1, 1);-o-transform: scale(1, 1);-ms-transform: scale(1, 1);transform: scale(1, 1);}50% {/* transform: rotateY(0deg); */-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);}100% {/* transform: rotateY(360deg); */-moz-transform: scale(1, 1);-webkit-transform: scale(1, 1);-o-transform: scale(1, 1);-ms-transform: scale(1, 1);transform: scale(1, 1);}}@-moz-keyframes fliptext {0% {/* transform: rotateY(360deg); */-moz-transform: scale(1, 1);-webkit-transform: scale(1, 1);-o-transform: scale(1, 1);-ms-transform: scale(1, 1);transform: scale(1, 1);}50% {/* transform: rotateY(0deg); */-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);}100% {/* transform: rotateY(360deg); */-moz-transform: scale(1, 1);-webkit-transform: scale(1, 1);-o-transform: scale(1, 1);-ms-transform: scale(1, 1);transform: scale(1, 1);}}@keyframes fliptext {0% {/* transform: rotateY(360deg); */-moz-transform: scale(1, 1);-webkit-transform: scale(1, 1);-o-transform: scale(1, 1);-ms-transform: scale(1, 1);transform: scale(1, 1);}50% {/* transform: rotateY(0deg); */-moz-transform: scale(-1, 1);-webkit-transform: scale(-1, 1);-o-transform: scale(-1, 1);-ms-transform: scale(-1, 1);transform: scale(-1, 1);}100% {/* transform: rotateY(360deg); */-moz-transform: scale(1, 1);-webkit-transform: scale(1, 1);-o-transform: scale(1, 1);-ms-transform: scale(1, 1);transform: scale(1, 1);}}.glow-yellow {-webkit-animation: glowyellow 1.5s ease-in-out 10 alternate;-moz-animation: glowyellow 1.5s ease-in-out 10 alternate;animation: glowyellow 1.5s ease-in-out 10 alternate;/*this would be a less CPU intensive operation-webkit-animation: fliptext 2s ease-in-out 2;-moz-animation: fliptext 2s ease-in-out 2;animation: fliptext 2s ease-in-out 2;*/}@-webkit-keyframes glowyellow {from {}to {background-color: rgba(224,230,57,0.7);border-radius: 50%;}}@-moz-keyframes glowyellow {from {}to {background-color: rgba(224,230,57,0.7);border-radius: 50%;}}@keyframes glowyellow {from {}to {background-color: rgba(224,230,57,0.7);border-radius: 50%;}}@media screen and (orientation: portrait) {letter-card {height: 20vh;content: 'viewport-units-buggyfill; height: 20vh;';}.content-span {font-size: 10vh;content: 'viewport-units-buggyfill; font-size: 12vh;';}score-board {font-size: 6vw;}.recorder-icon {height: 33.33vmax;width: 33.33vmax;}}@media screen and (orientation: landscape) {letter-card {width: 25vw;content: 'viewport-units-buggyfill; width: 25vw;';}}</style><script src="//cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+--><!--
+All images, sounds, other asset files on tinavg.com are not covered under the following license:
+@license
+Copyright 2015 David Pollack
 
-<style is="custom-style">:root {--layout: {display: -ms-flexbox;display: -webkit-flex;display: flex;};--layout-inline: {display: -ms-inline-flexbox;display: -webkit-inline-flex;display: inline-flex;};--layout-horizontal: {/* @apply(--layout); */display: -ms-flexbox;display: -webkit-flex;display: flex;-ms-flex-direction: row;-webkit-flex-direction: row;flex-direction: row;};--layout-horizontal-reverse: {-ms-flex-direction: row-reverse;-webkit-flex-direction: row-reverse;flex-direction: row-reverse;};--layout-vertical: {/* @apply(--layout); */display: -ms-flexbox;display: -webkit-flex;display: flex;-ms-flex-direction: column;-webkit-flex-direction: column;flex-direction: column;};--layout-vertical-reverse: {-ms-flex-direction: column-reverse;-webkit-flex-direction: column-reverse;flex-direction: column-reverse;};--layout-wrap: {-ms-flex-wrap: wrap;-webkit-flex-wrap: wrap;flex-wrap: wrap;};--layout-wrap-reverse: {-ms-flex-wrap: wrap-reverse;-webkit-flex-wrap: wrap-reverse;flex-wrap: wrap-reverse;};--layout-flex-auto: {-ms-flex: 1 1 auto;-webkit-flex: 1 1 auto;flex: 1 1 auto;};--layout-flex-none: {-ms-flex: none;-webkit-flex: none;flex: none;};--layout-flex: {-ms-flex: 1 1 0.000000001px;-webkit-flex: 1;flex: 1;-webkit-flex-basis: 0.000000001px;flex-basis: 0.000000001px;};--layout-flex-2: {-ms-flex: 2;-webkit-flex: 2;flex: 2;};--layout-flex-3: {-ms-flex: 3;-webkit-flex: 3;flex: 3;};--layout-flex-4: {-ms-flex: 4;-webkit-flex: 4;flex: 4;};--layout-flex-5: {-ms-flex: 5;-webkit-flex: 5;flex: 5;};--layout-flex-6: {-ms-flex: 6;-webkit-flex: 6;flex: 6;};--layout-flex-7: {-ms-flex: 7;-webkit-flex: 7;flex: 7;};--layout-flex-8: {-ms-flex: 8;-webkit-flex: 8;flex: 8;};--layout-flex-9: {-ms-flex: 9;-webkit-flex: 9;flex: 9;};--layout-flex-10: {-ms-flex: 10;-webkit-flex: 10;flex: 10;};--layout-flex-11: {-ms-flex: 11;-webkit-flex: 11;flex: 11;};--layout-flex-12: {-ms-flex: 12;-webkit-flex: 12;flex: 12;};/* alignment in cross axis */--layout-start: {-ms-flex-align: start;-webkit-align-items: flex-start;align-items: flex-start;};--layout-center: {-ms-flex-align: center;-webkit-align-items: center;align-items: center;};--layout-end: {-ms-flex-align: end;-webkit-align-items: flex-end;align-items: flex-end;};/* alignment in main axis */--layout-start-justified: {-ms-flex-pack: start;-webkit-justify-content: flex-start;justify-content: flex-start;};--layout-center-justified: {-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;};--layout-end-justified: {-ms-flex-pack: end;-webkit-justify-content: flex-end;justify-content: flex-end;};--layout-around-justified: {-ms-flex-pack: around;-webkit-justify-content: space-around;justify-content: space-around;};--layout-justified: {-ms-flex-pack: justify;-webkit-justify-content: space-between;justify-content: space-between;};--layout-center-center: {/* @apply(--layout-center --layout-center-justified); */-ms-flex-align: center;-webkit-align-items: center;align-items: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;};/* self alignment */--layout-self-start: {-ms-align-self: flex-start;-webkit-align-self: flex-start;align-self: flex-start;};--layout-self-center: {-ms-align-self: center;-webkit-align-self: center;align-self: center;};--layout-self-end: {-ms-align-self: flex-end;-webkit-align-self: flex-end;align-self: flex-end;};--layout-self-stretch: {-ms-align-self: stretch;-webkit-align-self: stretch;align-self: stretch;};/*******************************Other Layout*******************************/--layout-block: {display: block;};--layout-invisible: {visibility: hidden !important;};--layout-relative: {position: relative;};--layout-fit: {position: absolute;top: 0;right: 0;bottom: 0;left: 0;};--layout-scroll: {-webkit-overflow-scrolling: touch;overflow: auto;};/* fixed position */--layout-fixed-bottom:,--layout-fixed-left:,--layout-fixed-right:,--layout-fixed-top: {position: fixed;};--layout-fixed-top: {top: 0;left: 0;right: 0;};--layout-fixed-right: {top: 0;right: 0;bottom: 0;};--layout-fixed-bottom: {right: 0;bottom: 0;left: 0;};--layout-fixed-left: {top: 0;bottom: 0;left: 0;};}</style>
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+--><style is="custom-style">:root {--layout: {display: -ms-flexbox;display: -webkit-flex;display: flex;};--layout-inline: {display: -ms-inline-flexbox;display: -webkit-inline-flex;display: inline-flex;};--layout-horizontal: {/* @apply(--layout); */display: -ms-flexbox;display: -webkit-flex;display: flex;-ms-flex-direction: row;-webkit-flex-direction: row;flex-direction: row;};--layout-horizontal-reverse: {-ms-flex-direction: row-reverse;-webkit-flex-direction: row-reverse;flex-direction: row-reverse;};--layout-vertical: {/* @apply(--layout); */display: -ms-flexbox;display: -webkit-flex;display: flex;-ms-flex-direction: column;-webkit-flex-direction: column;flex-direction: column;};--layout-vertical-reverse: {-ms-flex-direction: column-reverse;-webkit-flex-direction: column-reverse;flex-direction: column-reverse;};--layout-wrap: {-ms-flex-wrap: wrap;-webkit-flex-wrap: wrap;flex-wrap: wrap;};--layout-wrap-reverse: {-ms-flex-wrap: wrap-reverse;-webkit-flex-wrap: wrap-reverse;flex-wrap: wrap-reverse;};--layout-flex-auto: {-ms-flex: 1 1 auto;-webkit-flex: 1 1 auto;flex: 1 1 auto;};--layout-flex-none: {-ms-flex: none;-webkit-flex: none;flex: none;};--layout-flex: {-ms-flex: 1 1 0.000000001px;-webkit-flex: 1;flex: 1;-webkit-flex-basis: 0.000000001px;flex-basis: 0.000000001px;};--layout-flex-2: {-ms-flex: 2;-webkit-flex: 2;flex: 2;};--layout-flex-3: {-ms-flex: 3;-webkit-flex: 3;flex: 3;};--layout-flex-4: {-ms-flex: 4;-webkit-flex: 4;flex: 4;};--layout-flex-5: {-ms-flex: 5;-webkit-flex: 5;flex: 5;};--layout-flex-6: {-ms-flex: 6;-webkit-flex: 6;flex: 6;};--layout-flex-7: {-ms-flex: 7;-webkit-flex: 7;flex: 7;};--layout-flex-8: {-ms-flex: 8;-webkit-flex: 8;flex: 8;};--layout-flex-9: {-ms-flex: 9;-webkit-flex: 9;flex: 9;};--layout-flex-10: {-ms-flex: 10;-webkit-flex: 10;flex: 10;};--layout-flex-11: {-ms-flex: 11;-webkit-flex: 11;flex: 11;};--layout-flex-12: {-ms-flex: 12;-webkit-flex: 12;flex: 12;};/* alignment in cross axis */--layout-start: {-ms-flex-align: start;-webkit-align-items: flex-start;align-items: flex-start;};--layout-center: {-ms-flex-align: center;-webkit-align-items: center;align-items: center;};--layout-end: {-ms-flex-align: end;-webkit-align-items: flex-end;align-items: flex-end;};/* alignment in main axis */--layout-start-justified: {-ms-flex-pack: start;-webkit-justify-content: flex-start;justify-content: flex-start;};--layout-center-justified: {-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;};--layout-end-justified: {-ms-flex-pack: end;-webkit-justify-content: flex-end;justify-content: flex-end;};--layout-around-justified: {-ms-flex-pack: around;-webkit-justify-content: space-around;justify-content: space-around;};--layout-justified: {-ms-flex-pack: justify;-webkit-justify-content: space-between;justify-content: space-between;};--layout-center-center: {/* @apply(--layout-center --layout-center-justified); */-ms-flex-align: center;-webkit-align-items: center;align-items: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;};/* self alignment */--layout-self-start: {-ms-align-self: flex-start;-webkit-align-self: flex-start;align-self: flex-start;};--layout-self-center: {-ms-align-self: center;-webkit-align-self: center;align-self: center;};--layout-self-end: {-ms-align-self: flex-end;-webkit-align-self: flex-end;align-self: flex-end;};--layout-self-stretch: {-ms-align-self: stretch;-webkit-align-self: stretch;align-self: stretch;};/*******************************Other Layout*******************************/--layout-block: {display: block;};--layout-invisible: {visibility: hidden !important;};--layout-relative: {position: relative;};--layout-fit: {position: absolute;top: 0;right: 0;bottom: 0;left: 0;};--layout-scroll: {-webkit-overflow-scrolling: touch;overflow: auto;};/* fixed position */--layout-fixed-bottom:,--layout-fixed-left:,--layout-fixed-right:,--layout-fixed-top: {position: fixed;};--layout-fixed-top: {top: 0;left: 0;right: 0;};--layout-fixed-right: {top: 0;right: 0;bottom: 0;};--layout-fixed-bottom: {right: 0;bottom: 0;left: 0;};--layout-fixed-left: {top: 0;bottom: 0;left: 0;};}</style>
+
 
 
 <style>/*******************************Flex Layout*******************************/html /deep/ .layout.horizontal,html /deep/ .layout.horizontal-reverse,html /deep/ .layout.vertical,html /deep/ .layout.vertical-reverse {display: -ms-flexbox;display: -webkit-flex;display: flex;}html /deep/ .layout.inline {display: -ms-inline-flexbox;display: -webkit-inline-flex;display: inline-flex;}html /deep/ .layout.horizontal {-ms-flex-direction: row;-webkit-flex-direction: row;flex-direction: row;}html /deep/ .layout.horizontal-reverse {-ms-flex-direction: row-reverse;-webkit-flex-direction: row-reverse;flex-direction: row-reverse;}html /deep/ .layout.vertical {-ms-flex-direction: column;-webkit-flex-direction: column;flex-direction: column;}html /deep/ .layout.vertical-reverse {-ms-flex-direction: column-reverse;-webkit-flex-direction: column-reverse;flex-direction: column-reverse;}html /deep/ .layout.wrap {-ms-flex-wrap: wrap;-webkit-flex-wrap: wrap;flex-wrap: wrap;}html /deep/ .layout.wrap-reverse {-ms-flex-wrap: wrap-reverse;-webkit-flex-wrap: wrap-reverse;flex-wrap: wrap-reverse;}html /deep/ .flex-auto {-ms-flex: 1 1 auto;-webkit-flex: 1 1 auto;flex: 1 1 auto;}html /deep/ .flex-none {-ms-flex: none;-webkit-flex: none;flex: none;}html /deep/ .flex,html /deep/ .flex-1 {-ms-flex: 1;-webkit-flex: 1;flex: 1;}html /deep/ .flex-2 {-ms-flex: 2;-webkit-flex: 2;flex: 2;}html /deep/ .flex-3 {-ms-flex: 3;-webkit-flex: 3;flex: 3;}html /deep/ .flex-4 {-ms-flex: 4;-webkit-flex: 4;flex: 4;}html /deep/ .flex-5 {-ms-flex: 5;-webkit-flex: 5;flex: 5;}html /deep/ .flex-6 {-ms-flex: 6;-webkit-flex: 6;flex: 6;}html /deep/ .flex-7 {-ms-flex: 7;-webkit-flex: 7;flex: 7;}html /deep/ .flex-8 {-ms-flex: 8;-webkit-flex: 8;flex: 8;}html /deep/ .flex-9 {-ms-flex: 9;-webkit-flex: 9;flex: 9;}html /deep/ .flex-10 {-ms-flex: 10;-webkit-flex: 10;flex: 10;}html /deep/ .flex-11 {-ms-flex: 11;-webkit-flex: 11;flex: 11;}html /deep/ .flex-12 {-ms-flex: 12;-webkit-flex: 12;flex: 12;}/* alignment in cross axis */html /deep/ .layout.start {-ms-flex-align: start;-webkit-align-items: flex-start;align-items: flex-start;}html /deep/ .layout.center,html /deep/ .layout.center-center {-ms-flex-align: center;-webkit-align-items: center;align-items: center;}html /deep/ .layout.end {-ms-flex-align: end;-webkit-align-items: flex-end;align-items: flex-end;}/* alignment in main axis */html /deep/ .layout.start-justified {-ms-flex-pack: start;-webkit-justify-content: flex-start;justify-content: flex-start;}html /deep/ .layout.center-justified,html /deep/ .layout.center-center {-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;}html /deep/ .layout.end-justified {-ms-flex-pack: end;-webkit-justify-content: flex-end;justify-content: flex-end;}html /deep/ .layout.around-justified {-ms-flex-pack: around;-webkit-justify-content: space-around;justify-content: space-around;}html /deep/ .layout.justified {-ms-flex-pack: justify;-webkit-justify-content: space-between;justify-content: space-between;}/* self alignment */html /deep/ .self-start {-ms-align-self: flex-start;-webkit-align-self: flex-start;align-self: flex-start;}html /deep/ .self-center {-ms-align-self: center;-webkit-align-self: center;align-self: center;}html /deep/ .self-end {-ms-align-self: flex-end;-webkit-align-self: flex-end;align-self: flex-end;}html /deep/ .self-stretch {-ms-align-self: stretch;-webkit-align-self: stretch;align-self: stretch;}/*******************************Other Layout*******************************/html /deep/ .block {display: block;}/* IE 10 support for HTML5 hidden attr */html /deep/ [hidden] {display: none !important;}html /deep/ .invisible {visibility: hidden !important;}html /deep/ .relative {position: relative;}html /deep/ .fit {position: absolute;top: 0;right: 0;bottom: 0;left: 0;}body.fullbleed {margin: 0;height: 100vh;}html /deep/ .scroll {-webkit-overflow-scrolling: touch;overflow: auto;}.fixed-bottom,.fixed-left,.fixed-right,.fixed-top {position: fixed;}html /deep/ .fixed-top {top: 0;left: 0;right: 0;}html /deep/ .fixed-right {top: 0;right: 0;botttom: 0;}html /deep/ .fixed-bottom {right: 0;bottom: 0;left: 0;}html /deep/ .fixed-left {top: 0;botttom: 0;left: 0;}</style>
@@ -43,7 +58,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 
-<style is="custom-style">/* perhaps used later, but really I don't get why they use properties *//*paper-toggle-button {--paper-toggle-button-unchecked-bar-color: #FF4081;--paper-toggle-button-unchecked-button-color: #9c27b0;--paper-toggle-button-unchecked-ink-color: #009688;--paper-toggle-button-checked-bar-color: #5677fc;--paper-toggle-button-checked-button-color: #ff4081;--paper-toggle-button-checked-ink-color: #ff4081;}*/</style></head><body fullbleed="" unresolved=""><div hidden="" by-vulcanize=""><dom-module id="iron-icon" assetpath="bower_components/iron-icon/">
+<style is="custom-style">/* perhaps used later, but really I don't get why they use properties *//*paper-toggle-button {--paper-toggle-button-unchecked-bar-color: #FF4081;--paper-toggle-button-unchecked-button-color: #9c27b0;--paper-toggle-button-unchecked-ink-color: #009688;--paper-toggle-button-checked-bar-color: #5677fc;--paper-toggle-button-checked-button-color: #ff4081;--paper-toggle-button-checked-ink-color: #ff4081;}*/</style>
+</head><body><div hidden="" by-vulcanize=""><dom-module id="iron-localstorage" assetpath="../../bower_components/iron-localstorage/"></dom-module>
+<dom-module id="iron-icon" assetpath="../../bower_components/iron-icon/">
 
   <style>:host {@apply(--layout-inline);@apply(--layout-center-center);position: relative;vertical-align: middle;fill: currentcolor;/*width: var(--iron-icon-width, 24px);height: var(--iron-icon-height, 24px);*/}</style>
 
@@ -382,7 +399,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <g id="web"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"></path></g>
 </defs></svg>
 </iron-iconset-svg>
-<dom-module id="paper-ripple" assetpath="bower_components/paper-ripple/">
+<dom-module id="iron-pages" assetpath="../../bower_components/iron-pages/">
+
+  <style>:host {display: block;}:host > ::content > :not(.iron-selected) {display: none !important;}</style>
+
+  <template>
+
+    <content></content>
+
+  </template>
+
+</dom-module>
+
+<dom-module id="paper-ripple" assetpath="../../bower_components/paper-ripple/">
 
   
 
@@ -392,7 +421,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div id="waves"></div>
   </template>
 </dom-module>
-<dom-module id="paper-icon-button" assetpath="bower_components/paper-icon-button/">
+<dom-module id="paper-icon-button" assetpath="../../bower_components/paper-icon-button/">
   <style>:host {display: inline-block;position: relative;padding: 8px;outline: none;-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;cursor: pointer;z-index: 0;@apply(--paper-icon-button);}:host #ink {color: var(--paper-icon-button-ink-color, --primary-text-color);opacity: 0.6;}:host([disabled]) {color: var(--paper-icon-button-disabled-text, --disabled-text-color);pointer-events: none;cursor: auto;@apply(--paper-icon-button-disabled);}</style>
   <template>
     <paper-ripple id="ink" class="circle" center=""></paper-ripple>
@@ -405,7 +434,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <g id="chevron-right"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></g>
 </defs></svg>
 </iron-iconset-svg>
-<dom-module id="paper-tab" assetpath="bower_components/paper-tabs/">
+<dom-module id="paper-tab" assetpath="../../bower_components/paper-tabs/">
 
   <style>:host {@apply(--layout-inline);@apply(--layout-center);@apply(--layout-center-justified);@apply(--layout-flex);position: relative;padding: 0 12px;overflow: hidden;cursor: pointer;@apply(--paper-tab);}:host(:focus) {outline: none;}:host([link]) {padding: 0;}.tab-content {height: 100%;-webkit-transform: translateZ(0);transform: translateZ(0);transition: opacity 0.1s cubic-bezier(0.4, 0.0, 1, 1);@apply(--paper-tab-content);}:host(:not(.iron-selected)) > .tab-content {opacity: 0.8;}:host(:focus) .tab-content {opacity: 1;font-weight: 700;}#ink {color: var(--paper-tab-ink, --paper-yellow-a100);pointer-events: none;}.tab-content > ::content > a {height: 100%;/* flex */-ms-flex: 1 1 0.000000001px;-webkit-flex: 1;flex: 1;-webkit-flex-basis: 0.000000001px;flex-basis: 0.000000001px;}</style>
 
@@ -423,7 +452,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-tabs" assetpath="bower_components/paper-tabs/">
+<dom-module id="paper-tabs" assetpath="../../bower_components/paper-tabs/">
 
   <style>:host {@apply(--layout);@apply(--layout-center);height: 48px;font-size: 14px;font-weight: 500;overflow: hidden;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;-webkit-tap-highlight-color: rgba(0,0,0,0);@apply(--paper-tabs);}#tabsContainer {position: relative;height: 100%;white-space: nowrap;overflow: hidden;}#tabsContent {height: 100%;}#tabsContent.scrollable {position: absolute;white-space: nowrap;}.hidden {display: none;}.not-visible {opacity: 0;}paper-icon-button {width: 24px;padding: 16px;}#selectionBar {position: absolute;height: 2px;bottom: 0;left: 0;right: 0;background-color: var(--paper-tabs-selection-bar-color, --paper-yellow-a100);-webkit-transform-origin: left center;transform-origin: left center;-webkit-transform: scale(0);transform: scale(0);transition: -webkit-transform;transition: transform;@apply(--paper-tabs-selection-bar);}#selectionBar.align-bottom {top: 0;bottom: auto;}#selectionBar.expand {transition-duration: 0.15s;transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);}#selectionBar.contract {transition-duration: 0.18s;transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);}#tabsContent > ::content > *:not(#selectionBar) {height: 100%;}</style>
 
@@ -449,7 +478,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-header-panel" assetpath="bower_components/paper-header-panel/">
+<dom-module id="paper-header-panel" assetpath="../../bower_components/paper-header-panel/">
 
   <style>:host {@apply(--layout);@apply(--layout-vertical);display: block;position: relative;height: 100%;/* Create a stack context, we will need it for the shadow*/z-index: 0;}:root {/*** Default paper header panel shadow*/--paper-header-panel-shadow: {height: 6px;bottom: -6px;box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);};}#mainContainer {@apply(--layout-flex);position: relative;overflow-y: auto;overflow-x: hidden;-webkit-overflow-scrolling: touch;flex-basis: 0.0001px;}/** mode: scroll*/:host([mode=scroll]) #mainContainer {@apply(--paper-header-panel-scroll-container);overflow: visible;}:host([mode=scroll]) {overflow-y: auto;overflow-x: hidden;-webkit-overflow-scrolling: touch;}/** mode: cover*/:host([mode=cover]) #mainContainer {@apply(--paper-header-panel-cover-container);position: absolute;top: 0;right: 0;bottom: 0;left: 0;}/** mode: standard*/:host([mode=standard]) #mainContainer {@apply(--paper-header-panel-standard-container);}/** mode: waterfall*/:host([mode=waterfall]) #mainContainer {@apply(--paper-header-panel-waterfall-container);}/** mode: waterfall-tall*/:host([mode=waterfall-tall]) #mainContainer {@apply(--paper-header-panel-waterfall-tall-container);}:host ::content paper-toolbar,:host ::content .paper-header {position: relative;overflow: visible !important;}:host ::content paper-toolbar:after,:host ::content .paper-header:after {@apply(--paper-header-panel-shadow);-webkit-transition: opacity 0.5s, -webkit-transform 0.5s;transition: opacity 0.5s, transform 0.5s;opacity: 0;content: "";width: 100%;position: absolute;left: 0px;right: 0px;z-index: 1;-webkit-transform: scale3d(1, 0, 1);-webkit-transform-origin: 0% 0%;transform: scale3d(1, 0, 1);transform-origin: 0% 0%;}:host ::content paper-toolbar.has-shadow:after,:host ::content .paper-header.has-shadow:after {opacity: 1;-webkit-transform: scale3d(1, 1, 1);transform: scale3d(1, 1, 1);}</style>
 
@@ -462,7 +491,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-drawer-panel" assetpath="bower_components/paper-drawer-panel/">
+<dom-module id="paper-drawer-panel" assetpath="../../bower_components/paper-drawer-panel/">
   <style>/**@licenseCopyright (c) 2015 The Polymer Project Authors. All rights reserved.This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txtThe complete set of authors may be found at http://polymer.github.io/AUTHORS.txtThe complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txtCode distributed by Google as part of the polymer project is alsosubject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt*/:host {display: block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;overflow: hidden;}iron-selector > #drawer {position: absolute;top: 0;left: 0;height: 100%;background-color: white;-moz-box-sizing: border-box;box-sizing: border-box;@apply(--paper-drawer-panel-drawer-container);}.transition > #drawer {transition: -webkit-transform ease-in-out 0.3s, width ease-in-out 0.3s, visibility 0.3s;transition: transform ease-in-out 0.3s, width ease-in-out 0.3s, visibility 0.3s;}.left-drawer > #drawer {@apply(--paper-drawer-panel-left-drawer-container);}.right-drawer > #drawer {left: auto;right: 0;@apply(--paper-drawer-panel-right-drawer-container);}iron-selector > #main {position: absolute;top: 0;right: 0;bottom: 0;@apply(--paper-drawer-panel-main-container);}.transition > #main {transition: left ease-in-out 0.3s, padding ease-in-out 0.3s;}.right-drawer > #main {left: 0;}.right-drawer.transition > #main {transition: right ease-in-out 0.3s, padding ease-in-out 0.3s;}#main > ::content > [main] {height: 100%;}#drawer > ::content > [drawer] {height: 100%;}#scrim {position: absolute;top: 0;right: 0;bottom: 0;left: 0;visibility: hidden;opacity: 0;transition: opacity ease-in-out 0.38s, visibility ease-in-out 0.38s;background-color: rgba(0, 0, 0, 0.3);}.narrow-layout > #drawer {will-change: transform;}.narrow-layout > #drawer.iron-selected {box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);}.right-drawer.narrow-layout > #drawer.iron-selected {box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.15);}.narrow-layout > #drawer > ::content > [drawer] {border: 0;}.left-drawer.narrow-layout > #drawer:not(.iron-selected) {-webkit-transform: translateX(-100%);transform: translateX(-100%);}.right-drawer.narrow-layout > #drawer:not(.iron-selected) {left: auto;visibility: hidden;-webkit-transform: translateX(100%);transform: translateX(100%);}.right-drawer.narrow-layout.dragging > #drawer:not(.iron-selected),.right-drawer.narrow-layout.peeking > #drawer:not(.iron-selected) {visibility: visible;}.narrow-layout > #main {padding: 0;}.right-drawer.narrow-layout > #main {left: 0;right: 0;}.narrow-layout > #main:not(.iron-selected) > #scrim,.dragging > #main > #scrim {visibility: visible;opacity: var(--paper-drawer-panel-scrim-opacity, 1);}.narrow-layout > #main > * {margin: 0;min-height: 100%;left: 0;right: 0;-moz-box-sizing: border-box;box-sizing: border-box;}iron-selector:not(.narrow-layout) #main ::content [paper-drawer-toggle] {display: none;}</style>
 
   <template>
@@ -485,19 +514,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="iron-pages" assetpath="bower_components/iron-pages/">
-
-  <style>:host {display: block;}:host > ::content > :not(.iron-selected) {display: none !important;}</style>
-
-  <template>
-
-    <content></content>
-
-  </template>
-
-</dom-module>
-
-<dom-module id="paper-toggle-button" assetpath="bower_components/paper-toggle-button/">
+<dom-module id="paper-toggle-button" assetpath="../../bower_components/paper-toggle-button/">
 
   <style>/*@licenseCopyright (c) 2015 The Polymer Project Authors. All rights reserved.This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txtThe complete set of authors may be found at http://polymer.github.io/AUTHORS.txtThe complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txtCode distributed by Google as part of the polymer project is alsosubject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt*/:host {display: inline-block;}:host([disabled]) {pointer-events: none;}:host(:focus) {outline:none;}:host .toggle-bar {background-color: var(--paper-toggle-button-unchecked-bar-color, #000000);}:host .toggle-button {background-color: var(--paper-toggle-button-unchecked-button-color, --paper-grey-50);}:host([checked]) .toggle-bar {background-color: var(--paper-toggle-button-checked-bar-color, --google-green-500);}:host([checked]) .toggle-button {background-color: var(--paper-toggle-button-checked-button-color, --google-green-500);}:host .toggle-ink {color: var(--paper-toggle-button-unchecked-ink-color, --primary-text-color);}:host([checked]) .toggle-ink {color: var(--paper-toggle-button-checked-ink-color, --google-green-500);}/* ID selectors should not be overriden by users. */#toggleContainer {position: relative;width: 36px;height: 14px;}#toggleBar {position: absolute;height: 100%;width: 100%;border-radius: 8px;pointer-events: none;opacity: 0.4;transition: background-color linear .08s;}:host([checked]) #toggleBar {opacity: 0.5;}:host([disabled]) #toggleBar {background-color: #000;opacity: 0.12;}#toggleButton {position: absolute;top: -3px;height: 20px;width: 20px;border-radius: 50%;box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6);transition: -webkit-transform linear .08s, background-color linear .08s;transition: transform linear .08s, background-color linear .08s;will-change: transform;}#toggleButton.dragging {-webkit-transition: none;transition: none;}:host([checked]) #toggleButton {-webkit-transform: translate(16px, 0);transform: translate(16px, 0);}:host([disabled]) #toggleButton {background-color: #bdbdbd;opacity: 1;}#ink {position: absolute;top: -14px;left: -14px;width: 48px;height: 48px;opacity: 0.5;pointer-events: none;}</style>
 
@@ -513,7 +530,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   </dom-module>
-<dom-module id="iron-a11y-announcer" assetpath="bower_components/iron-a11y-announcer/">
+<dom-module id="iron-a11y-announcer" assetpath="../../bower_components/iron-a11y-announcer/">
   <style>:host {display: inline-block;position: fixed;clip: rect(0px,0px,0px,0px);}</style>
 
   <template>
@@ -521,14 +538,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   </dom-module>
-<dom-module id="paper-toast" assetpath="bower_components/paper-toast/">
+<dom-module id="paper-toast" assetpath="../../bower_components/paper-toast/">
   <style>:host {display: inline-block;position: fixed;background: #323232;color: #f1f1f1;min-height: 48px;min-width: 288px;padding: 16px 24px 12px;box-sizing: border-box;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);border-radius: 2px;bottom: 12px;left: 12px;font-size: 14px;cursor: default;-webkit-transition: visibility 0.3s, -webkit-transform 0.3s;transition: visibility 0.3s, transform 0.3s;-webkit-transform: translateY(100px);transform: translateY(100px);visibility: hidden;}:host(.capsule) {border-radius: 24px;}:host(.fit-bottom) {bottom: 0;left: 0;width: 100%;min-width: 0;border-radius: 0;}:host(.paper-toast-open){visibility: visible;-webkit-transform: translateY(0px);transform: translateY(0px);}</style>
   <template>
     <span id="label">{{text}}</span>
     <content></content>
   </template>
 </dom-module>
-<dom-module id="iron-overlay-backdrop" assetpath="bower_components/iron-overlay-behavior/">
+<dom-module id="iron-overlay-backdrop" assetpath="../../bower_components/iron-overlay-behavior/">
 
   <style>:host {position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background-color: var(--iron-overlay-backdrop-background-color, #000);opacity: 0;transition: opacity 0.2s;@apply(--iron-overlay-backdrop);}:host([opened]) {opacity: var(--iron-overlay-backdrop-opacity, 0.6);@apply(--iron-overlay-backdrop-opened);}</style>
 
@@ -538,7 +555,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-dialog" assetpath="bower_components/paper-dialog/">
+<dom-module id="paper-dialog" assetpath="../../bower_components/paper-dialog/">
 
   <style>/*@licenseCopyright (c) 2015 The Polymer Project Authors. All rights reserved.This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txtThe complete set of authors may be found at http://polymer.github.io/AUTHORS.txtThe complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txtCode distributed by Google as part of the polymer project is alsosubject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt*/:host {display: block;margin: 24px 40px;background: var(--paper-dialog-background-color, --primary-background-color);color: var(--paper-dialog-color, --primary-text-color);/*@apply(--layout-scroll);*/@apply(--paper-font-body1);@apply(--shadow-elevation-16dp);@apply(--paper-dialog);}:host > ::content > * {margin-top: 0;padding: 0;}:host > ::content > .no-padding {padding: 0;}:host > ::content > *:first-child {margin-top: 0;}:host > ::content > *:last-child {margin-bottom: 24px;}:host > ::content h2 {position: relative;margin: 0;@apply(--paper-font-title);@apply(--paper-dialog-title);}:host > ::content .buttons {position: relative;padding: 8px 8px 8px 24px;margin: 0;color: var(--paper-dialog-button-color, --default-primary-color);@apply(--layout-horizontal);@apply(--layout-end-justified);}</style>
 
@@ -548,13 +565,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-material" assetpath="bower_components/paper-material/">
+<dom-module id="paper-material" assetpath="../../bower_components/paper-material/">
   <style>:host {display: block;position: relative;@apply(--shadow-transition);}:host([elevation="1"]) {@apply(--shadow-elevation-2dp);}:host([elevation="2"]) {@apply(--shadow-elevation-4dp);}:host([elevation="3"]) {@apply(--shadow-elevation-6dp);}:host([elevation="4"]) {@apply(--shadow-elevation-8dp);}:host([elevation="5"]) {@apply(--shadow-elevation-16dp);}</style>
   <template>
     <content></content>
   </template>
 </dom-module>
-<dom-module id="paper-button" assetpath="bower_components/paper-button/">
+<dom-module id="paper-button" assetpath="../../bower_components/paper-button/">
 
   <style>:host {display: inline-block;position: relative;box-sizing: border-box;min-width: 5.14em;margin: 0 0.29em;background: transparent;text-align: center;font: inherit;text-transform: uppercase;outline: none;border-radius: 3px;-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;user-select: none;cursor: pointer;z-index: 0;@apply(--paper-button);}.keyboard-focus {font-weight: bold;}:host([disabled]) {background: #eaeaea;color: #a8a8a8;cursor: auto;pointer-events: none;@apply(--paper-button-disabled);}:host([noink]) paper-ripple {display: none;}paper-material {border-radius: inherit;}.content > ::content * {text-transform: inherit;}.content {padding: 0.7em 0.57em}</style>
 
@@ -570,7 +587,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-input-container" assetpath="bower_components/paper-input/">
+<dom-module id="paper-input-container" assetpath="../../bower_components/paper-input/">
 
   <style>:host {display: block;padding: 8px 0;@apply(--paper-input-container);}:host[inline] {display: inline-block;}:host([disabled]) {pointer-events: none;opacity: 0.33;}.floated-label-placeholder {@apply(--paper-font-caption);}.underline {position: relative;}.focused-line {height: 2px;-webkit-transform-origin: center center;transform-origin: center center;-webkit-transform: scale3d(0,1,1);transform: scale3d(0,1,1);background: var(--paper-input-container-focus-color, --default-primary-color);@apply(--paper-input-container-underline-focus);}.underline.is-highlighted .focused-line {-webkit-transform: none;transform: none;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.underline.is-invalid .focused-line {background: var(--paper-input-container-invalid-color, --google-red-500);-webkit-transform: none;transform: none;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.unfocused-line {height: 1px;background: var(--paper-input-container-color, --secondary-text-color);@apply(--paper-input-container-underline);}:host([disabled]) .unfocused-line {border-bottom: 1px dashed;border-color: var(--paper-input-container-color, --secondary-text-color);background: transparent;@apply(--paper-input-container-underline-disabled);}.input-content {position: relative;}.input-content ::content label,.input-content ::content .paper-input-label {position: absolute;top: 0;right: 0;left: 0;font: inherit;color: var(--paper-input-container-color, --secondary-text-color);@apply(--paper-font-subhead);@apply(--paper-input-container-label);}.input-content.label-is-floating ::content label,.input-content.label-is-floating ::content .paper-input-label {-webkit-transform: translate3d(0, -75%, 0) scale(0.75);transform: translate3d(0, -75%, 0) scale(0.75);-webkit-transform-origin: left top;transform-origin: left top;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.input-content.label-is-highlighted ::content label,.input-content.label-is-highlighted ::content .paper-input-label {color: var(--paper-input-container-focus-color, --default-primary-color);@apply(--paper-input-container-label-focus);}.input-content.is-invalid ::content label,.input-content.is-invalid ::content .paper-input-label {color: var(--paper-input-container-invalid-color, --google-red-500);}.input-content.label-is-hidden ::content label,.input-content.label-is-hidden ::content .paper-input-label {visibility: hidden;}.input-content ::content input,.input-content ::content textarea,.input-content ::content iron-autogrow-textarea,.input-content ::content .paper-input-input {position: relative; /* to make a stacking context */outline: none;box-shadow: none;padding: 0;width: 100%;background: transparent;border: none;color: var(--paper-input-container-input-color, --primary-text-color);@apply(--paper-font-subhead);@apply(--paper-input-container-input);}/* Firefox sets a min-width on the input, which can cause layout issues */.input-content ::content input {min-width: 0;}.input-content ::content textarea {resize: none;}.add-on-content.is-invalid ::content * {color: var(--paper-input-container-invalid-color, --google-red-500);}.add-on-content.is-highlighted ::content * {color: var(--paper-input-container-focus-color, --default-primary-color);}</style>
 
@@ -597,7 +614,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-input-error" assetpath="bower_components/paper-input/">
+<dom-module id="paper-input-error" assetpath="../../bower_components/paper-input/">
 
   <style>:host {display: inline-block;visibility: hidden;float: left;color: var(--paper-input-container-invalid-color, --google-red-500);@apply(--paper-font-caption);@apply(--paper-input-error);}:host([invalid]) {visibility: visible;};</style>
 
@@ -609,7 +626,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-input-char-counter" assetpath="bower_components/paper-input/">
+<dom-module id="paper-input-char-counter" assetpath="../../bower_components/paper-input/">
 
   <style>:host {display: inline-block;float: right;@apply(--paper-font-caption);@apply(--paper-input-char-counter);}</style>
 
@@ -621,7 +638,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-input" assetpath="bower_components/paper-input/">
+<dom-module id="paper-input" assetpath="../../bower_components/paper-input/">
 
   <style>:host {display: block;}input::-webkit-input-placeholder {color: var(--paper-input-container-color, --secondary-text-color);}input:-moz-placeholder {color: var(--paper-input-container-color, --secondary-text-color);}input::-moz-placeholder {color: var(--paper-input-container-color, --secondary-text-color);}input:-ms-input-placeholder {color: var(--paper-input-container-color, --secondary-text-color);}</style>
 
@@ -647,7 +664,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="iron-autogrow-textarea" assetpath="bower_components/iron-autogrow-textarea/">
+<dom-module id="iron-autogrow-textarea" assetpath="../../bower_components/iron-autogrow-textarea/">
 
   <style>:host {display: inline-block;position: relative;width: 400px;border: 1px solid;padding: 2px;-moz-appearance: textarea;-webkit-appearance: textarea;}.mirror-text {visibility: hidden;word-wrap: break-word;}textarea {position: relative;outline: none;border: none;resize: none;background: inherit;color: inherit;/* see comments in template */width: 100%;height: 100%;font-size: inherit;font-family: inherit;}::content textarea:invalid {box-shadow: none;}</style>
   <template>
@@ -661,7 +678,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 </dom-module>
 
-<dom-module id="paper-textarea" assetpath="bower_components/paper-input/">
+<dom-module id="paper-textarea" assetpath="../../bower_components/paper-input/">
   <template>
 
     <paper-input-container no-label-float$="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
@@ -684,7 +701,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </dom-module>
 
-<dom-module id="paper-progress" assetpath="bower_components/paper-progress/">
+<dom-module id="paper-progress" assetpath="../../bower_components/paper-progress/">
   <style>:host {display: inline-block;width: 200px;height: 4px;}:host(.transiting) #activeProgress,:host(.transiting) #secondaryProgress {-webkit-transition-property: -webkit-transform;transition-property: transform;/* Duration */-webkit-transition-duration: var(--paper-progress-transition-duration, 0.08s);transition-duration: var(--paper-progress-transition-duration, 0.08s);/* Timing function */-webkit-transition-timing-function: var(--paper-progress-transition-timing-function, ease);transition-timing-function: var(--paper-progress-transition-timing-function, ease);/* Delay */-webkit-transition-delay: var(--paper-progress-transition-delay, 0s);transition-delay: var(--paper-progress-transition-delay, 0s);}#progressContainer {position: relative;height: 100%;background-color: var(--paper-progress-container-color, --google-grey-300);overflow: hidden;}#activeProgress,#secondaryProgress {-webkit-transform-origin: left center;transform-origin: left center;-webkit-transform: scaleX(0);transform: scaleX(0);}#activeProgress {background-color: var(--paper-progress-active-color, --google-green-500);}#secondaryProgress {background-color: var(--paper-progress-secondary-color, --google-green-100);}#activeProgress.indeterminate {-webkit-transform-origin: center center;transform-origin: center center;-webkit-animation: indeterminate-bar 1s linear infinite;animation: indeterminate-bar 1s linear infinite;}@-webkit-keyframes indeterminate-bar {0% {-webkit-transform: translate(-50%) scaleX(0);}50% {-webkit-transform: translate(0%) scaleX(0.3);}100% {-webkit-transform: translate(50%) scaleX(0);}}@keyframes indeterminate-bar {0% {transform: translate(-50%) scaleX(0);}50% {transform: translate(0%) scaleX(0.3);}100% {transform: translate(50%) scaleX(0);}}</style>
   <template>
     <div id="progressContainer" role="progressbar" aria-valuenow$="{{value}}" aria-valuemin$="{{min}}" aria-valuemax$="{{max}}">
@@ -694,5 +711,244 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 </dom-module>
 
-<dom-module id="iron-localstorage" assetpath="bower_components/iron-localstorage/"></dom-module>
-<dom-module id="word-service" assetpath="services/"><style>iron-ajax {display: none;}</style><template><iron-ajax id="wajax" url="{{jsonUrl}}" handleas="json" on-request="requestSent" on-response="wordsLoaded"></iron-ajax></template></dom-module><dom-module id="word-board" assetpath="elements/"><style></style><template><div id="word-board-word"><span id="my_word">{{myWord}}</span></div><audio id="word_aud_elem" src="{{wordAudio}}" on-error="enableSynth" hidden=""></audio><word-service id="wservice" game-lang="{{gameLang}}" warray="{{warray}}"></word-service></template></dom-module><dom-module id="score-board" assetpath="elements/"><style></style><template><div class="score-box"><div id="score-sign" class="horizontal layout center"><iron-icon id="star-points" icon="stars" class="tinavg-med-icon"></iron-icon>&nbsp;<span id="score-box-score">{{score}}</span></div></div></template></dom-module><dom-module id="jumbotron-text" assetpath="elements/"><style></style><template><div id="jumbotron-div" class="jumbotron"><paper-button id="jtext">{{usertext}}</paper-button></div></template></dom-module><dom-module id="word-recorder" assetpath="elements/"><style>.recording-on {background-color: rgba(255, 50, 50, 0.6);border-radius: 50%;}/*:root {--iron-icon-width: 25vmax;--iron-icon-height: 25vmax;}@media screen and (orientation: portrait) {--iron-icon-width: 33.33vmax;--iron-icon-height: 33.33vmax;}*/</style><template><div id="record-elem" class="horizontal center-justified layout center"><audio id="recAudio" src="" hidden=""></audio><iron-icon id="recorderInit" class="recorder-icon" icon="av:mic" on-tap="makeRecording"></iron-icon><iron-icon id="recorderPlay" class="spin-flip-transition recorder-icon" icon="av:play-circle-filled" on-tap="playRecording"></iron-icon></div></template></dom-module><dom-module id="letter-card" assetpath="elements/"><style>:host {display: inline-block;position: relative;}</style><template><div class="card-body layout horizontal center-justified"><span class="content-span"><content></content></span><paper-ripple id="letterpr" recenters=""></paper-ripple></div><audio id="letteraudio" src="{{aacAudio}}" on-error="enableSynth" preload="auto" hidden=""></audio></template></dom-module><dom-module id="letter-service" assetpath="services/"><style>iron-ajax {display: none;}</style><template><iron-ajax id="ajax" url="{{jsonUrl}}" handleas="json" on-request="lettersRequest" on-response="lettersLoaded"></iron-ajax></template></dom-module><dom-module id="letter-list" assetpath="elements/"><style>:host {display: inline-block;position: relative;}</style><template><letter-service id="lservice" game-lang="{{gameLang}}" lobj="{{lobj}}"></letter-service><div id="lmc" class="horizontal layout flex wrap" style="width: 100vw"><template id="repeater" is="dom-repeat" filter="addIndex" items="{{letterList}}"><letter-card class="letter-matrix" uid="[[item.uid]]" aac-audio="[[item.audio]]" letter="[[item.letter]]" game-lang="[[gameLang]]" regular="[[item.regular]]" hidden="[[item.hidden]]" tabindex="[[item.index]]"><p>[[item.letter]]</p></letter-card></template></div></template></dom-module><dom-module id="lang-flag" assetpath="elements/"><style></style><template><div id="flag_icon" class="spin-flip-transition flag-svg tinavg-med-icon flag-div"></div></template></dom-module><dom-module id="tinavg-webapp" assetpath="elements/"><style is="custom-style">/* see tinavg-style.html... it didn't work */:host {--paper-progress-container-color: #f3d6b0;--paper-progress-secondary-color: var(--paper-red-a700);}</style><template><iron-localstorage name="tinavg-lastlang" value="{{gameLang}}"></iron-localstorage><iron-localstorage name="tinavg-earmodus" value="{{earmodus}}"></iron-localstorage><iron-localstorage name="tinavg-learnmodus" value="{{learnmodus}}"></iron-localstorage><iron-localstorage name="tinavg-recordmodus" value="{{recordmodus}}"></iron-localstorage><iron-localstorage name="tinavg-nerdmodus" value="{{nerdmodus}}"></iron-localstorage><iron-localstorage name="tinavg-nerdsprache" value="{{nerdSprache}}"></iron-localstorage><paper-drawer-panel id="pdp" responsive-width="25000px" right-drawer=""><div id="collapse" class="mini-menu" drawer=""><div>Language:<select id="selectLang" on-change="setLang"><template is="dom-repeat" items="{{languageList}}"><option value="{{item.abbrev}}">{{item.fullname}}</option></template></select></div><br><div>Earmodus:<paper-toggle-button id="select_earmodus" on-tap="toggleEarModus" checked$="{{earmodus}}"></paper-toggle-button></div><br><div>Learnmodus:<paper-toggle-button id="select_learnmodus" on-tap="toggleLearnModus" checked$="{{learnmodus}}"></paper-toggle-button></div><br><div>Meiselmodus:<paper-toggle-button id="select_nerdmodus" on-tap="toggleNerdModus" checked$="{{nerdmodus}}"></paper-toggle-button></div><br><div>Meiselsprache:<select id="meiselspracheliste" on-change="setNerdSprache"><template is="dom-repeat" items="{{nerdSpracheList}}"><option value="{{item.abbrev}}">{{item.fullname}}</option></template></select></div><br><div>Talkmodus:<paper-toggle-button id="select_recordmodus" on-tap="toggleRecordModus" checked$="{{recordmodus}}"></paper-toggle-button></div><br><div><firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://intense-heat-8981.firebaseio.com" provider="twitter" on-error="errorHandler"></firebase-auth><img src="assets/images/sign-in-with-twitter-gray.png" alt="sign in with Twitter" on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}"> <button on-tap="logout" hidden$="{{!computeLoginHidden(statusKnown, user)}}">Logout</button></div></div><paper-header-panel id="header-panel" main=""><div class="two-headers paper-header"><div class="footer horizontal justified layout center"><div class="footer-button horizontal start-justified layout flex"><score-board id="score-board-player-1" player="1" learnmodus="{{learnmodus}}" recordmodus="{{recordmodus}}"></score-board></div><word-board id="wboard" class="horizontal center-justified layout flex-2" game-lang="{{gameLang}}" earmodus="{{earmodus}}"></word-board><div class="horizontal end-justified layout flex"><iron-icon id="menutoggle" class="spin-flip-transition tinavg-med-icon big" icon="menu" paper-drawer-toggle=""></iron-icon></div></div><div class="core-header horizontal justified layout center"><div class="top-right-item horizontal start-justified layout flex"><iron-icon id="help-show" class="tinavg-med-icon" icon="help" on-tap="showHelp"></iron-icon><lang-flag id="switchModusIcon" game-lang="[[gameLang]]" langs="[[languageList]]" on-tap="switchModus"></lang-flag></div><div class="horizontal center-justified layout flex-2"><jumbotron-text id="jt" tabindex="{{jumbotronIndexCompute()}}" learnmodus="{{learnmodus}}"></jumbotron-text></div><div id="nerdmodus-div" class="horizontal end-justified layout flex"><score-board id="score-board-player-2" player="2" hidden=""></score-board><div id="clue-show-div" class="tinavg-med-icon"><iron-icon id="clueshow" class="spin-flip-transition tinavg-med-icon" icon="text-format" on-tap="showClue"></iron-icon></div></div></div></div><div id="maincontentarea" class="content"><word-recorder id="wrecorder" hidden$="{{!recordmodus}}"></word-recorder><letter-list id="lettergrid" limit="{{letterLimit}}" game-lang="{{gameLang}}" hidden$="{{recordmodus}}"></letter-list></div><paper-progress value="{{progress1}}" secondary-progress="{{progress2}}"></paper-progress><paper-toast id="übersetzung" text="{{gameLang}}"></paper-toast></paper-header-panel></paper-drawer-panel><paper-dialog id="so" entry-animation="slide-from-left-animation" exit-animation="slide-right-animation" with-backdrop="" no-cancel-on-outside-click=""><div id="overlay-toolbar" class="vertical flex overlay-toolbar"><center><h2>This Is Not A Vocabulary Game</h2></center><paper-tabs selected="{{selected}}"><paper-tab>Rules</paper-tab><paper-tab>Credits</paper-tab><paper-tab>Contact</paper-tab></paper-tabs></div><iron-pages selected="{{selected}}" class="overlay-pages"><div id="rules"><h3>The Goal</h3><p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p><h3>The Rules: Normal / Earmodus / Learnmodus / Talkmodus</h3><ol><li>Look at the word at the top of the page.</li><li>Spell the word by tapping the letters in the grid.</li><li>Check your answer by tapping the word just below the target word.</li><li>100 points for a correct answer and -30 for an incorrect answer.</li><li>Earmodus: The word is hidden and only spoken. The underline gives hints about the word's grammar.</li><li>Learnmodus: Skip words and do not lose 30 pts for incorrect answers.</li><li>Talkmodus: Record your voice and play it. Then click the emoticon for the next word and 250 pts.</li></ol><h3>The Buttons</h3><ol><li><div class="tinavg-med-icon"><iron-icon id="help-overlay-menutoggle" icon="menu" class="tinavg-med-icon"></iron-icon></div>: Reveals the options menu</li><li><div class="tinavg-med-icon"><iron-icon id="help-overlay-a" icon="text-format" class="tinavg-med-icon"></iron-icon></div>: Goes through the letter sequence, then says the word aloud</li><li><div class="tinavg-med-icon"><iron-icon id="help-overlay-help-show" icon="help" class="tinavg-med-icon"></iron-icon></div>: Shows this help menu.</li><li><div class="tinavg-med-icon"><lang-flag id="help-overlay-switch-modus" mylang="[[gameLang]]" langs="[[languageList]]" class="same-line"></lang-flag></div>: Switches the language. Does NOT check word.</li><li><div class="tinavg-med-icon"><iron-icon icon="av:mic" class="tinavg-med-icon"></iron-icon></div>: Record voice in Talkmodus. Also stops recording.</li><li><div class="tinavg-med-icon"><iron-icon icon="av:play-circle-filled" class="tinavg-med-icon"></iron-icon></div>: Play voice recording. Also stops recording.</li><li>Target Word: You can click this to have the word spoken outloud.</li></ol><div id="llin" hidden=""><small>You last logged in on: <span>{{lastvisit}}</span></small></div><div id="help-lang-specific"></div></div><div id="credits"><p>First, I know that I won't be able to thank everyone that made this game possible, but I wanted to give credit to a few people that have inspired me to develop this game and to those that have lent their voice to the game.</p><h3>German</h3><strong>Voice: Ina Schoof</strong><ul><li>Ina has not only has she provided a voice that shatters all the preconceived notions that German is an "ugly" sounding language, but she has also been super supportive as a flatmate, a friend, and even as a fake girlfriend with the Ausländerbehörde.</li></ul><h3>English (US and Southern US)</h3><strong>Voice: David Pollack</strong><br><strong>Inspiration (Southern US): Pete Delaune</strong><ul><li>In a previous life, Pete was my partner in crime in the Atlanta low-society social scene. We would practice our southern accents with each other to the point where we could hold entire conversations in the dialect only pausing from time to time to laugh at how ridiculous we sounded. But like Icarus one cannot fly too close to the sun forever. Thus we can blame Pete for driving me away from the States and onto my language learning sojourn in Deutschland. Danke Pete, ich haße dich wirklich mit allem Kraft auf der Welt... hehe, just kidding.</li></ul><h3>Arabic</h3><strong>Voice (alphabet): Tamam El-Mohamed</strong><ul><li>Tamam is one of my students at the Rütli Schule and the voice of the Arabic alphabet. I really appreciated her and all my other students enthusiasm at the Rütli Schule. They've given me a much deeper perspective on what it is like growing up in Berlin.</li></ul><h3>Korean and Russian</h3><strong>Voice (words): <a href="http://updates.html5rocks.com/2014/01/Web-apps-that-talk---Introduction-to-the-Speech-Synthesis-API" target="_blank">Speech Synthesis API</a></strong><br><strong>Voice (letters): <a href="https://goo.gl/photos/g1djbMV34RKZX78FA" target="_blank">die Schreibmaschine</a></strong><ul><li>Of course, I'd like to thank die Schreibmaschine for providing her voice for the letters that have yet to be vocalized. :-)</li></ul><h3>Hebrew</h3><strong>Voice: Suzan Badran</strong><ul><li>Suzan hails from Israel and contributed her voice after a chance meeting while she was on vacation in Berlin. I was super excited about that because I was going to Israel the very next week, so I could actually put this project to use. She also showed me a around a bit in Jerusalem and will hopefully remain a dear friend in the future.</li></ul><p>Additionally, I would like to thank my friend, Luisa Meisel, for whom the "Meiselmodus" is named after (originally conceived as "Nerdmodus"). She was the first of many that suggested that I add definitions to the game. I resisted for a long time, even going so far as to name the game "this is not a vocabulary game" but in the end, I conceded.</p><p>Finally, I would like to thank my father, Bob Pollack. The list would be endless if I had to thank him for everything, but he has endured the trials and tribulations of beta testing tinavg.com on the iPad/iPhone. His along with all of my friends' comments, suggestions, criticisms, and wild looks of bewilderment have made this game what it is today.</p></div><div id="contact"><h3>Email Me!</h3><form id="contactme" action="//formspree.io/david@tinavg.com" method="POST" target="_blank" class="vertical layout"><paper-input name="_replyto" type="email" label="your email" autofocus=""></paper-input><paper-textarea name="message" label="your message"></paper-textarea><input type="text" name="_gotcha" style="display:none"> <button type="submit" value="Send">Send</button></form></div></iron-pages><div class="horizontal end-justified flex layout"><paper-button raised=""><a href="/terms.html" target="_blank">Terms</a></paper-button><paper-button raised=""><a href="/privacy.html" target="_blank">Privacy Policy</a></paper-button><paper-button raised="" dialog-dismiss="" autofocus="">Close</paper-button></div></paper-dialog></template></dom-module></div><div id="friendly_message" hidden="">If you see this message something is taking too long, please try reloading your browser. <a href="javascript:void(0)" onclick="hideFriendlyMessage();">Click here to hide this message</a></div><tinavg-webapp id="tinavg_app"></tinavg-webapp><script type="text/javascript">function hideFriendlyMessage(){document.getElementById("friendly_message").setAttribute("hidden",!0)}window.cookieconsent_options={learnMore:"more info",link:"https://www.tinavg.com/terms.html",theme:"dark-top"},setTimeout(function(){document.querySelector("[unresolved]")&&(document.getElementById("friendly_message").removeAttribute("hidden"),document.querySelector("[unresolved]").removeAttribute("unresolved"))},25e3);</script><script src="index.build.js"></script></body></html>
+<dom-module id="word-service" assetpath="../services/">
+  <style>iron-ajax {display: none;}</style>
+  <template>
+    <iron-ajax id="wajax" url="{{jsonUrl}}" handleas="json" on-request="requestSent" on-response="wordsLoaded">
+    </iron-ajax>
+  </template>
+</dom-module>
+<dom-module id="word-board" assetpath="/">
+  <style></style>
+  <template>
+    <div id="word-board-word"><span id="my_word">{{myWord}}</span></div>
+    <audio id="word_aud_elem" src="{{wordAudio}}" on-error="enableSynth" hidden=""></audio>
+    <word-service id="wservice" game-lang="{{gameLang}}" warray="{{warray}}"></word-service>
+  </template>
+</dom-module>
+<dom-module id="score-board" assetpath="/">
+  <style></style>
+  <template>
+    <div class="score-box">
+      <div id="score-sign" class="horizontal layout center"><iron-icon id="star-points" icon="stars" class="tinavg-med-icon"></iron-icon>&nbsp;<span id="score-box-score">{{score}}</span></div>
+    </div>
+  </template>
+</dom-module>
+<dom-module id="jumbotron-text" assetpath="/">
+  <style></style>
+  <template>
+    <div id="jumbotron-div" class="jumbotron">
+      <paper-button id="jtext">{{usertext}}</paper-button>
+    </div>
+  </template>
+</dom-module>
+<dom-module id="word-recorder" assetpath="/">
+    <style>.recording-on {background-color: rgba(255, 50, 50, 0.6);border-radius: 50%;}/*:root {--iron-icon-width: 25vmax;--iron-icon-height: 25vmax;}@media screen and (orientation: portrait) {--iron-icon-width: 33.33vmax;--iron-icon-height: 33.33vmax;}*/</style>
+    <template>
+      <div id="record-elem" class="horizontal center-justified layout center">
+        <audio id="recAudio" src="" hidden=""></audio>
+        <iron-icon id="recorderInit" class="recorder-icon" icon="av:mic" on-tap="makeRecording"></iron-icon>
+        <iron-icon id="recorderPlay" class="spin-flip-transition recorder-icon" icon="av:play-circle-filled" on-tap="playRecording"></iron-icon>
+      </div>
+    </template>
+</dom-module>
+<dom-module id="letter-card" assetpath="/">
+    <style>:host {display: inline-block;position: relative;}</style>
+    <template>
+      <div class="card-body layout horizontal center-justified">
+        <span class="content-span"><content></content></span>
+        <paper-ripple id="letterpr" recenters=""></paper-ripple>
+      </div>
+      <audio id="letteraudio" src="{{aacAudio}}" on-error="enableSynth" preload="auto" hidden=""></audio>
+    </template>
+</dom-module>
+<dom-module id="letter-service" assetpath="../services/">
+  <style>iron-ajax {display: none;}</style>
+  <template>
+    <iron-ajax id="ajax" url="{{jsonUrl}}" handleas="json" on-request="lettersRequest" on-response="lettersLoaded">
+    </iron-ajax>
+  </template>
+</dom-module>
+<dom-module id="letter-list" assetpath="/">
+  <style>:host {display: inline-block;position: relative;}</style>
+  <template>
+    <letter-service id="lservice" game-lang="{{gameLang}}" lobj="{{lobj}}"></letter-service>
+    <div id="lmc" class="horizontal layout flex wrap" style="width: 100vw">
+      <template id="repeater" is="dom-repeat" filter="addIndex" items="{{letterList}}">
+        <letter-card class="letter-matrix" uid="[[item.uid]]" aac-audio="[[item.audio]]" letter="[[item.letter]]" game-lang="[[gameLang]]" regular="[[item.regular]]" hidden="[[item.hidden]]" tabindex="[[item.index]]">
+          <p>[[item.letter]]</p>
+        </letter-card>
+      </template>
+    </div>
+  </template>
+</dom-module>
+<dom-module id="lang-flag" assetpath="/">
+    <style></style>
+    <template>
+      <div id="flag_icon" class="spin-flip-transition flag-svg tinavg-med-icon flag-div"></div>
+    </template>
+</dom-module>
+</div><dom-module id="tinavg-webapp">
+  <style is="custom-style">/* see tinavg-style.html... it didn't work */:host {--paper-progress-container-color: #f3d6b0;--paper-progress-secondary-color: var(--paper-red-a700);}</style>
+  <template>
+    
+    <iron-localstorage name="tinavg-lastlang" value="{{gameLang}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-earmodus" value="{{earmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-learnmodus" value="{{learnmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-recordmodus" value="{{recordmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-nerdmodus" value="{{nerdmodus}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-nerdsprache" value="{{nerdSprache}}"></iron-localstorage>
+    
+    <paper-drawer-panel id="pdp" responsive-width="25000px" right-drawer="">
+      
+      <div id="collapse" class="mini-menu" drawer="">
+        <div>
+          Language: 
+          <select id="selectLang" on-change="setLang">
+            <template is="dom-repeat" items="{{languageList}}"><option value="{{item.abbrev}}">{{item.fullname}}</option></template>
+          </select>
+        </div>
+        <br><div>Earmodus: <paper-toggle-button id="select_earmodus" on-tap="toggleEarModus" checked$="{{earmodus}}"></paper-toggle-button></div>
+        <br><div>Learnmodus: <paper-toggle-button id="select_learnmodus" on-tap="toggleLearnModus" checked$="{{learnmodus}}"></paper-toggle-button></div>
+        <br><div>Meiselmodus: <paper-toggle-button id="select_nerdmodus" on-tap="toggleNerdModus" checked$="{{nerdmodus}}"></paper-toggle-button></div>
+        <br><div>
+          Meiselsprache: 
+          <select id="meiselspracheliste" on-change="setNerdSprache">
+            <template is="dom-repeat" items="{{nerdSpracheList}}"><option value="{{item.abbrev}}">{{item.fullname}}</option></template>
+          </select>
+        </div>
+        <br><div>Talkmodus: <paper-toggle-button id="select_recordmodus" on-tap="toggleRecordModus" checked$="{{recordmodus}}"></paper-toggle-button></div>
+        <br><div>
+          <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://intense-heat-8981.firebaseio.com" provider="twitter" on-error="errorHandler"></firebase-auth>
+          <img src="../assets/images/sign-in-with-twitter-gray.png" alt="sign in with Twitter" on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">
+          <button on-tap="logout" hidden$="{{!computeLoginHidden(statusKnown, user)}}">Logout</button>
+        </div>
+      </div>
+      
+      
+      <paper-header-panel id="header-panel" class="vertical layout" main="">
+        <div class="two-headers paper-header">
+          <div class="footer horizontal justified layout center">
+            <div class="footer-button horizontal start-justified layout flex">
+              <score-board id="score-board-player-1" player="1" learnmodus="{{learnmodus}}" recordmodus="{{recordmodus}}"></score-board>
+            </div>
+            <word-board id="wboard" class="horizontal center-justified layout flex-2" game-lang="{{gameLang}}" earmodus="{{earmodus}}"></word-board>
+            <div class="horizontal end-justified layout flex">
+              <iron-icon id="menutoggle" class="spin-flip-transition tinavg-med-icon big" icon="menu" paper-drawer-toggle=""></iron-icon>
+            </div>
+          </div>
+          <div class="core-header horizontal justified layout center">
+            <div class="top-right-item horizontal start-justified layout flex">
+              <iron-icon id="help-show" class="tinavg-med-icon" icon="help" on-tap="showHelp"></iron-icon>
+              <lang-flag id="switchModusIcon" game-lang="[[gameLang]]" langs="[[languageList]]" on-tap="switchModus"></lang-flag>
+            </div>
+            <div class="horizontal center-justified layout flex-2">
+              <jumbotron-text id="jt" tabindex="{{jumbotronIndexCompute()}}" learnmodus="{{learnmodus}}"></jumbotron-text>
+            </div>
+            <div id="nerdmodus-div" class="horizontal end-justified layout flex">
+              <score-board id="score-board-player-2" player="2" hidden=""></score-board>
+              <div id="clue-show-div" class="tinavg-med-icon"><iron-icon id="clueshow" class="spin-flip-transition tinavg-med-icon" icon="text-format" on-tap="showClue"></iron-icon></div>
+            </div>
+          </div>
+        </div>
+        <div id="maincontentarea" class="content">
+          <word-recorder id="wrecorder" hidden$="{{!recordmodus}}"></word-recorder>
+          <letter-list id="lettergrid" limit="{{letterLimit}}" game-lang="{{gameLang}}" hidden$="{{recordmodus}}"></letter-list>
+        </div>
+        <paper-progress value="{{progress1}}" secondary-progress="{{progress2}}"></paper-progress>
+        <paper-toast id="übersetzung" text="{{gameLang}}"></paper-toast>
+      </paper-header-panel>
+    </paper-drawer-panel>
+    
+    <paper-dialog id="so" entry-animation="slide-from-left-animation" exit-animation="slide-right-animation" with-backdrop="" no-cancel-on-outside-click="">
+      <div id="overlay-toolbar" class="vertical flex overlay-toolbar">
+        <center><h2>This Is Not A Vocabulary Game</h2></center>
+        <paper-tabs selected="{{selected}}">
+          <paper-tab>Rules</paper-tab>
+          <paper-tab>Credits</paper-tab>
+          <paper-tab>Contact</paper-tab>
+        </paper-tabs>
+      </div>
+      <iron-pages selected="{{selected}}" class="overlay-pages">
+        <div id="rules">
+          <h3>The Goal</h3>
+          <p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p>
+          <h3>The Rules: Normal / Earmodus / Learnmodus / Talkmodus</h3>
+          <ol>
+            <li>Look at the word at the top of the page.</li>
+            <li>Spell the word by tapping the letters in the grid.</li>
+            <li>Check your answer by tapping the word just below the target word.</li>
+            <li>100 points for a correct answer and -30 for an incorrect answer.</li>
+            <li>Earmodus: The word is hidden and only spoken.  The underline gives hints about the word's grammar.</li>
+            <li>Learnmodus: Skip words and do not lose 30 pts for incorrect answers.</li>
+            <li>Talkmodus: Record your voice and play it.  Then click the emoticon for the next word and 250 pts.</li>
+          </ol>
+          <h3>The Buttons</h3>
+          <ol>
+            <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-menutoggle" icon="menu" class="tinavg-med-icon"></iron-icon></div>: Reveals the options menu</li>
+            <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-a" icon="text-format" class="tinavg-med-icon"></iron-icon></div>: Goes through the letter sequence, then says the word aloud</li>
+            <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-help-show" icon="help" class="tinavg-med-icon"></iron-icon></div>: Shows this help menu.</li>
+            <li><div class="tinavg-med-icon"><lang-flag id="help-overlay-switch-modus" mylang="[[gameLang]]" langs="[[languageList]]" class="same-line"></lang-flag></div>: Switches the language.  Does NOT check word.</li>
+            <li><div class="tinavg-med-icon"><iron-icon icon="av:mic" class="tinavg-med-icon"></iron-icon></div>: Record voice in Talkmodus.  Also stops recording.</li>
+            <li><div class="tinavg-med-icon"><iron-icon icon="av:play-circle-filled" class="tinavg-med-icon"></iron-icon></div>: Play voice recording.  Also stops recording.</li>
+            <li>Target Word: You can click this to have the word spoken outloud.</li>
+          </ol>
+          <div id="llin" hidden=""><small>You last logged in on: <span>{{lastvisit}}</span></small></div>
+          <div id="help-lang-specific"></div>
+        </div>
+        <div id="credits">
+          <p>First, I know that I won't be able to thank everyone that made this game possible, but I wanted to give credit to a few people that have inspired me to develop this game and to those that have lent their voice to the game.</p>
+          <h3>German</h3>
+            <strong>Voice: Ina Schoof</strong>
+              <ul>
+                <li>Ina has not only has she provided a voice that shatters all the preconceived notions that German is an "ugly" sounding language, but she has also been super supportive as a flatmate, a friend, and even as a fake girlfriend with the Ausländerbehörde.</li>
+              </ul>
+          <h3>English (US and Southern US)</h3>
+            <strong>Voice: David Pollack</strong><br>
+            <strong>Inspiration (Southern US): Pete Delaune</strong>
+              <ul>
+                <li>In a previous life, Pete was my partner in crime in the Atlanta low-society social scene.  We would practice our southern accents with each other to the point where we could hold entire conversations in the dialect only pausing from time to time to laugh at how ridiculous we sounded.  But like Icarus one cannot fly too close to the sun forever. Thus we can blame Pete for driving me away from the States and onto my language learning sojourn in Deutschland.  Danke Pete, ich haße dich wirklich mit allem Kraft auf der Welt... hehe, just kidding.</li>
+              </ul>
+          <h3>Arabic</h3>
+            <strong>Voice (alphabet): Tamam El-Mohamed</strong>
+              <ul>
+                <li>Tamam is one of my students at the Rütli Schule and the voice of the Arabic alphabet.  I really appreciated her and all my other students enthusiasm at the Rütli Schule.  They've given me a much deeper perspective on what it is like growing up in Berlin.</li>
+              </ul>
+          <h3>Korean and Russian</h3>
+            <strong>Voice (words): <a href="http://updates.html5rocks.com/2014/01/Web-apps-that-talk---Introduction-to-the-Speech-Synthesis-API" target="_blank">Speech Synthesis API</a></strong><br>
+            <strong>Voice (letters): <a href="https://goo.gl/photos/g1djbMV34RKZX78FA" target="_blank">die Schreibmaschine</a></strong>
+              <ul>
+                <li>Of course, I'd like to thank die Schreibmaschine for providing her voice for the letters that have yet to be vocalized.  :-)</li>
+              </ul>
+          <h3>Hebrew</h3>
+            <strong>Voice: Suzan Badran</strong>
+              <ul>
+                <li>Suzan hails from Israel and contributed her voice after a chance meeting while she was on vacation in Berlin.  I was super excited about that because I was going to Israel the very next week, so I could actually put this project to use.  She also showed me a around a bit in Jerusalem and will hopefully remain a dear friend in the future.</li>
+              </ul>
+          <p>Additionally, I would like to thank my friend, Luisa Meisel, for whom the "Meiselmodus" is named after (originally conceived as "Nerdmodus").  She was the first of many that suggested that I add definitions to the game.  I resisted for a long time, even going so far as to name the game "this is not a vocabulary game" but in the end, I conceded.</p>
+          <p>Finally, I would like to thank my father, Bob Pollack.  The list would be endless if I had to thank him for everything, but he has endured the trials and tribulations of beta testing tinavg.com on the iPad/iPhone.  His along with all of my friends' comments, suggestions, criticisms, and wild looks of bewilderment have made this game what it is today.</p>
+        </div>
+        <div id="contact">
+          <h3>Email Me!</h3>
+          <form id="contactme" action="//formspree.io/david@tinavg.com" method="POST" target="_blank" class="vertical layout">
+              <paper-input name="_replyto" type="email" label="your email" autofocus=""></paper-input>
+              <paper-textarea name="message" label="your message"></paper-textarea>
+              <input type="text" name="_gotcha" style="display:none">
+              <button type="submit" value="Send">Send</button>
+          </form>
+        </div>
+      </iron-pages>
+      <div class="horizontal end-justified flex layout">
+        <paper-button raised=""><a href="/terms.html" target="_blank">Terms</a></paper-button>
+        <paper-button raised=""><a href="/privacy.html">Privacy Policy</a></paper-button>
+        <paper-button raised="" dialog-dismiss="" autofocus="">Close</paper-button>
+      </div>
+    </paper-dialog>
+    
+    <platinum-sw-register id="psw" auto-register="" clients-claim="" skip-waiting="">
+      <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="../precache.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
+  </template>
+</dom-module>
+<script src="tinavg-webapp.build.js"></script></body></html>

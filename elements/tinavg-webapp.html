@@ -18,12 +18,18 @@ limitations under the License.
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <!-- Additional Component Load -->
 <!-- Layout/Polymer Elements -->
-<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../../bower_components/iron-iconset/iron-iconset.html">
+<link rel="import" href="../../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
@@ -32,14 +38,17 @@ limitations under the License.
 <link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animations.html">
-<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-auth.html">
+<link rel="import" href="../../bower_components/platinum-sw/platinum-sw-cache.html">
+<link rel="import" href="../../bower_components/platinum-sw/platinum-sw-register.html">
 <!-- Custom Elements -->
 <link rel="import" href="tinavg-behavior.html">
 <link rel="import" href="tinavg-style.html">
 <link rel="import" href="elements.html">
 <!-- keyboard shortcuts -->
 <script src="../assets/js/mousetrap.min.js"></script>
+
+<script src="../assets/js/app.js"></script>
 <dom-module id="tinavg-webapp">
   <style is="custom-style">
     /* see tinavg-style.html... it didn't work */
@@ -50,7 +59,6 @@ limitations under the License.
 
   </style>
   <template>
-    
     <!-- localstorage -->
     <iron-localstorage name="tinavg-lastlang" value="{{gameLang}}"></iron-localstorage>
     <iron-localstorage name="tinavg-earmodus" value="{{earmodus}}"></iron-localstorage>
@@ -58,10 +66,8 @@ limitations under the License.
     <iron-localstorage name="tinavg-recordmodus" value="{{recordmodus}}"></iron-localstorage>
     <iron-localstorage name="tinavg-nerdmodus" value="{{nerdmodus}}"></iron-localstorage>
     <iron-localstorage name="tinavg-nerdsprache" value="{{nerdSprache}}"></iron-localstorage>
-
     <!-- in main viewport -->
     <paper-drawer-panel id="pdp" responsive-width="25000px" right-drawer>
-      
       <!-- Drawer -->
       <div id="collapse" class="mini-menu" drawer>
         <div>
@@ -88,7 +94,7 @@ limitations under the License.
       </div>
       
       <!-- Main Content Area -->
-      <paper-header-panel id="header-panel" main>
+      <paper-header-panel id="header-panel" class="vertical layout" main>
         <div class="two-headers paper-header">
           <div class="footer horizontal justified layout center">
             <div class="footer-button horizontal start-justified layout flex">
@@ -202,10 +208,19 @@ limitations under the License.
       </iron-pages>
       <div class="horizontal end-justified flex layout">
         <paper-button raised><a href="/terms.html" target="_blank">Terms</a></paper-button>
-        <paper-button raised><a href="/privacy.html" target="_blank">Privacy Policy</a></paper-button>
+        <paper-button raised><a href="/privacy.html">Privacy Policy</a></paper-button>
         <paper-button raised dialog-dismiss autofocus>Close</paper-button>
       </div>
     </paper-dialog>
+    <!-- Service Workers -->
+    <platinum-sw-register id="psw"
+                          auto-register
+                          clients-claim
+                          skip-waiting>
+      <platinum-sw-cache default-cache-strategy="networkFirst"
+                         precache-file="../precache.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
   </template>
 </dom-module>
 <script>
@@ -266,98 +281,30 @@ limitations under the License.
       }
     },
     listeners: {
+      'set-default-options': 'setDefaults',
+      'iron-select': 'showMenuPanel',
       'letter-card-tapped': 'letterTapped',
       'stripdia-set': 'setWBoardDisplay',
       'ready-set-go': 'lettersSet',
       'checking-word': 'fbLetterSeq',
-      'cookieconsent-dismissed': 'helpCheckNoOutsideClick',
-      'word-percent-correct': 'wordPercentCorrect'
+      'word-percent-correct': 'wordPercentCorrect',
+      'service-worker-installed': 'confirmSWInstall',
+      'service-worker-error': 'swError'
     },
-    observers: [],
+    observers: [
+
+    ],
     ready: function() {
 
       // localStorage functions and setting defaults
-      window.localStorage["tinavg-lastvisit"] = new Date();
-
-      if(localStorage.getItem("tinavg-earmodus") !== undefined) {
-        this.earmodus = JSON.parse(localStorage.getItem("tinavg-earmodus"));
-      } else {
-        this.earmodus = false;
-      }
-
-      if(localStorage.getItem("tinavg-learnmodus") !== undefined) {
-        this.learnmodus = JSON.parse(localStorage.getItem("tinavg-learnmodus"));
-      } else {
-        this.learnmodus = false;
-      }
-
-      if(localStorage.getItem("tinavg-recordmodus") !== undefined) {
-        this.recordmodus = JSON.parse(localStorage.getItem("tinavg-recordmodus"));
-      } else {
-        this.recordmodus = false;
-      }
-
-      if(localStorage.getItem("tinavg-nerdmodus") !== undefined) {
-        this.nerdmodus = JSON.parse(localStorage.getItem("tinavg-nerdmodus"));
-      } else {
-        this.nerdmodus = false;
-      }
-      
-      if(_findWithAttr(this.languageList, "abbrev", JSON.parse(localStorage.getItem("tinavg-lastlang"))) === -1) {
-        this.gameLang = "de";
-      } else {
-        this.gameLang = JSON.parse(localStorage.getItem("tinavg-lastlang"));
-      }
-      
-      if(_findWithAttr(this.nerdSpracheList, "abbrev", JSON.parse(localStorage.getItem("tinavg-nerdsprache"))) === -1) {
-        this.nerdSprache = "en";
-      } else {
-        this.nerdSprache = JSON.parse(localStorage.getItem("tinavg-nerdsprache"));
-      }
-      this.$.jt.forceLearnmodus(this.learnmodus);
+      localStorage["tinavg-lastvisit"] = new Date();
       
       // selected tab
       if(!this.selected) this.selected = 0;
+      
+      // Firebase
+      this.firebaseLogin();
   
-      // firebase
-      try {
-        var fbRef = new Firebase('https://intense-heat-8981.firebaseio.com');
-        var lastlogin = window.localStorage["tinavg-lastvisit"];
-        var ulanglist = window.navigator.languages;
-        var preflang = window.navigator.language || window.navigator.userLanguage;
-        this.letterSeq = [];
-        fbRef.onAuth(function(authData) {
-          if (authData) {
-            // save the user's profile into Firebase so we can list users,
-            // use them in Security and Firebase Rules, and show profiles
-            fbRef.child("users").child(authData.uid).update({
-              provider: authData.provider,
-              name: _getFirebaseName(authData),
-              lastlogin: lastlogin,
-              stimestamp: Firebase.ServerValue.TIMESTAMP,
-              userlang: ulanglist,
-              preflang: preflang,
-              options: this.getOptions()
-            });
-            fbRef.child("users").child(authData.uid).child("logins").push({
-              lastlogin: lastlogin,
-              stimestamp: Firebase.ServerValue.TIMESTAMP
-            });
-          } else {
-            fbRef.child("users").child("anonymous").child("logins").push({
-              lastlogin: lastlogin,
-              userlang: ulanglist,
-              preflang: preflang,
-              stimestamp: Firebase.ServerValue.TIMESTAMP
-            });
-          }
-        }.bind(this));
-        
-        this.firebaseRef = fbRef;
-      } catch(e) {
-        console.log(e);
-      }
-
       // Keyboard Shortcut Bindings
       Mousetrap.bind('shift+enter', function() { 
         this.$.jt.click(); 
@@ -415,15 +362,63 @@ limitations under the License.
       document.querySelector('[unresolved]').removeAttribute("unresolved");
       this.showHelp();
 
-      if(localStorage.cookieconsent_dismissed !== undefined) {
+      if(document.cookie.indexOf("cookieconsent_dismissed") > -1) {
         this.$.so.noCancelOnOutsideClick = false;
       }
       
       this.async(function() { 
+        this.fire('set-default-options');
         this.$.selectLang.selectedIndex = _findWithAttr(this.languageList, "abbrev", this.gameLang);
         this.$.meiselspracheliste.selectedIndex = _findWithAttr(this.nerdSpracheList, "abbrev", this.nerdSprache); 
       }, 200);
 
+    },
+    setDefaults: function() {
+      var tinavgEarmodus = JSON.parse(localStorage.getItem("tinavg-earmodus"));
+      var tinavgLearnmodus = JSON.parse(localStorage.getItem("tinavg-learnmodus"));
+      var tinavgRecordmodus = JSON.parse(localStorage.getItem("tinavg-recordmodus"));
+      var tinavgNerdmodus = JSON.parse(localStorage.getItem("tinavg-nerdmodus"));
+      var tinavgLastlang = localStorage.getItem("tinavg-lastlang");
+      var tinavgNerdsprache = localStorage.getItem("tinavg-nerdsprache");
+      if(tinavgEarmodus !== undefined) {
+        this.earmodus = tinavgEarmodus;
+      } else {
+        this.earmodus = false;
+      }
+
+      if(tinavgLearnmodus !== undefined) {
+        this.learnmodus = tinavgLearnmodus;
+      } else {
+        this.learnmodus = false;
+      }
+
+      if(tinavgRecordmodus !== undefined) {
+        this.recordmodus = tinavgRecordmodus;
+      } else {
+        this.recordmodus = false;
+      }
+
+      if(tinavgNerdmodus !== undefined) {
+        this.nerdmodus = tinavgNerdmodus;
+      } else {
+        this.nerdmodus = false;
+      }
+      
+      if(this.gameLang !== (null && undefined)) {
+        console.log("Game Language Set: " + this.gameLang);
+      } else if(_findWithAttr(this.languageList, "abbrev", tinavgLastlang) === -1) {
+        console.log("default language set to deutsch");
+        this.gameLang = "de";
+      } else {
+        this.gameLang = tinavgLastlang;
+      }
+      
+      if(_findWithAttr(this.nerdSpracheList, "abbrev", tinavgNerdsprache) === -1) {
+        this.nerdSprache = "en";
+      } else {
+        this.nerdSprache = tinavgNerdsprache;
+      }
+      this.$.jt.forceLearnmodus(this.learnmodus);
     },
     setLangHelp: function() {
       var langHtml = this.$.lettergrid.getLangHelpInfo();
@@ -443,18 +438,20 @@ limitations under the License.
       } else {
         this.letterSeq.push(e.detail.letter);
       }
-      var authData = this.firebaseRef.getAuth();
-      if(authData) {
-        this.firebaseWordRef.child('letters').set(this.letterSeq);
+      if(this.firebaseRef) {
+        var authData = this.firebaseRef.getAuth();
+        if(authData) {
+          this.firebaseWordRef.child('letters').set(this.letterSeq);
+        } else {
+          // not logged in
+        }
       } else {
-        // not logged in
+        this.firebaseLogin();
       }
     },
     showHelp: function(e) {
       this.async(function(){ this.$.so.open();}, 200);
-    },
-    helpCheckNoOutsideClick: function(e) {
-      if(this.$.so.noCancelOnOutsideClick) this.$.so.noCancelOnOutsideClick = false;
+      if(e) this.$.so.noCancelOnOutsideClick = false;
     },
     showClue: function(e) {
       this.$.wboard.revealWord();
@@ -464,6 +461,9 @@ limitations under the License.
       } else {
         this.$.clueshow.style.transform = "rotateX(360deg)";
       }
+    },
+    showMenuPanel: function(e) {
+      if(!this.firebaseRef) this.firebaseLogin();
     },
     toggleEarModus: function() {
       this.earmodus = !this.earmodus;
@@ -483,8 +483,14 @@ limitations under the License.
       this.gameLang = ev.target.value;
       this.$.jt.resetBox();
     },
-    setLangManual: function(lang) {
+    setLangManual: function(lang, force) {
       console.log("toggling language: " + lang + " | chars: " + this.letterLimit);
+      if(_findWithAttr(this.nerdSpracheList, "abbrev", lang) > -1 || force) {
+        if(localStorage.getItem("tinavg-lastlang") !== lang) localStorage.setItem("tinavg-lastlang", lang);
+        this.gameLang = lang;
+      } else {
+        console.log("Invalid language: " + lang);
+      }
       this.gameLang = lang;
       this.$.jt.resetBox();
     },
@@ -521,14 +527,18 @@ limitations under the License.
     lettersSet: function() {
       this.showÜbersetzung();
       this.letterSeq = [];
-      var authData = this.firebaseRef.getAuth();
-      if(authData) {
-        var wordObj = this.$.wboard.getWordObj();
-        var word = { "word": wordObj.word, "ohne": wordObj.ohne } ;
-        this.firebaseWordRef = this.firebaseRef.child("users").child(authData.uid).child('words').push(word);
-        this.firebaseWordRef.child('timestamp').set(Firebase.ServerValue.TIMESTAMP);
+      if(this.firebaseRef) {
+        var authData = this.firebaseRef.getAuth();
+        if(authData) {
+          var wordObj = this.$.wboard.getWordObj();
+          var word = { "word": wordObj.word, "ohne": wordObj.ohne } ;
+          this.firebaseWordRef = this.firebaseRef.child("users").child(authData.uid).child('words').push(word);
+          this.firebaseWordRef.child('timestamp').set(Firebase.ServerValue.TIMESTAMP);
+        } else {
+          // not logged in
+        }
       } else {
-        // not logged in
+        this.firebaseLogin();
       }
       this.setLangHelp();
     },
@@ -576,6 +586,52 @@ limitations under the License.
     wordPercentCorrect: function(ev) {
       this.progress1 = ev.detail.progress;
       this.progress2 = ev.detail.secondary;
+    },
+    confirmSWInstall: function() {
+      console.log("SW Install Complete");
+    },
+    swError: function(err) {
+      console.log(err);
+    },
+    firebaseLogin: function() {
+      // firebase
+      try {
+        var fbRef = new Firebase('https://intense-heat-8981.firebaseio.com');
+        var lastlogin = window.localStorage["tinavg-lastvisit"];
+        var ulanglist = window.navigator.languages;
+        var preflang = window.navigator.language || window.navigator.userLanguage;
+        this.letterSeq = [];
+        fbRef.onAuth(function(authData) {
+          if (authData) {
+            // save the user's profile into Firebase so we can list users,
+            // use them in Security and Firebase Rules, and show profiles
+            fbRef.child("users").child(authData.uid).update({
+              provider: authData.provider,
+              name: _getFirebaseName(authData),
+              lastlogin: lastlogin,
+              stimestamp: Firebase.ServerValue.TIMESTAMP,
+              userlang: ulanglist,
+              preflang: preflang,
+              options: this.getOptions()
+            });
+            fbRef.child("users").child(authData.uid).child("logins").push({
+              lastlogin: lastlogin,
+              stimestamp: Firebase.ServerValue.TIMESTAMP
+            });
+          } else {
+            fbRef.child("users").child("anonymous").child("logins").push({
+              lastlogin: lastlogin,
+              userlang: ulanglist,
+              preflang: preflang,
+              stimestamp: Firebase.ServerValue.TIMESTAMP
+            });
+          }
+        }.bind(this));
+        
+        this.firebaseRef = fbRef;
+      } catch(e) {
+        console.log(e);
+      }
     }
   });
 function _getFirebaseName(authData) {

@@ -1,191 +1,189 @@
-[
-  {
-    "lang": {
-      "code": "ru",
-      "stripDiacritics": false,
-      "langHelpInfo": "<h3><u>Russian</u></h3>"
+{
+  "lang": {
+    "code": "ru",
+    "stripDiacritics": false,
+    "langHelpInfo": "<h3><u>Russian</u></h3>"
+  },
+  "alphabet": [
+    {
+      "uid": 1,
+      "hidden": true,
+      "letter": "а"
     },
-    "alphabet": [
-      {
-        "uid": 1,
-        "hidden": true,
-        "letter": "а"
-      },
-      {
-        "uid": 2,
-        "hidden": true,
-        "letter": "б"
-      },
-      {
-        "uid": 3,
-        "hidden": true,
-        "letter": "в"
-      },
-      {
-        "uid": 4,
-        "hidden": true,
-        "letter": "г"
-      },
-      {
-        "uid": 5,
-        "hidden": true,
-        "letter": "д"
-      },
-    
-      {
-        "uid": 6,
-        "hidden": true,
-        "letter": "е"
-      },
-    
-      {
-        "uid": 7,
-        "hidden": true,
-        "letter": "ё"
-      },
-    
-      {
-        "uid": 8,
-        "hidden": true,
-        "letter": "ж"
-      },
-    
-      {
-        "uid": 9,
-        "hidden": true,
-        "letter": "з"
-      },
-    
-      {
-        "uid": 10,
-        "hidden": true,
-        "letter": "и"
-      },
-    
-      {
-        "uid": 11,
-        "hidden": true,
-        "letter": "й"
-      },
-    
-      {
-        "uid": 12,
-        "hidden": true,
-        "letter": "к"
-      },
-    
-      {
-        "uid": 13,
-        "hidden": true,
-        "letter": "л"
-      },
-    
-      {
-        "uid": 14,
-        "hidden": true,
-        "letter": "м"
-      },
-    
-      {
-        "uid": 15,
-        "hidden": true,
-        "letter": "н"
-      },
-    
-      {
-        "uid": 16,
-        "hidden": true,
-        "letter": "о"
-      },
-    
-      {
-        "uid": 17,
-        "hidden": true,
-        "letter": "п"
-      },
-    
-      {
-        "uid": 18,
-        "hidden": true,
-        "letter": "р"
-      },
-    
-      {
-        "uid": 19,
-        "hidden": true,
-        "letter": "с"
-      },
-    
-      {
-        "uid": 20,
-        "hidden": true,
-        "letter": "т"
-      },
-      {
-        "uid": 21,
-        "hidden": true,
-        "letter": "у"
-      },
-      {
-        "uid": 22,
-        "hidden": true,
-        "letter": "ф"
-      },
-      {
-        "uid": 23,
-        "hidden": true,
-        "letter": "х"
-      },
-      {
-        "uid": 24,
-        "hidden": true,
-        "letter": "ц"
-      },
-      {
-        "uid": 25,
-        "hidden": true,
-        "letter": "ч"
-      },
-      {
-        "uid": 26,
-        "hidden": true,
-        "letter": "ш"
-      },
-      {
-        "uid": 27,
-        "hidden": true,
-        "letter": "щ"
-      },
-      {
-        "uid": 28,
-        "hidden": true,
-        "letter": "ъ"
-      },
-      {
-        "uid": 29,
-        "hidden": true,
-        "letter": "ы"
-      },
-      {
-        "uid": 30,
-        "hidden": true,
-        "letter": "ь"
-      },
-      {
-        "uid": 31,
-        "hidden": true,
-        "letter": "э"
-      },
-      {
-        "uid": 32,
-        "hidden": true,
-        "letter": "ю"
-      },
-      {
-        "uid": 33,
-        "hidden": true,
-        "letter": "я"
-      }
-    ]
-  }
-]
+    {
+      "uid": 2,
+      "hidden": true,
+      "letter": "б"
+    },
+    {
+      "uid": 3,
+      "hidden": true,
+      "letter": "в"
+    },
+    {
+      "uid": 4,
+      "hidden": true,
+      "letter": "г"
+    },
+    {
+      "uid": 5,
+      "hidden": true,
+      "letter": "д"
+    },
+  
+    {
+      "uid": 6,
+      "hidden": true,
+      "letter": "е"
+    },
+  
+    {
+      "uid": 7,
+      "hidden": true,
+      "letter": "ё"
+    },
+  
+    {
+      "uid": 8,
+      "hidden": true,
+      "letter": "ж"
+    },
+  
+    {
+      "uid": 9,
+      "hidden": true,
+      "letter": "з"
+    },
+  
+    {
+      "uid": 10,
+      "hidden": true,
+      "letter": "и"
+    },
+  
+    {
+      "uid": 11,
+      "hidden": true,
+      "letter": "й"
+    },
+  
+    {
+      "uid": 12,
+      "hidden": true,
+      "letter": "к"
+    },
+  
+    {
+      "uid": 13,
+      "hidden": true,
+      "letter": "л"
+    },
+  
+    {
+      "uid": 14,
+      "hidden": true,
+      "letter": "м"
+    },
+  
+    {
+      "uid": 15,
+      "hidden": true,
+      "letter": "н"
+    },
+  
+    {
+      "uid": 16,
+      "hidden": true,
+      "letter": "о"
+    },
+  
+    {
+      "uid": 17,
+      "hidden": true,
+      "letter": "п"
+    },
+  
+    {
+      "uid": 18,
+      "hidden": true,
+      "letter": "р"
+    },
+  
+    {
+      "uid": 19,
+      "hidden": true,
+      "letter": "с"
+    },
+  
+    {
+      "uid": 20,
+      "hidden": true,
+      "letter": "т"
+    },
+    {
+      "uid": 21,
+      "hidden": true,
+      "letter": "у"
+    },
+    {
+      "uid": 22,
+      "hidden": true,
+      "letter": "ф"
+    },
+    {
+      "uid": 23,
+      "hidden": true,
+      "letter": "х"
+    },
+    {
+      "uid": 24,
+      "hidden": true,
+      "letter": "ц"
+    },
+    {
+      "uid": 25,
+      "hidden": true,
+      "letter": "ч"
+    },
+    {
+      "uid": 26,
+      "hidden": true,
+      "letter": "ш"
+    },
+    {
+      "uid": 27,
+      "hidden": true,
+      "letter": "щ"
+    },
+    {
+      "uid": 28,
+      "hidden": true,
+      "letter": "ъ"
+    },
+    {
+      "uid": 29,
+      "hidden": true,
+      "letter": "ы"
+    },
+    {
+      "uid": 30,
+      "hidden": true,
+      "letter": "ь"
+    },
+    {
+      "uid": 31,
+      "hidden": true,
+      "letter": "э"
+    },
+    {
+      "uid": 32,
+      "hidden": true,
+      "letter": "ю"
+    },
+    {
+      "uid": 33,
+      "hidden": true,
+      "letter": "я"
+    }
+  ]
+}
