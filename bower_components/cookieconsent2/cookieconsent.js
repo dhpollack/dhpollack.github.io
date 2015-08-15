@@ -20,12 +20,7 @@
   var THEME_BUCKET_PATH = '//s3.amazonaws.com/cc.silktide.com/';
 
   // No point going further if they've already dismissed.
-  //if (document.cookie.indexOf(DISMISSED_COOKIE) > -1) {
-  //  return;
-  //}
-
-  // No point going further if they've already dismissed.
-  if (localStorage[DISMISSED_COOKIE] !== undefined) {
+  if (document.cookie.indexOf(DISMISSED_COOKIE) > -1) {
     return;
   }
 
@@ -96,12 +91,25 @@
       return null;
     },
 
-    setCookie: function (name, value, expirydays) {
+    setCookie: function (name, value, expiryDays, domain, path) {
+      expiryDays = expiryDays || 365;
+
       var exdate = new Date();
-      expirydays = expirydays || 365;
-      exdate.setDate(exdate.getDate() + expirydays);
-      localStorage[name] = value;
-      localStorage[name + "-expiry"] = exdate.toUTCString();
+      exdate.setDate(exdate.getDate() + expiryDays);
+
+      var cookie = [
+        name + '=' + value,
+        'expires=' + exdate.toUTCString(),
+        'path=' + path || '/'
+      ];
+
+      if (domain) {
+        cookie.push(
+          'domain=' + domain
+        );
+      }
+
+      document.cookie = cookie.join(';');
     },
 
     addEventListener: function (el, event, eventListener) {
@@ -225,6 +233,9 @@
       link: null,
       container: null, // selector
       theme: 'light-floating',
+      domain: null, // default to current domain.
+      path: '/', 
+      expiryDays: 365,
       markup: [
         '<div class="cc_banner-wrapper {{containerClasses}}">',
         '<div class="cc_banner cc_container cc_container--open">',
@@ -318,17 +329,11 @@
       evt.preventDefault && evt.preventDefault();
       evt.returnValue = false;
       this.setDismissedCookie();
-      this.dismissedCallback();
       this.container.removeChild(this.element);
-    },
-    dismissedCallback: function() {
-      var ev = new CustomEvent("cookieconsent-dismissed", { detail: { dismissed: true }});
-      var webapp = document.getElementById("tinavg_app");
-      webapp.dispatchEvent(ev);
     },
 
     setDismissedCookie: function () {
-      Util.setCookie(DISMISSED_COOKIE, 'yes');
+      Util.setCookie(DISMISSED_COOKIE, 'yes', this.options.expiryDays, this.options.domain, this.options.path);
     }
   };
 
