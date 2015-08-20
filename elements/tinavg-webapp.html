@@ -501,13 +501,14 @@ limitations under the License.
       this.earmodus = !this.earmodus;
     },
     toggleLearnModus: function() {
-      this.learnmodus = !this.learnmodus;
-      this.$.jt.resetBox();
+      if(!this.recordmodus) {
+        this.learnmodus = !this.learnmodus;
+        this.$.jt.resetBox();
+      } 
     },
     toggleRecordModus: function() {
       this.recordmodus = !this.recordmodus;
       this.learnmodus = this.recordmodus;
-      this.$.select_learnmodus.toggleAttribute('disabled');
       this.$.jt.resetBox();
     },
     setLang: function(ev) {
@@ -516,13 +517,14 @@ limitations under the License.
       this.$.jt.resetBox();
     },
     setLangManual: function(lang, force) {
+      var forceLangs = ['emoji'];
+      if(forceLangs.indexOf(lang) > -1) force = true;
       console.log("toggling language: " + lang + " | chars: " + this.letterLimit);
       if(_findWithAttr(this.languageList, "abbrev", lang) > -1 || force) {
         if(localStorage.getItem("tinavg-lastlang") !== lang) localStorage.setItem("tinavg-lastlang", lang);
         this.gameLang = lang;
       } else {
         console.log("Invalid language: " + lang);
-        
       }
       this.gameLang = lang;
       this.$.jt.resetBox();
