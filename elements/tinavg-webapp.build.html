@@ -60,7 +60,6 @@ limitations under the License.
 
 
 
-<style is="custom-style">:root {--iron-icon-height: 7vmin;--iron-icon-width: 7vmin;}</style>
 </head><body><div hidden="" by-vulcanize=""><dom-module id="iron-localstorage" assetpath="../../bower_components/iron-localstorage/"></dom-module>
 <dom-module id="iron-icon" assetpath="../../bower_components/iron-icon/">
 
@@ -482,7 +481,7 @@ limitations under the License.
 
 <dom-module id="paper-header-panel" assetpath="../../bower_components/paper-header-panel/">
 
-  <style>/**@licenseCopyright (c) 2015 The Polymer Project Authors. All rights reserved.This code may only be used under the BSD style license found at http://polymer.github.io/LICENSEThe complete set of authors may be found at http://polymer.github.io/AUTHORSThe complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORSCode distributed by Google as part of the polymer project is alsosubject to an additional IP rights grant found at http://polymer.github.io/PATENTS*/:host {@apply(--layout-vertical);position: relative;height: 100%;}/** * Default paper header panel shadow */:root {--paper-header-panel-shadow: {height: 6px;bottom: -6px;box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);};}#mainContainer {@apply(--layout-flex);position: relative;overflow-y: auto;overflow-x: hidden;-webkit-overflow-scrolling: touch;}#mainPanel {@apply(--layout-vertical);@apply(--layout-flex);position: relative;}/* * mode: scroll */:host([mode=scroll]) #mainContainer {@apply(--paper-header-panel-scroll-container);overflow: visible;}:host([mode=scroll]) {overflow-y: auto;overflow-x: hidden;-webkit-overflow-scrolling: touch;}/* * mode: cover */:host([mode=cover]) #mainContainer {@apply(--paper-header-panel-cover-container);position: absolute;top: 0;right: 0;bottom: 0;left: 0;}:host([mode=cover]) #mainPanel {position: static;}/* * mode: standard */:host([mode=standard]) #mainContainer {@apply(--paper-header-panel-standard-container);}/* * mode: seamed */:host([mode=seamed]) #mainContainer {@apply(--paper-header-panel-seamed-container);}/* * mode: waterfall */:host([mode=waterfall]) #mainContainer {@apply(--paper-header-panel-waterfall-container);}/* * mode: waterfall-tall */:host([mode=waterfall-tall]) #mainContainer {@apply(--paper-header-panel-waterfall-tall-container);}#dropShadow {@apply(--paper-header-panel-shadow);-webkit-transition: opacity 0.5s, -webkit-transform 0.5s;transition: opacity 0.5s, transform 0.5s;-webkit-transform: scale3d(1, 0, 1);transform: scale3d(1, 0, 1);-webkit-transform-origin: left top;transform-origin: left top;position: absolute;top: 0;left: 0;right: 0;height: 6px;opacity: 0;}#dropShadow.has-shadow {opacity: 1;-webkit-transform: scale3d(1, 1, 1);transform: scale3d(1, 1, 1);}</style>
+  <style>/**@licenseCopyright (c) 2015 The Polymer Project Authors. All rights reserved.This code may only be used under the BSD style license found at http://polymer.github.io/LICENSEThe complete set of authors may be found at http://polymer.github.io/AUTHORSThe complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORSCode distributed by Google as part of the polymer project is alsosubject to an additional IP rights grant found at http://polymer.github.io/PATENTS*/:host {--paper-header-panel-shadow: {height: 6px;bottom: -6px;box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);};@apply(--layout-vertical);position: relative;height: 100%;}#mainContainer {@apply(--layout-flex);position: relative;overflow-y: auto;overflow-x: hidden;-webkit-overflow-scrolling: touch;}#mainPanel {@apply(--layout-vertical);@apply(--layout-flex);position: relative;}/* * mode: scroll */:host([mode=scroll]) #mainContainer {@apply(--paper-header-panel-scroll-container);overflow: visible;}:host([mode=scroll]) {overflow-y: auto;overflow-x: hidden;-webkit-overflow-scrolling: touch;}/* * mode: cover */:host([mode=cover]) #mainContainer {@apply(--paper-header-panel-cover-container);position: absolute;top: 0;right: 0;bottom: 0;left: 0;}:host([mode=cover]) #mainPanel {position: static;}/* * mode: standard */:host([mode=standard]) #mainContainer {@apply(--paper-header-panel-standard-container);}/* * mode: seamed */:host([mode=seamed]) #mainContainer {@apply(--paper-header-panel-seamed-container);}/* * mode: waterfall */:host([mode=waterfall]) #mainContainer {@apply(--paper-header-panel-waterfall-container);}/* * mode: waterfall-tall */:host([mode=waterfall-tall]) #mainContainer {@apply(--paper-header-panel-waterfall-tall-container);}#dropShadow {@apply(--paper-header-panel-shadow);-webkit-transition: opacity 0.5s, -webkit-transform 0.5s;transition: opacity 0.5s, transform 0.5s;-webkit-transform: scale3d(1, 0, 1);transform: scale3d(1, 0, 1);-webkit-transform-origin: left top;transform-origin: left top;position: absolute;top: 0;left: 0;right: 0;height: 6px;opacity: 0;}#dropShadow.has-shadow {opacity: 1;-webkit-transform: scale3d(1, 1, 1);transform: scale3d(1, 1, 1);}</style>
 
   <template>
     <content id="headerContent" select="paper-toolbar, .paper-header"></content>
@@ -595,7 +594,7 @@ limitations under the License.
 
 <dom-module id="paper-input-container" assetpath="../../bower_components/paper-input/">
 
-  <style>:host {display: block;padding: 8px 0;@apply(--paper-input-container);}:host[inline] {display: inline-block;}:host([disabled]) {pointer-events: none;opacity: 0.33;}.floated-label-placeholder {@apply(--paper-font-caption);}.underline {position: relative;}.focused-line {height: 2px;-webkit-transform-origin: center center;transform-origin: center center;-webkit-transform: scale3d(0,1,1);transform: scale3d(0,1,1);background: var(--paper-input-container-focus-color, --default-primary-color);@apply(--paper-input-container-underline-focus);}.underline.is-highlighted .focused-line {-webkit-transform: none;transform: none;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.underline.is-invalid .focused-line {background: var(--paper-input-container-invalid-color, --google-red-500);-webkit-transform: none;transform: none;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.unfocused-line {height: 1px;background: var(--paper-input-container-color, --secondary-text-color);@apply(--paper-input-container-underline);}:host([disabled]) .unfocused-line {border-bottom: 1px dashed;border-color: var(--paper-input-container-color, --secondary-text-color);background: transparent;@apply(--paper-input-container-underline-disabled);}.label-and-input-container {@apply(--layout-flex);@apply(--layout-relative);}.input-content {position: relative;@apply(--layout-horizontal);@apply(--layout-end);}.input-content ::content label,.input-content ::content .paper-input-label {position: absolute;top: 0;right: 0;left: 0;font: inherit;color: var(--paper-input-container-color, --secondary-text-color);@apply(--paper-font-subhead);@apply(--paper-input-container-label);}.input-content.label-is-floating ::content label,.input-content.label-is-floating ::content .paper-input-label {-webkit-transform: translate3d(0, -75%, 0) scale(0.75);transform: translate3d(0, -75%, 0) scale(0.75);-webkit-transform-origin: left top;transform-origin: left top;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.input-content.label-is-highlighted ::content label,.input-content.label-is-highlighted ::content .paper-input-label {color: var(--paper-input-container-focus-color, --default-primary-color);@apply(--paper-input-container-label-focus);}.input-content.is-invalid ::content label,.input-content.is-invalid ::content .paper-input-label {color: var(--paper-input-container-invalid-color, --google-red-500);}.input-content.label-is-hidden ::content label,.input-content.label-is-hidden ::content .paper-input-label {visibility: hidden;}.input-content ::content input,.input-content ::content textarea,.input-content ::content iron-autogrow-textarea,.input-content ::content .paper-input-input {position: relative; /* to make a stacking context */outline: none;box-shadow: none;padding: 0;width: 100%;background: transparent;border: none;color: var(--paper-input-container-input-color, --primary-text-color);@apply(--paper-font-subhead);@apply(--paper-input-container-input);}::content [prefix] {@apply(--paper-font-subhead);@apply(--paper-input-prefix);}::content [suffix] {@apply(--paper-font-subhead);@apply(--paper-input-suffix);}/* Firefox sets a min-width on the input, which can cause layout issues */.input-content ::content input {min-width: 0;}.input-content ::content textarea {resize: none;}.add-on-content.is-invalid ::content * {color: var(--paper-input-container-invalid-color, --google-red-500);}.add-on-content.is-highlighted ::content * {color: var(--paper-input-container-focus-color, --default-primary-color);}</style>
+  <style>:host {display: block;padding: 8px 0;@apply(--paper-input-container);}:host[inline] {display: inline-block;}:host([disabled]) {pointer-events: none;opacity: 0.33;@apply(--paper-input-container-disabled);}.floated-label-placeholder {@apply(--paper-font-caption);}.underline {position: relative;}.focused-line {height: 2px;-webkit-transform-origin: center center;transform-origin: center center;-webkit-transform: scale3d(0,1,1);transform: scale3d(0,1,1);background: var(--paper-input-container-focus-color, --default-primary-color);@apply(--paper-input-container-underline-focus);}.underline.is-highlighted .focused-line {-webkit-transform: none;transform: none;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.underline.is-invalid .focused-line {background: var(--paper-input-container-invalid-color, --google-red-500);-webkit-transform: none;transform: none;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.unfocused-line {height: 1px;background: var(--paper-input-container-color, --secondary-text-color);@apply(--paper-input-container-underline);}:host([disabled]) .unfocused-line {border-bottom: 1px dashed;border-color: var(--paper-input-container-color, --secondary-text-color);background: transparent;@apply(--paper-input-container-underline-disabled);}.label-and-input-container {@apply(--layout-flex);@apply(--layout-relative);}.input-content {position: relative;@apply(--layout-horizontal);@apply(--layout-end);}.input-content ::content label,.input-content ::content .paper-input-label {position: absolute;top: 0;right: 0;left: 0;font: inherit;color: var(--paper-input-container-color, --secondary-text-color);@apply(--paper-font-subhead);@apply(--paper-input-container-label);}.input-content.label-is-floating ::content label,.input-content.label-is-floating ::content .paper-input-label {-webkit-transform: translate3d(0, -75%, 0) scale(0.75);transform: translate3d(0, -75%, 0) scale(0.75);-webkit-transform-origin: left top;transform-origin: left top;-webkit-transition: -webkit-transform 0.25s;transition: transform 0.25s;@apply(--paper-transition-easing);}.input-content.label-is-highlighted ::content label,.input-content.label-is-highlighted ::content .paper-input-label {color: var(--paper-input-container-focus-color, --default-primary-color);@apply(--paper-input-container-label-focus);}.input-content.is-invalid ::content label,.input-content.is-invalid ::content .paper-input-label {color: var(--paper-input-container-invalid-color, --google-red-500);}.input-content.label-is-hidden ::content label,.input-content.label-is-hidden ::content .paper-input-label {visibility: hidden;}.input-content ::content input,.input-content ::content textarea,.input-content ::content iron-autogrow-textarea,.input-content ::content .paper-input-input {position: relative; /* to make a stacking context */outline: none;box-shadow: none;padding: 0;width: 100%;background: transparent;border: none;color: var(--paper-input-container-input-color, --primary-text-color);@apply(--paper-font-subhead);@apply(--paper-input-container-input);}::content [prefix] {@apply(--paper-font-subhead);@apply(--paper-input-prefix);}::content [suffix] {@apply(--paper-font-subhead);@apply(--paper-input-suffix);}/* Firefox sets a min-width on the input, which can cause layout issues */.input-content ::content input {min-width: 0;}.input-content ::content textarea {resize: none;}.add-on-content.is-invalid ::content * {color: var(--paper-input-container-invalid-color, --google-red-500);}.add-on-content.is-highlighted ::content * {color: var(--paper-input-container-focus-color, --default-primary-color);}</style>
 
   <template>
 
@@ -694,6 +693,7 @@ limitations under the License.
 
 <dom-module id="paper-textarea" assetpath="../../bower_components/paper-input/">
   <template>
+    <style>:host {display: block;}</style>
 
     <paper-input-container no-label-float$="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
 
@@ -742,9 +742,9 @@ limitations under the License.
     <div id="trigger" on-tap="open">
       <content select=".dropdown-trigger"></content>
     </div>
-    <iron-dropdown id="dropdown" opened="{{opened}}" horizontal-align="[[horizontalAlign]]" vertical-align="[[verticalAlign]]" horizontal-offset="[[horizontalOffset]]" vertical-offset="[[verticalOffset]]" open-animation-config="[[openAnimationConfig]]" close-animation-config="[[closeAnimationConfig]]" no-animations="[[noAnimations]]">
+    <iron-dropdown id="dropdown" opened="{{opened}}" horizontal-align="[[horizontalAlign]]" vertical-align="[[verticalAlign]]" horizontal-offset="[[horizontalOffset]]" vertical-offset="[[verticalOffset]]" open-animation-config="[[openAnimationConfig]]" close-animation-config="[[closeAnimationConfig]]" no-animations="[[noAnimations]]" focus-target="[[_dropdownContent]]">
       <paper-material class="dropdown-content">
-        <content select=".dropdown-content"></content>
+        <content id="content" select=".dropdown-content"></content>
       </paper-material>
     </iron-dropdown>
   </template>
@@ -752,16 +752,14 @@ limitations under the License.
 <dom-module id="paper-dropdown-menu" assetpath="../../bower_components/paper-dropdown-menu/">
   <style>:host {display: inline-block;position: relative;text-align: left;cursor: pointer;--paper-input-container-input: {overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 100%;box-sizing: border-box;cursor: pointer;};@apply(--paper-dropdown-menu);}:host([disabled]) {@apply(--paper-dropdown-menu-disabled);}:host([noink]) paper-ripple {display: none;}:host([no-label-float]) paper-ripple {top: 8px;}paper-ripple {top: 20px;left: 8px;bottom: 16px;right: 8px;@apply(--paper-dropdown-menu-ripple);}paper-menu-button {@apply(--paper-dropdown-menu-button);}paper-input {@apply(--paper-dropdown-menu-input);}iron-icon {color: var(--disabled-text-color);@apply(--paper-dropdown-menu-icon);}</style>
   <template>
-    <paper-menu-button id="menuButton" vertical-align="top" horizontal-align="right" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" on-iron-activate="_onIronActivate" opened="{{opened}}">
+    <paper-menu-button id="menuButton" vertical-align="top" horizontal-align="right" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" on-iron-select="_onIronSelect" opened="{{opened}}">
       <div class="dropdown-trigger">
         <paper-ripple></paper-ripple>
         <paper-input readonly="" disabled="[[disabled]]" value="[[selectedItemLabel]]" placeholder="[[placeholder]]" always-float-label="[[alwaysFloatLabel]]" no-label-float="[[noLabelFloat]]" label="[[label]]">
           <iron-icon icon="arrow-drop-down" suffix=""></iron-icon>
         </paper-input>
       </div>
-      <div class="dropdown-content">
-        <content select=".dropdown-content"></content>
-      </div>
+      <content id="content" select=".dropdown-content"></content>
     </paper-menu-button>
   </template>
 </dom-module>
@@ -791,7 +789,11 @@ limitations under the License.
 
 </dom-module>
 
-<dom-module id="word-service" assetpath="../services/">
+<dom-module id="tinavg-style" assetpath="/">
+  <template>
+    <style>:root {/* defaul icons*/--iron-icon-height: 7vmin;--iron-icon-width: 7vmin;/* progress bar at bottom of page */--paper-progress-container-color: #f3d6b0;--paper-progress-secondary-color: var(--paper-red-a700);}</style>
+  </template>
+</dom-module><dom-module id="word-service" assetpath="../services/">
   <style>iron-ajax {display: none;}</style>
   <template>
     <iron-ajax id="wajax" url="{{jsonUrl}}" handleas="json" on-request="requestSent" on-response="wordsLoaded">
@@ -869,9 +871,8 @@ limitations under the License.
     </template>
 </dom-module>
 </div><dom-module id="tinavg-webapp">
-  <style is="custom-style">/* see tinavg-style.html... it didn't work */:host {--paper-progress-container-color: #f3d6b0;--paper-progress-secondary-color: var(--paper-red-a700);}</style>
-
   <template>
+    <style include="tinavg-style"></style>
     
     <iron-localstorage name="tinavg-lastlang" value="{{gameLang}}"></iron-localstorage>
     <iron-localstorage name="tinavg-earmodus" value="{{earmodus}}"></iron-localstorage>
@@ -1050,7 +1051,7 @@ limitations under the License.
     </paper-dialog>
     
     <platinum-sw-register id="psw" auto-register="" clients-claim="" skip-waiting="">
-      <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="../precache.json">
+      <platinum-sw-cache default-cache-strategy="networkFirst" cache-config-file="../cache-config.json">
       </platinum-sw-cache>
     </platinum-sw-register>
   </template>
