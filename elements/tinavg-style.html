@@ -10,6 +10,28 @@
         /* progress bar at bottom of page */
         --paper-progress-container-color: #f3d6b0;
         --paper-progress-secondary-color: var(--paper-red-a700);
+        
+        /* paper-header-panel */
+        --paper-header-panel-standard-container: {
+          overflow: hidden;
+        };
+        
+        --paper-dialog: {
+          ::content > *:first-child {
+            margin-top: 0;
+          }
+        };
+        
+        --paper-button: {
+          padding: 2px;
+          text-transform: none;
+        };
+
+        paper-drawer-panel {
+          --paper-drawer-panel-right-drawer-container: {
+            background-color: rgba(200,170,160, 1.0);
+          };
+        }
       }
     </style>
   </template>

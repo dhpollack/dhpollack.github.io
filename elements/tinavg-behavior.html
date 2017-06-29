@@ -2,9 +2,28 @@
   TinavgBehavior = {
 
     properties: {
-      gameLang: {
+      gl: {
         type: String,
         notify: true
+      }
+    },
+    listeners: {
+      //"gl-changed": "_gameLangChanged"
+    },
+    _gameLangChanged: function(value) {
+      console.log("Game Lange Change: " + this.gl);
+      if(this._checkElement(this.$.switchModusIcon)) this.$.switchModusIcon.switchLanguage();
+      if(this._checkElement(this.$.wboard)) this.$.wboard.changeLanguage();
+      if(this._checkElement(this.$.lettergrid)) this.$.lettergrid.glChanged();
+
+
+    },
+    _checkElement: function(el) {
+      if(typeof el !== "undefined") {
+        return true;
+      } else {
+        console.log(el + " was not found");
+        return false;
       }
     }
 

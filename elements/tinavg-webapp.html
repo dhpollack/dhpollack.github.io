@@ -18,7 +18,7 @@ limitations under the License.
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <!-- Additional Component Load -->
 <!-- Layout/Polymer Elements -->
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
@@ -49,26 +49,28 @@ limitations under the License.
 <link rel="import" href="tinavg-style.html">
 <link rel="import" href="elements.html">
 <!-- keyboard shortcuts -->
-<script src="../assets/js/mousetrap.min.js"></script>
+<script src="../../node_modules/mousetrap/mousetrap.min.js"></script>
 
 <script src="../assets/js/app.js"></script>
 <dom-module id="tinavg-webapp">
   <template>
     <style include="tinavg-style"></style>
+    <style is="custom-style" include="iron-flex iron-flex-alignment iron-flex-factors iron-positioning"></style>
+    <!-- Firebase Auths -->
+    <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://intense-heat-8981.firebaseio.com" provider="{{loginProvider}}" on-error="errorHandler" ></firebase-auth>
     <!-- localstorage -->
-    <iron-localstorage name="tinavg-lastlang" value="{{gameLang}}"></iron-localstorage>
-    <iron-localstorage name="tinavg-earmodus" value="{{earmodus}}"></iron-localstorage>
-    <iron-localstorage name="tinavg-learnmodus" value="{{learnmodus}}"></iron-localstorage>
-    <iron-localstorage name="tinavg-recordmodus" value="{{recordmodus}}"></iron-localstorage>
-    <iron-localstorage name="tinavg-nerdmodus" value="{{nerdmodus}}"></iron-localstorage>
-    <iron-localstorage name="tinavg-nerdsprache" value="{{nerdSprache}}"></iron-localstorage>
+    <iron-localstorage name="tinavg-lastlang" value="{{gl}}" on-iron-localstorage-load-empty="initializeDefaultTinavg"></iron-localstorage>
+    <iron-localstorage name="tinavg-earmodus" value="{{earmodus}}" on-iron-localstorage-load-empty="initializeDefaultTinavg"></iron-localstorage>
+    <iron-localstorage name="tinavg-learnmodus" value="{{learnmodus}}" on-iron-localstorage-load-empty="initializeDefaultTinavg"></iron-localstorage>
+    <iron-localstorage name="tinavg-recordmodus" value="{{recordmodus}}" on-iron-localstorage-load-empty="initializeDefaultTinavg"></iron-localstorage>
+    <iron-localstorage name="tinavg-nerdsprache" value="{{nerdSprache}}" on-iron-localstorage-load-empty="initializeDefaultTinavg"></iron-localstorage>
     <!-- in main viewport -->
-    <paper-drawer-panel id="pdp" responsive-width="25000px" right-drawer>
+    <paper-drawer-panel id="pdp" responsive-width="25000px" drawer-width="360px" right-drawer>
       <!-- Drawer -->
       <div id="collapse" class="mini-menu vertical layout" drawer>
         <div hidden>
           <paper-dropdown-menu label="Language" noink>
-            <paper-menu class="dropdown-content" id="glMenu" selected={{gameLang}} valueattr="value">
+            <paper-menu class="dropdown-content" id="glMenu" selected={{gl}} valueattr="value">
               <template is="dom-repeat" items="{{languageList}}" as="gl">
                 <paper-item value="{{gl.abbrev}}">{{gl.fullname}}</paper-item>
               </template>
@@ -96,15 +98,9 @@ limitations under the License.
             <template is="dom-repeat" items="{{nerdSpracheList}}"><option value="{{item.abbrev}}">{{item.fullname}}</option></template>
           </select>
         </div>
-        <div class="menu-line"><paper-toggle-button id="select_earmodus" on-tap="toggleEarModus" checked$="{{earmodus}}"></paper-toggle-button><span>Earmodus</span></div>
-        <div class="menu-line"><paper-toggle-button id="select_learnmodus" on-tap="toggleLearnModus" checked$="{{learnmodus}}"></paper-toggle-button><span>Learnmodus</span></div>
-        <div class="menu-line" hidden><paper-toggle-button id="select_nerdmodus" on-tap="toggleNerdModus" checked$="{{nerdmodus}}"></paper-toggle-button><span>Meiselmodus</span></div>
-        <div class="menu-line"><paper-toggle-button id="select_recordmodus" on-tap="toggleRecordModus" checked$="{{recordmodus}}"></paper-toggle-button><span>Talkmodus</span></div>
-        <div>
-          <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://intense-heat-8981.firebaseio.com" provider="twitter" on-error="errorHandler" ></firebase-auth>
-          <img src="../assets/images/sign-in-with-twitter-gray.png" alt="sign in with Twitter" on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">
-          <button on-tap="logout" hidden$="{{!computeLoginHidden(statusKnown, user)}}">Logout</button>
-        </div>
+        <div class="menu-line"><paper-toggle-button id="select_earmodus" on-tap="toggleEarModus" checked$="{{earmodus}}"><span>Earmodus</span></paper-toggle-button></div>
+        <div class="menu-line"><paper-toggle-button id="select_learnmodus" on-tap="toggleLearnModus" checked$="{{learnmodus}}"><span>Learnmodus</span></paper-toggle-button></div>
+        <div class="menu-line"><paper-toggle-button id="select_recordmodus" on-tap="toggleRecordModus" checked$="{{recordmodus}}"><span>Talkmodus</span></paper-toggle-button></div>
       </div>
       
       <!-- Main Content Area -->
@@ -114,7 +110,10 @@ limitations under the License.
             <div class="footer-button horizontal start-justified layout flex">
               <score-board id="score-board-player-1" player="1" learnmodus="{{learnmodus}}" recordmodus="{{recordmodus}}"></score-board>
             </div>
-            <word-board id="wboard" class="horizontal center-justified layout flex-2" game-lang="{{gameLang}}" earmodus="{{earmodus}}"></word-board>
+            <div class="horizontal center-justified layout flex-2">
+              <word-board id="wboard" gl="[[gl]]" earmodus="[[earmodus]]"></word-board>
+            </div>
+
             <div class="horizontal end-justified layout flex">
               <iron-icon id="menutoggle" class="tinavg-med-icon spin-flip-transition" icon="menu" paper-drawer-toggle></iron-icon>
             </div>
@@ -122,7 +121,7 @@ limitations under the License.
           <div class="core-header horizontal justified layout center">
             <div class="top-right-item horizontal start-justified layout flex">
               <iron-icon id="help-show" class="tinavg-med-icon" icon="help" on-tap="showHelp"></iron-icon>
-              <lang-flag id="switchModusIcon" game-lang="[[gameLang]]" langs="[[languageList]]" on-tap="switchModus"></lang-flag>
+              <lang-flag id="switchModusIcon" gl="{{gl}}" langs="{{languageList}}" on-tap="switchModus"></lang-flag>
             </div>
             <div class="horizontal center-justified layout flex-2">
               <jumbotron-text id="jt" tabindex="{{jumbotronIndexCompute()}}" learnmodus="{{learnmodus}}"></jumbotron-text>
@@ -130,15 +129,16 @@ limitations under the License.
             <div id="nerdmodus-div" class="horizontal end-justified layout flex">
               <score-board id="score-board-player-2" player="2" hidden></score-board>
               <div id="clue-show-div" class="tinavg-med-icon"><iron-icon id="clueshow" class="spin-flip-transition tinavg-med-icon" icon="text-format" on-tap="showClue"></iron-icon></div>
+              
             </div>
           </div>
         </div>
         <div id="maincontentarea" class="content">
           <word-recorder id="wrecorder" hidden$="{{!recordmodus}}"></word-recorder>
-          <letter-list id="lettergrid" limit="{{letterLimit}}" game-lang="{{gameLang}}" hidden$="{{recordmodus}}"></letter-list>
+          <letter-list id="lettergrid" limit="{{letterLimit}}" gl="[[gl]]" hidden$="{{recordmodus}}"></letter-list>
         </div>
         <paper-progress value="{{progress1}}" secondary-progress="{{progress2}}"></paper-progress>
-        <paper-toast id="übersetzung" text="{{gameLang}}"></paper-toast>
+        <paper-toast id="übersetzung" text="[[gl]]"></paper-toast>
       </paper-header-panel>
     </paper-drawer-panel>
     <!-- Dialog Modal -->
@@ -146,12 +146,38 @@ limitations under the License.
       <div id="overlay-toolbar" class="vertical flex overlay-toolbar">
         <center><h2>This Is Not A Vocabulary Game</h2></center>
         <paper-tabs selected="{{selected}}">
+          <paper-tab>Game</paper-tab>
           <paper-tab>Rules</paper-tab>
           <paper-tab>Credits</paper-tab>
           <paper-tab>Contact</paper-tab>
         </paper-tabs>
       </div>
       <iron-pages selected="{{selected}}" class="overlay-pages">
+        <div id="game" class="login-menu vertical center-center layout">
+          <h2>Welcome!</h2>
+          <h4>Select Your Option:</h4>
+          <paper-button raised on-tap="login" data-lp="twitter" hidden$="{{computeLoginHidden(statusKnown, user)}}">
+            <paper-item class="horizontal layout center">
+              <img src="../assets/images/login-twitter.png" alt="sign in with Twitter">
+              <span class="login-text">Login with Twitter</span>
+            </paper-item>
+          </paper-button>
+          <paper-button raised on-tap="login" data-lp="facebook" hidden$="{{computeLoginHidden(statusKnown, user)}}">
+            <paper-item class="horizontal layout center">
+              <img src="../assets/images/login-fb.png" alt="sign in with Facebook">
+              <span class="login-text">Login with Facebook</span>
+            </paper-item>
+          </paper-button>
+          <paper-button raised on-tap="login" data-lp="google" hidden$="{{computeLoginHidden(statusKnown, user)}}">
+            <paper-item class="horizontal layout center">
+              <img src="../assets/images/login-google.png" alt="sign in with Twitter">
+              <span class="login-text">Login with Google</span>
+            </paper-item>
+          </paper-button>
+          <paper-button raised dialog-dismiss><paper-item><span>Just Play!</span></paper-item></paper-button>
+          <paper-button raised on-tap="selectRules"><paper-item><span>Read The Game Rules</span></paper-item></paper-button>
+          <paper-button raised on-tap="logout" hidden$="{{!computeLoginHidden(statusKnown, user)}}"><paper-item><span>Logout</span></paper-item></paper-button>
+        </div>
         <div id="rules">
           <h3>The Goal</h3>
           <p>Learn the alphabet (shapes and sounds) and spelling patterns of a foreign language.</p>
@@ -170,7 +196,7 @@ limitations under the License.
             <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-menutoggle" icon="menu" class="tinavg-med-icon"></iron-icon></div>: Reveals the options menu</li>
             <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-a" icon="text-format" class="tinavg-med-icon"></iron-icon></div>: Goes through the letter sequence, then says the word aloud</li>
             <li><div class="tinavg-med-icon"><iron-icon id="help-overlay-help-show" icon="help" class="tinavg-med-icon"></iron-icon></div>: Shows this help menu.</li>
-            <li><div class="tinavg-med-icon"><lang-flag id="help-overlay-switch-modus" mylang="[[gameLang]]" langs="[[languageList]]" class="same-line"></lang-flag></div>: Switches the language.  Does NOT check word.</li>
+            <li><div class="tinavg-med-icon"><lang-flag id="help-overlay-switch-modus" mylang="[[gl]]" langs="[[languageList]]" class="same-line"></lang-flag></div>: Switches the language.  Does NOT check word.</li>
             <li><div class="tinavg-med-icon"><iron-icon icon="av:mic" class="tinavg-med-icon"></iron-icon></div>: Record voice in Talkmodus.  Also stops recording.</li>
             <li><div class="tinavg-med-icon"><iron-icon icon="av:play-circle-filled" class="tinavg-med-icon"></iron-icon></div>: Play voice recording.  Also stops recording.</li>
             <li>Target Word: You can click this to have the word spoken outloud.</li>
@@ -232,6 +258,7 @@ limitations under the License.
       </div>
     </paper-dialog>
     <!-- Service Workers -->
+    <!--
     <platinum-sw-register id="psw"
                           auto-register
                           clients-claim
@@ -240,9 +267,21 @@ limitations under the License.
                          cache-config-file="../cache-config.json">
       </platinum-sw-cache>
     </platinum-sw-register>
+    -->    
+
+    <platinum-sw-register auto-register
+                          clients-claim
+                          skip-waiting
+                          base-uri="/assets/js/platinum-sw/bootstrap">
+      <platinum-sw-cache default-cache-strategy="fastest"
+                         cache-config-file="cache-config.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
+    <!-- this is a test -->
   </template>
 </dom-module>
 <script>
+  /* global Polymer TinavgBehavior Mousetrap Firebase history */
   Polymer({
     is: 'tinavg-webapp',
     behaviors: [TinavgBehavior],
@@ -253,7 +292,7 @@ limitations under the License.
           return [
             {"abbrev": "de","fullname": "German"}, 
             {"abbrev": "en", "fullname":"English"}, 
-            {"abbrev": "en-US-south", "fullname": "English (US South)"}, 
+            {"abbrev": "en-us-south", "fullname": "English (US South)"}, 
             {"abbrev": "ar","fullname": "Arabic"},
             {"abbrev":"ko","fullname": "Korean"}, 
             {"abbrev":"ru","fullname":"Russian"}, 
@@ -288,9 +327,6 @@ limitations under the License.
       recordmodus: {
         type: Boolean
       },
-      nerdmodus: {
-        type: Boolean
-      },
       earmodus: {
         type: Boolean
       },
@@ -311,7 +347,9 @@ limitations under the License.
       'checking-word': 'fbLetterSeq',
       'word-percent-correct': 'wordPercentCorrect',
       'service-worker-installed': 'confirmSWInstall',
-      'service-worker-error': 'swError'
+      'service-worker-error': 'swError',
+      'cookieconsent-dismissed': 'ccDismissed',
+      'firebase-login': 'firebaseSuccess'
     },
     observers: [
 
@@ -382,25 +420,33 @@ limitations under the License.
       // remove unresolve, reveal app, show help
       document.getElementById('friendly_message').setAttribute('hidden', true);
       document.querySelector('[unresolved]').removeAttribute("unresolved");
-      this.showHelp();
-
-      if(document.cookie.indexOf("cookieconsent_dismissed") > -1) {
-        this.$.so.noCancelOnOutsideClick = false;
+      if(!this.fbConnBool) {
+        this.showHelp();
       }
+      if(localStorage.cookieconsent_dismissed || document.cookie.indexOf("cookieconsent_dismissed") > -1) {
+        this.ccDismissed();
+      } 
       
       this.async(function() { 
-        this.fire('set-default-options');
-        this.$.selectLang.selectedIndex = _findWithAttr(this.languageList, "abbrev", this.gameLang);
+        //this.fire('set-default-options');
+        this.$.selectLang.selectedIndex = _findWithAttr(this.languageList, "abbrev", this.gl);
         this.$.meiselspracheliste.selectedIndex = _findWithAttr(this.nerdSpracheList, "abbrev", this.nerdSprache); 
 
       }, 200);
 
     },
+    initializeDefaultTinavg: function() {
+      this.earmodus = false;
+      this.learnmodus = false;
+      this.recordmodus = false;
+      this.gl = "de";
+      this.nerdSprache = "disable";
+      this.$.jt.forceLearnmodus(this.learnmodus);
+    },
     setDefaults: function() {
       var tinavgEarmodus = JSON.parse(localStorage.getItem("tinavg-earmodus"));
       var tinavgLearnmodus = JSON.parse(localStorage.getItem("tinavg-learnmodus"));
       var tinavgRecordmodus = JSON.parse(localStorage.getItem("tinavg-recordmodus"));
-      var tinavgNerdmodus = JSON.parse(localStorage.getItem("tinavg-nerdmodus"));
       var tinavgLastlang = localStorage.getItem("tinavg-lastlang");
       var tinavgNerdsprache = localStorage.getItem("tinavg-nerdsprache");
       if(tinavgEarmodus !== undefined) {
@@ -421,19 +467,13 @@ limitations under the License.
         this.recordmodus = false;
       }
 
-      if(tinavgNerdmodus !== undefined) {
-        this.nerdmodus = tinavgNerdmodus;
-      } else {
-        this.nerdmodus = false;
-      }
-      
-      if(this.gameLang !== (null && undefined)) {
-        console.log("Game Language Set: " + this.gameLang);
+      if(this.gl !== (null && undefined)) {
+        console.log("Game Language Set: " + this.gl);
       } else if(_findWithAttr(this.languageList, "abbrev", tinavgLastlang) === -1) {
         console.log("default language set to deutsch");
-        this.gameLang = "de";
+        this.gl = "de";
       } else {
-        this.gameLang = tinavgLastlang;
+        this.gl = tinavgLastlang;
       }
       
       if(_findWithAttr(this.nerdSpracheList, "abbrev", tinavgNerdsprache) === -1) {
@@ -442,7 +482,7 @@ limitations under the License.
         this.nerdSprache = tinavgNerdsprache;
       }
       this.$.jt.forceLearnmodus(this.learnmodus);
-      //this.$.glMenu.select(this.setGameLangIndex());
+      //this.$.glMenu.select(this.setglIndex());
     },
     setLangHelp: function() {
       var langHtml = this.$.lettergrid.getLangHelpInfo();
@@ -465,7 +505,11 @@ limitations under the License.
       if(this.firebaseRef) {
         var authData = this.firebaseRef.getAuth();
         if(authData) {
-          this.firebaseWordRef.child('letters').set(this.letterSeq);
+          if(this.firebaseWordRef === 'undefined') {
+            this.firebaseWordSave();
+          } else {
+            this.firebaseWordRef.child('letters').set(this.letterSeq);
+          }
         } else {
           // not logged in
         }
@@ -474,16 +518,24 @@ limitations under the License.
       }
     },
     showHelp: function(e) {
+      if(e) {
+        this.$.so.noCancelOnOutsideClick = false;
+        this.selected = 1;
+      }
       this.async(function(){ this.$.so.open();}, 200);
-      if(e) this.$.so.noCancelOnOutsideClick = false;
     },
     showClue: function(e) {
-      this.$.wboard.revealWord();
-      if(this.$.clueshow.classList.contains("glow-yellow")) this.$.clueshow.classList.remove("glow-yellow");
-      if(this.$.clueshow.style.transform === "rotateX(360deg)") {
-        this.$.clueshow.style.transform = "rotateX(0deg)";
+      var clueshowIcon = this.$.clueshow.icon;
+      if(clueshowIcon === "check") {
+        this.checkWord();
       } else {
-        this.$.clueshow.style.transform = "rotateX(360deg)";
+        this.$.wboard.revealWord();
+        if(this.$.clueshow.classList.contains("glow-yellow")) this.$.clueshow.classList.remove("glow-yellow");
+        if(this.$.clueshow.style.transform === "rotateX(360deg)") {
+          this.$.clueshow.style.transform = "rotateX(0deg)";
+        } else {
+          this.$.clueshow.style.transform = "rotateX(360deg)";
+        }
       }
     },
     showMenuPanel: function(e) {
@@ -505,7 +557,7 @@ limitations under the License.
     },
     setLang: function(ev) {
       console.log("toggling language: " + ev.target.value + " | chars: " + this.letterLimit);
-      this.gameLang = ev.target.value;
+      this.gl = ev.target.value;
       this.$.jt.resetBox();
     },
     setLangManual: function(lang, force) {
@@ -514,18 +566,17 @@ limitations under the License.
       console.log("toggling language: " + lang + " | chars: " + this.letterLimit);
       if(_findWithAttr(this.languageList, "abbrev", lang) > -1 || force) {
         if(localStorage.getItem("tinavg-lastlang") !== lang) localStorage.setItem("tinavg-lastlang", lang);
-        this.gameLang = lang;
+        this.gl = lang;
       } else {
         console.log("Invalid language: " + lang);
       }
-      this.gameLang = lang;
       this.$.jt.resetBox();
     },
     setWBoardDisplay: function() {
       this.$.wboard.setDisplayWord();
     },
     switchModus: function() {
-      var currentLangIndex = _findWithAttr(this.languageList, "abbrev", this.gameLang);
+      var currentLangIndex = _findWithAttr(this.languageList, "abbrev", this.gl);
       var gl;
       if(currentLangIndex + 1 < this.languageList.length && currentLangIndex !== -1) {
         gl = this.languageList[currentLangIndex + 1].abbrev;
@@ -533,13 +584,10 @@ limitations under the License.
         gl = this.languageList[0].abbrev;
       }
       history.replaceState(null, null, "/#!/lang/" + gl);
-      this.gameLang = gl;
-      this.$.selectLang.selectedIndex = currentLangIndex;
+      this.gl = gl;
+      console.log("lang index: " + currentLangIndex);
+      this.$.selectLang.selectedIndex = _findWithAttr(this.languageList, "abbrev", this.gl);
       this.$.jt.resetBox();
-    },
-    toggleNerdModus: function() {
-      this.nerdmodus = !this.nerdmodus;
-      this.showÜbersetzung();
     },
     showÜbersetzung: function() {
       // stub to add phrase info
@@ -558,15 +606,7 @@ limitations under the License.
       this.showÜbersetzung();
       this.letterSeq = [];
       if(this.firebaseRef) {
-        var authData = this.firebaseRef.getAuth();
-        if(authData) {
-          var wordObj = this.$.wboard.getWordObj();
-          var word = { "word": wordObj.word, "ohne": wordObj.ohne } ;
-          this.firebaseWordRef = this.firebaseRef.child("users").child(authData.uid).child('words').push(word);
-          this.firebaseWordRef.child('timestamp').set(Firebase.ServerValue.TIMESTAMP);
-        } else {
-          // not logged in
-        }
+        this.firebaseWordSave();
       } else {
         this.firebaseLogin();
       }
@@ -576,8 +616,24 @@ limitations under the License.
       this.nerdSprache = ev.target.value;
       this.showÜbersetzung();
     },
-    login: function() {
+    selectRules: function() {
+      this.selected = 1;
+    },
+    login: function(ev, detail) {
+      var provider;
+      for(var i=0; i < ev.path.length; i++) {
+        if(ev.path[i].localName === "paper-button") {
+          provider = ev.path[i].attributes['data-lp'].value;
+          break;
+        }
+      }
+      var validProviders = ["twitter", "facebook", "google"];
+      if(validProviders.indexOf(provider) === -1) {
+        console.log(provider);
+        provider = "twitter"; 
+      }
       var params;
+      this.loginProvider = provider;
       try {
         params = JSON.parse(this.params);
       } catch (e) {
@@ -598,19 +654,18 @@ limitations under the License.
     },
     getOptions: function() {
       var options = {};
-      options.language = this.gameLang;
-      options.learnmodus = this.learnmodus;
-      options.recordmodus = this.recordmodus;
-      options.nerdmodus = this.nerdmodus;
-      options.nerdsprache = this.nerdSprache;
-      options.earmodus = this.earmodus;
+      options.language = this.gl || "not set yet";
+      options.learnmodus = this.learnmodus || "not set yet";
+      options.recordmodus = this.recordmodus || "not set yet";
+      options.nerdsprache = this.nerdSprache || "not set yet";
+      options.earmodus = this.earmodus || "not set yet";
       return options;
     },
-    setGameLangIndex: function(ev) {
+    setglIndex: function(ev) {
       console.log(ev);
       console.log(this.languageList);
-      console.log(this.gameLang);
-      var ret = _findWithAttr(this.languageList, "abbrev", this.gameLang);
+      console.log(this.gl);
+      var ret = _findWithAttr(this.languageList, "abbrev", this.gl);
       console.log(ret);
       this.glIndex = ret;
       return ret;
@@ -625,6 +680,14 @@ limitations under the License.
     wordPercentCorrect: function(ev) {
       this.progress1 = ev.detail.progress;
       this.progress2 = ev.detail.secondary;
+      if(ev.detail.progress === 100) {
+        this.$.clueshow.icon = "check";
+      } else if(this.$.clueshow.icon !== "text-format") {
+        this.$.clueshow.icon = "text-format";
+      }
+    },
+    checkWord: function() {
+      this.$.jt.lastBucket = "!!!"; 
     },
     confirmSWInstall: function() {
       console.log("SW Install Complete");
@@ -635,12 +698,14 @@ limitations under the License.
     firebaseLogin: function() {
       // firebase
       try {
+        
         var fbRef = new Firebase('https://intense-heat-8981.firebaseio.com');
         var lastlogin = window.localStorage["tinavg-lastvisit"];
         var ulanglist = window.navigator.languages;
         var preflang = window.navigator.language || window.navigator.userLanguage;
         this.letterSeq = [];
         fbRef.onAuth(function(authData) {
+          this.firebaseRef = fbRef;
           if (authData) {
             // save the user's profile into Firebase so we can list users,
             // use them in Security and Firebase Rules, and show profiles
@@ -657,6 +722,8 @@ limitations under the License.
               lastlogin: lastlogin,
               stimestamp: Firebase.ServerValue.TIMESTAMP
             });
+            this.firebaseWordSave(authData);
+            this.fire("firebase-login", {success: true});
           } else {
             fbRef.child("users").child("anonymous").child("logins").push({
               lastlogin: lastlogin,
@@ -666,21 +733,43 @@ limitations under the License.
             });
           }
         }.bind(this));
-        
-        this.firebaseRef = fbRef;
       } catch(e) {
         console.log(e);
       }
+    },
+    firebaseSuccess: function(ev) {
+      if(!this.fbConnBool) {
+        this.fbConnBool = true;
+      }
+      this.$.so.close();
+    },
+    firebaseWordSave: function(authData) {
+      if(!authData) authData = this.firebaseRef.getAuth();
+      if(authData) {
+        var wordObj = this.$.wboard.getWordObj();
+        var word = { "word": wordObj.word, "ohne": wordObj.ohne };
+        this.firebaseWordRef = this.firebaseRef.child("users").child(authData.uid).child('words').push(word);
+        this.firebaseWordRef.child('timestamp').set(Firebase.ServerValue.TIMESTAMP);
+      } else {
+        console.log("authData not set for words");
+      }      
+    },
+    ccDismissed: function(ev) {
+      this.$.so.noCancelOnOutsideClick = false;
+      if(ev) console.log(ev);
     }
   });
 function _getFirebaseName(authData) {
   switch(authData.provider) {
-     case 'password':
-       return authData.password.email.replace(/@.*/, '');
-     case 'twitter':
-       return authData.twitter.displayName;
-     case 'facebook':
-       return authData.facebook.displayName;
+  case 'password':
+    return authData.password.email.replace(/@.*/, '');
+  case 'twitter':
+    return authData.twitter.displayName;
+  case 'facebook':
+    return authData.facebook.displayName;
+  case 'google':
+    return authData.google.displayName;
+    
   }
 }
 function _findWithAttr(array, attr, value) {

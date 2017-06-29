@@ -141,6 +141,14 @@
   .mini-menu > div {
     margin-bottom: 1vh;
   }
+  
+  .login-menu paper-button {
+    line-height: 48px;
+    min-width: 300px;
+  }
+  .login-text {
+    padding-left: 10px;
+  }
   .floated-label-placeholder {
     display: none;
   }
@@ -155,6 +163,8 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+    height: 7vh;
+    width: 7vh;
     content: 'viewport-units-buggyfill; width: 7vh; height: 7vh;';
   }
   .content-span {
@@ -171,12 +181,6 @@
   paper-ripple {
     color: #18C924; /* greenish */
   }
-  paper-button {
-    text-transform: none;
-  }
-  .content.paper-button {
-    padding: 2px;
-  }
   .overlay-toolbar {
     background-color: #16B38B;
     margin: 0px;
@@ -188,6 +192,9 @@
   paper-dialog {
     overflow: hidden;
     width: 100%;
+  }
+  paper-dialog > *:first-child {
+    margin-top: 0;
   }
   .overlay-pages {
     padding: 10px;
